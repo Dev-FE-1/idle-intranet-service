@@ -1,0 +1,36 @@
+name: 😢 Help
+description: 도움이 필요하신가요?
+title: "[Help] "
+labels: ["😢 Help"]
+body:
+  - type: textarea
+    id: help-description
+    attributes:
+      label: 😢 문제 설명
+      description: 도움이 필요한 문제에 대한 설명을 작성해 주세요.
+      placeholder: 자세하게 작성해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: help-context
+    attributes:
+      label: 🌐 문제 발생 상황
+      description: 문제가 발생한 상황을 설명해 주세요.
+      placeholder: 가능한 구체적으로 작성해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: help-attempts
+    attributes:
+      label: 💡 시도한 해결책
+      description: 문제를 해결하기 위해 시도한 방법이 있다면 작성해 주세요.
+      placeholder: 시도한 모든 방법을 나열해 주세요.
+    validations:
+      required: false
+  - type: textarea
+    id: help-more
+    attributes:
+      label: 📝 추가 메모
+      description: 추가로 하고 싶은 말이 있다면 작성해 주세요.
+    validations:
+      required: false

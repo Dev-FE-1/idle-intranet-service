@@ -1,0 +1,18 @@
+name: Automate project assignments
+
+on:
+  issues:
+    types: [opened, reopened]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+jobs:
+  assign-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign issue to project
+        uses: srggrs/assign-one-project-github-action@1.2.1
+        with:
+          project: "https://github.com/Dev-FE-1/idle-intranet-service"
+          column_name: "To Do"
