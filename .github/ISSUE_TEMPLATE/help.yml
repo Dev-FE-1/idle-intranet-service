@@ -1,12 +1,12 @@
-name: 🆘 Help
+name: 😢 Help
 description: 도움이 필요하신가요?
 title: "[Help] "
-labels: ["🆘 Help"]
+labels: ["😢 Help"]
 body:
   - type: textarea
     id: help-description
     attributes:
-      label: 🆘 문제 설명
+      label: 😢 문제 설명
       description: 도움이 필요한 문제에 대한 설명을 작성해 주세요.
       placeholder: 자세하게 작성해 주세요.
     validations:
