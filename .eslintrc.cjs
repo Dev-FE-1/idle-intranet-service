@@ -4,6 +4,12 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ["airbnb-base"],
-  rules: {},
+  extends: ['airbnb-base'],
+  rules: {
+    'import/prefer-default-export': 'off',
+    'no-param-reassign': [
+      'error',
+      { props: true, ignorePropertyModificationsFor: ['element'] },
+    ],
+  },
 };

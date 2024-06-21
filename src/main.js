@@ -1,7 +1,7 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import './style.css';
+import javascriptLogo from './javascript.svg';
+import viteLogo from '../public/vite.svg';
+import { setupCounter } from './counter';
 
 async function app() {
   document.querySelector('#app').innerHTML = `
@@ -20,9 +20,9 @@ async function app() {
         Click on the Vite logo to learn more
       </p>
     </div>
-  `
-  
-  setupCounter(document.querySelector('#counter'))
+  `;
+
+  setupCounter(document.querySelector('#counter'));
 }
 
 document.addEventListener('DOMContentLoaded', app);
