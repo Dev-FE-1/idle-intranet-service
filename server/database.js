@@ -1,7 +1,7 @@
-import sqlite3 from 'sqlite3'
+import sqlite3 from 'sqlite3';
 
-const databaseName = 'toyprj1'
-const database = new sqlite3.Database(`./${databaseName}.db`)
+const databaseName = 'toyprj1';
+const database = new sqlite3.Database(`./${databaseName}.db`);
 
 database.serialize(() => {
   database.run(`
@@ -10,7 +10,7 @@ database.serialize(() => {
       userId TEXT NOT NULL,
       email TEXT NOT NULL,
       password TEXT NOT NULL
-    )`)
-})
+    )`);
+});
 
-export default database
+export default database;
