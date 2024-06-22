@@ -16,7 +16,8 @@
     "career": [],
     "role": "프론트엔드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Jasper&eyes=variant02",
-    "remainingVacationDays": 10.5
+    "remainingVacationDays": 10.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 101,
@@ -41,7 +42,8 @@
     ],
     "role": "백엔드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Max&eyes=variant09",
-    "remainingVacationDays": 11
+    "remainingVacationDays": 11,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 102,
@@ -71,7 +73,8 @@
     ],
     "role": "디지털 마케팅 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant13",
-    "remainingVacationDays": 12.5
+    "remainingVacationDays": 12.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 103,
@@ -95,7 +98,8 @@
     ],
     "role": "프로젝트 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant05",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 104,
@@ -120,7 +124,8 @@
     ],
     "role": "그래픽 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant14",
-    "remainingVacationDays": 9.5
+    "remainingVacationDays": 9.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 105,
@@ -145,7 +150,8 @@
     ],
     "role": "고객 서비스 담당자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Cali&eyes=variant23",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 106,
@@ -169,7 +175,8 @@
     ],
     "role": "프로젝트 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant22",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 107,
@@ -194,7 +201,8 @@
     ],
     "role": "안드로이드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant03",
-    "remainingVacationDays": 10.5
+    "remainingVacationDays": 10.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 108,
@@ -224,7 +232,8 @@
     ],
     "role": "프론트엔드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Coco&eyes=variant13",
-    "remainingVacationDays": 9.5
+    "remainingVacationDays": 9.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 109,
@@ -248,7 +257,8 @@
     ],
     "role": "프로젝트 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Salem&eyes=variant17",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 110,
@@ -278,7 +288,8 @@
     ],
     "role": "콘텐츠 마케팅 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Salem&eyes=variant11",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 111,
@@ -313,7 +324,8 @@
     ],
     "role": "DevOps 엔지니어",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant08",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 112,
@@ -343,7 +355,8 @@
     ],
     "role": "인사 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Angel&eyes=variant23",
-    "remainingVacationDays": 10
+    "remainingVacationDays": 10,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 113,
@@ -378,7 +391,8 @@
     ],
     "role": "UI/UX 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Peanut&eyes=variant09",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 114,
@@ -403,7 +417,8 @@
     ],
     "role": "iOS 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Smokey&eyes=variant21",
-    "remainingVacationDays": 8.5
+    "remainingVacationDays": 8.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 115,
@@ -433,7 +448,8 @@
     ],
     "role": "iOS 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Angel&eyes=variant23",
-    "remainingVacationDays": 10
+    "remainingVacationDays": 10,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 116,
@@ -468,7 +484,8 @@
     ],
     "role": "재무 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant07",
-    "remainingVacationDays": 10.5
+    "remainingVacationDays": 10.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 117,
@@ -487,7 +504,8 @@
     "career": [],
     "role": "회계 담당자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Boots&eyes=variant03",
-    "remainingVacationDays": 10
+    "remainingVacationDays": 10,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 118,
@@ -512,7 +530,8 @@
     ],
     "role": "UI/UX 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Abby&eyes=variant03",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 119,
@@ -531,7 +550,8 @@
     "career": [],
     "role": "회계 담당자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Jasper&eyes=variant13",
-    "remainingVacationDays": 10.5
+    "remainingVacationDays": 10.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 120,
@@ -561,7 +581,8 @@
     ],
     "role": "DevOps 엔지니어",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Abby&eyes=variant09",
-    "remainingVacationDays": 10
+    "remainingVacationDays": 10,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 121,
@@ -586,7 +607,8 @@
     ],
     "role": "인사 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant23",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 122,
@@ -605,7 +627,8 @@
     "career": [],
     "role": "UI/UX 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Abby&eyes=variant18",
-    "remainingVacationDays": 11
+    "remainingVacationDays": 11,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 123,
@@ -635,7 +658,8 @@
     ],
     "role": "백엔드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Leo&eyes=variant11",
-    "remainingVacationDays": 12
+    "remainingVacationDays": 12,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 124,
@@ -660,7 +684,8 @@
     ],
     "role": "안드로이드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Smokey&eyes=variant03",
-    "remainingVacationDays": 10.5
+    "remainingVacationDays": 10.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 125,
@@ -685,7 +710,8 @@
     ],
     "role": "재무 분석가",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Boo&eyes=variant02",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 126,
@@ -710,7 +736,8 @@
     ],
     "role": "그래픽 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Lucy&eyes=variant10",
-    "remainingVacationDays": 8.5
+    "remainingVacationDays": 8.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 127,
@@ -735,7 +762,8 @@
     ],
     "role": "재무 분석가",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Lucy&eyes=variant03",
-    "remainingVacationDays": 11.5
+    "remainingVacationDays": 11.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 128,
@@ -760,7 +788,8 @@
     ],
     "role": "콘텐츠 마케팅 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant06",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 129,
@@ -779,7 +808,8 @@
     "career": [],
     "role": "디지털 마케팅 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant18",
-    "remainingVacationDays": 9.5
+    "remainingVacationDays": 9.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 130,
@@ -804,7 +834,8 @@
     ],
     "role": "그래픽 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Coco&eyes=variant02",
-    "remainingVacationDays": 12
+    "remainingVacationDays": 12,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 131,
@@ -828,7 +859,8 @@
     ],
     "role": "프로젝트 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant06",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 132,
@@ -853,7 +885,8 @@
     ],
     "role": "UI/UX 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Angel&eyes=variant20",
-    "remainingVacationDays": 11.5
+    "remainingVacationDays": 11.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 133,
@@ -878,7 +911,8 @@
     ],
     "role": "그래픽 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Sasha&eyes=variant23",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 134,
@@ -903,7 +937,8 @@
     ],
     "role": "콘텐츠 마케팅 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant20",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 135,
@@ -933,7 +968,8 @@
     ],
     "role": "백엔드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Callie&eyes=variant13",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 136,
@@ -958,7 +994,8 @@
     ],
     "role": "DevOps 엔지니어",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Cali&eyes=variant11",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 137,
@@ -977,7 +1014,8 @@
     "career": [],
     "role": "DevOps 엔지니어",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant17",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 138,
@@ -996,7 +1034,8 @@
     "career": [],
     "role": "디지털 마케팅 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Leo&eyes=variant06",
-    "remainingVacationDays": 11.5
+    "remainingVacationDays": 11.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 139,
@@ -1015,7 +1054,8 @@
     "career": [],
     "role": "고객 서비스 담당자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant19",
-    "remainingVacationDays": 11
+    "remainingVacationDays": 11,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 140,
@@ -1034,7 +1074,8 @@
     "career": [],
     "role": "재무 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant03",
-    "remainingVacationDays": 8
+    "remainingVacationDays": 8,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 141,
@@ -1059,7 +1100,8 @@
     ],
     "role": "채용 담당자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant20",
-    "remainingVacationDays": 10
+    "remainingVacationDays": 10,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 142,
@@ -1084,7 +1126,8 @@
     ],
     "role": "iOS 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Smokey&eyes=variant19",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 143,
@@ -1109,7 +1152,8 @@
     ],
     "role": "프론트엔드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant03",
-    "remainingVacationDays": 12
+    "remainingVacationDays": 12,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 144,
@@ -1133,7 +1177,8 @@
     ],
     "role": "프로젝트 관리자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Abby&eyes=variant24",
-    "remainingVacationDays": 9.5
+    "remainingVacationDays": 9.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 145,
@@ -1152,7 +1197,8 @@
     "career": [],
     "role": "채용 담당자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant14",
-    "remainingVacationDays": 10
+    "remainingVacationDays": 10,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 146,
@@ -1177,7 +1223,8 @@
     ],
     "role": "DevOps 엔지니어",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant14",
-    "remainingVacationDays": 11.5
+    "remainingVacationDays": 11.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 147,
@@ -1196,7 +1243,8 @@
     "career": [],
     "role": "그래픽 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Lucy&eyes=variant15",
-    "remainingVacationDays": 11.5
+    "remainingVacationDays": 11.5,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 148,
@@ -1221,7 +1269,8 @@
     ],
     "role": "UI/UX 디자이너",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Callie&eyes=variant01",
-    "remainingVacationDays": 9
+    "remainingVacationDays": 9,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   },
   {
     "employeeNumber": 149,
@@ -1240,6 +1289,7 @@
     "career": [],
     "role": "안드로이드 개발자",
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant05",
-    "remainingVacationDays": 11
+    "remainingVacationDays": 11,
+    "password": "$2b$10$gYoQJYDG1Ui6oU2zsL5LzuagCLGwr1eWy0VPJ/3DNXfPqfSaw0N8e"
   }
 ]
