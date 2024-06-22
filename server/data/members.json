@@ -1,0 +1,1245 @@
+[
+  {
+    "employeeNumber": 100,
+    "name": "민지혜",
+    "position": "Software Engineer",
+    "hireDate": "2020-06-24",
+    "birthDate": "1997-02-02",
+    "address": "경기도 원주시 양재천가",
+    "email": "minjihye@cubeit.com",
+    "phoneNumber": "010-1939-2017",
+    "salary": 63000000,
+    "isAdmin": false,
+    "departmentNumber": 20,
+    "education": "서울대학교 소프트웨어공학 학사",
+    "organization": "개발팀",
+    "career": [],
+    "role": "프론트엔드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Jasper&eyes=variant02",
+    "remainingVacationDays": 10.5
+  },
+  {
+    "employeeNumber": 101,
+    "name": "안민지",
+    "position": "Software Engineer",
+    "hireDate": "2015-10-11",
+    "birthDate": "1987-05-08",
+    "address": "경상북도 안산시 단원구 반포대거리",
+    "email": "anminji@cubeit.com",
+    "phoneNumber": "010-7583-2446",
+    "salary": 69000000,
+    "isAdmin": false,
+    "departmentNumber": 20,
+    "education": "성균관대학교 소프트웨어공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "카카오",
+        "period": "2012-04-06 ~ 2014-07-02",
+        "role": "백엔드 개발자"
+      }
+    ],
+    "role": "백엔드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Max&eyes=variant09",
+    "remainingVacationDays": 11
+  },
+  {
+    "employeeNumber": 102,
+    "name": "김승민",
+    "position": "Marketing Manager",
+    "hireDate": "2014-09-09",
+    "birthDate": "1984-06-10",
+    "address": "전라북도 수원시 팔달구 학동거리",
+    "email": "kimseungmin@cubeit.com",
+    "phoneNumber": "010-5886-1879",
+    "salary": 71000000,
+    "isAdmin": true,
+    "departmentNumber": 40,
+    "education": "성균관대학교 경영학 학사",
+    "organization": "마케팅팀",
+    "career": [
+      {
+        "companyName": "현대자동차",
+        "period": "2013-03-30 ~ 2014-05-24",
+        "role": "디지털 마케팅 관리자"
+      },
+      {
+        "companyName": "한화",
+        "period": "2014-06-07 ~ 2014-09-07",
+        "role": "디지털 마케팅 관리자"
+      }
+    ],
+    "role": "디지털 마케팅 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant13",
+    "remainingVacationDays": 12.5
+  },
+  {
+    "employeeNumber": 103,
+    "name": "성경숙",
+    "position": "Product Manager",
+    "hireDate": "2020-03-15",
+    "birthDate": "1978-10-18",
+    "address": "충청남도 부여군 압구정60길",
+    "email": "seongkyeongsuk@cubeit.com",
+    "phoneNumber": "010-8674-6215",
+    "salary": 85000000,
+    "isAdmin": false,
+    "education": "성균관대학교 산업공학 학사",
+    "organization": "제품팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "1989-12-31 ~ 1994-12-31",
+        "role": "프로젝트 관리자"
+      }
+    ],
+    "role": "프로젝트 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant05",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 104,
+    "name": "이현주",
+    "position": "Designer",
+    "hireDate": "2020-06-12",
+    "birthDate": "1981-02-24",
+    "address": "대구광역시 영등포구 오금가",
+    "email": "leehyunju@cubeit.com",
+    "phoneNumber": "010-5769-7098",
+    "salary": 55000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "서울대학교 산업디자인 학사",
+    "organization": "디자인팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2019-08-02 ~ 2020-05-11",
+        "role": "그래픽 디자이너"
+      }
+    ],
+    "role": "그래픽 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant14",
+    "remainingVacationDays": 9.5
+  },
+  {
+    "employeeNumber": 105,
+    "name": "엄경자",
+    "position": "Customer Support",
+    "hireDate": "2019-12-17",
+    "birthDate": "1990-10-25",
+    "address": "충청북도 청주시 서원구 압구정69거리",
+    "email": "eomkyungja@cubeit.com",
+    "phoneNumber": "010-4931-9689",
+    "salary": 42000000,
+    "isAdmin": false,
+    "departmentNumber": 50,
+    "education": "고려대학교 경영학 학사",
+    "organization": "고객 지원팀",
+    "career": [
+      {
+        "companyName": "LG전자",
+        "period": "2018-06-30 ~ 2019-11-15",
+        "role": "고객 서비스 담당자"
+      }
+    ],
+    "role": "고객 서비스 담당자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Cali&eyes=variant23",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 106,
+    "name": "김영일",
+    "position": "Product Manager",
+    "hireDate": "2021-04-08",
+    "birthDate": "1975-12-11",
+    "address": "충청남도 영월군 언주37가",
+    "email": "kimyoungil@cubeit.com",
+    "phoneNumber": "010-4003-8896",
+    "salary": 83000000,
+    "isAdmin": false,
+    "education": "고려대학교 산업공학 학사",
+    "organization": "제품팀",
+    "career": [
+      {
+        "companyName": "LG전자",
+        "period": "2019-03-23 ~ 2021-03-06",
+        "role": "프로젝트 관리자"
+      }
+    ],
+    "role": "프로젝트 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant22",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 107,
+    "name": "조지영",
+    "position": "Software Engineer",
+    "hireDate": "2018-06-28",
+    "birthDate": "1982-11-10",
+    "address": "서울특별시 광진구 압구정66로",
+    "email": "jojieong@cubeit.com",
+    "phoneNumber": "010-7833-3651",
+    "salary": 67000000,
+    "isAdmin": false,
+    "departmentNumber": 10,
+    "education": "성균관대학교 전산학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2015-07-30 ~ 2016-06-05",
+        "role": "안드로이드 개발자"
+      }
+    ],
+    "role": "안드로이드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant03",
+    "remainingVacationDays": 10.5
+  },
+  {
+    "employeeNumber": 108,
+    "name": "박민준",
+    "position": "Software Engineer",
+    "hireDate": "2022-07-12",
+    "birthDate": "1987-06-12",
+    "address": "전라남도 단양군 가락034길",
+    "email": "parkminjun@cubeit.com",
+    "phoneNumber": "010-8308-8405",
+    "salary": 63000000,
+    "isAdmin": false,
+    "departmentNumber": 20,
+    "education": "성균관대학교 컴퓨터공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "포스코",
+        "period": "2020-09-10 ~ 2022-06-19",
+        "role": "프론트엔드 개발자"
+      },
+      {
+        "companyName": "SK하이닉스",
+        "period": "2013-03-22 ~ 2019-07-11",
+        "role": "프론트엔드 개발자"
+      }
+    ],
+    "role": "프론트엔드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Coco&eyes=variant13",
+    "remainingVacationDays": 9.5
+  },
+  {
+    "employeeNumber": 109,
+    "name": "이은주",
+    "position": "Product Manager",
+    "hireDate": "2019-05-30",
+    "birthDate": "1992-03-21",
+    "address": "대전광역시 동대문구 선릉가",
+    "email": "leeeunju@cubeit.com",
+    "phoneNumber": "010-3455-3584",
+    "salary": 86000000,
+    "isAdmin": false,
+    "education": "성균관대학교 컴퓨터공학 학사",
+    "organization": "제품팀",
+    "career": [
+      {
+        "companyName": "롯데그룹",
+        "period": "2016-07-29 ~ 2018-05-02",
+        "role": "프로젝트 관리자"
+      }
+    ],
+    "role": "프로젝트 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Salem&eyes=variant17",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 110,
+    "name": "오정수",
+    "position": "Marketing Manager",
+    "hireDate": "2021-09-11",
+    "birthDate": "1991-12-31",
+    "address": "전라남도 부여군 삼성164길",
+    "email": "ohjeongsu1231@cubeit.com",
+    "phoneNumber": "010-9008-1084",
+    "salary": 64000000,
+    "isAdmin": false,
+    "departmentNumber": 40,
+    "education": "연세대학교 경영학 학사",
+    "organization": "마케팅팀",
+    "career": [
+      {
+        "companyName": "포스코",
+        "period": "2020-09-19 ~ 2021-07-10",
+        "role": "콘텐츠 마케팅 관리자"
+      },
+      {
+        "companyName": "한화",
+        "period": "2017-01-07 ~ 2019-09-10",
+        "role": "콘텐츠 마케팅 관리자"
+      }
+    ],
+    "role": "콘텐츠 마케팅 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Salem&eyes=variant11",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 111,
+    "name": "서수진",
+    "position": "Software Engineer",
+    "hireDate": "2020-11-24",
+    "birthDate": "1985-04-01",
+    "address": "충청북도 파주시 가락길",
+    "email": "seosujin@cubeit.com",
+    "phoneNumber": "010-1941-3778",
+    "salary": 77000000,
+    "isAdmin": false,
+    "departmentNumber": 20,
+    "education": "연세대학교 전산학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "CJ제일제당",
+        "period": "2017-10-02 ~ 2020-09-07",
+        "role": "DevOps 엔지니어"
+      },
+      {
+        "companyName": "포스코",
+        "period": "2012-09-21 ~ 2017-09-23",
+        "role": "DevOps 엔지니어"
+      },
+      {
+        "companyName": "CJ제일제당",
+        "period": "2008-02-10 ~ 2011-11-23",
+        "role": "DevOps 엔지니어"
+      }
+    ],
+    "role": "DevOps 엔지니어",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant08",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 112,
+    "name": "나미영",
+    "position": "Human Resources",
+    "hireDate": "2017-04-29",
+    "birthDate": "1986-03-31",
+    "address": "전라남도 서산시 오금32로",
+    "email": "namiyoung@cubeit.com",
+    "phoneNumber": "010-4332-1345",
+    "salary": 62000000,
+    "isAdmin": false,
+    "departmentNumber": 60,
+    "education": "연세대학교 교육학 학사",
+    "organization": "인사팀",
+    "career": [
+      {
+        "companyName": "현대자동차",
+        "period": "2015-03-10 ~ 2017-03-28",
+        "role": "인사 관리자"
+      },
+      {
+        "companyName": "SK하이닉스",
+        "period": "2012-05-19 ~ 2015-02-28",
+        "role": "인사 관리자"
+      }
+    ],
+    "role": "인사 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Angel&eyes=variant23",
+    "remainingVacationDays": 10
+  },
+  {
+    "employeeNumber": 113,
+    "name": "장시우",
+    "position": "Designer",
+    "hireDate": "2021-05-07",
+    "birthDate": "1982-06-12",
+    "address": "울산광역시 노원구 서초대가",
+    "email": "jangsiwoo0612@cubeit.com",
+    "phoneNumber": "010-5533-9108",
+    "salary": 61000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "성균관대학교 인터랙션디자인 학사",
+    "organization": "디자인팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2017-03-03 ~ 2021-04-06",
+        "role": "UI/UX 디자이너"
+      },
+      {
+        "companyName": "한화",
+        "period": "2012-04-26 ~ 2017-01-06",
+        "role": "UI/UX 디자이너"
+      },
+      {
+        "companyName": "포스코",
+        "period": "2010-10-04 ~ 2012-01-06",
+        "role": "UI/UX 디자이너"
+      }
+    ],
+    "role": "UI/UX 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Peanut&eyes=variant09",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 114,
+    "name": "김준영",
+    "position": "Software Engineer",
+    "hireDate": "2022-10-19",
+    "birthDate": "1992-03-14",
+    "address": "강원도 화성시 개포681거리",
+    "email": "kimjoonyoung92@cubeit.com",
+    "phoneNumber": "010-3074-2105",
+    "salary": 60000000,
+    "isAdmin": false,
+    "departmentNumber": 10,
+    "education": "서울대학교 소프트웨어공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "삼성전자",
+        "period": "2019-03-30 ~ 2022-09-18",
+        "role": "iOS 개발자"
+      }
+    ],
+    "role": "iOS 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Smokey&eyes=variant21",
+    "remainingVacationDays": 8.5
+  },
+  {
+    "employeeNumber": 115,
+    "name": "김정숙",
+    "position": "Software Engineer",
+    "hireDate": "2017-11-01",
+    "birthDate": "1973-09-12",
+    "address": "강원도 영월군 삼성0길",
+    "email": "kimjeongsuk@cubeit.com",
+    "phoneNumber": "010-8394-4139",
+    "salary": 69000000,
+    "isAdmin": false,
+    "departmentNumber": 10,
+    "education": "연세대학교 소프트웨어공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "1999-12-31 ~ 2016-12-31",
+        "role": "iOS 개발자"
+      },
+      {
+        "companyName": "삼성전자",
+        "period": "1995-12-31 ~ 1999-10-24",
+        "role": "iOS 개발자"
+      }
+    ],
+    "role": "iOS 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Angel&eyes=variant23",
+    "remainingVacationDays": 10
+  },
+  {
+    "employeeNumber": 116,
+    "name": "이진호",
+    "position": "Finance",
+    "hireDate": "2020-04-04",
+    "birthDate": "1976-07-30",
+    "address": "전라북도 고양시 오금46길",
+    "email": "leeginho@cubeit.com",
+    "phoneNumber": "010-6185-2630",
+    "salary": 77000000,
+    "isAdmin": false,
+    "departmentNumber": 70,
+    "education": "연세대학교 경영학 학사",
+    "organization": "재무팀",
+    "career": [
+      {
+        "companyName": "CJ제일제당",
+        "period": "2016-02-11 ~ 2020-03-12",
+        "role": "재무 관리자"
+      },
+      {
+        "companyName": "삼성전자",
+        "period": "2009-07-03 ~ 2014-04-03",
+        "role": "재무 관리자"
+      },
+      {
+        "companyName": "CJ제일제당",
+        "period": "2003-09-24 ~ 2008-04-03",
+        "role": "재무 관리자"
+      }
+    ],
+    "role": "재무 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant07",
+    "remainingVacationDays": 10.5
+  },
+  {
+    "employeeNumber": 117,
+    "name": "이준호",
+    "position": "Finance",
+    "hireDate": "2018-05-07",
+    "birthDate": "1995-10-14",
+    "address": "전라북도 부천시 양재천7길",
+    "email": "leejunho@cubeit.com",
+    "phoneNumber": "010-7692-3978",
+    "salary": 51000000,
+    "isAdmin": false,
+    "departmentNumber": 70,
+    "education": "성균관대학교 금융학 학사",
+    "organization": "재무팀",
+    "career": [],
+    "role": "회계 담당자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Boots&eyes=variant03",
+    "remainingVacationDays": 10
+  },
+  {
+    "employeeNumber": 118,
+    "name": "장현우",
+    "position": "Designer",
+    "hireDate": "2022-05-14",
+    "birthDate": "1990-12-06",
+    "address": "제주특별자치도 용인시 처인구 언주80로",
+    "email": "janghyunwoo90@cubeit.com",
+    "phoneNumber": "010-1012-5695",
+    "salary": 56000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "연세대학교 멀티미디어디자인 학사",
+    "organization": "디자인팀",
+    "career": [
+      {
+        "companyName": "롯데그룹",
+        "period": "2021-01-12 ~ 2022-05-12",
+        "role": "UI/UX 디자이너"
+      }
+    ],
+    "role": "UI/UX 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Abby&eyes=variant03",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 119,
+    "name": "김미숙",
+    "position": "Finance",
+    "hireDate": "2017-11-12",
+    "birthDate": "1998-02-21",
+    "address": "제주특별자치도 파주시 봉은사길",
+    "email": "kimmisook@cubeit.com",
+    "phoneNumber": "010-7721-2317",
+    "salary": 51000000,
+    "isAdmin": false,
+    "departmentNumber": 70,
+    "education": "연세대학교 경영학 학사",
+    "organization": "재무팀",
+    "career": [],
+    "role": "회계 담당자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Jasper&eyes=variant13",
+    "remainingVacationDays": 10.5
+  },
+  {
+    "employeeNumber": 120,
+    "name": "홍명자",
+    "position": "Software Engineer",
+    "hireDate": "2017-06-21",
+    "birthDate": "1981-06-06",
+    "address": "서울특별시 영등포구 영동대72로",
+    "email": "hongmyungja@cubeit.com",
+    "phoneNumber": "010-1237-8647",
+    "salary": 79000000,
+    "isAdmin": false,
+    "departmentNumber": 20,
+    "education": "연세대학교 컴퓨터공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "현대자동차",
+        "period": "2014-12-04 ~ 2016-06-20",
+        "role": "DevOps 엔지니어"
+      },
+      {
+        "companyName": "네이버",
+        "period": "2010-06-26 ~ 2014-06-20",
+        "role": "DevOps 엔지니어"
+      }
+    ],
+    "role": "DevOps 엔지니어",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Abby&eyes=variant09",
+    "remainingVacationDays": 10
+  },
+  {
+    "employeeNumber": 121,
+    "name": "김서영",
+    "position": "Human Resources",
+    "hireDate": "2019-11-23",
+    "birthDate": "1980-04-27",
+    "address": "충청북도 홍천군 테헤란46로",
+    "email": "kimseoyoung80@cubeit.com",
+    "phoneNumber": "010-9212-6750",
+    "salary": 60000000,
+    "isAdmin": false,
+    "departmentNumber": 60,
+    "education": "연세대학교 교육학 학사",
+    "organization": "인사팀",
+    "career": [
+      {
+        "companyName": "CJ제일제당",
+        "period": "2014-09-06 ~ 2018-11-22",
+        "role": "인사 관리자"
+      }
+    ],
+    "role": "인사 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant23",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 122,
+    "name": "이예원",
+    "position": "Designer",
+    "hireDate": "2016-07-24",
+    "birthDate": "1992-04-03",
+    "address": "충청남도 오산시 서초중앙3가",
+    "email": "leeyewon@cubeit.com",
+    "phoneNumber": "010-1294-5804",
+    "salary": 63000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "고려대학교 산업디자인 학사",
+    "organization": "디자인팀",
+    "career": [],
+    "role": "UI/UX 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Abby&eyes=variant18",
+    "remainingVacationDays": 11
+  },
+  {
+    "employeeNumber": 123,
+    "name": "김현숙",
+    "position": "Software Engineer",
+    "hireDate": "2014-07-18",
+    "birthDate": "1975-06-20",
+    "address": "경상북도 청주시 서원구 선릉가",
+    "email": "kimhyunsook@cubeit.com",
+    "phoneNumber": "010-8335-1841",
+    "salary": 71000000,
+    "isAdmin": false,
+    "departmentNumber": 20,
+    "education": "고려대학교 전산학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "카카오",
+        "period": "2010-02-13 ~ 2014-06-17",
+        "role": "백엔드 개발자"
+      },
+      {
+        "companyName": "LG전자",
+        "period": "2005-07-17 ~ 2010-01-17",
+        "role": "백엔드 개발자"
+      }
+    ],
+    "role": "백엔드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Leo&eyes=variant11",
+    "remainingVacationDays": 12
+  },
+  {
+    "employeeNumber": 124,
+    "name": "박지민",
+    "position": "Software Engineer",
+    "hireDate": "2017-07-29",
+    "birthDate": "1991-02-15",
+    "address": "경기도 남양주시 백제고분83로",
+    "email": "parkjimin@cubeit.com",
+    "phoneNumber": "010-6363-6304",
+    "salary": 68000000,
+    "isAdmin": false,
+    "departmentNumber": 10,
+    "education": "성균관대학교 전산학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "포스코",
+        "period": "2014-03-18 ~ 2017-06-18",
+        "role": "안드로이드 개발자"
+      }
+    ],
+    "role": "안드로이드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Smokey&eyes=variant03",
+    "remainingVacationDays": 10.5
+  },
+  {
+    "employeeNumber": 125,
+    "name": "김현주",
+    "position": "Finance",
+    "hireDate": "2023-03-26",
+    "birthDate": "1987-12-09",
+    "address": "충청북도 양주시 반포대75가",
+    "email": "kimhyunjoo@cubeit.com",
+    "phoneNumber": "010-7300-8415",
+    "salary": 56000000,
+    "isAdmin": false,
+    "departmentNumber": 70,
+    "education": "연세대학교 경제학 학사",
+    "organization": "재무팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2012-12-31 ~ 2022-12-31",
+        "role": "재무 분석가"
+      }
+    ],
+    "role": "재무 분석가",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Boo&eyes=variant02",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 126,
+    "name": "권정훈",
+    "position": "Designer",
+    "hireDate": "2021-02-28",
+    "birthDate": "1989-03-29",
+    "address": "울산광역시 중랑구 선릉가",
+    "email": "kwonjeonghun@cubeit.com",
+    "phoneNumber": "010-6186-2702",
+    "salary": 53000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "연세대학교 인터랙션디자인 학사",
+    "organization": "디자인팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2010-12-31 ~ 2020-12-31",
+        "role": "그래픽 디자이너"
+      }
+    ],
+    "role": "그래픽 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Lucy&eyes=variant10",
+    "remainingVacationDays": 8.5
+  },
+  {
+    "employeeNumber": 127,
+    "name": "김현준",
+    "position": "Finance",
+    "hireDate": "2016-10-11",
+    "birthDate": "1991-07-10",
+    "address": "경기도 고양시 덕양구 백제고분41로",
+    "email": "kimhyunjun@cubeit.com",
+    "phoneNumber": "010-5194-7235",
+    "salary": 62000000,
+    "isAdmin": true,
+    "departmentNumber": 70,
+    "education": "연세대학교 금융학 학사",
+    "organization": "재무팀",
+    "career": [
+      {
+        "companyName": "삼성전자",
+        "period": "2015-02-08 ~ 2016-06-20",
+        "role": "재무 분석가"
+      }
+    ],
+    "role": "재무 분석가",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Lucy&eyes=variant03",
+    "remainingVacationDays": 11.5
+  },
+  {
+    "employeeNumber": 128,
+    "name": "박민석",
+    "position": "Marketing Manager",
+    "hireDate": "2022-01-24",
+    "birthDate": "1982-12-07",
+    "address": "부산광역시 중구 삼성가",
+    "email": "parkminseok@cubeit.com",
+    "phoneNumber": "010-1695-3806",
+    "salary": 62000000,
+    "isAdmin": false,
+    "departmentNumber": 40,
+    "education": "연세대학교 미디어학 학사",
+    "organization": "마케팅팀",
+    "career": [
+      {
+        "companyName": "삼성전자",
+        "period": "2013-12-24 ~ 2021-08-06",
+        "role": "콘텐츠 마케팅 관리자"
+      }
+    ],
+    "role": "콘텐츠 마케팅 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant06",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 129,
+    "name": "문민석",
+    "position": "Marketing Manager",
+    "hireDate": "2020-09-24",
+    "birthDate": "1999-05-17",
+    "address": "광주광역시 강북구 봉은사45길",
+    "email": "moonminseok@cubeit.com",
+    "phoneNumber": "010-5611-1751",
+    "salary": 62000000,
+    "isAdmin": false,
+    "departmentNumber": 40,
+    "education": "성균관대학교 경영학 학사",
+    "organization": "마케팅팀",
+    "career": [],
+    "role": "디지털 마케팅 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant18",
+    "remainingVacationDays": 9.5
+  },
+  {
+    "employeeNumber": 130,
+    "name": "정순자",
+    "position": "Designer",
+    "hireDate": "2014-09-11",
+    "birthDate": "1978-12-14",
+    "address": "대전광역시 광진구 봉은사861거리",
+    "email": "jeongsunja78@cubeit.com",
+    "phoneNumber": "010-8864-1449",
+    "salary": 60000000,
+    "isAdmin": true,
+    "departmentNumber": 30,
+    "education": "연세대학교 인터랙션디자인 학사",
+    "organization": "디자인팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2010-12-31 ~ 2013-12-31",
+        "role": "그래픽 디자이너"
+      }
+    ],
+    "role": "그래픽 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Coco&eyes=variant02",
+    "remainingVacationDays": 12
+  },
+  {
+    "employeeNumber": 131,
+    "name": "박종수",
+    "position": "Product Manager",
+    "hireDate": "2020-05-14",
+    "birthDate": "1976-10-02",
+    "address": "경상북도 고양시 영동대4거리",
+    "email": "parkjongsu@cubeit.com",
+    "phoneNumber": "010-5956-6477",
+    "salary": 85000000,
+    "isAdmin": false,
+    "education": "서울대학교 경영학 학사",
+    "organization": "제품팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2001-12-31 ~ 2020-02-11",
+        "role": "프로젝트 관리자"
+      }
+    ],
+    "role": "프로젝트 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant06",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 132,
+    "name": "김지은",
+    "position": "Designer",
+    "hireDate": "2016-08-23",
+    "birthDate": "1982-11-17",
+    "address": "부산광역시 동작구 양재천로",
+    "email": "kimjieun@cubeit.com",
+    "phoneNumber": "010-8361-7141",
+    "salary": 64000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "연세대학교 인터랙션디자인 학사",
+    "organization": "디자인팀",
+    "career": [
+      {
+        "companyName": "LG전자",
+        "period": "2010-06-16 ~ 2016-07-21",
+        "role": "UI/UX 디자이너"
+      }
+    ],
+    "role": "UI/UX 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Angel&eyes=variant20",
+    "remainingVacationDays": 11.5
+  },
+  {
+    "employeeNumber": 133,
+    "name": "구옥순",
+    "position": "Designer",
+    "hireDate": "2020-12-08",
+    "birthDate": "1988-09-27",
+    "address": "강원도 안양시 삼성4길",
+    "email": "kooocksun@cubeit.com",
+    "phoneNumber": "010-3104-5188",
+    "salary": 54000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "연세대학교 멀티미디어디자인 학사",
+    "organization": "디자인팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2019-01-31 ~ 2020-08-30",
+        "role": "그래픽 디자이너"
+      }
+    ],
+    "role": "그래픽 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Sasha&eyes=variant23",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 134,
+    "name": "김현지",
+    "position": "Marketing Manager",
+    "hireDate": "2019-10-14",
+    "birthDate": "1984-03-29",
+    "address": "울산광역시 마포구 석촌호수4거리",
+    "email": "kimhyunji84@cubeit.com",
+    "phoneNumber": "010-2077-6972",
+    "salary": 65000000,
+    "isAdmin": false,
+    "departmentNumber": 40,
+    "education": "고려대학교 광고홍보학 학사",
+    "organization": "마케팅팀",
+    "career": [
+      {
+        "companyName": "LG전자",
+        "period": "2017-02-23 ~ 2019-10-12",
+        "role": "콘텐츠 마케팅 관리자"
+      }
+    ],
+    "role": "콘텐츠 마케팅 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Kiki&eyes=variant20",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 135,
+    "name": "박민석",
+    "position": "Software Engineer",
+    "hireDate": "2020-10-29",
+    "birthDate": "1979-03-24",
+    "address": "부산광역시 서구 테헤란가",
+    "email": "parkminseok@cubeit.com",
+    "phoneNumber": "010-3295-7943",
+    "salary": 65000000,
+    "isAdmin": false,
+    "departmentNumber": 20,
+    "education": "성균관대학교 전산학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "롯데그룹",
+        "period": "2019-08-08 ~ 2020-03-03",
+        "role": "백엔드 개발자"
+      },
+      {
+        "companyName": "SK하이닉스",
+        "period": "2010-03-17 ~ 2019-01-27",
+        "role": "백엔드 개발자"
+      }
+    ],
+    "role": "백엔드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Callie&eyes=variant13",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 136,
+    "name": "박수민",
+    "position": "Software Engineer",
+    "hireDate": "2021-10-19",
+    "birthDate": "1989-06-22",
+    "address": "충청남도 용인시 역삼거리",
+    "email": "parksumin@cubeit.com",
+    "phoneNumber": "010-7785-3625",
+    "salary": 72000000,
+    "isAdmin": false,
+    "departmentNumber": 10,
+    "education": "고려대학교 컴퓨터공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "CJ제일제당",
+        "period": "2015-10-05 ~ 2021-08-13",
+        "role": "DevOps 엔지니어"
+      }
+    ],
+    "role": "DevOps 엔지니어",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Cali&eyes=variant11",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 137,
+    "name": "김준서",
+    "position": "Software Engineer",
+    "hireDate": "2021-07-23",
+    "birthDate": "1997-06-15",
+    "address": "세종특별자치시 동구 도산대가",
+    "email": "kimjoonse@cubeit.com",
+    "phoneNumber": "010-7003-1308",
+    "salary": 71000000,
+    "isAdmin": false,
+    "departmentNumber": 10,
+    "education": "서울대학교 컴퓨터공학 학사",
+    "organization": "개발팀",
+    "career": [],
+    "role": "DevOps 엔지니어",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant17",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 138,
+    "name": "이성훈",
+    "position": "Marketing Manager",
+    "hireDate": "2016-05-30",
+    "birthDate": "1990-03-29",
+    "address": "전라북도 원주시 오금41길",
+    "email": "leesungwon@cubeit.com",
+    "phoneNumber": "010-2694-1331",
+    "salary": 68000000,
+    "isAdmin": false,
+    "departmentNumber": 40,
+    "education": "고려대학교 광고홍보학 학사",
+    "organization": "마케팅팀",
+    "career": [],
+    "role": "디지털 마케팅 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Leo&eyes=variant06",
+    "remainingVacationDays": 11.5
+  },
+  {
+    "employeeNumber": 139,
+    "name": "한선영",
+    "position": "Customer Support",
+    "hireDate": "2016-09-29",
+    "birthDate": "1993-11-13",
+    "address": "대구광역시 종로구 논현657거리",
+    "email": "hansunyeong@cubeit.com",
+    "phoneNumber": "010-4607-6467",
+    "salary": 44000000,
+    "isAdmin": true,
+    "departmentNumber": 50,
+    "education": "성균관대학교 사회학 학사",
+    "organization": "고객 지원팀",
+    "career": [],
+    "role": "고객 서비스 담당자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant19",
+    "remainingVacationDays": 11
+  },
+  {
+    "employeeNumber": 140,
+    "name": "조영숙",
+    "position": "Finance",
+    "hireDate": "2021-04-14",
+    "birthDate": "1997-02-14",
+    "address": "제주특별자치도 괴산군 삼성64가",
+    "email": "joyoungsuk97@cubeit.com",
+    "phoneNumber": "010-3979-5448",
+    "salary": 71000000,
+    "isAdmin": false,
+    "departmentNumber": 70,
+    "education": "서울대학교 경영학 학사",
+    "organization": "재무팀",
+    "career": [],
+    "role": "재무 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant03",
+    "remainingVacationDays": 8
+  },
+  {
+    "employeeNumber": 141,
+    "name": "안서연",
+    "position": "Human Resources",
+    "hireDate": "2018-10-30",
+    "birthDate": "1989-01-25",
+    "address": "전라남도 금산군 압구정009길",
+    "email": "anseoyeon89@cubeit.com",
+    "phoneNumber": "010-5346-4895",
+    "salary": 51000000,
+    "isAdmin": false,
+    "departmentNumber": 60,
+    "education": "서울대학교 교육학 학사",
+    "organization": "인사팀",
+    "career": [
+      {
+        "companyName": "CJ제일제당",
+        "period": "2014-04-05 ~ 2017-05-03",
+        "role": "채용 담당자"
+      }
+    ],
+    "role": "채용 담당자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant20",
+    "remainingVacationDays": 10
+  },
+  {
+    "employeeNumber": 142,
+    "name": "김지은",
+    "position": "Software Engineer",
+    "hireDate": "2020-08-21",
+    "birthDate": "1985-07-12",
+    "address": "대전광역시 송파구 개포길",
+    "email": "kimjieun@cubeit.com",
+    "phoneNumber": "010-4432-8075",
+    "salary": 64000000,
+    "isAdmin": false,
+    "departmentNumber": 10,
+    "education": "성균관대학교 소프트웨어공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "한화",
+        "period": "2016-09-21 ~ 2020-07-20",
+        "role": "iOS 개발자"
+      }
+    ],
+    "role": "iOS 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Smokey&eyes=variant19",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 143,
+    "name": "최현정",
+    "position": "Software Engineer",
+    "hireDate": "2014-04-25",
+    "birthDate": "1973-07-21",
+    "address": "제주특별자치도 안양시 양재천93로",
+    "email": "choihyeonjeong0721@cubeit.com",
+    "phoneNumber": "010-8760-7498",
+    "salary": 70000000,
+    "isAdmin": true,
+    "departmentNumber": 20,
+    "education": "연세대학교 컴퓨터공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2009-10-08 ~ 2013-12-31",
+        "role": "프론트엔드 개발자"
+      }
+    ],
+    "role": "프론트엔드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Annie&eyes=variant03",
+    "remainingVacationDays": 12
+  },
+  {
+    "employeeNumber": 144,
+    "name": "이현지",
+    "position": "Product Manager",
+    "hireDate": "2019-02-15",
+    "birthDate": "1989-12-30",
+    "address": "세종특별자치시 동구 봉은사거리",
+    "email": "leehyeonji@cubeit.com",
+    "phoneNumber": "010-4843-1502",
+    "salary": 86000000,
+    "isAdmin": false,
+    "education": "서울대학교 산업공학 학사",
+    "organization": "제품팀",
+    "career": [
+      {
+        "companyName": "롯데그룹",
+        "period": "2016-05-09 ~ 2018-01-30",
+        "role": "프로젝트 관리자"
+      }
+    ],
+    "role": "프로젝트 관리자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Abby&eyes=variant24",
+    "remainingVacationDays": 9.5
+  },
+  {
+    "employeeNumber": 145,
+    "name": "조영자",
+    "position": "Human Resources",
+    "hireDate": "2017-03-01",
+    "birthDate": "1994-02-16",
+    "address": "대구광역시 송파구 양재천164거리",
+    "email": "jojeongja0216@cubeit.com",
+    "phoneNumber": "010-2839-7359",
+    "salary": 51000000,
+    "isAdmin": true,
+    "departmentNumber": 60,
+    "education": "성균관대학교 심리학 학사",
+    "organization": "인사팀",
+    "career": [],
+    "role": "채용 담당자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant14",
+    "remainingVacationDays": 10
+  },
+  {
+    "employeeNumber": 146,
+    "name": "박옥자",
+    "position": "Software Engineer",
+    "hireDate": "2015-09-24",
+    "birthDate": "1973-09-25",
+    "address": "경상북도 평창군 삼성길",
+    "email": "parkokja@cubeit.com",
+    "phoneNumber": "010-3945-1951",
+    "salary": 79000000,
+    "isAdmin": false,
+    "departmentNumber": 20,
+    "education": "연세대학교 컴퓨터공학 학사",
+    "organization": "개발팀",
+    "career": [
+      {
+        "companyName": "CJ제일제당",
+        "period": "2011-08-07 ~ 2014-08-12",
+        "role": "DevOps 엔지니어"
+      }
+    ],
+    "role": "DevOps 엔지니어",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant14",
+    "remainingVacationDays": 11.5
+  },
+  {
+    "employeeNumber": 147,
+    "name": "허지후",
+    "position": "Designer",
+    "hireDate": "2015-04-06",
+    "birthDate": "1993-11-04",
+    "address": "세종특별자치시 북구 잠실길",
+    "email": "heojihoo@cubeit.com",
+    "phoneNumber": "010-1150-9759",
+    "salary": 59000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "성균관대학교 멀티미디어디자인 학사",
+    "organization": "디자인팀",
+    "career": [],
+    "role": "그래픽 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Lucy&eyes=variant15",
+    "remainingVacationDays": 11.5
+  },
+  {
+    "employeeNumber": 148,
+    "name": "곽준영",
+    "position": "Designer",
+    "hireDate": "2022-06-13",
+    "birthDate": "1983-04-02",
+    "address": "대구광역시 강동구 서초대길",
+    "email": "kwakjoonyoung@cubeit.com",
+    "phoneNumber": "010-5233-9785",
+    "salary": 56000000,
+    "isAdmin": false,
+    "departmentNumber": 30,
+    "education": "서울대학교 인터랙션디자인 학사",
+    "organization": "디자인팀",
+    "career": [
+      {
+        "companyName": "네이버",
+        "period": "2016-07-03 ~ 2021-06-30",
+        "role": "UI/UX 디자이너"
+      }
+    ],
+    "role": "UI/UX 디자이너",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Callie&eyes=variant01",
+    "remainingVacationDays": 9
+  },
+  {
+    "employeeNumber": 149,
+    "name": "권도현",
+    "position": "Software Engineer",
+    "hireDate": "2016-12-24",
+    "birthDate": "1982-02-04",
+    "address": "제주특별자치도 고성군 학동거리",
+    "email": "kwondoheon@cubeit.com",
+    "phoneNumber": "010-8818-4893",
+    "salary": 67000000,
+    "isAdmin": true,
+    "departmentNumber": 10,
+    "education": "서울대학교 소프트웨어공학 학사",
+    "organization": "개발팀",
+    "career": [],
+    "role": "안드로이드 개발자",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Gizmo&eyes=variant05",
+    "remainingVacationDays": 11
+  }
+]
