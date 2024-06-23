@@ -3,19 +3,19 @@
     "departmentNumber": 10,
     "departmentName": "모바일 애플리케이션 개발팀",
     "admin": 149,
-    "numberOfMembers": 8
+    "numberOfMembers": 10
   },
   {
     "departmentNumber": 20,
     "departmentName": "웹 애플리케이션 개발팀",
     "admin": 143,
-    "numberOfMembers": 9
+    "numberOfMembers": 11
   },
   {
     "departmentNumber": 30,
     "departmentName": "UI/UX 디자인팀",
     "admin": 130,
-    "numberOfMembers": 10
+    "numberOfMembers": 11
   },
   {
     "departmentNumber": 40,
