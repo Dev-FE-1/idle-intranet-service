@@ -1,7 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import fs from 'fs';
-import db from './database';
+import db from './database.js';
 
 const THRESHOLD = 2000;
 const port = process.env.PORT || 8080;
@@ -63,6 +63,82 @@ app.get('/api/users.json', (req, res) => {
 
 app.get('/api/users', (req, res) => {
   const sql = 'SELECT * FROM Users';
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
+    });
+  });
+});
+
+app.get('/api/members', (req, res) => {
+  const sql = 'SELECT * FROM Members';
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
+    });
+  });
+});
+
+app.get('/api/attendance', (req, res) => {
+  const sql = 'SELECT * FROM Attendance';
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
+    });
+  });
+});
+
+app.get('/api/vacationRequests', (req, res) => {
+  const sql = 'SELECT * FROM VacationRequests';
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
+    });
+  });
+});
+
+app.get('/api/departments', (req, res) => {
+  const sql = 'SELECT * FROM Departments';
 
   // eslint-disable-next-line consistent-return
   db.all(sql, [], (err, rows) => {
