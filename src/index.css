@@ -34,6 +34,11 @@ button {
   padding: 0 20px;
 }
 
+.main-container {
+  position: relative;
+  padding-bottom: 70px;
+}
+
 @media (width >= 1024px) {
   body {
     background-color: #fff;
@@ -41,5 +46,9 @@ button {
 
   .desktop-only {
     display: block;
+  }
+
+  .main-container {
+    padding: 60px 0 0 220px;
   }
 }

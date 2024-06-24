@@ -30,6 +30,10 @@
   text-decoration: none;
 }
 
+.menu-list a.active .nav-menu {
+  color: var(--color-primary);
+}
+
 .nav-icon {
   width: 1rem;
   height: 1rem;
@@ -99,12 +103,16 @@
     background-color: var(--color-light-gray);
   }
 
+  .menu-list a.active .nav-menu {
+    color: var(--color-black);
+  }
+
   .nav-menu {
     font-size: 0.875rem;
     line-height: 1.6;
   }
 
-  .menu-profile {
+  .menu-list li:nth-child(3) {
     margin-top: 24px;
   }
 }
