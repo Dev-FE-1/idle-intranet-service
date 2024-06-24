@@ -1,0 +1,44 @@
+[
+  {
+    "departmentNumber": 10,
+    "departmentName": "모바일 애플리케이션 개발팀",
+    "admin": 149,
+    "numberOfMembers": 10
+  },
+  {
+    "departmentNumber": 20,
+    "departmentName": "웹 애플리케이션 개발팀",
+    "admin": 143,
+    "numberOfMembers": 11
+  },
+  {
+    "departmentNumber": 30,
+    "departmentName": "UI/UX 디자인팀",
+    "admin": 130,
+    "numberOfMembers": 11
+  },
+  {
+    "departmentNumber": 40,
+    "departmentName": "마케팅팀",
+    "admin": 102,
+    "numberOfMembers": 6
+  },
+  {
+    "departmentNumber": 50,
+    "departmentName": "고객 지원팀",
+    "admin": 139,
+    "numberOfMembers": 2
+  },
+  {
+    "departmentNumber": 60,
+    "departmentName": "HR 및 법률 서비스팀",
+    "admin": 145,
+    "numberOfMembers": 4
+  },
+  {
+    "departmentNumber": 70,
+    "departmentName": "재무팀",
+    "admin": 127,
+    "numberOfMembers": 6
+  }
+]
