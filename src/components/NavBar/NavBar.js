@@ -21,7 +21,7 @@ export default class NavBar {
       .map(
         (menu) => `
       <li>
-        <a href="${menu.path}" class="${this._active === menu.title ? 'active' : ''}">
+        <a href="${menu.path}" class="${this._active === menu.path ? 'active' : ''}">
           <img class="nav-icon" src=${menu.icon} alt="" />
           <span class="nav-menu">${menu.title}</span>
         </a>

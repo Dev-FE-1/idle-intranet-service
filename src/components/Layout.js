@@ -10,7 +10,7 @@ export default class Layout {
     this.$container.innerHTML = `
       <header class="header-container desktop-only"></header>
       <nav class="navbar"></nav>
-      <main class="main-container"></main>
+      <main id="main" class="main-container"></main>
     `;
   }
 }
