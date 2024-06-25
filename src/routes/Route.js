@@ -1,3 +1,4 @@
+import Menu from '../components/NavBar/Menu';
 import {
   HomePage,
   MembersPage,
@@ -7,13 +8,13 @@ import {
 } from '../pages';
 
 export default class Route {
-  constructor(Navbar) {
+  constructor() {
     this.homePage = new HomePage();
     this.membersPage = new MembersPage();
     this.profilePage = new ProfilePage();
     this.workManagePage = new WorkManagePage();
     this.notFoundPage = new PageNotFound();
-    this.Navbar = Navbar;
+    this.Menu = new Menu('.menu-list');
 
     this.init();
   }
@@ -32,7 +33,7 @@ export default class Route {
 
   activeNavBar() {
     const path = window.location.pathname;
-    this.Navbar.active = path;
+    this.Menu.active = path;
   }
 
   route() {
