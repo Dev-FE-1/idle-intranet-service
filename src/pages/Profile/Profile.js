@@ -1,10 +1,10 @@
 import Main from '../../components/Main';
-import './Home.css';
+import './Profile.css';
 
-export default class HomePage extends Main {
+export default class ProfilePage extends Main {
   render() {
     this.$container.innerHTML = `
-        <h1>홈</h1>
+        <h1>프로필</h1>
     `;
   }
 }
