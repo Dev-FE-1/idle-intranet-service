@@ -30,6 +30,10 @@
   text-decoration: none;
 }
 
+.menu-list a.active .nav-menu {
+  color: var(--color-primary);
+}
+
 .nav-icon {
   width: 1rem;
   height: 1rem;
@@ -76,7 +80,7 @@
 
   .menu-list {
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     margin: 20px 10px 0;
   }
 
@@ -85,7 +89,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 12px;
-    height: 36px;
+    height: 40px;
     padding-top: 0;
     padding-left: 16px;
     border-radius: 4px;
@@ -96,15 +100,11 @@
   }
 
   .menu-list a.active {
-    background-color: var(--color-light-gray);
+    background-color: rgba(0 122 255 / 10%);
   }
 
   .nav-menu {
     font-size: 0.875rem;
     line-height: 1.6;
-  }
-
-  .menu-profile {
-    margin-top: 24px;
   }
 }
