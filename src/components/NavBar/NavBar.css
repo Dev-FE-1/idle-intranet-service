@@ -80,7 +80,7 @@
 
   .menu-list {
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     margin: 20px 10px 0;
   }
 
@@ -89,7 +89,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 12px;
-    height: 36px;
+    height: 40px;
     padding-top: 0;
     padding-left: 16px;
     border-radius: 4px;
@@ -100,19 +100,11 @@
   }
 
   .menu-list a.active {
-    background-color: var(--color-light-gray);
-  }
-
-  .menu-list a.active .nav-menu {
-    color: var(--color-black);
+    background-color: rgba(0 122 255 / 10%);
   }
 
   .nav-menu {
     font-size: 0.875rem;
     line-height: 1.6;
-  }
-
-  .menu-list li:nth-child(3) {
-    margin-top: 24px;
   }
 }

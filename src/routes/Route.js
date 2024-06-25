@@ -56,7 +56,7 @@ export default class Route {
         break;
     }
 
-    this.activeNavBar(path);
+    this.activeNavBar();
   }
 
   init() {
