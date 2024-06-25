@@ -1,8 +1,6 @@
 export default class Layout {
   constructor({ container }) {
     this.$container = document.querySelector(container);
-    this.Header = null;
-    this.NavBar = null;
     this.render();
   }
 
