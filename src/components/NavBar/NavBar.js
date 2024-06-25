@@ -1,3 +1,5 @@
+import Icon from '../Icon/Icon';
+import { COLORS } from '../../utils/constants';
 import logo from '../../../public/images/logo.svg';
 import './NavBar.css';
 
@@ -18,16 +20,24 @@ export default class NavBar {
 
   getMenuHtml() {
     return this.menus
-      .map(
-        (menu) => `
+      .map((menu) => {
+        const isActive = this._active === menu.path;
+        const icon = new Icon({
+          svg: menu.icon,
+          options: {
+            color: isActive ? COLORS.PRIMARY : COLORS.BLACK,
+          },
+        });
+
+        return `
       <li>
-        <a href="${menu.path}" class="${this._active === menu.path ? 'active' : ''}">
-          <img class="nav-icon" src=${menu.icon} alt="" />
+        <a href="${menu.path}" class="${isActive ? 'active' : ''}">
+          ${icon.html()}
           <span class="nav-menu">${menu.title}</span>
         </a>
       </li>
-    `,
-      )
+    `;
+      })
       .join('');
   }
 
