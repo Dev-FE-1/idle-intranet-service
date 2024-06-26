@@ -1,6 +1,6 @@
 import './Button.css';
 
-export class Button {
+export default class Button {
   constructor({ type, size, content }) {
     this.type = type || 'primary'; //primary, secondary, tertiary, ghost, text
     this.size = size || 'default'; //small
