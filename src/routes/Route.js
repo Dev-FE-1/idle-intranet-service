@@ -6,6 +6,15 @@ import {
   WorkManagePage,
   PageNotFound,
 } from '../pages';
+import { MENUS, PATH } from '../utils/constants';
+import { clockIcon, homeIcon, membersIcon, profileIcon } from '../utils/icons';
+
+const menus = [
+  { path: PATH.HOME, title: MENUS.HOME, icon: homeIcon },
+  { path: PATH.MEMBERS, title: MENUS.MEMBERS, icon: membersIcon },
+  { path: PATH.PROFILE, title: MENUS.PROFILE, icon: profileIcon },
+  { path: PATH.WORK_MANAGE, title: MENUS.WORK_MANAGE, icon: clockIcon },
+];
 
 export default class Route {
   constructor() {
@@ -14,7 +23,7 @@ export default class Route {
     this.profilePage = new ProfilePage();
     this.workManagePage = new WorkManagePage();
     this.notFoundPage = new PageNotFound();
-    this.Menu = new Menu('.menu-list');
+    this.Menu = new Menu('.menu-list', menus);
 
     this.init();
   }
@@ -40,16 +49,16 @@ export default class Route {
     const path = window.location.pathname;
 
     switch (path) {
-      case '/':
+      case PATH.HOME:
         this.homePage.render();
         break;
-      case '/members':
+      case PATH.MEMBERS:
         this.membersPage.render();
         break;
-      case '/profile':
+      case PATH.PROFILE:
         this.profilePage.render();
         break;
-      case '/work-manage':
+      case PATH.WORK_MANAGE:
         this.workManagePage.render();
         break;
       default:

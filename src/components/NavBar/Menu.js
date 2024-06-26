@@ -1,22 +1,11 @@
 import Icon from '../Icon/Icon';
-import { COLORS } from '../../utils/constants';
-import {
-  clockIcon,
-  homeIcon,
-  membersIcon,
-  profileIcon,
-} from '../../utils/icons';
+import { COLORS, PATH } from '../../utils/constants';
 
 export default class Menu {
-  constructor(container) {
+  constructor(container, menus) {
     this.$container = document.querySelector(container);
-    this.menus = [
-      { path: '/', title: '홈', icon: homeIcon },
-      { path: '/members', title: '구성원', icon: membersIcon },
-      { path: '/profile', title: '프로필', icon: profileIcon },
-      { path: '/work-manage', title: '근무/휴가', icon: clockIcon },
-    ];
-    this._active = '/';
+    this.menus = menus;
+    this._active = PATH.HOME;
     this.render();
   }
 

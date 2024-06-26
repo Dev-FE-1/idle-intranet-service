@@ -6,3 +6,17 @@ export const COLORS = {
   LIGHT_GRAY: 'var(--color-light-gray)',
   LIGHTEST_GRAY: 'var(--color-lightest-gray)',
 };
+
+export const PATH = {
+  HOME: '/',
+  MEMBERS: '/members',
+  PROFILE: '/profile',
+  WORK_MANAGE: '/work-manage',
+};
+
+export const MENUS = {
+  HOME: '홈',
+  MEMBERS: '구성원',
+  PROFILE: '프로필',
+  WORK_MANAGE: '근무/휴가',
+};
