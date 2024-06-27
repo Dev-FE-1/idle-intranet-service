@@ -3,8 +3,8 @@ import './Avatar.css';
 export default class Avatar {
   constructor({ url, size, border }) {
     this.url = url;
-    this.size = size || 'default'; //default, large
-    this.border = border || 'default'; //default, light
+    this.size = size || 'default'; // default, large
+    this.border = border || 'default'; // default, light
   }
 
   html() {
