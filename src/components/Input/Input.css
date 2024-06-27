@@ -1,0 +1,38 @@
+:root {
+  --color-primary: #007aff;
+  --color-black: #121212;
+  --color-darkest-gray: #333d4b;
+  --color-dark-gray: #8b95a1;
+  --color-light-gray: #e3e5eb;
+  --color-lightest-gray: #f2f3f6;
+}
+
+.input {
+  height: 50px;
+  width: 264px;
+  font-size: 16px;
+  color: var(--color-darkest-gray);
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  padding: 13px 16px;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #b2b3b9;
+}
+
+.input:focus {
+  outline: 0;
+}
+
+.input:hover {
+  color: #3f4150;
+  background-color: var(--color-lightest-gray);
+}
+
+.input-readOnly,
+.input-readOnly:hover {
+  border: 0;
+  background-color: transparent;
+}
