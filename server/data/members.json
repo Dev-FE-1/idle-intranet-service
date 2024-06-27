@@ -1,6 +1,46 @@
 [
   {
     "employeeNumber": 100,
+    "name": "안민지",
+    "position": "CEO",
+    "hireDate": "2015-10-01",
+    "birthDate": "1978-05-08",
+    "address": "경상북도 안산시 단원구 반포대거리",
+    "email": "anminji@cubeit.com",
+    "phoneNumber": "010-7583-2446",
+    "salary": 120000000,
+    "isAdmin": true,
+    "departmentNumber": 70,
+    "education": "성균관대학교 소프트웨어공학 학사",
+    "career": [
+      {
+        "companyName": "카카오",
+        "period": "2007-07-01 ~ 2011-06-30",
+        "role": "백엔드 개발자"
+      },
+      {
+        "companyName": "Nexon",
+        "period": "2011-10-01 ~ 2015-09-30",
+        "role": "기술 리더"
+      },
+      {
+        "companyName": "CubeIT",
+        "period": "2015-10-01 ~ 2019-09-30",
+        "role": "기술 운영 이사"
+      },
+      {
+        "companyName": "CubeIT",
+        "period": "2019-10-01 ~ 현재",
+        "role": "CEO"
+      }
+    ],
+    "role": "CEO",
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Max&eyes=variant09",
+    "remainingVacationDays": 20,
+    "password": "$2b$10$dGptfBmyKsFYBGPkwYc.M.GgPBkpwb92i8hj2F7imJmSKamS0awVW"
+  },
+  {
+    "employeeNumber": 101,
     "name": "민지혜",
     "position": "Software Engineer",
     "hireDate": "2020-06-24",
@@ -17,31 +57,6 @@
     "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Jasper&eyes=variant02",
     "remainingVacationDays": 10.5,
     "password": "$2b$10$sjLja/YaJhdtSiAXNNSyf.EXDUj4p4pSzYwFWPSbOhnODQH3s8oyu"
-  },
-  {
-    "employeeNumber": 101,
-    "name": "안민지",
-    "position": "Software Engineer",
-    "hireDate": "2015-10-11",
-    "birthDate": "1987-05-08",
-    "address": "경상북도 안산시 단원구 반포대거리",
-    "email": "anminji@cubeit.com",
-    "phoneNumber": "010-7583-2446",
-    "salary": 69000000,
-    "isAdmin": false,
-    "departmentNumber": 20,
-    "education": "성균관대학교 소프트웨어공학 학사",
-    "career": [
-      {
-        "companyName": "카카오",
-        "period": "2012-04-06 ~ 2014-07-02",
-        "role": "백엔드 개발자"
-      }
-    ],
-    "role": "백엔드 개발자",
-    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Max&eyes=variant09",
-    "remainingVacationDays": 11,
-    "password": "$2b$10$dGptfBmyKsFYBGPkwYc.M.GgPBkpwb92i8hj2F7imJmSKamS0awVW"
   },
   {
     "employeeNumber": 102,
@@ -1142,21 +1157,21 @@
   },
   {
     "employeeNumber": 145,
-    "name": "조영자",
+    "name": "김우석",
     "position": "Human Resources",
     "hireDate": "2017-03-01",
-    "birthDate": "1994-02-16",
+    "birthDate": "1980-02-16",
     "address": "대구광역시 송파구 양재천164거리",
-    "email": "jojeongja0216@cubeit.com",
+    "email": "kimwooseok0216@cubeit.com",
     "phoneNumber": "010-2839-7359",
-    "salary": 51000000,
+    "salary": 60000000,
     "isAdmin": true,
     "departmentNumber": 60,
     "education": "성균관대학교 심리학 학사",
     "career": [],
     "role": "채용 담당자",
-    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant14",
-    "remainingVacationDays": 10,
+    "profileImage": "https://api.dicebear.com/9.x/lorelei/svg?seed=Bella&eyes=variant13&glasses=variant04&glassesProbability=100&eyebrows=variant09",
+    "remainingVacationDays": 15,
     "password": "$2b$10$CcUQg98NwmIOILsnhJ0TB.EQYlqHyqGBltcxTSnQKq1PANLH2PE9W"
   },
   {
