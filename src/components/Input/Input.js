@@ -14,4 +14,3 @@ export default class Input {
         `;
   }
 }
-s
