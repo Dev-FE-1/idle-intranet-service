@@ -5,7 +5,6 @@ export default class Icon {
     this.svg = svg;
     this.color = options.color || COLORS.BLACK;
     this.size = options.size || '1rem';
-    this.icon = null;
   }
 
   html() {
