@@ -54,24 +54,24 @@
 
 @media (width >= 1024px) {
   .btn-primary:hover {
-    background-color: #0067d7;
+    background-color: var(--color-primary-hover);
   }
 
   .btn-secondary:hover {
-    background-color: var(--color-dark-gray);
+    background-color: var(--color-light-gray-hover);
   }
 
   .btn-tertiary:hover {
-    background-color: var(--color-dark-gray);
+    background-color: var(--color-light-gray);
   }
 
   .btn-ghost:hover {
     border: 1px solid var(--color-primary);
-    color: var(--color-primary);
+    color: var(--color-primary-hover);
   }
 
   .btn-text:hover {
-    background-color: var(--color-light-gray);
+    background-color: var(--color-lightest-gray);
     color: var(--color-black);
   }
 }

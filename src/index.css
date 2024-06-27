@@ -5,6 +5,10 @@
   --color-dark-gray: #8b95a1;
   --color-light-gray: #e3e5eb;
   --color-lightest-gray: #f2f3f6;
+
+  /* hover */
+  --color-primary-hover: #1662eb;
+  --color-light-gray-hover: #d5d7dd;
 }
 
 body {
