@@ -43,3 +43,14 @@ export async function fetchDepartments() {
 
   return departments;
 }
+
+export async function fetchAnnouncements() {
+  const response = await axios.get('/api/announcements');
+  let announcements;
+
+  if (response.status === 200) {
+    announcements = response.data.data;
+  }
+
+  return announcements;
+}

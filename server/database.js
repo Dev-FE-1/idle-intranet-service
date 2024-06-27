@@ -15,6 +15,7 @@ const vacationRequestsJsonPath = path.join(
   __dirname,
   './data/vacationRequests.json',
 );
+const announcementsJsonPath = path.join(__dirname, './data/announcements.json');
 
 // JSON 파일 읽기
 const readJsonFileSync = (filePath) => {
@@ -34,6 +35,7 @@ const initializeDatabase = () => {
       const members = readJsonFileSync(membersJsonPath);
       const attendance = readJsonFileSync(attendanceJsonPath);
       const vacationRequests = readJsonFileSync(vacationRequestsJsonPath);
+      const announcements = readJsonFileSync(announcementsJsonPath);
 
       database.serialize(() => {
         // Departments 데이터 삽입
@@ -186,12 +188,46 @@ const initializeDatabase = () => {
           );
         });
         insertVacationRequest.finalize();
+
+        // Announcements 데이터 삽입
+        database.run(`
+          CREATE TABLE IF NOT EXISTS Announcements (
+            announcementId INTEGER PRIMARY KEY,
+            title TEXT NOT NULL,
+            content TEXT NOT NULL,
+            employeeNumber INTEGER,
+            departmentNumber INTEGER,
+            postedDate TEXT NOT NULL,
+            imageUrl TEXT,
+            FOREIGN KEY(employeeNumber) REFERENCES Members(employeeNumber),
+            FOREIGN KEY(departmentNumber) REFERENCES Departments(departmentNumber)
+        )`);
+
+        const insertAnnouncement = database.prepare(`
+          INSERT OR IGNORE INTO Announcements (
+            announcementId, title, content, employeeNumber, departmentNumber, postedDate, imageUrl
+          ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        `);
+
+        announcements.forEach((announcement) => {
+          insertAnnouncement.run(
+            announcement.announcementId,
+            announcement.title,
+            announcement.content,
+            announcement.employeeNumber,
+            announcement.departmentNumber,
+            announcement.postedDate,
+            announcement.imageUrl,
+          );
+        });
+
+        insertAnnouncement.finalize();
       });
     } catch (error) {
       console.error('Error initializing database:', error);
-      reject(error)
+      reject(error);
     }
-  })
+  });
 };
 
 initializeDatabase();
