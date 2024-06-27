@@ -2,8 +2,8 @@ import './Button.css';
 
 export default class Button {
   constructor({ type, size, content }) {
-    this.type = type || 'primary'; //primary, secondary, tertiary, ghost, text
-    this.size = size || 'default'; //small
+    this.type = type || 'primary'; // primary, secondary, tertiary, ghost, text
+    this.size = size || 'default'; // small
     this.content = content || '';
   }
 
