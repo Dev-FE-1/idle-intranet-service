@@ -22,8 +22,8 @@
   background-color: var(--color-lightest-gray);
 }
 
-.input-readOnly,
-.input-readOnly:hover {
+.input-read-only,
+.input-read-only:hover {
   border: 0;
   background-color: transparent;
 }
