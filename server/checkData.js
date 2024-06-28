@@ -24,6 +24,7 @@ const checkDatabase = async () => {
     await printFirstFiveRows('Members');
     await printFirstFiveRows('Attendance');
     await printFirstFiveRows('VacationRequests');
+    await printFirstFiveRows('Announcements');
   } catch (error) {
     console.error('Error checking database:', error);
   } finally {

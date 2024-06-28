@@ -137,6 +137,25 @@ app.get('/api/vacationRequests', (req, res) => {
   });
 });
 
+app.get('/api/announcements', (req, res) => {
+  const sql = 'SELECT * FROM Announcements';
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
+    });
+  });
+});
+
 app.get('/api/departments', (req, res) => {
   const sql = 'SELECT * FROM Departments';
 
