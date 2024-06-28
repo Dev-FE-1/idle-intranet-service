@@ -18,7 +18,7 @@ export default class ProfileInfo {
         <div class="personal-profile">
           <div class="work-status-label${this.isWorking ? ' active' : ''}">${this.isWorking ? '근무중' : '근무전'}</div>
           <h2 class="profile-name">${this.user.name}</h2>
-          <span>${this.user.role}</span>
+          <span>${this.user.position}</span>
         </div>
       </div>
     `;
