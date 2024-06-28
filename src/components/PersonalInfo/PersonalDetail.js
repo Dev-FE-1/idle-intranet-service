@@ -15,17 +15,16 @@ export default class PersonalDetail {
                 ? this.info
                     .map(
                       (detail) => `
-                  <li>
-                    <h3 class="personal-detail-subtitle">${detail.subtitle}</h3>
-                    <span class="personal-detail-info">${detail.contents}</span>
-                  </li>
-                `,
+                        <li>
+                          <h3 class="personal-detail-subtitle">${detail.subtitle}</h3>
+                          <span class="personal-detail-info">${detail.contents}</span>
+                        </li>
+                      `,
                     )
                     .join('')
-                : ''
+                : '<li class="admin-owner-only">본인 혹은 관리자만 열람할 수 있습니다.</li>'
             }
           </ul>
-          ${!this.info.length ? '<p class="admin-owner-only-text">본인 혹은 관리자만 열람할 수 있습니다.</p>' : ''}
         </div>
       </li>
     `;

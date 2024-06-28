@@ -42,7 +42,8 @@
   font-size: 0.875rem;
 }
 
-.admin-owner-only-text {
+.personal-detail-list .admin-owner-only {
+  display: block;
   color: var(--color-dark-gray);
 }
 
@@ -95,7 +96,7 @@
     font-size: 1.125rem;
   }
 
-  .admin-owner-only-text {
+  .personal-detail-list .admin-owner-only {
     font-size: 0.875rem;
   }
 }
