@@ -1,0 +1,102 @@
+.personal-details-list > li {
+  padding: 30px 0;
+  margin-top: 12px;
+  background-color: #fff;
+}
+
+.personal-detail-title {
+  margin-bottom: 24px;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.personal-detail-list > li {
+  display: grid;
+  grid-template-columns: minmax(0, 110px) 2fr;
+  margin-bottom: 8px;
+}
+
+.personal-detail-list > li:last-child {
+  margin-bottom: 0;
+}
+
+.personal-detail-subtitle {
+  color: var(--color-darkest-gray);
+  font-weight: 500;
+}
+
+.career-list li:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.career-company {
+  font-weight: 500;
+}
+
+.career-period {
+  font-size: 0.75rem;
+}
+
+.career-role {
+  color: var(--color-dark-gray);
+  font-size: 0.875rem;
+}
+
+.personal-detail-list .admin-owner-only {
+  display: block;
+  color: var(--color-dark-gray);
+}
+
+@media (width >= 1024px) {
+  .personal-details-section {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .personal-details-list {
+    display: grid;
+    grid-auto-rows: minmax(150px, auto);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'details-1 details-3'
+      'details-2 details-4';
+  }
+
+  .personal-details-list > li:nth-child(1) {
+    grid-area: details-1;
+  }
+
+  .personal-details-list > li:nth-child(2) {
+    grid-area: details-2;
+  }
+
+  .personal-details-list > li:nth-child(3) {
+    grid-area: details-3;
+  }
+
+  .personal-details-list > li:nth-child(4) {
+    grid-area: details-4;
+  }
+
+  .personal-detail-list {
+    font-size: 0.875rem;
+  }
+
+  .personal-details-list > li {
+    padding: 30px 0;
+    margin: 0;
+  }
+
+  .personal-details-list > li:nth-child(1),
+  .personal-details-list > li:nth-child(3) {
+    padding-top: 20px;
+  }
+
+  .personal-detail-title {
+    font-size: 1.125rem;
+  }
+
+  .personal-detail-list .admin-owner-only {
+    font-size: 0.875rem;
+  }
+}

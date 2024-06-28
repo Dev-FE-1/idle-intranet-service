@@ -1,0 +1,30 @@
+.profile-img-container {
+  position: relative;
+  height: 36px;
+  width: 36px;
+  border-radius: 4px;
+  border: 1px solid var(--color-light-gray);
+  overflow: hidden;
+}
+
+.profile-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  transform: translate(-50%, -50%);
+}
+
+.profile-img-container.img-large {
+  height: 140px;
+  width: 140px;
+  border-radius: 30px;
+}
+
+.profile-img.img-large {
+  width: 100%;
+}
+
+.profile-img-container.img-bd-light {
+  border: 1px solid var(--color-lightest-gray);
+}

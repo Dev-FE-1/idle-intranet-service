@@ -1,0 +1,30 @@
+.page-title-container {
+  padding-top: 30px;
+}
+
+.page-title {
+  font-size: 1.25rem;
+  font-weight: 7002;
+}
+
+.page-subtitle {
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  color: var(--color-dark-gray);
+}
+
+.page-title-description {
+  margin-top: 2px;
+  font-size: 0.875rem;
+  color: var(--color-dark-gray);
+}
+
+@media (width >= 1024px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.875rem;
+  }
+}

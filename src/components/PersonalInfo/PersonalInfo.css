@@ -1,0 +1,11 @@
+.personal-info-section {
+  padding: 30px 0;
+  background-color: #fff;
+}
+
+@media (width >= 1024px) {
+  .personal-info-section .wrapper {
+    display: flex;
+    flex-basis: 0;
+  }
+}

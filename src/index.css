@@ -1,5 +1,3 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
-
 :root {
   --color-primary: #007aff;
   --color-black: #121212;
@@ -7,6 +5,10 @@
   --color-dark-gray: #8b95a1;
   --color-light-gray: #e3e5eb;
   --color-lightest-gray: #f2f3f6;
+
+  /* hover */
+  --color-primary-hover: #1662eb;
+  --color-light-gray-hover: #d5d7dd;
 }
 
 body {
@@ -34,6 +36,11 @@ button {
   padding: 0 20px;
 }
 
+.main-container {
+  position: relative;
+  padding-bottom: 70px;
+}
+
 @media (width >= 1024px) {
   body {
     background-color: #fff;
@@ -41,5 +48,15 @@ button {
 
   .desktop-only {
     display: block;
+  }
+
+  .main-container {
+    padding: 60px 0 0 220px;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
