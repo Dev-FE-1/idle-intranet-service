@@ -12,6 +12,7 @@ export default class Modal {
 
   html() {
     return `
+      <div class='modal-bg'></div>
       <div class="modal-content">
         <div class="modal-header">
           <h2>${this.title}</h2>
