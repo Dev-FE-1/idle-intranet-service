@@ -1,0 +1,133 @@
+.members-container {
+  font-family: Pretendard;
+  margin: 0 60px;
+  min-width: auto;
+  max-width: 1200px;
+}
+
+.members-content-container {
+  margin-top: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--color-light-gray);
+}
+
+.members-content-container .table-wrapper {
+  padding: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.members-content-container .table-wrapper .table-container {
+  border-bottom: 0;
+  border-radius: 0;
+}
+
+.members-search-header {
+  padding: 0 30px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.members-container span {
+  color: var(--color-black);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+}
+
+.members-container span em {
+  color: var(--color-primary);
+  font-style: normal;
+}
+
+.members-search-header .input {
+  height: 30px;
+  width: 220px;
+}
+
+.members-search-header img {
+  position: absolute;
+  right: 40px;
+  top: 2px;
+}
+
+.members-mobile-only span {
+  display: none;
+}
+
+@media (width <= 1024px) {
+  .members-container {
+    margin: 0;
+  }
+
+  .members-mobile-only span {
+    display: block;
+    margin: 20px 0 0 20px;
+    font-size: 14px;
+  }
+
+  .members-search-header span {
+    display: none;
+  }
+
+  .members-mobile-only {
+    background-color: #fff;
+    padding-bottom: 20px;
+    margin-bottom: -15px;
+  }
+
+  .members-content-container {
+    border-radius: 0;
+  }
+
+  .members-search-header {
+    background-color: #fff;
+    margin: 0;
+    height: 80px;
+    padding: 0 20px;
+    justify-content: center;
+  }
+
+  .members-search-header .input {
+    width: 100%;
+    height: 40px;
+    border-radius: 4px;
+  }
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  height: 87px;
+  background-color: #fff;
+}
+
+@media (width <= 1024px) {
+  .members-search-header img {
+    right: 35px;
+    top: 27px;
+  }
+}
+
+@media (width <= 770px) {
+  thead th:nth-child(5),
+  tbody td:nth-child(5n) {
+    display: none;
+  }
+}
+
+@media (width <= 635px) {
+  thead th:nth-child(4),
+  tbody td:nth-child(4n) {
+    display: none;
+  }
+}
+
+@media (width <= 515px) {
+  thead th:nth-child(3),
+  tbody td:nth-child(3n) {
+    display: none;
+  }
+}
