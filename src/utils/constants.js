@@ -8,6 +8,7 @@ export const COLORS = {
 };
 
 export const PATH = {
+  SIGNIN: '/signin',
   HOME: '/',
   MEMBERS: '/members',
   PROFILE: '/profile',

@@ -4,6 +4,7 @@ import {
   MembersPage,
   ProfilePage,
   WorkManagePage,
+  SignInPage,
   PageNotFound,
 } from '../pages';
 import { MENUS, PATH } from '../utils/constants';
@@ -23,6 +24,7 @@ export default class Route {
     this.profilePage = new ProfilePage();
     this.workManagePage = new WorkManagePage();
     this.notFoundPage = new PageNotFound();
+    this.signInPage = new SignInPage();
     this.Menu = new Menu('.menu-list', menus);
 
     this.init();
@@ -49,6 +51,9 @@ export default class Route {
     const path = window.location.pathname;
 
     switch (path) {
+      case PATH.SIGNIN:
+        this.signInPage.render();
+        break;
       case PATH.HOME:
         this.homePage.render();
         break;
