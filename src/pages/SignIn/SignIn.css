@@ -1,0 +1,124 @@
+.signin-container {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  padding: 0 20px;
+  background-color: #fff;
+}
+
+.signin-container .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 80px;
+}
+
+.signin-container .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+}
+
+.signin-section,
+.signin-container header {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.signin-title .hand-icon {
+  margin-top: 20px;
+  font-size: 1.25rem;
+}
+
+.signin-title .title-message {
+  margin: 8px 0 40px;
+  font-size: 1.125rem;
+}
+
+.signin-container .alert-message {
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  color: var(--color-alert);
+}
+
+.signin-container input {
+  margin-bottom: 8px;
+}
+
+.signin-container .button:is(.btn-tertiary) {
+  margin-bottom: 20px;
+  color: var(--color-dark-gray);
+  font-weight: 500;
+}
+
+.password-help-message {
+  font-size: 0.875rem;
+  color: var(--color-dark-gray);
+  line-height: 160%;
+}
+
+@media (width >= 1024px) {
+  .signin-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .signin-container .logo-title {
+    font-size: 1rem;
+  }
+
+  .signin-bg {
+    position: relative;
+    width: 50%;
+    height: 100vh;
+    background-color: var(--color-lightest-gray);
+  }
+
+  .signin-bg img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 420px;
+    transform: translate(-50%, -50%);
+  }
+
+  .signin-container header {
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    border-bottom: 0;
+  }
+
+  .signin-section {
+    width: 55%;
+    margin-left: 40px;
+    margin-bottom: 100px;
+  }
+
+  .signin-section .signin-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .signin-container .logo-container {
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .signin-title .hand-icon {
+    font-size: 2rem;
+  }
+
+  .signin-title .title-message {
+    margin-bottom: 50px;
+    font-size: 1.75rem;
+    word-break: auto-phrase;
+  }
+}
