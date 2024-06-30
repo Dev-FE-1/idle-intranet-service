@@ -4,10 +4,10 @@
   gap: 5px;
 }
 
-.pagination-container button{
+.pagination-container button {
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   width: 24px;
   height: 24px;
   border-radius: 4px;
@@ -31,17 +31,26 @@
   transition: 0.3s;
 }
 
-.pagination-container button:nth-child(1),
-.pagination-container button:nth-child(2),
-.pagination-container button:nth-last-child(1),
-.pagination-container button:nth-last-child(2) {
+.pagination-container .fast-left,
+.pagination-container .fast-right,
+.pagination-container .left,
+.pagination-container .right {
   border: 0;
   margin: 0 -3px;
 }
 
-.pagination-container button:nth-child(1):hover svg,
-.pagination-container button:nth-child(2):hover svg,
-.pagination-container button:nth-last-child(1):hover svg,
-.pagination-container button:nth-last-child(2):hover svg{
-  stroke: #333D4B;
+.pagination-container .fast-left:hover svg,
+.pagination-container .fast-right:hover svg,
+.pagination-container .left:hover svg,
+.pagination-container .right:hover svg {
+  stroke: #333d4b;
+}
+
+@media (width <= 1024px) {
+  .pagination-container .fast-left,
+  .pagination-container .fast-right,
+  .pagination-container .left,
+  .pagination-container .right {
+    background-color: var(--color-lighest-gray);
+  }
 }

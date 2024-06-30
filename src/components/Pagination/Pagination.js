@@ -122,8 +122,8 @@ export default class Pagination {
   html() {
     return `
       <div class='pagination-container'>
-        <button>${this.chevrons_left.html()}</button>
-        <button>${this.chevron_left.html()}</button>
+        <button class='fast-left'>${this.chevrons_left.html()}</button>
+        <button class='left'>${this.chevron_left.html()}</button>
         ${this.pages
           .map((page) => {
             if (page === '...') {
@@ -133,8 +133,8 @@ export default class Pagination {
             }
           })
           .join('')}
-        <button>${this.chevron_right.html()}</button>
-        <button>${this.chevrons_right.html()}</button>
+        <button class='right'>${this.chevron_right.html()}</button>
+        <button class='fast-right'>${this.chevrons_right.html()}</button>
       </div>
     `;
   }
