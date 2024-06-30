@@ -44,3 +44,10 @@
   border: 0;
   margin: 0 -3px;
 }
+
+.pagination-container button:nth-child(1):hover svg,
+.pagination-container button:nth-child(2):hover svg,
+.pagination-container button:nth-last-child(1):hover svg,
+.pagination-container button:nth-last-child(2):hover svg{
+  stroke: #333D4B;
+}
