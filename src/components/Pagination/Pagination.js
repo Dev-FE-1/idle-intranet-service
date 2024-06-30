@@ -51,7 +51,7 @@ export default class Pagination {
           .map((page) => {
             if (page == 1) return `<button class='active'>${page}</button>`;
             else if (page == '...')
-              return `<button style='border: 0'>${page}</button>`;
+              return `<div>${page}</div>`;
             else return `<button>${page}</button>`;
           })
           .join('')}

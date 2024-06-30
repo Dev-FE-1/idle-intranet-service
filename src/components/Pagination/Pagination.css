@@ -4,7 +4,11 @@
   gap: 5px;
 }
 
-.pagination-container button {
+.pagination-container button,
+.pagination-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
   width: 24px;
   height: 24px;
   border-radius: 4px;
@@ -14,6 +18,11 @@
   font-size: 12px;
   letter-spacing: -0.12px;
   background-color: #fff;
+}
+
+.pagination-container div {
+  cursor: default;
+  border: 0;
 }
 
 .pagination-container button:hover {
@@ -33,8 +42,5 @@
 .pagination-container button:nth-last-child(1),
 .pagination-container button:nth-last-child(2) {
   border: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0 -3px;
 }
