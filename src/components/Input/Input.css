@@ -11,7 +11,7 @@
 }
 
 .input::placeholder {
-  color: #b2b3b9;
+  color: var(--color-dark-gray);
 }
 
 .input:focus {

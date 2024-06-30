@@ -2,7 +2,7 @@ import Main from '../../components/Main';
 import Title from '../../components/Title/Title';
 import Input from '../../components/Input/Input';
 import Table from '../../components/Table/Table';
-import { MENUS } from '../../utils/constants';
+import { COLORS, MENUS } from '../../utils/constants';
 import './Members.css';
 import Icon from '../../components/Icon/Icon';
 import { magnifyingGlass } from '../../utils/icons';
@@ -14,7 +14,10 @@ export default class MembersPage extends Main {
     this.Title = new Title({
       title: MENUS.MEMBERS,
     });
-    this.magnifyGlass = new Icon({ svg: magnifyingGlass });
+    this.magnifyGlass = new Icon({
+      svg: magnifyingGlass,
+      options: { size: '18px', color: COLORS.DARK_GRAY },
+    });
     this.input = new Input({ placeholder: '이름을 입력하세요' });
     this.table = new Table({
       headers: ['이름', '직무', '조직', '이메일', '연락처'],
@@ -97,6 +100,6 @@ export default class MembersPage extends Main {
         </div>
       </div>
     `;
-    this.pagination.render()
+    this.pagination.render();
   }
 }
