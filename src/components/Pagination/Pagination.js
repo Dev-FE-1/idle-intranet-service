@@ -63,6 +63,18 @@ export default class Pagination {
     pageCalcUp(this.currentPage, this.maxPage, this.pages);
   }
 
+  handleFastLeft = () => {
+    this.currentPage = 1;
+    this.calculatePages();
+    this.render();
+  };
+
+  handleFastRight = () => {
+    this.currentPage = this.maxPage;
+    this.calculatePages();
+    this.render();
+  };
+
   handleLeft = () => {
     this.currentPage = this.currentPage === 1 ? 1 : this.currentPage - 1;
     this.calculatePages();
@@ -92,21 +104,13 @@ export default class Pagination {
       .querySelectorAll('.pagination-container button')
       .forEach((button, index) => {
         if (index === 0) {
-          button.addEventListener('click', () => {
-            this.currentPage = 1;
-            this.calculatePages();
-            this.render();
-          });
+          button.addEventListener('click', this.handleFastLeft);
         } else if (index === 1) {
           button.addEventListener('click', this.handleLeft);
         } else if (index === this.pages.length + 2) {
           button.addEventListener('click', this.handleRight);
         } else if (index === this.pages.length + 3) {
-          button.addEventListener('click', () => {
-            this.currentPage = this.maxPage;
-            this.calculatePages();
-            this.render();
-          });
+          button.addEventListener('click', this.handleFastRight);
         } else {
           button.addEventListener('click', () => {
             this.handlePageClick(this.pages[index - 2]);
@@ -123,9 +127,9 @@ export default class Pagination {
         ${this.pages
           .map((page) => {
             if (page === '...') {
-              return `<button>${page}</button>`;
+              return `<button style='cursor:default; border:0' disabled>${page}</button>`;
             } else {
-              return `<button class='${page === this.currentPage ? 'active' : ''}'>${page}</button>`;
+              return `<button class='page ${page === this.currentPage ? 'active' : ''}'>${page}</button>`;
             }
           })
           .join('')}
