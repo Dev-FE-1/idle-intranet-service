@@ -1,4 +1,9 @@
-import { chevron_left, chevron_right, chevrons_left, chevrons_right } from '../../utils/icons';
+import {
+  chevron_left,
+  chevron_right,
+  chevrons_left,
+  chevrons_right,
+} from '../../utils/icons';
 import Icon from '../Icon/Icon';
 import './Pagination.css';
 
@@ -7,11 +12,27 @@ export default class Pagination {
     this.currentPage = currentPage;
     this.maxPage = maxPage;
     this.pages = [];
-    this.chevrons_left = new Icon({svg: chevrons_left, options:{size: '14px'}});
-    this.chevron_left = new Icon({svg: chevron_left, options:{size: '14px'}});
-    this.chevron_right = new Icon({svg: chevron_right, options:{size: '14px'}});
-    this.chevrons_right = new Icon({svg: chevrons_right, options:{size: '14px'}});
+    this.chevrons_left = new Icon({
+      svg: chevrons_left,
+      options: { size: '14px' },
+    });
+    this.chevron_left = new Icon({
+      svg: chevron_left,
+      options: { size: '14px' },
+    });
+    this.chevron_right = new Icon({
+      svg: chevron_right,
+      options: { size: '14px' },
+    });
+    this.chevrons_right = new Icon({
+      svg: chevrons_right,
+      options: { size: '14px' },
+    });
+    this.calculatePages();
+  }
 
+  calculatePages() {
+    this.pages = [];
     let pageCalcDown = (currentPage, pages) => {
       if (currentPage > 4) {
         pages.push(1, '...', currentPage - 2, currentPage - 1);
@@ -38,8 +59,60 @@ export default class Pagination {
         );
       }
     };
-    pageCalcDown(currentPage, this.pages);
-    pageCalcUp(currentPage, maxPage, this.pages);
+    pageCalcDown(this.currentPage, this.pages);
+    pageCalcUp(this.currentPage, this.maxPage, this.pages);
+  }
+
+  handleLeft = () => {
+    this.currentPage = this.currentPage === 1 ? 1 : this.currentPage - 1;
+    this.calculatePages();
+    this.render();
+  };
+
+  handleRight = () => {
+    this.currentPage =
+      this.currentPage === this.maxPage ? this.maxPage : this.currentPage + 1;
+    this.calculatePages();
+    this.render();
+  };
+
+  handlePageClick = (page) => {
+    this.currentPage = page;
+    this.calculatePages();
+    this.render();
+  };
+
+  render() {
+    document.querySelector('.pagination-container').innerHTML = this.html();
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    document
+      .querySelectorAll('.pagination-container button')
+      .forEach((button, index) => {
+        if (index === 0) {
+          button.addEventListener('click', () => {
+            this.currentPage = 1;
+            this.calculatePages();
+            this.render();
+          });
+        } else if (index === 1) {
+          button.addEventListener('click', this.handleLeft);
+        } else if (index === this.pages.length + 2) {
+          button.addEventListener('click', this.handleRight);
+        } else if (index === this.pages.length + 3) {
+          button.addEventListener('click', () => {
+            this.currentPage = this.maxPage;
+            this.calculatePages();
+            this.render();
+          });
+        } else {
+          button.addEventListener('click', () => {
+            this.handlePageClick(this.pages[index - 2]);
+          });
+        }
+      });
   }
 
   html() {
@@ -49,10 +122,11 @@ export default class Pagination {
         <button>${this.chevron_left.html()}</button>
         ${this.pages
           .map((page) => {
-            if (page == 1) return `<button class='active'>${page}</button>`;
-            else if (page == '...')
-              return `<div>${page}</div>`;
-            else return `<button>${page}</button>`;
+            if (page === '...') {
+              return `<button>${page}</button>`;
+            } else {
+              return `<button class='${page === this.currentPage ? 'active' : ''}'>${page}</button>`;
+            }
           })
           .join('')}
         <button>${this.chevron_right.html()}</button>
