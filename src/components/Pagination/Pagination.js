@@ -33,34 +33,31 @@ export default class Pagination {
 
   calculatePages() {
     this.pages = [];
-    let pageCalcDown = (currentPage, pages) => {
-      if (currentPage > 4) {
-        pages.push(1, '...', currentPage - 2, currentPage - 1);
-      } else {
-        pages.push(...Array.from({ length: currentPage - 1 }, (_, i) => i + 1));
-      }
-    };
-
-    let pageCalcUp = (currentPage, maxPage, pages) => {
-      if (maxPage - currentPage <= 3) {
+    let pageCalc = (currentPage, maxPage, pages) => {
+      if (currentPage < 5) {
         pages.push(
-          ...Array.from(
-            { length: maxPage - currentPage + 1 },
-            (_, i) => i + currentPage,
-          ),
-        );
-      } else {
-        pages.push(
-          currentPage,
-          currentPage + 1,
-          currentPage + 2,
+          ...Array.from({ length: 5 }, (_, i) => i + 1),
           '...',
           maxPage,
         );
+      } else if (5 <= currentPage && currentPage <= maxPage - 4) {
+        pages.push(
+          1,
+          '...',
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          '...',
+          maxPage,
+        );
+      } else {
+        pages.push(1, '...',
+          ...Array.from({ length: 5 }, (_, i) => i + maxPage - 4),
+        ); 
       }
     };
-    pageCalcDown(this.currentPage, this.pages);
-    pageCalcUp(this.currentPage, this.maxPage, this.pages);
+
+    pageCalc(this.currentPage, this.maxPage, this.pages);
   }
 
   handleFastLeft = () => {
