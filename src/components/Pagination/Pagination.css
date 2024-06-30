@@ -4,8 +4,7 @@
   gap: 5px;
 }
 
-.pagination-container button,
-.pagination-container div {
+.pagination-container button{
   display: flex;
   align-items: center;
   justify-content: center;  
@@ -20,18 +19,13 @@
   background-color: #fff;
 }
 
-.pagination-container div {
-  cursor: default;
-  border: 0;
-}
-
-.pagination-container button:hover {
+.pagination-container .page:hover {
   border: 1px solid var(--color-primary);
   color: var(--color-primary);
   transition: 0.3s;
 }
 
-.pagination-container button.active {
+.pagination-container .page.active {
   background-color: var(--color-primary);
   color: #fff;
   transition: 0.3s;
