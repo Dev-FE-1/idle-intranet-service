@@ -14,19 +14,19 @@ export default class Pagination {
     this.pages = [];
     this.chevrons_left = new Icon({
       svg: chevrons_left,
-      options: { size: '14px' },
+      options: { size: '18px' },
     });
     this.chevron_left = new Icon({
       svg: chevron_left,
-      options: { size: '14px' },
+      options: { size: '18px' },
     });
     this.chevron_right = new Icon({
       svg: chevron_right,
-      options: { size: '14px' },
+      options: { size: '18px' },
     });
     this.chevrons_right = new Icon({
       svg: chevrons_right,
-      options: { size: '14px' },
+      options: { size: '18px' },
     });
     this.calculatePages();
   }
@@ -51,9 +51,11 @@ export default class Pagination {
           maxPage,
         );
       } else {
-        pages.push(1, '...',
+        pages.push(
+          1,
+          '...',
           ...Array.from({ length: 5 }, (_, i) => i + maxPage - 4),
-        ); 
+        );
       }
     };
 
@@ -124,7 +126,7 @@ export default class Pagination {
         ${this.pages
           .map((page) => {
             if (page === '...') {
-              return `<button style='cursor:default; border:0' disabled>${page}</button>`;
+              return `<button class='disabled' disabled>${page}</button>`;
             } else {
               return `<button class='page ${page === this.currentPage ? 'active' : ''}'>${page}</button>`;
             }

@@ -1,8 +1,12 @@
 .members-container {
-  font-family: Pretendard;
-  margin: 0 60px;
   min-width: auto;
   max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.members-container .page-title-container .wrapper {
+  padding: 0;
 }
 
 .members-content-container {
@@ -20,11 +24,13 @@
 
 .members-content-container .table-wrapper .table-container {
   border: 0;
+  border-radius: 0;
   border-top: 1px solid var(--color-light-gray);
+  background: #fff;
 }
 
 .members-search-header {
-  padding: 0 30px;
+  padding: 0 20px;
   margin: 20px 0;
   display: flex;
   justify-content: space-between;
@@ -50,18 +56,22 @@
 }
 
 .members-search-header .input {
-  height: 30px;
   width: 220px;
+  height: 40px;
   border-right: 0;
-  border-radius: 4px 0 0 4px;
+  border-radius: 8px 0 0 8px;
+  font-size: 14px;
 }
 
 .members-search-header button {
-  height: 30px;
-  border-radius: 0 4px 4px 0;
-  background-color: #fff;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-right: 8px;
+  border-radius: 0 8px 8px 0;
   border: 1px solid var(--color-light-gray);
   border-left: 0;
+  background-color: #fff;
 }
 
 .members-mobile-only span {
@@ -71,21 +81,23 @@
 .pagination-container {
   display: flex;
   align-items: center;
-  height: 87px;
+  height: 80px;
   background-color: #fff;
 }
 
 /* 미디어 쿼리 */
-
 @media (width <= 1024px) {
   .members-container {
-    margin: 0;
+    padding: 0;
+  }
+
+  .members-container .page-title-container .wrapper {
+    padding: 0 20px;
   }
 
   .members-mobile-only span {
     display: block;
     margin: 20px 0 0 20px;
-    font-size: 14px;
   }
 
   .members-search-header span {
@@ -95,11 +107,13 @@
   .members-mobile-only {
     background-color: #fff;
     padding-bottom: 20px;
-    margin-bottom: -15px;
   }
 
   .members-content-container {
+    margin-top: 12px;
     border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid var(--color-light-gray);
   }
 
   .members-search-header {
@@ -109,41 +123,14 @@
     padding: 0 20px;
     justify-content: flex-end;
   }
+}
 
+@media (width <= 400px) {
   .members-input-container {
-    max-width: 400px;
     width: 100%;
   }
 
   .members-search-header .input {
     width: 100%;
-    height: 40px;
-    border-radius: 8px 0 0 8px;
-  }
-
-  .members-search-header button {
-    height: 40px;
-    border-radius: 0 8px 8px 0;
   }
 }
-
-/* @media (width <= 770px) {
-  thead th:nth-child(5),
-  tbody td:nth-child(5n) {
-    display: none;
-  }
-}
-
-@media (width <= 635px) {
-  thead th:nth-child(4),
-  tbody td:nth-child(4n) {
-    display: none;
-  }
-}
-
-@media (width <= 515px) {
-  thead th:nth-child(3),
-  tbody td:nth-child(3n) {
-    display: none;
-  }
-} */
