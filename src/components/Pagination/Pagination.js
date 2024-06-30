@@ -1,3 +1,5 @@
+import { chevron_left, chevron_right, chevrons_left, chevrons_right } from '../../utils/icons';
+import Icon from '../Icon/Icon';
 import './Pagination.css';
 
 export default class Pagination {
@@ -5,6 +7,10 @@ export default class Pagination {
     this.currentPage = currentPage;
     this.maxPage = maxPage;
     this.pages = [];
+    this.chevrons_left = new Icon({svg: chevrons_left, options:{size: '14px'}});
+    this.chevron_left = new Icon({svg: chevron_left, options:{size: '14px'}});
+    this.chevron_right = new Icon({svg: chevron_right, options:{size: '14px'}});
+    this.chevrons_right = new Icon({svg: chevrons_right, options:{size: '14px'}});
 
     let pageCalcDown = (currentPage, pages) => {
       if (currentPage > 4) {
@@ -39,15 +45,18 @@ export default class Pagination {
   html() {
     return `
       <div class='pagination-container'>
-        <button>&laquo</button>
+        <button>${this.chevrons_left.html()}</button>
+        <button>${this.chevron_left.html()}</button>
         ${this.pages
           .map((page) => {
-            if(page == 1) return `<button class='active'>${page}</button>`
-            else if(page == '...') return `<button style='border: 0'>${page}</button>`
+            if (page == 1) return `<button class='active'>${page}</button>`;
+            else if (page == '...')
+              return `<button style='border: 0'>${page}</button>`;
             else return `<button>${page}</button>`;
           })
           .join('')}
-        <button>&raquo</button>
+        <button>${this.chevron_right.html()}</button>
+        <button>${this.chevrons_right.html()}</button>
       </div>
     `;
   }
