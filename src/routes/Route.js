@@ -52,7 +52,7 @@ export default class Route {
     const anchor = event.target.closest('a');
 
     if (anchor && anchor.href) {
-      history.pushState(null, null, anchor.href);
+      window.history.pushState(null, null, anchor.href);
       this.route();
       this.activeNavBar();
     }
@@ -66,7 +66,7 @@ export default class Route {
   route() {
     const user = JSON.parse(localStorage.getItem('user')) || 'user'; // 임시
     if (!user) {
-      history.pushState(null, null, PATH.SIGNIN);
+      window.history.pushState(null, null, PATH.SIGNIN);
       this.routes[PATH.SIGNIN].page.render();
       return;
     }
