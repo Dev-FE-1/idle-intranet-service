@@ -1,8 +1,9 @@
 import './Button.css';
 
 export default class Button {
-  constructor({ type, size, content }) {
-    this.type = type || 'primary'; // primary, secondary, tertiary, ghost, text
+  constructor({ type, variant, size, content }) {
+    this.type = type || 'button'; // HTML button type: 'submit', 'reset', 'button'
+    this.variant = variant || 'primary'; // Button style type: 'primary', 'secondary',
     this.size = size || 'default'; // small
     this.content = content || '';
   }

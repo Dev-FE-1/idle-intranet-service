@@ -7,7 +7,7 @@ export default class Modal {
     this.mainContent = mainContent || '메인 컨텐츠';
     this.buttonContent = buttonContent || 'Click me';
     this.submitButton = new Button({ content: 'click me' });
-    this.closeButton = new Button({ type: 'text', content: '취소' });
+    this.closeButton = new Button({ variant: 'text', content: '취소' });
   }
 
   html() {

@@ -14,7 +14,7 @@ export default class WorkInfo {
     });
     this.ProgressRing = new ProgressRing({ percent: 50 });
     this.Button = new Button({
-      type: 'secondary',
+      variant: 'secondary',
       size: 'large',
       content: '근무 시작',
     });
