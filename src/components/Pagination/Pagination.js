@@ -33,14 +33,14 @@ export default class Pagination {
 
   calculatePages() {
     this.pages = [];
-    let pageCalc = (currentPage, maxPage, pages) => {
+    const pageCalc = (currentPage, maxPage, pages) => {
       if (currentPage < 5) {
         pages.push(
           ...Array.from({ length: 5 }, (_, i) => i + 1),
           '...',
           maxPage,
         );
-      } else if (5 <= currentPage && currentPage <= maxPage - 4) {
+      } else if (currentPage >= 5 && currentPage <= maxPage - 4) {
         pages.push(
           1,
           '...',
@@ -127,9 +127,8 @@ export default class Pagination {
           .map((page) => {
             if (page === '...') {
               return `<button class='disabled' disabled>${page}</button>`;
-            } else {
-              return `<button class='page ${page === this.currentPage ? 'active' : ''}'>${page}</button>`;
             }
+            return `<button class='page ${page === this.currentPage ? 'active' : ''}'>${page}</button>`;
           })
           .join('')}
         <button class='right'>${this.chevron_right.html()}</button>
