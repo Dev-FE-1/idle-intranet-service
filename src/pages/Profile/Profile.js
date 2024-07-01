@@ -2,7 +2,7 @@ import Main from '../../components/Main';
 import PersonalDetails from '../../components/PersonalInfo/PersonalDetails';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo';
 import Title from '../../components/Title/Title';
-import { MENUS } from '../../utils/constants';
+import { PATH_TITLE } from '../../utils/constants';
 import './Profile.css';
 
 const dummyUserProfile = {
@@ -35,7 +35,7 @@ export default class ProfilePage extends Main {
   constructor() {
     super();
     this.Title = new Title({
-      title: MENUS.PROFILE,
+      title: PATH_TITLE.PROFILE,
       desktopOnly: true,
     });
     this.PersonalInfo = new PersonalInfo({ user: dummyUserProfile });
