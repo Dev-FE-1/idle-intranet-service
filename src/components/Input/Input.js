@@ -10,7 +10,7 @@ export default class Input {
 
   html() {
     return `
-      <input type=${this.type} class='input input-${this.readOnly}' id=${this.id} placeholder='${this.placeholder}'>
+      <input type=${this.type} class='input input-${this.readOnly}' id='${this.id}' placeholder='${this.placeholder}'>
     `;
   }
 }
