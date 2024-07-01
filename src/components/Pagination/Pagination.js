@@ -1,8 +1,8 @@
 import {
-  chevron_left,
-  chevron_right,
-  chevrons_left,
-  chevrons_right,
+  chevronLeft,
+  chevronRight,
+  chevronsLeft,
+  chevronsRight,
 } from '../../utils/icons.js';
 import Icon from '../Icon/Icon.js';
 import './Pagination.css';
@@ -13,19 +13,19 @@ export default class Pagination {
     this.maxPage = maxPage;
     this.pages = [];
     this.chevrons_left = new Icon({
-      svg: chevrons_left,
+      svg: chevronsLeft,
       options: { size: '18px' },
     });
     this.chevron_left = new Icon({
-      svg: chevron_left,
+      svg: chevronLeft,
       options: { size: '18px' },
     });
     this.chevron_right = new Icon({
-      svg: chevron_right,
+      svg: chevronRight,
       options: { size: '18px' },
     });
     this.chevrons_right = new Icon({
-      svg: chevrons_right,
+      svg: chevronsRight,
       options: { size: '18px' },
     });
     this.calculatePages();
