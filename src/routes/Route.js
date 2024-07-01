@@ -85,7 +85,7 @@ export default class Route {
   }
 
   init() {
-    window.addEventListener('popstate', this.route);
+    window.addEventListener('popstate', () => this.route());
     document.body.addEventListener('click', this.handleNavigatePage);
     this.setRoutes();
     this.route();
