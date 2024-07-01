@@ -2,7 +2,7 @@ import Main from '../../components/Main';
 import Title from '../../components/Title/Title';
 import Input from '../../components/Input/Input';
 import Table from '../../components/Table/Table';
-import { COLORS, MENUS } from '../../utils/constants';
+import { COLORS, PATH_TITLE } from '../../utils/constants';
 import './Members.css';
 import Icon from '../../components/Icon/Icon';
 import { magnifyingGlass } from '../../utils/icons';
@@ -12,7 +12,7 @@ export default class MembersPage extends Main {
   constructor() {
     super();
     this.Title = new Title({
-      title: MENUS.MEMBERS,
+      title: PATH_TITLE.MEMBERS,
     });
     this.magnifyGlass = new Icon({
       svg: magnifyingGlass,

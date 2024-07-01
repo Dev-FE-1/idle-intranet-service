@@ -7,27 +7,38 @@ import {
   SignInPage,
   PageNotFound,
 } from '../pages';
-import { MENUS, PATH } from '../utils/constants';
+import { PATH_TITLE, PATH } from '../utils/constants';
 import { clockIcon, homeIcon, membersIcon, profileIcon } from '../utils/icons';
+import { matchRoute } from '../utils/matchRoute';
 
 const menus = [
-  { path: PATH.HOME, title: MENUS.HOME, icon: homeIcon },
-  { path: PATH.MEMBERS, title: MENUS.MEMBERS, icon: membersIcon },
-  { path: PATH.PROFILE, title: MENUS.PROFILE, icon: profileIcon },
-  { path: PATH.WORK_MANAGE, title: MENUS.WORK_MANAGE, icon: clockIcon },
+  { path: PATH.HOME, title: PATH_TITLE.HOME, icon: homeIcon },
+  { path: PATH.MEMBERS, title: PATH_TITLE.MEMBERS, icon: membersIcon },
+  { path: PATH.PROFILE, title: PATH_TITLE.PROFILE, icon: profileIcon },
+  { path: PATH.WORK_MANAGE, title: PATH_TITLE.WORK_MANAGE, icon: clockIcon },
 ];
 
 export default class Route {
   constructor() {
-    this.homePage = new HomePage();
-    this.membersPage = new MembersPage();
-    this.profilePage = new ProfilePage();
-    this.workManagePage = new WorkManagePage();
     this.notFoundPage = new PageNotFound();
-    this.signInPage = new SignInPage();
     this.Menu = new Menu('.menu-list', menus);
+    this.title = 'CubeIT ';
 
     this.init();
+  }
+
+  setRoutes() {
+    this.routes = {
+      [PATH.HOME]: { title: PATH_TITLE.HOME, page: new HomePage() },
+      [PATH.MEMBERS]: { title: PATH_TITLE.MEMBERS, page: new MembersPage() },
+      [PATH.MEMBER]: { title: PATH_TITLE.MEMBERS, page: new ProfilePage() },
+      [PATH.PROFILE]: { title: PATH_TITLE.PROFILE, page: new ProfilePage() },
+      [PATH.WORK_MANAGE]: {
+        title: PATH_TITLE.WORK_MANAGE,
+        page: new WorkManagePage(),
+      },
+      [PATH.SIGNIN]: { title: PATH_TITLE.SIGNIN, page: new SignInPage() },
+    };
   }
 
   handleNavigatePage = (event) => {
@@ -48,27 +59,21 @@ export default class Route {
   }
 
   route() {
-    const path = window.location.pathname;
+    const user = JSON.parse(localStorage.getItem('user')) || 'user'; // 임시
+    if (!user) {
+      history.pushState(null, null, PATH.SIGNIN);
+      this.routes[PATH.SIGNIN].page.render();
+      return;
+    }
 
-    switch (path) {
-      case PATH.SIGNIN:
-        this.signInPage.render();
-        break;
-      case PATH.HOME:
-        this.homePage.render();
-        break;
-      case PATH.MEMBERS:
-        this.membersPage.render();
-        break;
-      case PATH.PROFILE:
-        this.profilePage.render();
-        break;
-      case PATH.WORK_MANAGE:
-        this.workManagePage.render();
-        break;
-      default:
-        this.notFoundPage.render();
-        break;
+    const path = window.location.pathname;
+    const matchedRoute = matchRoute(path, this.routes);
+    if (matchedRoute) {
+      const page = matchedRoute.page;
+      document.title = this.title + matchedRoute.title;
+      page.render();
+    } else {
+      this.notFoundPage.render();
     }
 
     this.activeNavBar();
@@ -77,6 +82,7 @@ export default class Route {
   init() {
     window.addEventListener('popstate', this.route);
     document.body.addEventListener('click', this.handleNavigatePage);
+    this.setRoutes();
     this.route();
   }
 }
