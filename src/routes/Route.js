@@ -73,10 +73,10 @@ export default class Route {
 
     const path = window.location.pathname;
     const matchedRoute = matchRoute(path, this.routes);
-    if (matchedRoute) {
-      const page = matchedRoute.page;
+    if (matchedRoute && matchedRoute.page) {
+      const currentRoutePage = matchedRoute.page;
       document.title = this.title + matchedRoute.title;
-      page.render();
+      currentRoutePage.render();
     } else {
       this.notFoundPage.render();
     }
