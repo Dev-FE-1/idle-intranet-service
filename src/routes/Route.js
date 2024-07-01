@@ -1,4 +1,4 @@
-import Menu from '../components/NavBar/Menu';
+import Menu from '../components/NavBar/Menu.js';
 import {
   HomePage,
   MembersPage,
@@ -6,10 +6,15 @@ import {
   WorkManagePage,
   SignInPage,
   PageNotFound,
-} from '../pages';
-import { PATH_TITLE, PATH } from '../utils/constants';
-import { clockIcon, homeIcon, membersIcon, profileIcon } from '../utils/icons';
-import { matchRoute } from '../utils/matchRoute';
+} from '../pages/index.js';
+import { PATH_TITLE, PATH } from '../utils/constants.js';
+import {
+  clockIcon,
+  homeIcon,
+  membersIcon,
+  profileIcon,
+} from '../utils/icons.js';
+import { matchRoute } from '../utils/matchRoute.js';
 
 const menus = [
   { path: PATH.HOME, title: PATH_TITLE.HOME, icon: homeIcon },
@@ -47,7 +52,7 @@ export default class Route {
     const anchor = event.target.closest('a');
 
     if (anchor && anchor.href) {
-      history.pushState(null, null, anchor.href);
+      window.history.pushState(null, null, anchor.href);
       this.route();
       this.activeNavBar();
     }
@@ -61,17 +66,17 @@ export default class Route {
   route() {
     const user = JSON.parse(localStorage.getItem('user')) || 'user'; // 임시
     if (!user) {
-      history.pushState(null, null, PATH.SIGNIN);
+      window.history.pushState(null, null, PATH.SIGNIN);
       this.routes[PATH.SIGNIN].page.render();
       return;
     }
 
     const path = window.location.pathname;
     const matchedRoute = matchRoute(path, this.routes);
-    if (matchedRoute) {
-      const page = matchedRoute.page;
+    if (matchedRoute && matchedRoute.page) {
+      const currentRoutePage = matchedRoute.page;
       document.title = this.title + matchedRoute.title;
-      page.render();
+      currentRoutePage.render();
     } else {
       this.notFoundPage.render();
     }
@@ -80,7 +85,7 @@ export default class Route {
   }
 
   init() {
-    window.addEventListener('popstate', this.route);
+    window.addEventListener('popstate', () => this.route());
     document.body.addEventListener('click', this.handleNavigatePage);
     this.setRoutes();
     this.route();

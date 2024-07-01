@@ -1,5 +1,5 @@
-import Main from '../../components/Main';
-import Title from '../../components/Title/Title';
+import Main from '../../components/Main.js';
+import Title from '../../components/Title/Title.js';
 import './Home.css';
 
 export default class HomePage extends Main {

@@ -1,5 +1,5 @@
-import Icon from '../Icon/Icon';
-import { COLORS, PATH } from '../../utils/constants';
+import Icon from '../Icon/Icon.js';
+import { COLORS, PATH } from '../../utils/constants.js';
 
 export default class Menu {
   constructor(container, menus) {

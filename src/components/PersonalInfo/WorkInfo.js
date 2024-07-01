@@ -1,8 +1,8 @@
-import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
-import ProgressRing from '../ProgressRing.js/ProgressRing';
-import { COLORS } from '../../utils/constants';
-import { clockIcon } from '../../utils/icons';
+import Button from '../Button/Button.js';
+import Icon from '../Icon/Icon.js';
+import ProgressRing from '../ProgressRing.js/ProgressRing.js';
+import { COLORS } from '../../utils/constants.js';
+import { clockIcon } from '../../utils/icons.js';
 import './WorkInfo.css';
 
 export default class WorkInfo {
@@ -14,7 +14,7 @@ export default class WorkInfo {
     });
     this.ProgressRing = new ProgressRing({ percent: 50 });
     this.Button = new Button({
-      type: 'secondary',
+      variant: 'secondary',
       size: 'large',
       content: '근무 시작',
     });

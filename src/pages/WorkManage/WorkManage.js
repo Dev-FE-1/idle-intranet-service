@@ -1,6 +1,6 @@
-import Main from '../../components/Main';
-import Title from '../../components/Title/Title';
-import { PATH_TITLE } from '../../utils/constants';
+import Main from '../../components/Main.js';
+import Title from '../../components/Title/Title.js';
+import { PATH_TITLE } from '../../utils/constants.js';
 import './WorkManage.css';
 
 export default class WorkManagePage extends Main {

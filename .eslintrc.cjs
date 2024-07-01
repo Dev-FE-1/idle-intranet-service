@@ -17,6 +17,7 @@ module.exports = {
     'arrow-body-style': 'off',
     'import/extensions': ['error', 'ignorePackages', { js: 'always' }],
     'import/prefer-default-export': 'off',
+    'linebreak-style': ['error', 'unix'],
 
     // Essential rules
     'no-underscore-dangle': [

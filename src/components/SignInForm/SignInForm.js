@@ -14,7 +14,8 @@ export default class SignInForm {
       placeholder: '비밀번호',
     });
     this.Button = new Button({
-      type: 'tertiary',
+      type: 'submit',
+      variant: 'tertiary',
       content: '로그인',
     });
     this.isValidEmail = true;

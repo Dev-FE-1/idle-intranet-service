@@ -1,5 +1,9 @@
 export const matchRoute = (path, routes) => {
-  for (const routePath in routes) {
+  let matchedRoute = null;
+
+  Object.keys(routes).forEach((routePath) => {
+    if (matchedRoute) return;
+
     const route = routes[routePath];
     const paramNames = [];
     const regexPath = routePath.replace(/:[^\s/]+/g, (match) => {
@@ -11,8 +15,9 @@ export const matchRoute = (path, routes) => {
     const match = path.match(regex);
 
     if (match) {
-      return route;
+      matchedRoute = route;
     }
-  }
-  return null;
+  });
+
+  return matchedRoute;
 };
