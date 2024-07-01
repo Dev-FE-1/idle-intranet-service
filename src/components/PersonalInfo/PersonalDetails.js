@@ -1,4 +1,4 @@
-import PersonalDetail from './PersonalDetail';
+import PersonalDetail from './PersonalDetail.js';
 import './PersonalDetails.css';
 
 export default class PersonalDetails {

@@ -3,8 +3,8 @@ import {
   chevron_right,
   chevrons_left,
   chevrons_right,
-} from '../../utils/icons';
-import Icon from '../Icon/Icon';
+} from '../../utils/icons.js';
+import Icon from '../Icon/Icon.js';
 import './Pagination.css';
 
 export default class Pagination {

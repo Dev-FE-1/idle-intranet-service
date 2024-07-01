@@ -1,12 +1,12 @@
-import Main from '../../components/Main';
-import Title from '../../components/Title/Title';
-import Input from '../../components/Input/Input';
-import Table from '../../components/Table/Table';
-import { COLORS, PATH_TITLE } from '../../utils/constants';
+import Main from '../../components/Main.js';
+import Title from '../../components/Title/Title.js';
+import Input from '../../components/Input/Input.js';
+import Table from '../../components/Table/Table.js';
+import { COLORS, PATH_TITLE } from '../../utils/constants.js';
 import './Members.css';
-import Icon from '../../components/Icon/Icon';
-import { magnifyingGlass } from '../../utils/icons';
-import Pagination from '../../components/Pagination/Pagination';
+import Icon from '../../components/Icon/Icon.js';
+import { magnifyingGlass } from '../../utils/icons.js';
+import Pagination from '../../components/Pagination/Pagination.js';
 
 export default class MembersPage extends Main {
   constructor() {

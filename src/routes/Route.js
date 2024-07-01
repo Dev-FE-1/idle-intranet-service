@@ -1,4 +1,4 @@
-import Menu from '../components/NavBar/Menu';
+import Menu from '../components/NavBar/Menu.js';
 import {
   HomePage,
   MembersPage,
@@ -6,10 +6,15 @@ import {
   WorkManagePage,
   SignInPage,
   PageNotFound,
-} from '../pages';
-import { PATH_TITLE, PATH } from '../utils/constants';
-import { clockIcon, homeIcon, membersIcon, profileIcon } from '../utils/icons';
-import { matchRoute } from '../utils/matchRoute';
+} from '../pages/index.js';
+import { PATH_TITLE, PATH } from '../utils/constants.js';
+import {
+  clockIcon,
+  homeIcon,
+  membersIcon,
+  profileIcon,
+} from '../utils/icons.js';
+import { matchRoute } from '../utils/matchRoute.js';
 
 const menus = [
   { path: PATH.HOME, title: PATH_TITLE.HOME, icon: homeIcon },

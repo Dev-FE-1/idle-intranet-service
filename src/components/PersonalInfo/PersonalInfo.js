@@ -1,6 +1,6 @@
 import './PersonalInfo.css';
-import ProfileInfo from './ProfileInfo';
-import WorkInfo from './WorkInfo';
+import ProfileInfo from './ProfileInfo.js';
+import WorkInfo from './WorkInfo.js';
 
 export default class PersonalInfo {
   constructor({ user }) {
