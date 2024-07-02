@@ -10,12 +10,15 @@ export const COLORS = {
 export const PATH = {
   SIGNIN: '/signin',
   HOME: '/',
+  ANNOUNCEMENT: '/announcements/:id',
   MEMBERS: '/members',
+  MEMBER: '/members/:id',
   PROFILE: '/profile',
   WORK_MANAGE: '/work-manage',
 };
 
-export const MENUS = {
+export const PATH_TITLE = {
+  SIGNIN: '로그인',
   HOME: '홈',
   MEMBERS: '구성원',
   PROFILE: '프로필',

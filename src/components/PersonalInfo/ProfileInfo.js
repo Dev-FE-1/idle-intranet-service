@@ -1,4 +1,4 @@
-import Avatar from '../Avatar/Avatar';
+import Avatar from '../Avatar/Avatar.js';
 import './ProfileInfo.css';
 
 export default class ProfileInfo {

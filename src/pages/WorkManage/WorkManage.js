@@ -1,13 +1,13 @@
-import Main from '../../components/Main';
-import Title from '../../components/Title/Title';
-import { MENUS } from '../../utils/constants';
+import Main from '../../components/Main.js';
+import Title from '../../components/Title/Title.js';
+import { PATH_TITLE } from '../../utils/constants.js';
 import './WorkManage.css';
 
 export default class WorkManagePage extends Main {
   constructor() {
     super();
     this.Title = new Title({
-      title: MENUS.WORK_MANAGE,
+      title: PATH_TITLE.WORK_MANAGE,
     });
   }
 

@@ -1,5 +1,5 @@
-import Icon from '../Icon/Icon';
-import { COLORS, PATH } from '../../utils/constants';
+import Icon from '../Icon/Icon.js';
+import { COLORS, PATH } from '../../utils/constants.js';
 
 export default class Menu {
   constructor(container, menus) {
@@ -14,10 +14,21 @@ export default class Menu {
     this.render();
   }
 
+  isActiveMenu(path) {
+    if (path === PATH.HOME && this._active === PATH.HOME) {
+      return true;
+    }
+    if (path === PATH.HOME) {
+      return false;
+    }
+
+    return this._active.startsWith(path);
+  }
+
   render() {
     this.$container.innerHTML = this.menus
       .map((menu) => {
-        const isActive = this._active === menu.path;
+        const isActive = this.isActiveMenu(menu.path);
         const icon = new Icon({
           svg: menu.icon,
           options: {
