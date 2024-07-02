@@ -69,7 +69,9 @@ const initializeDatabase = () => {
           CREATE TABLE IF NOT EXISTS Members (
             employeeNumber INTEGER PRIMARY KEY,
             name TEXT NOT NULL,
+            departmentName TEXT NOT NULL,
             position TEXT NOT NULL,
+            employmentType TEXT NOT NULL,
             hireDate TEXT NOT NULL,
             birthDate TEXT NOT NULL,
             address TEXT NOT NULL,
@@ -89,17 +91,19 @@ const initializeDatabase = () => {
 
         const insertMember = database.prepare(`
           INSERT OR IGNORE INTO members (
-            employeeNumber, name, position, hireDate, birthDate, address, email, phoneNumber,
+            employeeNumber, name, departmentName, position, employmentType, hireDate, birthDate, address, email, phoneNumber,
             salary, isAdmin, departmentNumber, education, career, role,
             profileImage, remainingVacationDays, password
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `);
 
         members.forEach((member) => {
           insertMember.run(
             member.employeeNumber,
             member.name,
+            member.departmentName,
             member.position,
+            member.employmentType,
             member.hireDate,
             member.birthDate,
             member.address,
