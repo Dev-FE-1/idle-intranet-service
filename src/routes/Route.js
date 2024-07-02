@@ -1,3 +1,4 @@
+import { isLoggedIn } from '../components/Login';
 import Menu from '../components/NavBar/Menu';
 import {
   HomePage,
@@ -49,6 +50,11 @@ export default class Route {
 
   route() {
     const path = window.location.pathname;
+
+    if (!isLoggedIn() && path !== PATH.SIGNIN) {
+      window.location.href = PATH.SIGNIN;
+      return;
+    }
 
     switch (path) {
       case PATH.SIGNIN:
