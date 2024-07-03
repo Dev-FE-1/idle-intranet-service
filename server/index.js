@@ -3,17 +3,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 import db from './database.js';
 
-const THRESHOLD = 2000;
 const port = process.env.PORT || 8080;
 const app = express();
-
-app.use((req, res, next) => {
-  const delayTime = Math.floor(Math.random() * THRESHOLD);
-
-  setTimeout(() => {
-    next();
-  }, delayTime);
-});
 
 app.use(morgan('dev'));
 app.use(express.static('dist'));
