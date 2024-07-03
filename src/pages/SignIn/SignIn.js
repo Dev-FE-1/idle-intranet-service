@@ -29,7 +29,9 @@ export default class SignIn {
               <div class="hand-icon">👋</div>
               <p class="title-message">큐브잇 인트라넷에 오신 걸 환영합니다!</p>
             </h2>
-            ${this.Form.html()}
+            <div class='form-wrapper'>
+              ${this.Form.html()}
+            </div>
             <p class="password-help-message">비밀번호를 잊어버리셨다면, IT 지원팀으로 문의해 주세요.</p>
             <p class="password-help-message">IT 지원팀 연락처: cubeit.it@cubeit.com</p>
           </div>
