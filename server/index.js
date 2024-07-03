@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import db from './database.js';
@@ -7,7 +8,6 @@ import { verifyPassword } from './passwords.js';
 
 dotenv.config();
 
-const THRESHOLD = 2000;
 const port = process.env.PORT || 8080;
 const app = express();
 const SECRET_KEY = process.env.JWT_SECRET;
@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json());
+app.use(cors());
 
 const generateToken = (user) => {
   const payload = { id: user.employeeNumber, email: user.email };
@@ -64,15 +65,39 @@ app.post('/api/login', async (req, res) => {
   });
 });
 
-app.get('/api/attendance', authenticateToken, (req, res) => {
-  const sql = 'SELECT * FROM Attendance';
-  db.all(sql, [], (err, rows) => {
+app.get('/api/members/:page', authenticateToken, (req, res) => {
+  let { page } = req.params;
+  const { max = 10 } = req.query;
+  const limit = parseInt(max, 10);
+  const offset = (parseInt(page, 10) - 1) * limit;
+
+  if (!parseInt(page, 10)) {
+    page = 1;
+  }
+
+  const sql = `
+    SELECT 
+      employeeNumber, 
+      name, 
+      position, 
+      email, 
+      phoneNumber 
+    FROM 
+      Members 
+    ORDER BY 
+      employeeNumber ASC 
+    LIMIT ? 
+    OFFSET ?`; // 조직 추가
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [limit, offset], (err, rows) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
         error: err.message,
       });
     }
+
     res.json({
       status: 'OK',
       data: rows,
@@ -80,11 +105,189 @@ app.get('/api/attendance', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/api/vacationRequests', authenticateToken, (req, res) => {
-  const sql = 'SELECT * FROM VacationRequests';
+app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
+  const { employeeNumber } = req.params;
+  const { isAdmin } = req.query;
+
+  const selectItems = [
+    'employeeNumber',
+    'name',
+    'position',
+    'role',
+    'email',
+    'phoneNumber',
+    'profileImage',
+  ]; // 조직 추가
+
+  if (isAdmin === 'true') {
+    selectItems.push(
+      'hireDate',
+      'birthDate',
+      'address',
+      'salary',
+      'education',
+      'career', // 근무 유형 추가
+    );
+  }
+
+  const sql = `
+    SELECT ${selectItems.join(',')} FROM Members WHERE employeeNumber = ?`;
 
   // eslint-disable-next-line consistent-return
-  db.all(sql, [], (err, rows) => {
+  db.get(sql, [employeeNumber], (err, row) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    if (!row) {
+      return res.status(404).json({
+        status: 'Error',
+        error: '사용자를 찾을 수 없습니다.',
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: row,
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
+app.get('/api/user', authenticateToken, (req, res) => {
+  const { employeeNumber } = req.query;
+
+  if (!employeeNumber) {
+    return res.status(422).json({
+      status: 'Error',
+      error: '사원 번호가 누락되었습니다.',
+    });
+  }
+
+  const sql = `
+    SELECT 
+      employeeNumber,
+      name, 
+      position, 
+      hireDate, 
+      birthDate, 
+      address, 
+      email, 
+      phoneNumber, 
+      isAdmin, 
+      departmentNumber, 
+      education, 
+      career, 
+      role, 
+      profileImage, 
+      remainingVacationDays
+    FROM 
+      Members 
+    WHERE 
+      employeeNumber = ?`; // 조직, 근무유형 추가
+
+  // eslint-disable-next-line consistent-return
+  db.get(sql, [employeeNumber], (err, row) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    if (!row) {
+      return res.status(404).json({
+        status: 'Error',
+        error: '사용자를 찾을 수 없습니다.',
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: row,
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
+app.get('/api/attendance/:page', authenticateToken, (req, res) => {
+  let { page } = req.params;
+  const { employeeNumber, max = 10 } = req.query;
+
+  if (!parseInt(page, 10)) {
+    page = 1;
+  }
+
+  if (!employeeNumber) {
+    return res.status(422).json({
+      status: 'Error',
+      error: '사원 번호가 누락되었습니다.',
+    });
+  }
+
+  const limit = parseInt(max, 10);
+  const offset = (parseInt(page, 10) - 1) * limit;
+
+  const sql = `
+    SELECT * 
+    FROM 
+      Attendance 
+    WHERE 
+      employeeNumber = ? 
+    ORDER BY date DESC 
+    LIMIT ? 
+    OFFSET ?`;
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [employeeNumber, limit, offset], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
+app.get('/api/vacationRequests/:page', authenticateToken, (req, res) => {
+  let { page } = req.params;
+  const { employeeNumber, max = 10 } = req.query;
+
+  if (!parseInt(page, 10)) {
+    page = 1;
+  }
+
+  if (!employeeNumber) {
+    return res.status(422).json({
+      status: 'Error',
+      error: '사원 번호가 누락되었습니다.',
+    });
+  }
+
+  const limit = parseInt(max, 10);
+  const offset = (parseInt(page, 10) - 1) * limit;
+
+  const sql = `
+    SELECT * 
+    FROM 
+      VacationRequests 
+    WHERE 
+      employeeNumber = ? 
+    ORDER BY vacationRequestDate DESC 
+    LIMIT ? 
+    OFFSET ?`;
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [employeeNumber, limit, offset], (err, rows) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
@@ -118,7 +321,34 @@ app.get('/api/announcements', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/api/departments', authenticateToken, (req, res) => {
+app.get('/api/announcements/:id', authenticateToken, (req, res) => {
+  const { id } = req.params;
+  const sql = 'SELECT * FROM Announcements WHERE announcementId = ?';
+
+  // eslint-disable-next-line consistent-return
+  db.get(sql, [id], (err, row) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    if (!row) {
+      return res.status(404).json({
+        status: 'Error',
+        error: '공지를 찾을 수 없습니다.',
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: row,
+    });
+  });
+});
+
+app.get('/api/departments', (req, res) => {
   const sql = 'SELECT * FROM Departments';
 
   // eslint-disable-next-line consistent-return
