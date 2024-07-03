@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import fs from 'fs';
+import cors from 'cors';
 import db from './database.js';
 
 const THRESHOLD = 2000;
@@ -18,70 +18,10 @@ app.use((req, res, next) => {
 app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json());
-
-app.get('/api/counter', (req, res) => {
-  const counter = Number(req.query.latest);
-
-  if (Math.floor(Math.random() * 10) <= 3) {
-    res.status(400).send({
-      status: 'Error',
-      data: null,
-    });
-  } else {
-    res.status(200).send({
-      status: 'OK',
-      data: counter + 1,
-    });
-  }
-});
-
-app.get('/api/users.json', (req, res) => {
-  // eslint-disable-next-line consistent-return
-  fs.readFile('./server/data/users.json', 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading JSON file:', err);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: err,
-        data: null,
-      });
-    }
-
-    try {
-      const jsonData = JSON.parse(data);
-      res.json(jsonData);
-    } catch (parseErr) {
-      console.error('Error parsing JSON file:', parseErr);
-      return res.status(500).send({
-        status: 'Internal Server Error',
-        message: parseErr,
-        data: null,
-      });
-    }
-  });
-});
-
-app.get('/api/users', (req, res) => {
-  const sql = 'SELECT * FROM Users';
-
-  // eslint-disable-next-line consistent-return
-  db.all(sql, [], (err, rows) => {
-    if (err) {
-      return res.status(500).json({
-        status: 'Error',
-        error: err.message,
-      });
-    }
-
-    res.json({
-      status: 'OK',
-      data: rows,
-    });
-  });
-});
+app.use(cors());
 
 app.get('/api/members', (req, res) => {
-  const sql = 'SELECT * FROM Members';
+  const sql = `SELECT employeeNumber, name, position, email, phoneNumber FROM Members`; // 조직 추가
 
   // eslint-disable-next-line consistent-return
   db.all(sql, [], (err, rows) => {
@@ -99,11 +39,127 @@ app.get('/api/members', (req, res) => {
   });
 });
 
+app.get('/api/members/:employeeNumber', (req, res) => {
+  const { employeeNumber } = req.params;
+  const { isAdmin } = req.query;
+
+  const selectItems = [
+    'employeeNumber',
+    'name',
+    'position',
+    'role',
+    'email',
+    'phoneNumber',
+    'profileImage',
+  ]; // 조직 추가
+
+  if (isAdmin === 'true') {
+    selectItems.push(
+      'hireDate',
+      'birthDate',
+      'address',
+      'salary',
+      'education',
+      'career', // 근무 유형 추가
+    );
+  }
+
+  const sql = `
+    SELECT ${selectItems.join(',')} FROM Members WHERE employeeNumber = ?`;
+
+  // eslint-disable-next-line consistent-return
+  db.get(sql, [employeeNumber], (err, row) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    if (!row) {
+      return res.status(404).json({
+        status: 'Error',
+        error: '사용자를 찾을 수 없습니다.',
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: row,
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
+app.get('/api/user', (req, res) => {
+  const { employeeNumber } = req.query;
+
+  if (!employeeNumber) {
+    return res.status(422).json({
+      status: 'Error',
+      error: '사원 번호가 누락되었습니다.',
+    });
+  }
+
+  const sql = `
+    SELECT 
+      employeeNumber,
+      name, 
+      position, 
+      hireDate, 
+      birthDate, 
+      address, 
+      email, 
+      phoneNumber, 
+      isAdmin, 
+      departmentNumber, 
+      education, 
+      career, 
+      role, 
+      profileImage, 
+      remainingVacationDays
+    FROM 
+      Members 
+    WHERE 
+      employeeNumber = ?`; // 조직, 근무유형 추가
+
+  // eslint-disable-next-line consistent-return
+  db.get(sql, [employeeNumber], (err, row) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    if (!row) {
+      return res.status(404).json({
+        status: 'Error',
+        error: '사용자를 찾을 수 없습니다.',
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: row,
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
 app.get('/api/attendance', (req, res) => {
-  const sql = 'SELECT * FROM Attendance';
+  const { employeeNumber } = req.query;
+  const sql = 'SELECT * FROM Attendance WHERE employeeNumber = ?';
+
+  if (!employeeNumber) {
+    return res.status(422).json({
+      status: 'Error',
+      error: '사원 번호가 누락되었습니다.',
+    });
+  }
 
   // eslint-disable-next-line consistent-return
-  db.all(sql, [], (err, rows) => {
+  db.all(sql, [employeeNumber], (err, row) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
@@ -113,16 +169,25 @@ app.get('/api/attendance', (req, res) => {
 
     res.json({
       status: 'OK',
-      data: rows,
+      data: row,
     });
   });
 });
 
+// eslint-disable-next-line consistent-return
 app.get('/api/vacationRequests', (req, res) => {
-  const sql = 'SELECT * FROM VacationRequests';
+  const { employeeNumber } = req.query;
+  const sql = 'SELECT * FROM VacationRequests WHERE employeeNumber = ?';
+
+  if (!employeeNumber) {
+    return res.status(422).json({
+      status: 'Error',
+      error: '사원 번호가 누락되었습니다.',
+    });
+  }
 
   // eslint-disable-next-line consistent-return
-  db.all(sql, [], (err, rows) => {
+  db.all(sql, [employeeNumber], (err, row) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
@@ -132,7 +197,7 @@ app.get('/api/vacationRequests', (req, res) => {
 
     res.json({
       status: 'OK',
-      data: rows,
+      data: row,
     });
   });
 });
@@ -152,6 +217,33 @@ app.get('/api/announcements', (req, res) => {
     res.json({
       status: 'OK',
       data: rows,
+    });
+  });
+});
+
+app.get('/api/announcements/:id', (req, res) => {
+  const { id } = req.params;
+  const sql = 'SELECT * FROM Announcements WHERE announcementId = ?';
+
+  // eslint-disable-next-line consistent-return
+  db.get(sql, [id], (err, row) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    if (!row) {
+      return res.status(404).json({
+        status: 'Error',
+        error: '공지를 찾을 수 없습니다.',
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: row,
     });
   });
 });
