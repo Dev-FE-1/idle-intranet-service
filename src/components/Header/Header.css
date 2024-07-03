@@ -32,8 +32,9 @@
     width: 40px;
   }
 
-  .logout-btn button{
+  .logout-btn-wrapper button {
     margin-left: 5px;
     padding: 5px;
+    cursor: pointer;
   }
 }

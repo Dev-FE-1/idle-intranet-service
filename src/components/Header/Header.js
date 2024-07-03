@@ -26,13 +26,13 @@ export default class Header {
             alt="${this.userName || '김직원'}"
           />
         </div>
-        <div class ='logout-btn'>
+        <div class ='logout-btn-wrapper'>
           ${this.Button.html()}
         </div>
       </div>
     `;
     document
-      .querySelector('.logout-btn button')
+      .querySelector('.logout-btn-wrapper button')
       .addEventListener('click', this.handleLogout);
   }
 }
