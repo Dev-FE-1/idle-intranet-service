@@ -20,11 +20,28 @@ app.use(express.static('dist'));
 app.use(express.json());
 app.use(cors());
 
-app.get('/api/members', (req, res) => {
-  const sql = `SELECT employeeNumber, name, position, email, phoneNumber FROM Members`; // 조직 추가
+app.get('/api/members/:page', (req, res) => {
+  const { page } = req.params;
+  const { max = 10 } = req.query;
+  const limit = parseInt(max, 10);
+  const offset = (parseInt(page, 10) - 1) * limit;
+
+  const sql = `
+    SELECT 
+      employeeNumber, 
+      name, 
+      position, 
+      email, 
+      phoneNumber 
+    FROM 
+      Members 
+    ORDER BY 
+      employeeNumber ASC 
+    LIMIT ? 
+    OFFSET ?`; // 조직 추가
 
   // eslint-disable-next-line consistent-return
-  db.all(sql, [], (err, rows) => {
+  db.all(sql, [limit, offset], (err, rows) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
@@ -147,9 +164,9 @@ app.get('/api/user', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/attendance', (req, res) => {
-  const { employeeNumber } = req.query;
-  const sql = 'SELECT * FROM Attendance WHERE employeeNumber = ?';
+app.get('/api/attendance/:page', (req, res) => {
+  const { page } = req.params;
+  const { employeeNumber, max = 10 } = req.query;
 
   if (!employeeNumber) {
     return res.status(422).json({
@@ -158,8 +175,21 @@ app.get('/api/attendance', (req, res) => {
     });
   }
 
+  const limit = parseInt(max, 10);
+  const offset = (parseInt(page, 10) - 1) * limit;
+
+  const sql = `
+    SELECT * 
+    FROM 
+      Attendance 
+    WHERE 
+      employeeNumber = ? 
+    ORDER BY date DESC 
+    LIMIT ? 
+    OFFSET ?`;
+
   // eslint-disable-next-line consistent-return
-  db.all(sql, [employeeNumber], (err, row) => {
+  db.all(sql, [employeeNumber, limit, offset], (err, rows) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
@@ -169,15 +199,15 @@ app.get('/api/attendance', (req, res) => {
 
     res.json({
       status: 'OK',
-      data: row,
+      data: rows,
     });
   });
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/vacationRequests', (req, res) => {
-  const { employeeNumber } = req.query;
-  const sql = 'SELECT * FROM VacationRequests WHERE employeeNumber = ?';
+app.get('/api/vacationRequests/:page', (req, res) => {
+  const { page } = req.params;
+  const { employeeNumber, max = 10 } = req.query;
 
   if (!employeeNumber) {
     return res.status(422).json({
@@ -186,8 +216,21 @@ app.get('/api/vacationRequests', (req, res) => {
     });
   }
 
+  const limit = parseInt(max, 10);
+  const offset = (parseInt(page, 10) - 1) * limit;
+
+  const sql = `
+    SELECT * 
+    FROM 
+      VacationRequests 
+    WHERE 
+      employeeNumber = ? 
+    ORDER BY vacationRequestDate DESC 
+    LIMIT ? 
+    OFFSET ?`;
+
   // eslint-disable-next-line consistent-return
-  db.all(sql, [employeeNumber], (err, row) => {
+  db.all(sql, [employeeNumber, limit, offset], (err, rows) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
@@ -197,7 +240,7 @@ app.get('/api/vacationRequests', (req, res) => {
 
     res.json({
       status: 'OK',
-      data: row,
+      data: rows,
     });
   });
 });

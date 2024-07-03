@@ -2,8 +2,10 @@ import axios from 'axios';
 
 const { VITE_SERVER_URL } = import.meta.env;
 
-export async function fetchMembers() {
-  const response = await axios.get(`${VITE_SERVER_URL}/api/members`);
+export async function fetchMembers(page = 1, max = 10) {
+  const response = await axios.get(
+    `${VITE_SERVER_URL}/api/members/${page}?max=${max}`,
+  );
   let members;
 
   if (response.status === 200) {
@@ -15,6 +17,10 @@ export async function fetchMembers() {
 
 export async function fetchMember(employeeNumber) {
   const isAdmin = false; // 임시
+
+  if (!employeeNumber) {
+    console.error('사원 번호가 필요합니다');
+  }
 
   const response = await fetch(
     `${VITE_SERVER_URL}/api/members/${employeeNumber}?isAdmin=${isAdmin}`,
@@ -28,9 +34,13 @@ export async function fetchMember(employeeNumber) {
   return member.data;
 }
 
-export async function fetchAttendance(employeeNumber) {
+export async function fetchAttendance(employeeNumber, page = 1, max = 10) {
+  if (!employeeNumber) {
+    console.error('사원 번호가 필요합니다');
+  }
+
   const response = await axios.get(
-    `${VITE_SERVER_URL}/api/attendance?employeeNumber=${employeeNumber}`,
+    `${VITE_SERVER_URL}/api/attendance/${page}?employeeNumber=${employeeNumber}&max=${max}`,
   );
   let attendance;
 
@@ -41,9 +51,17 @@ export async function fetchAttendance(employeeNumber) {
   return attendance;
 }
 
-export async function fetchVacationRequest(employeeNumber) {
+export async function fetchVacationRequests(
+  employeeNumber,
+  page = 1,
+  max = 10,
+) {
+  if (!employeeNumber) {
+    console.error('사원 번호가 필요합니다');
+  }
+
   const response = await axios.get(
-    `${VITE_SERVER_URL}/api/vacationRequests?employeeNumber=${employeeNumber}`,
+    `${VITE_SERVER_URL}/api/vacationRequests/${page}?employeeNumber=${employeeNumber}&max=${max}`,
   );
   let vacationRequests;
 
@@ -77,6 +95,9 @@ export async function fetchAnnouncements() {
 }
 
 export async function fetchAnnouncement(id) {
+  if (!id) {
+    console.error('공지 아이디가 필요합니다');
+  }
   const response = await axios.get(
     `${VITE_SERVER_URL}/api/announcements/${id}`,
   );
