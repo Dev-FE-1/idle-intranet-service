@@ -161,6 +161,9 @@ const initializeDatabase = () => {
             vacationRequestDate TEXT NOT NULL,
             vacationStartDate TEXT NOT NULL,
             vacationEndDate TEXT NOT NULL,
+            vacationStartTime TEXT NOT NULL,
+            vacationEndTime TEXT NOT NULL,
+            vacationReason TEXT NOT NULL,
             position TEXT NOT NULL,
             approvalStatus TEXT NOT NULL,
             usageStatus TEXT NOT NULL,
@@ -173,9 +176,10 @@ const initializeDatabase = () => {
         const insertVacationRequest = database.prepare(`
           INSERT OR IGNORE INTO vacationRequests (
             employeeNumber, departmentNumber, vacationRequestDate,
-            vacationStartDate, vacationEndDate, position, approvalStatus,
+            vacationStartDate, vacationEndDate, vacationStartTime, 
+            vacationEndTime, vacationReason, position, approvalStatus,
             usageStatus, vacationType
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `);
 
         vacationRequests.forEach((request) => {
@@ -185,6 +189,9 @@ const initializeDatabase = () => {
             request.vacationRequestDate,
             request.vacationStartDate,
             request.vacationEndDate,
+            request.vacationStartTime,
+            request.vacationEndTime,
+            request.vacationReason,
             request.position,
             request.approvalStatus,
             request.usageStatus,
