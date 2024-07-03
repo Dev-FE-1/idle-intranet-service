@@ -12,10 +12,14 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/api/members/:page', (req, res) => {
-  const { page } = req.params;
+  let { page } = req.params;
   const { max = 10 } = req.query;
   const limit = parseInt(max, 10);
   const offset = (parseInt(page, 10) - 1) * limit;
+
+  if (!parseInt(page, 10)) {
+    page = 1;
+  }
 
   const sql = `
     SELECT 
@@ -156,8 +160,12 @@ app.get('/api/user', (req, res) => {
 
 // eslint-disable-next-line consistent-return
 app.get('/api/attendance/:page', (req, res) => {
-  const { page } = req.params;
+  let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;
+
+  if (!parseInt(page, 10)) {
+    page = 1;
+  }
 
   if (!employeeNumber) {
     return res.status(422).json({
@@ -197,8 +205,12 @@ app.get('/api/attendance/:page', (req, res) => {
 
 // eslint-disable-next-line consistent-return
 app.get('/api/vacationRequests/:page', (req, res) => {
-  const { page } = req.params;
+  let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;
+
+  if (!parseInt(page, 10)) {
+    page = 1;
+  }
 
   if (!employeeNumber) {
     return res.status(422).json({
