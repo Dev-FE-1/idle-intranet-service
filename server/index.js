@@ -12,13 +12,6 @@ const port = process.env.PORT || 8080;
 const app = express();
 const SECRET_KEY = process.env.JWT_SECRET;
 
-app.use((req, res, next) => {
-  const delayTime = Math.floor(Math.random() * THRESHOLD);
-  setTimeout(() => {
-    next();
-  }, delayTime);
-});
-
 app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json());
