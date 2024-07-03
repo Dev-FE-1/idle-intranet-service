@@ -17,7 +17,11 @@ module.exports = {
     'arrow-body-style': 'off',
     'import/extensions': ['error', 'ignorePackages', { js: 'always' }],
     'import/prefer-default-export': 'off',
-    'linebreak-style': ['error', 'unix'],
+    'linebreak-style': [
+      'error',
+      require('os').EOL === '\r\n' ? 'windows' : 'unix',
+    ],
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
 
     // Essential rules
     'no-underscore-dangle': [
