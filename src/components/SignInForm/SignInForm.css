@@ -1,0 +1,12 @@
+.alert-message{
+    display: none;
+}
+
+.alert-message.show{
+    display: block;
+}
+
+.disabled:hover{
+    cursor: default;
+    background-color: var(--color-lightest-gray);
+}

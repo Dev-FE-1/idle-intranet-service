@@ -1,6 +1,7 @@
 import Input from '../Input/Input.js';
 import Button from '../Button/Button.js';
 import './SignInForm.css';
+import AuthService from '../Auth/AuthService.js';
 
 export default class SignInForm {
   constructor() {
@@ -20,7 +21,9 @@ export default class SignInForm {
       type: 'submit',
       variant: 'tertiary',
       content: '로그인',
+      disabled: true,
     });
+    this.authService = new AuthService();
     this.isValidEmail = false;
     this.isValidPassword = false;
     this.email = '';
@@ -39,11 +42,9 @@ export default class SignInForm {
     if (!this.isValidEmail || !this.isValidPassword) {
       document.getElementById('signin_email').value = '';
       document.getElementById('signin_password').value = '';
-      document.querySelector('.alert-message').classList.add('show')
-    }
-
-    if (this.isValidEmail && this.isValidPassword) {
-      this.login();
+      document.querySelector('.alert-message').classList.add('show');
+    } else {
+      this.authService.login(this.email, this.password);
     }
   };
 
@@ -56,32 +57,19 @@ export default class SignInForm {
     return password.length >= 8 && password.length <= 30;
   }
 
-  login() {
-    fetch('/api/members', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.email,
-        password: this.password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === 'OK') {
-          localStorage.setItem('user', JSON.stringify(data.user));
-          window.location.href = '/';
-        } else {
-          alert(data.error);
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
+  handleInput = () => {
+    const emailValue = document.getElementById('signin_email').value;
+    const passwordValue = document.getElementById('signin_password').value;
+    const buttonElement = document.querySelector('.button.btn-tertiary');
 
-  
+    if (emailValue.length > 0 && passwordValue.length > 0) {
+      buttonElement.removeAttribute('disabled');
+      buttonElement.classList.remove('disabled');
+    } else {
+      buttonElement.setAttribute('disabled', true);
+      buttonElement.classList.add('disabled');
+    }
+  };
 
   html() {
     return `
@@ -95,10 +83,13 @@ export default class SignInForm {
   }
 
   render() {
+    const emailInput = document.getElementById('signin_email');
+    const passwordInput = document.getElementById('signin_password');
     const buttonElement = document.querySelector('.button.btn-tertiary');
-    if (buttonElement) {
-      buttonElement.addEventListener('click', this.handleForm);
-    }
+    buttonElement.classList.add('disabled');
+    emailInput.addEventListener('input', this.handleInput);
+    passwordInput.addEventListener('input', this.handleInput);
+    buttonElement.addEventListener('click', this.handleForm);
   }
 }
 
