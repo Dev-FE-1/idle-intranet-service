@@ -23,7 +23,7 @@ export async function fetchMember(employeeNumber) {
   }
 
   const response = await fetch(
-    `${VITE_SERVER_URL}/api/members/${employeeNumber}?isAdmin=${isAdmin}`,
+    `${VITE_SERVER_URL}/api/member/${employeeNumber}?isAdmin=${isAdmin}`,
   );
   let member;
 

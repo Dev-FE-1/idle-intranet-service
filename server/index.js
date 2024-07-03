@@ -56,7 +56,7 @@ app.get('/api/members/:page', (req, res) => {
   });
 });
 
-app.get('/api/members/:employeeNumber', (req, res) => {
+app.get('/api/member/:employeeNumber', (req, res) => {
   const { employeeNumber } = req.params;
   const { isAdmin } = req.query;
 
