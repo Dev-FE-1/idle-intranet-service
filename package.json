@@ -1,5 +1,5 @@
 {
-  "name": "toyprj-1st",
+  "name": "idle-intranet-service",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "morgan": "^1.10.0",
