@@ -1,3 +1,4 @@
+import AuthService from '../../components/Auth/AuthService.js';
 import Button from '../../components/Button/Button.js';
 import Main from '../../components/Main.js';
 import PersonalDetails from '../../components/PersonalInfo/PersonalDetails.js';
@@ -45,6 +46,7 @@ export default class ProfilePage extends Main {
       variant: 'tertiary',
       content: '로그아웃',
     });
+    this.handleLogout = new AuthService().logout;
   }
 
   render() {
@@ -52,7 +54,12 @@ export default class ProfilePage extends Main {
       ${this.Title.html()}
       ${this.PersonalInfo.html()}
       ${this.PersonalDetails.html()}
-      ${this.Button.html()}
+      <div class='logout-btn-wrapper'>
+        ${this.Button.html()}
+      </div>
     `;
+    document
+      .querySelector('.logout-btn-wrapper button')
+      .addEventListener('click', this.handleLogout);
   }
 }
