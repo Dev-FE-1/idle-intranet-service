@@ -42,6 +42,37 @@ export default class ProfilePage extends Main {
     });
     this.PersonalInfo = new PersonalInfo({ user: dummyUserProfile });
     this.PersonalDetails = new PersonalDetails({ user: dummyUserProfile });
+    this.timeout = null;
+    this.timer = null;
+  }
+
+  renderCurrentTime() {
+    this.PersonalInfo.updateTime();
+
+    if (!this.timer) {
+      const delay = this.PersonalInfo.getNextUpdateDelay();
+
+      const updateNextTime = () => {
+        this.PersonalInfo.updateTime();
+        const nextDelay = this.PersonalInfo.getNextUpdateDelay();
+        this.timer = setTimeout(updateNextTime, nextDelay);
+      };
+
+      this.timeout = setTimeout(updateNextTime, delay);
+    }
+  }
+
+  cleanUp() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+
     this.Button = new Button({
       variant: 'tertiary',
       content: '로그아웃',
@@ -58,6 +89,8 @@ export default class ProfilePage extends Main {
         ${this.Button.html()}
       </div>
     `;
+
+    this.renderCurrentTime();
     document
       .querySelector('.logout-btn-wrapper-inprofile button')
       .addEventListener('click', this.handleLogout);
