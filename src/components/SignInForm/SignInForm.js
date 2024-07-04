@@ -36,31 +36,31 @@ export default class SignInForm {
     this.email = document.getElementById('signin_email').value;
     this.password = document.getElementById('signin_password').value;
 
-    this.isValidEmail = this.validateEmail(this.email);
-    this.isValidPassword = this.validatePassword(this.password);
+    this.isValidEmail = this.validateEmail();
+    this.isValidPassword = this.validatePassword();
 
-    if (!this.isValidEmail || !this.isValidPassword) {
-      document.getElementById('signin_email').value = '';
-      document.getElementById('signin_password').value = '';
-      document.querySelector('.alert-message').classList.add('show');
+    if (!this.isValidEmail) {
+      this.showErrorMessage('이메일 형식이 맞는지 확인해주세요!');
+    } else if (!this.isValidPassword) {
+      this.showErrorMessage('비밀번호의 길이가 너무 짧거나 너무 깁니다!');
     } else {
-      this.authService.login(this.email, this.password);
+      this.authService.login(this.email, this.password, this.showErrorMessage);
     }
   };
 
-  validateEmail(email) {
+  validateEmail() {
     const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return re.test(String(email).toLowerCase());
+    return re.test(String(this.email).toLowerCase());
   }
 
-  validatePassword(password) {
-    return password.length >= 8 && password.length <= 30;
+  validatePassword() {
+    return this.password.length >= 8 && this.password.length <= 30;
   }
 
   handleInput = () => {
-    const emailValue = document.getElementById('signin_email').value;
-    const passwordValue = document.getElementById('signin_password').value;
-    const buttonElement = document.querySelector('.button.btn-tertiary');
+    const emailValue = this.EmailInput.getElement().value;
+    const passwordValue = this.PasswordInput.getElement().value;
+    const buttonElement = this.Button.getElement();
 
     if (emailValue.length > 0 && passwordValue.length > 0) {
       buttonElement.removeAttribute('disabled');
@@ -71,25 +71,36 @@ export default class SignInForm {
     }
   };
 
+  showErrorMessage = (message) => {
+    const alertMessage = document.querySelector('.alert-message');
+    alertMessage.textContent = message;
+    alertMessage.classList.add('show');
+    this.clearInputs();
+  };
+
+  clearInputs = () => {
+    this.EmailInput.getElement().value = '';
+    this.PasswordInput.getElement().value = '';
+  };
+
   html() {
     return `
       <form id="signin_form">
         ${this.EmailInput.html()}
         ${this.PasswordInput.html()}
-        <p class="alert-message">아이디 또는 비밀번호를 잘못 입력했습니다.</br>입력하신 내용을 다시 확인해주세요.</p>
+        <p class="alert-message"></p>
         ${this.Button.html()}
       </form>
     `;
   }
 
   setEventListeners() {
-    const emailInput = document.getElementById('signin_email');
-    const passwordInput = document.getElementById('signin_password');
-    const buttonElement = document.querySelector('.button.btn-tertiary');
+    const emailInput = this.EmailInput.getElement();
+    const passwordInput = this.PasswordInput.getElement();
+    const buttonElement = this.Button.getElement();
     buttonElement.classList.add('disabled');
     emailInput.addEventListener('input', this.handleInput);
     passwordInput.addEventListener('input', this.handleInput);
     buttonElement.addEventListener('click', this.handleForm);
   }
 }
-
