@@ -54,12 +54,12 @@ export default class ProfilePage extends Main {
       ${this.Title.html()}
       ${this.PersonalInfo.html()}
       ${this.PersonalDetails.html()}
-      <div class='logout-btn-wrapper'>
+      <div class='logout-btn-wrapper-inprofile'>
         ${this.Button.html()}
       </div>
     `;
     document
-      .querySelector('.logout-btn-wrapper button')
+      .querySelector('.logout-btn-wrapper-inprofile button')
       .addEventListener('click', this.handleLogout);
   }
 }
