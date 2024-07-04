@@ -28,6 +28,7 @@ export default class Route {
     this.notFoundPage = new PageNotFound();
     this.Menu = new Menu('.menu-list', menus);
     this.title = 'CubeIT ';
+    this.currentPage = null;
 
     this.init();
   }
@@ -73,10 +74,15 @@ export default class Route {
 
     const path = window.location.pathname;
     const matchedRoute = matchRoute(path, this.routes);
+
+    if (this.currentPage && this.currentPage.cleanUp) {
+      this.currentPage.cleanUp();
+    }
+
     if (matchedRoute && matchedRoute.page) {
-      const currentRoutePage = matchedRoute.page;
+      this.currentPage = matchedRoute.page;
       document.title = this.title + matchedRoute.title;
-      currentRoutePage.render();
+      this.currentPage.render();
     } else {
       this.notFoundPage.render();
     }
