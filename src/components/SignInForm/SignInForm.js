@@ -57,10 +57,11 @@ export default class SignInForm {
     return this.password.length >= 8 && this.password.length <= 30;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   handleInput = () => {
-    const emailValue = this.EmailInput.getElement().value;
-    const passwordValue = this.PasswordInput.getElement().value;
-    const buttonElement = this.Button.getElement();
+    const emailValue = document.getElementById('signin_email').value;
+    const passwordValue = document.getElementById('signin_password').value;
+    const buttonElement = document.querySelector('.button.btn-tertiary');
 
     if (emailValue.length > 0 && passwordValue.length > 0) {
       buttonElement.removeAttribute('disabled');
@@ -78,9 +79,10 @@ export default class SignInForm {
     this.clearInputs();
   };
 
+  // eslint-disable-next-line class-methods-use-this
   clearInputs = () => {
-    this.EmailInput.getElement().value = '';
-    this.PasswordInput.getElement().value = '';
+    document.getElementById('signin_email').value = '';
+    document.getElementById('signin_password').value = '';
   };
 
   html() {
@@ -95,9 +97,9 @@ export default class SignInForm {
   }
 
   setEventListeners() {
-    const emailInput = this.EmailInput.getElement();
-    const passwordInput = this.PasswordInput.getElement();
-    const buttonElement = this.Button.getElement();
+    const emailInput = document.getElementById('signin_email');
+    const passwordInput = document.getElementById('signin_password');
+    const buttonElement = document.querySelector('.button.btn-tertiary');
     buttonElement.classList.add('disabled');
     emailInput.addEventListener('input', this.handleInput);
     passwordInput.addEventListener('input', this.handleInput);

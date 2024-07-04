@@ -36,16 +36,19 @@ export default class AuthService {
       });
   }
 
-  static logout() {
+  // eslint-disable-next-line class-methods-use-this
+  logout() {
     localStorage.removeItem('token');
     window.location.href = '/signin';
   }
 
-  static isLoggedIn() {
+  // eslint-disable-next-line class-methods-use-this
+  isLoggedIn() {
     return localStorage.getItem('token') !== null;
   }
 
-  static getToken() {
+  // eslint-disable-next-line class-methods-use-this
+  getToken() {
     return localStorage.getItem('token');
   }
 }
