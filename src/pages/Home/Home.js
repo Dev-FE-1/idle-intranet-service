@@ -127,10 +127,11 @@ export default class HomePage extends Main {
     const galleryElement = this.$container.querySelector('.gallery');
 
     announcements.forEach((item) => {
-      const announcementElement = document.createElement('div');
-      announcementElement.classList.add('announcement-item');
+      if (item.imageUrl) {
+        const announcementElement = document.createElement('div');
+        announcementElement.classList.add('announcement-item');
 
-      announcementElement.innerHTML = `
+        announcementElement.innerHTML = `
           <a href="${item.link}">
             <div class="image-box">
               <img src="${item.imageUrl}" alt="${item.title}">
@@ -142,7 +143,8 @@ export default class HomePage extends Main {
           </a>
         `;
 
-      galleryElement.appendChild(announcementElement);
+        galleryElement.appendChild(announcementElement);
+      }
     });
   }
 }
