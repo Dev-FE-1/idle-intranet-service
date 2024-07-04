@@ -36,25 +36,40 @@ const authenticateToken = (req, res, next) => {
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
+
+  // 이메일과 비밀번호가 제공되지 않은 경우: STATUS 400
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ status: 'Error', error: '이메일과 비밀번호는 필수입니다!' });
+  }
+
   const sql = 'SELECT * FROM Members WHERE email = ?';
+
   db.get(sql, [email], async (err, row) => {
+    // 데이터베이스 쿼리 중 서버 에러 발생: STATUS 500
     if (err) {
       return res.status(500).json({
         status: 'Error',
         error: err.message,
       });
     }
+
+    // 이메일이 데이터베이스에 없는 경우: STATUS 400
     if (!row) {
       return res
         .status(400)
         .json({ status: 'Error', error: '존재하지 않는 계정입니다!' });
     }
+
     const match = await verifyPassword(password, row.password);
     if (match) {
       const token = generateToken(row);
       return res.json({ status: 'OK', token });
     }
-    return res.status(400).json({ status: 'Error', error: '로그인 실패!' });
+
+    // 비밀번호가 틀린 경우: STATUS 401
+    return res.status(401).json({ status: 'Error', error: '로그인 실패!' });
   });
 });
 
