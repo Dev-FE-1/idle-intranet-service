@@ -1,4 +1,4 @@
-import { COLORS } from '../../utils/constants';
+import { COLORS } from '../../utils/constants.js';
 
 export default class Icon {
   constructor({ svg, options = {} }) {

@@ -1,7 +1,7 @@
-import Layout from './components/Layout';
-import Header from './components/Header/Header';
-import NavBar from './components/NavBar/NavBar';
-import Route from './routes/Route';
+import Layout from './components/Layout.js';
+import Header from './components/Header/Header.js';
+import NavBar from './components/NavBar/NavBar.js';
+import Route from './routes/Route.js';
 
 class App {
   constructor() {

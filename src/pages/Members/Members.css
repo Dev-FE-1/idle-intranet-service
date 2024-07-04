@@ -1,0 +1,136 @@
+.members-container {
+  min-width: auto;
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.members-container .page-title-container .wrapper {
+  padding: 0;
+}
+
+.members-content-container {
+  margin-top: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--color-light-gray);
+  overflow: hidden;
+}
+
+.members-content-container .table-wrapper {
+  padding: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.members-content-container .table-wrapper .table-container {
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid var(--color-light-gray);
+  background: #fff;
+}
+
+.members-search-header {
+  padding: 0 20px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.members-container span {
+  color: var(--color-black);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+}
+
+.members-container span em {
+  color: var(--color-primary);
+  font-style: normal;
+}
+
+.members-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.members-search-header .input {
+  width: 220px;
+  height: 40px;
+  border-right: 0;
+  border-radius: 8px 0 0 8px;
+  font-size: 14px;
+}
+
+.members-search-header button {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-right: 8px;
+  border-radius: 0 8px 8px 0;
+  border: 1px solid var(--color-light-gray);
+  border-left: 0;
+  background-color: #fff;
+}
+
+.members-mobile-only span {
+  display: none;
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  background-color: #fff;
+}
+
+/* 미디어 쿼리 */
+@media (width <= 1024px) {
+  .members-container {
+    padding: 0;
+  }
+
+  .members-container .page-title-container .wrapper {
+    padding: 0 20px;
+  }
+
+  .members-mobile-only span {
+    display: block;
+    margin: 20px 0 0 20px;
+  }
+
+  .members-search-header span {
+    display: none;
+  }
+
+  .members-mobile-only {
+    background-color: #fff;
+    padding-bottom: 20px;
+  }
+
+  .members-content-container {
+    margin-top: 12px;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid var(--color-light-gray);
+  }
+
+  .members-search-header {
+    background-color: #fff;
+    margin: 0;
+    height: 80px;
+    padding: 0 20px;
+    justify-content: flex-end;
+  }
+}
+
+@media (width <= 400px) {
+  .members-input-container {
+    width: 100%;
+  }
+
+  .members-search-header .input {
+    width: 100%;
+  }
+}

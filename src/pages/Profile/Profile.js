@@ -1,8 +1,10 @@
-import Main from '../../components/Main';
-import PersonalDetails from '../../components/PersonalInfo/PersonalDetails';
-import PersonalInfo from '../../components/PersonalInfo/PersonalInfo';
-import Title from '../../components/Title/Title';
-import { MENUS } from '../../utils/constants';
+import AuthService from '../../components/Auth/AuthService.js';
+import Button from '../../components/Button/Button.js';
+import Main from '../../components/Main.js';
+import PersonalDetails from '../../components/PersonalInfo/PersonalDetails.js';
+import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
+import Title from '../../components/Title/Title.js';
+import { PATH_TITLE } from '../../utils/constants.js';
 import './Profile.css';
 
 const dummyUserProfile = {
@@ -35,11 +37,47 @@ export default class ProfilePage extends Main {
   constructor() {
     super();
     this.Title = new Title({
-      title: MENUS.PROFILE,
+      title: PATH_TITLE.PROFILE,
       desktopOnly: true,
     });
     this.PersonalInfo = new PersonalInfo({ user: dummyUserProfile });
     this.PersonalDetails = new PersonalDetails({ user: dummyUserProfile });
+    this.timeout = null;
+    this.timer = null;
+  }
+
+  renderCurrentTime() {
+    this.PersonalInfo.updateTime();
+
+    if (!this.timer) {
+      const delay = this.PersonalInfo.getNextUpdateDelay();
+
+      const updateNextTime = () => {
+        this.PersonalInfo.updateTime();
+        const nextDelay = this.PersonalInfo.getNextUpdateDelay();
+        this.timer = setTimeout(updateNextTime, nextDelay);
+      };
+
+      this.timeout = setTimeout(updateNextTime, delay);
+    }
+  }
+
+  cleanUp() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+
+    this.Button = new Button({
+      variant: 'tertiary',
+      content: '로그아웃',
+    });
+    this.handleLogout = new AuthService().logout;
   }
 
   render() {
@@ -47,6 +85,14 @@ export default class ProfilePage extends Main {
       ${this.Title.html()}
       ${this.PersonalInfo.html()}
       ${this.PersonalDetails.html()}
+      <div class='logout-btn-wrapper-inprofile'>
+        ${this.Button.html()}
+      </div>
     `;
+
+    this.renderCurrentTime();
+    document
+      .querySelector('.logout-btn-wrapper-inprofile button')
+      .addEventListener('click', this.handleLogout);
   }
 }

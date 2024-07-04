@@ -31,4 +31,10 @@
     left: -2px;
     width: 40px;
   }
+
+  .logout-btn-wrapper button {
+    margin-left: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
 }
