@@ -38,5 +38,6 @@ export default class SignIn {
         </section>
       </div>
     `;
+    this.Form.setEventListeners();
   }
 }

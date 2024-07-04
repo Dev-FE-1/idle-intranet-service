@@ -82,7 +82,7 @@ export default class SignInForm {
     `;
   }
 
-  render() {
+  setEventListeners() {
     const emailInput = document.getElementById('signin_email');
     const passwordInput = document.getElementById('signin_password');
     const buttonElement = document.querySelector('.button.btn-tertiary');
@@ -93,7 +93,3 @@ export default class SignInForm {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const signInForm = new SignInForm();
-  signInForm.render();
-});
