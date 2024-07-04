@@ -1,17 +1,92 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import db from './database.js';
+import { verifyPassword } from './passwords.js';
+
+dotenv.config();
 
 const port = process.env.PORT || 8080;
 const app = express();
+const SECRET_KEY = process.env.JWT_SECRET;
 
 app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json());
 app.use(cors());
 
-app.get('/api/members/:page', (req, res) => {
+const generateToken = (user) => {
+  const payload = { id: user.employeeNumber, email: user.email };
+  return jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
+};
+
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    res.sendStatus(401);
+    return;
+  }
+
+  jwt.verify(token, SECRET_KEY, (err, user) => {
+    if (err) {
+      res.sendStatus(403);
+      return;
+    }
+
+    /* eslint-disable no-param-reassign */
+    req.user = user;
+    /* eslint-enable no-param-reassign */
+    next();
+  });
+};
+
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  // 이메일과 비밀번호가 제공되지 않은 경우: STATUS 400
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ status: 'Error', error: '이메일과 비밀번호는 필수입니다!' });
+  }
+
+  const sql = 'SELECT * FROM Members WHERE email = ?';
+
+  db.get(sql, [email], async (err, row) => {
+    // 데이터베이스 쿼리 중 서버 에러 발생: STATUS 500
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    // 이메일이 데이터베이스에 없는 경우: STATUS 400
+    if (!row) {
+      return res
+        .status(400)
+        .json({ status: 'Error', error: '존재하지 않는 계정입니다!' });
+    }
+
+    const match = await verifyPassword(password, row.password);
+    if (match) {
+      const token = generateToken(row);
+      return res.json({ status: 'OK', token });
+    }
+
+    // 비밀번호가 틀린 경우: STATUS 401
+    return res.status(401).json({ status: 'Error', error: '로그인 실패!' });
+  });
+
+  // 반환 값을 명시적으로 추가하여 콜백 함수가 종료되었음을 알립니다.
+  return null;
+});
+
+app.get('/api/members/:page', authenticateToken, (req, res) => {
   let { page } = req.params;
   const { max = 10 } = req.query;
   const limit = parseInt(max, 10);
@@ -51,7 +126,7 @@ app.get('/api/members/:page', (req, res) => {
   });
 });
 
-app.get('/api/member/:employeeNumber', (req, res) => {
+app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
   const { employeeNumber } = req.params;
   const { isAdmin } = req.query;
 
@@ -103,7 +178,7 @@ app.get('/api/member/:employeeNumber', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/user', (req, res) => {
+app.get('/api/user', authenticateToken, (req, res) => {
   const { employeeNumber } = req.query;
 
   if (!employeeNumber) {
@@ -159,7 +234,7 @@ app.get('/api/user', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/attendance/:page', (req, res) => {
+app.get('/api/attendance/:page', authenticateToken, (req, res) => {
   let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;
 
@@ -204,7 +279,7 @@ app.get('/api/attendance/:page', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/vacationRequests/:page', (req, res) => {
+app.get('/api/vacationRequests/:page', authenticateToken, (req, res) => {
   let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;
 
@@ -248,7 +323,7 @@ app.get('/api/vacationRequests/:page', (req, res) => {
   });
 });
 
-app.get('/api/announcements', (req, res) => {
+app.get('/api/announcements', authenticateToken, (req, res) => {
   const sql = 'SELECT * FROM Announcements';
 
   // eslint-disable-next-line consistent-return
@@ -267,7 +342,7 @@ app.get('/api/announcements', (req, res) => {
   });
 });
 
-app.get('/api/announcements/:id', (req, res) => {
+app.get('/api/announcements/:id', authenticateToken, (req, res) => {
   const { id } = req.params;
   const sql = 'SELECT * FROM Announcements WHERE announcementId = ?';
 
