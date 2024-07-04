@@ -69,3 +69,11 @@ export const magnifyingGlass = `
   <path d="M14.0001 14.0001L11.1001 11.1001" stroke="#8B95A1" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 `;
+
+export const chevronDown = `
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="icon/chevron-down">
+  <path id="Vector" d="M4 6L8 10L12 6" stroke="#8B95A1" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  </svg> 
+`;
