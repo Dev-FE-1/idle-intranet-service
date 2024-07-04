@@ -1,5 +1,6 @@
+const os = require('os');
+
 module.exports = {
-  const os = require('os'),
   env: {
     browser: true,
     es6: true,

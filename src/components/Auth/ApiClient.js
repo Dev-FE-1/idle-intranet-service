@@ -8,7 +8,13 @@ export default class ApiClient {
       (config) => {
         const token = getToken();
         if (token) {
-          config.headers['Authorization'] = `Bearer ${token}`; //BEARER 토큰 사용
+          return {
+            ...config,
+            headers: {
+              ...config.headers,
+              Authorization: `Bearer ${token}`,
+            },
+          };
         }
         return config;
       },
@@ -21,7 +27,7 @@ export default class ApiClient {
       (response) => response,
       (error) => {
         if (error.response && error.response.status === 401) {
-          //권한이 없는 경우 어떻게 할 것인가...?
+          // 권한이 없는 경우 추가적인 처리 필요 시 작성
         }
         return Promise.reject(error);
       },

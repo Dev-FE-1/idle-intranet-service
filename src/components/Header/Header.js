@@ -10,7 +10,7 @@ export default class Header {
     this.Button = new Button({
       variant: 'tertiary',
       content: '로그아웃',
-      size: 'small'
+      size: 'small',
     });
     this.handleLogout = new AuthService().logout;
     this.render();

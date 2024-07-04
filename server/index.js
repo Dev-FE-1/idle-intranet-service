@@ -23,13 +23,23 @@ const generateToken = (user) => {
 };
 
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
-  if (!token) return res.sendStatus(401);
+
+  if (!token) {
+    res.sendStatus(401);
+    return;
+  }
 
   jwt.verify(token, SECRET_KEY, (err, user) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      res.sendStatus(403);
+      return;
+    }
+
+    /* eslint-disable no-param-reassign */
     req.user = user;
+    /* eslint-enable no-param-reassign */
     next();
   });
 };
@@ -71,6 +81,9 @@ app.post('/api/login', async (req, res) => {
     // 비밀번호가 틀린 경우: STATUS 401
     return res.status(401).json({ status: 'Error', error: '로그인 실패!' });
   });
+
+  // 반환 값을 명시적으로 추가하여 콜백 함수가 종료되었음을 알립니다.
+  return null;
 });
 
 app.get('/api/members/:page', authenticateToken, (req, res) => {
