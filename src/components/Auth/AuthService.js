@@ -25,7 +25,7 @@ export default class AuthService {
             showError(`잘못된 요청입니다. ${error.response.data.error}`);
           } else if (error.response.status === 401) {
             showError(
-              '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요!',
+              '로그인에 실패하였습니다. 이메일과 비밀번호를 다시 확인해 주시기 바랍니다',
             );
           } else {
             showError(`오류: ${error.message}`);

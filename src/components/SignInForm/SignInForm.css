@@ -1,12 +1,19 @@
-.alert-message{
-    display: none;
+.alert-message {
+  display: none;
 }
 
-.alert-message.show{
-    display: block;
+.alert-message.show {
+  display: block;
 }
 
-.disabled:hover{
-    cursor: default;
-    background-color: var(--color-lightest-gray);
+.button.btn-primary {
+  margin-bottom: 15px;
+}
+
+.button.btn-primary:hover {
+  background-color: var(--color-primary);
+}
+
+.button.btn-primary:disabled:hover {
+  background-color: var(--color-lightest-gray);
 }

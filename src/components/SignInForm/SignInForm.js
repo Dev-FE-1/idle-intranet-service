@@ -19,15 +19,13 @@ export default class SignInForm {
     });
     this.Button = new Button({
       type: 'submit',
-      variant: 'tertiary',
+      variant: 'primary',
       content: '로그인',
       disabled: true,
     });
     this.authService = new AuthService();
     this.isValidEmail = false;
     this.isValidPassword = false;
-    this.email = '';
-    this.password = '';
   }
 
   handleForm = (event) => {
@@ -40,12 +38,15 @@ export default class SignInForm {
     this.isValidPassword = this.validatePassword();
 
     if (!this.isValidEmail) {
-      this.showErrorMessage('이메일 형식이 맞는지 확인해주세요!');
+      this.showErrorMessage('이메일 형식이 올바른지 확인해 주시기 바랍니다.');
     } else if (!this.isValidPassword) {
-      this.showErrorMessage('비밀번호의 길이가 너무 짧거나 너무 깁니다!');
+      this.showErrorMessage(
+        '비밀번호는 8자 이상, 30자 이하로 작성해 주시기 바랍니다.',
+      );
     } else {
       this.authService.login(this.email, this.password, this.showErrorMessage);
     }
+    document.querySelector('.button.btn-primary').removeAttribute('disabled');
   };
 
   validateEmail() {
@@ -61,14 +62,11 @@ export default class SignInForm {
   handleInput = () => {
     const emailValue = document.getElementById('signin_email').value;
     const passwordValue = document.getElementById('signin_password').value;
-    const buttonElement = document.querySelector('.button.btn-tertiary');
-
+    const button = document.querySelector('.button.btn-primary');
     if (emailValue.length > 0 && passwordValue.length > 0) {
-      buttonElement.removeAttribute('disabled');
-      buttonElement.classList.remove('disabled');
+      button.removeAttribute('disabled');
     } else {
-      buttonElement.setAttribute('disabled', true);
-      buttonElement.classList.add('disabled');
+      button.setAttribute('disabled', true);
     }
   };
 
@@ -99,8 +97,7 @@ export default class SignInForm {
   setEventListeners() {
     const emailInput = document.getElementById('signin_email');
     const passwordInput = document.getElementById('signin_password');
-    const buttonElement = document.querySelector('.button.btn-tertiary');
-    buttonElement.classList.add('disabled');
+    const buttonElement = document.querySelector('.button.btn-primary');
     emailInput.addEventListener('input', this.handleInput);
     passwordInput.addEventListener('input', this.handleInput);
     buttonElement.addEventListener('click', this.handleForm);
