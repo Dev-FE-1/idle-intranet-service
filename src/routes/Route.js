@@ -1,3 +1,4 @@
+import AuthService from '../components/Auth/AuthService.js';
 import Menu from '../components/NavBar/Menu.js';
 import {
   HomePage,
@@ -25,6 +26,7 @@ const menus = [
 
 export default class Route {
   constructor() {
+    this.authService = new AuthService();
     this.notFoundPage = new PageNotFound();
     this.Menu = new Menu('.menu-list', menus);
     this.title = 'CubeIT ';
@@ -65,14 +67,15 @@ export default class Route {
   }
 
   route() {
-    const user = JSON.parse(localStorage.getItem('user')) || 'user'; // 임시
-    if (!user) {
+    const token = this.authService.getToken();
+    const path = window.location.pathname;
+
+    if (!token && path !== PATH.SIGNIN) {
       window.history.pushState(null, null, PATH.SIGNIN);
       this.routes[PATH.SIGNIN].page.render();
       return;
     }
 
-    const path = window.location.pathname;
     const matchedRoute = matchRoute(path, this.routes);
 
     if (this.currentPage && this.currentPage.cleanUp) {

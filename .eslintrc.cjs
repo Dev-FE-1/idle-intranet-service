@@ -1,3 +1,5 @@
+const os = require('os');
+
 module.exports = {
   env: {
     browser: true,
@@ -11,13 +13,13 @@ module.exports = {
   },
   rules: {
     // Prettier integration
-    'prettier/prettier': 'error',
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
 
     // Styling rules
     'arrow-body-style': 'off',
     'import/extensions': ['error', 'ignorePackages', { js: 'always' }],
     'import/prefer-default-export': 'off',
-    'linebreak-style': ['error', 'unix'],
+    'linebreak-style': ['error', os.EOL === '\r\n' ? 'windows' : 'unix'],
 
     // Essential rules
     'no-underscore-dangle': [
