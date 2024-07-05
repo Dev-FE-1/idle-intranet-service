@@ -1,4 +1,4 @@
-import AuthService from '../components/Auth/AuthService.js';
+import AuthService from '../components/API/AuthService.js';
 import Menu from '../components/NavBar/Menu.js';
 import {
   HomePage,

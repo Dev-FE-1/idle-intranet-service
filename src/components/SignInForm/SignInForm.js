@@ -1,7 +1,7 @@
 import Input from '../Input/Input.js';
 import Button from '../Button/Button.js';
 import './SignInForm.css';
-import AuthService from '../Auth/AuthService.js';
+import AuthService from '../API/AuthService.js';
 
 export default class SignInForm {
   constructor() {
