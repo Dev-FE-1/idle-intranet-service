@@ -74,18 +74,27 @@ export default class HomePage extends Main {
           </div>
           <ul class="menu-list"></ul>
         </header>
-
         ${this.Title.html()}
-        <div class="myinfo">내 정보</div>
-        ${this.PersonalInfo.html()}
+        <div class="my-info desktop-only">
+          <div class="wrapper">
+            <h2 class="home-subtitle">내 정보</h2>
+          </div>
+          ${this.PersonalInfo.html()}
+        </div>
 
-        <div class="gallery-h2">공지사항 갤러리</div>
-        <div class="gallery"></div>
+        <section class="gallery-section">
+          <div class="wrapper">
+            <h2 class="home-subtitle">공지사항 갤러리</h2>
+            <div class="gallery"></div>
+          </div>
+        </section>
 
-        ${this.moreButton.html()}
+        <div class="gallery-more-button-container wrapper">
+          ${this.moreButton.html()}
+        </div>
 
         <div class="announcement">
-          <h2>경영진 공지사항</h2>
+          <h2 class="home-subtitle">경영진 공지사항</h2>
           <div class="announcement-content">
             <img src="/public/images/user-default.svg" alt="profile" />
             <div class="announcement-info">
@@ -112,6 +121,7 @@ export default class HomePage extends Main {
         </div>
       </div>
     `;
+
     // 공지사항 데이터 가져오기 및 UI 업데이트
     try {
       const response = await axios.get('/api/announcements'); // axios를 사용하여 데이터 가져오기
@@ -129,16 +139,16 @@ export default class HomePage extends Main {
     announcements.forEach((item) => {
       if (item.imageUrl) {
         const announcementElement = document.createElement('div');
-        announcementElement.classList.add('announcement-item');
+        announcementElement.classList.add('gallery-item');
 
-        announcementElement.innerHTML = `
+        announcementElement.innerHTML = /* HTML */ `
           <a href="${item.link}">
-            <div class="image-box">
-              <img src="${item.imageUrl}" alt="${item.title}">
+            <div class="gallery-image-box">
+              <img src="${item.imageUrl}" alt="${item.title}" />
             </div>
-            <div class="content-box">
+            <div class="gallery-content-box">
               <h2>${item.title}</h2>
-              <p>${item.content}</p>
+              <p class="gallery-content">${item.content}</p>
             </div>
           </a>
         `;
