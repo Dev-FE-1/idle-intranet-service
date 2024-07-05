@@ -1,8 +1,11 @@
-import Main from '../../components/Main.js';
 import notFoundImage from '../../../public/images/404.png';
 import './PageNotFound.css';
 
-export default class PageNotFound extends Main {
+export default class PageNotFound {
+  constructor() {
+    this.$container = document.querySelector('#app');
+  }
+
   render() {
     this.$container.innerHTML = /* HTML */ `
       <div class="not-found-container wrapper">
