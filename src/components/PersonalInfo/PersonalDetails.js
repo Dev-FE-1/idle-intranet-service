@@ -1,21 +1,21 @@
 import PersonalDetail from './PersonalDetail.js';
 import './PersonalDetails.css';
+import { storeInstance } from '../Store.js';
+import { sortByPeriod } from '../../utils/sortByPeriod.js';
 
 export default class PersonalDetails {
-  constructor({ user }) {
-    this.user = user;
-    this.isAdmin = user.isAdmin;
+  constructor() {
+    this.store = storeInstance;
     this.isOwner = true; // 임시
     this.personalInfo = [];
     this.privateInfo = [];
     this.employmentInfo = [];
     this.educationAndCareerInfo = [];
-    this.setInfoArray();
   }
 
   setInfoArray() {
     this.personalInfo = [
-      { subtitle: '조직', contents: '검색시스템개발팀' }, // 임시
+      { subtitle: '조직', contents: this.user.departmentName },
       { subtitle: '직책', contents: this.user.role },
     ];
 
@@ -37,17 +37,19 @@ export default class PersonalDetails {
 
       this.employmentInfo = [
         { subtitle: '입사일', contents: this.user.hireDate },
-        { subtitle: '근무유형', contents: '정규직' }, // 임시
+        { subtitle: '근무유형', contents: this.user.employmentType },
       ];
 
+      const careers = JSON.parse(this.user.career);
+      careers.sort(sortByPeriod);
       this.educationAndCareerInfo = [
         { subtitle: '학력', contents: this.user.education },
         {
           subtitle: '경력',
           contents: `<ul class="career-list">
             ${
-              this.user.career.length
-                ? this.user.career
+              careers.length
+                ? careers
                     .map(
                       (career) => `
                         <li>
@@ -65,7 +67,7 @@ export default class PersonalDetails {
       ];
     }
 
-    if (this.isAdmin) {
+    if (this.isAdmin && this.user.salary) {
       this.employmentInfo.push({
         subtitle: '연봉',
         contents: this.user.salary.toLocaleString('en-US'),
@@ -73,15 +75,30 @@ export default class PersonalDetails {
     }
   }
 
+  renderPersonalDetails() {
+    const $container = document.querySelector('.personal-details-list');
+    $container.innerHTML = `
+      ${new PersonalDetail({ title: '인사정보', info: this.personalInfo }).html()}
+      ${new PersonalDetail({ title: '개인정보', info: this.privateInfo }).html()}
+      ${new PersonalDetail({ title: '고용정보', info: this.employmentInfo }).html()}
+      ${new PersonalDetail({ title: '학력/경력', info: this.educationAndCareerInfo }).html()}
+    `;
+  }
+
+  async render() {
+    if (!this.user) {
+      this.user = await this.store.getUser();
+      this.isAdmin = this.user.isAdmin;
+      this.setInfoArray();
+    }
+
+    this.renderPersonalDetails();
+  }
+
   html() {
     return `
       <section class="personal-details-section">
-        <ul class="personal-details-list">
-          ${new PersonalDetail({ title: '인사정보', info: this.personalInfo }).html()}
-          ${new PersonalDetail({ title: '개인정보', info: this.privateInfo }).html()}
-          ${new PersonalDetail({ title: '고용정보', info: this.employmentInfo }).html()}
-          ${new PersonalDetail({ title: '학력/경력', info: this.educationAndCareerInfo }).html()}
-        </ul>
+        <ul class="personal-details-list"></ul>
       </section>
     `;
   }

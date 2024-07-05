@@ -1,11 +1,12 @@
 import SignInForm from '../../components/SignInForm/SignInForm.js';
 import logo from '../../../public/images/logo.svg';
 import dashboardImage from '../../../public/images/dashboard.png';
+import Container from '../../components/Container.js';
 import './SignIn.css';
 
-export default class SignIn {
+export default class SignIn extends Container {
   constructor() {
-    this.$container = document.querySelector('#app');
+    super('#app');
     this.Form = new SignInForm();
   }
 

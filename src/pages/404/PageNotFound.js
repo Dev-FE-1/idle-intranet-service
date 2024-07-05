@@ -1,9 +1,11 @@
+
+import Container from '../../components/Container.js';
 import notFoundImage from '../../../public/images/404.png';
 import './PageNotFound.css';
 
-export default class PageNotFound {
+export default class PageNotFound extends Container {
   constructor() {
-    this.$container = document.querySelector('#app');
+    super('#app');
   }
 
   render() {
