@@ -1,11 +1,13 @@
 .not-found-container {
+  height: 100vh;
+  background-color: #fff;
+}
+
+.not-found-container .wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.not-found-container.wrapper {
   max-width: 500px;
   margin: 0 auto;
 }
@@ -42,7 +44,21 @@
 
 /* desktop */
 @media (width >= 1024px) {
+  .not-found-container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .not-found-container .wrapper {
+    padding-bottom: 50px;
+  }
+
   .not-found-container .home-link:hover {
     background-color: var(--color-primary-hover);
+  }
+
+  .not-found-image {
+    margin-top: 0;
   }
 }
