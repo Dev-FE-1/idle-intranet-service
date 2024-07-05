@@ -1,6 +1,6 @@
 import AuthService from '../../components/Auth/AuthService.js';
 import Button from '../../components/Button/Button.js';
-import Main from '../../components/Main.js';
+import Container from '../../components/Container.js';
 import PersonalDetails from '../../components/PersonalInfo/PersonalDetails.js';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
 import Title from '../../components/Title/Title.js';
@@ -33,9 +33,9 @@ const dummyUserProfile = {
   remainingVacationDays: 11,
 };
 
-export default class ProfilePage extends Main {
+export default class ProfilePage extends Container {
   constructor() {
-    super();
+    super('#main');
     this.Title = new Title({
       title: PATH_TITLE.PROFILE,
       desktopOnly: true,

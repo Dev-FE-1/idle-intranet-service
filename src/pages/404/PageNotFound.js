@@ -1,4 +1,4 @@
-import Main from '../../components/Main.js';
+import Main from '../../components/Container.js';
 import './PageNotFound.css';
 
 export default class PageNotFound extends Main {
