@@ -48,7 +48,7 @@ export default class MembersPage extends Main {
       .then((data) => {
         this.contents = data;
         this.renderTable();
-        if (window.location.pathname === PATH.MEMBER) {
+        if (window.location.pathname === PATH.MEMBERS) {
           this.render();
         }
       })
@@ -92,12 +92,10 @@ export default class MembersPage extends Main {
           ${this.table ? this.table.html() : ''}
         </div>
         <div class='pagination-container'>
-          ${this.pagination ? this.pagination.html() : ''}
+          ${this.pagination.html()}
         </div>
       </div>
     `;
-    if (this.pagination) {
-      this.pagination.render();
-    }
+    this.pagination.render();
   }
 }
