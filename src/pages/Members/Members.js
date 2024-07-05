@@ -75,6 +75,7 @@ export default class MembersPage extends Main {
     this.$container.innerHTML = `
       <div class='members-container'>
         <div class='members-mobile-only'>
+          ${this.Title.html()}
           <span>총 <em>50</em> 명</span>
         </div>
         <div class='members-content-container'>
