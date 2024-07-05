@@ -8,9 +8,10 @@ import Icon from '../Icon/Icon.js';
 import './Pagination.css';
 
 export default class Pagination {
-  constructor({ currentPage, maxPage }) {
+  constructor({ currentPage, maxPage, onPageChange }) {
     this.currentPage = currentPage;
     this.maxPage = maxPage;
+    this.onPageChange = onPageChange;
     this.pages = [];
     this.chevrons_left = new Icon({
       svg: chevronsLeft,
@@ -65,18 +66,21 @@ export default class Pagination {
   handleFastLeft = () => {
     this.currentPage = 1;
     this.calculatePages();
+    this.onPageChange(this.currentPage);
     this.render();
   };
 
   handleFastRight = () => {
     this.currentPage = this.maxPage;
     this.calculatePages();
+    this.onPageChange(this.currentPage);
     this.render();
   };
 
   handleLeft = () => {
     this.currentPage = this.currentPage === 1 ? 1 : this.currentPage - 1;
     this.calculatePages();
+    this.onPageChange(this.currentPage);
     this.render();
   };
 
@@ -84,14 +88,18 @@ export default class Pagination {
     this.currentPage =
       this.currentPage === this.maxPage ? this.maxPage : this.currentPage + 1;
     this.calculatePages();
+    this.onPageChange(this.currentPage);
     this.render();
   };
 
   handlePageClick = (page) => {
     this.currentPage = page;
     this.calculatePages();
+    this.onPageChange(this.currentPage);
     this.render();
   };
+
+  getCurrentPage = () => this.currentPage;
 
   render() {
     document.querySelector('.pagination-container').innerHTML = this.html();
@@ -128,7 +136,9 @@ export default class Pagination {
             if (page === '...') {
               return `<button class='disabled' disabled>${page}</button>`;
             }
-            return `<button class='page ${page === this.currentPage ? 'active' : ''}'>${page}</button>`;
+            return `<button class='page ${
+              page === this.currentPage ? 'active' : ''
+            }'>${page}</button>`;
           })
           .join('')}
         <button class='right'>${this.chevron_right.html()}</button>
