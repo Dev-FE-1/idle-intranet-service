@@ -2,7 +2,7 @@ import Main from '../../components/Main.js';
 import Title from '../../components/Title/Title.js';
 import Input from '../../components/Input/Input.js';
 import Table from '../../components/Table/Table.js';
-import { COLORS, PATH_TITLE } from '../../utils/constants.js';
+import { COLORS, PATH, PATH_TITLE } from '../../utils/constants.js';
 import './Members.css';
 import Icon from '../../components/Icon/Icon.js';
 import { magnifyingGlass } from '../../utils/icons.js';
@@ -26,14 +26,13 @@ export default class MembersPage extends Main {
     this.memberService = new MemberService();
     this.contents = [];
     this.auth = new AuthService();
-
-    if (this.auth.isLoggedIn()) {
-      this.pagination = new Pagination({
+    this.pagination = new Pagination({
         currentPage: this.currentPage,
         maxPage: 8,
         onPageChange: this.handlePageChange,
-      });
-
+    });
+    
+    if (this.auth.isLoggedIn() && window.location.pathname === PATH.MEMBERS) {
       this.loadData(this.currentPage, this.maxProfile);
     }
   }
