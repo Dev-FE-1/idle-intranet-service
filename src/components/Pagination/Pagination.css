@@ -15,7 +15,6 @@
   padding: 2px;
   color: #8b95a1;
   font-size: 14px;
-  letter-spacing: -0.12px;
   background-color: #fff;
 }
 
@@ -39,23 +38,16 @@
   margin: 0 -3px;
 }
 
-.pagination-container .fast-left:hover svg,
-.pagination-container .fast-right:hover svg,
-.pagination-container .left:hover svg,
-.pagination-container .right:hover svg {
-  stroke: #333d4b;
-}
-
-.pagination-container button:disabled {
+.pagination-container .fast-left:disabled,
+.pagination-container .fast-right:disabled,
+.pagination-container .left:disabled,
+.pagination-container .right:disabled {
   cursor: default;
   opacity: 0.3;
 }
 
-@media (width <= 1024px) {
-  .pagination-container .fast-left,
-  .pagination-container .fast-right,
-  .pagination-container .left,
-  .pagination-container .right {
-    background-color: var(--color-lighest-gray);
-  }
+.pagination-container .omit {
+  border: 0;
+  cursor: default;
 }
+

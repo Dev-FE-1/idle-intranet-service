@@ -130,7 +130,7 @@ export default class Pagination {
         ${this.pages
           .map((page) => {
             if (page === '...') {
-              return `<button class='disabled' disabled>${page}</button>`;
+              return `<button class='omit' disabled>${page}</button>`;
             }
             return `<button class='page ${
               page === this.currentPage ? 'active' : ''
