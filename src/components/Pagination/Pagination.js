@@ -63,47 +63,43 @@ export default class Pagination {
     pageCalc(this.currentPage, this.maxPage, this.pages);
   }
 
-  handleFastLeft = () => {
-    this.currentPage = 1;
+  updatePage(newPage) {
+    this.currentPage = newPage;
     this.calculatePages();
     this.onPageChange(this.currentPage);
+    this.updateButtonStates();
     this.render();
-  };
+  }
 
-  handleFastRight = () => {
-    this.currentPage = this.maxPage;
-    this.calculatePages();
-    this.onPageChange(this.currentPage);
-    this.render();
-  };
+  handleFastLeft = () => this.updatePage(1);
 
-  handleLeft = () => {
-    this.currentPage = this.currentPage === 1 ? 1 : this.currentPage - 1;
-    this.calculatePages();
-    this.onPageChange(this.currentPage);
-    this.render();
-  };
+  handleFastRight = () => this.updatePage(this.maxPage);
 
-  handleRight = () => {
-    this.currentPage =
-      this.currentPage === this.maxPage ? this.maxPage : this.currentPage + 1;
-    this.calculatePages();
-    this.onPageChange(this.currentPage);
-    this.render();
-  };
+  handleLeft = () =>
+    this.updatePage(this.currentPage === 1 ? 1 : this.currentPage - 1);
 
-  handlePageClick = (page) => {
-    this.currentPage = page;
-    this.calculatePages();
-    this.onPageChange(this.currentPage);
-    this.render();
-  };
+  handleRight = () =>
+    this.updatePage(
+      this.currentPage === this.maxPage ? this.maxPage : this.currentPage + 1,
+    );
+
+  handlePageClick = (page) => this.updatePage(page);
 
   getCurrentPage = () => this.currentPage;
+
+  updateButtonStates() {
+    document.querySelector('.fast-left').disabled = this.currentPage === 1;
+    document.querySelector('.left').disabled = this.currentPage === 1;
+    document.querySelector('.fast-right').disabled =
+      this.currentPage === this.maxPage;
+    document.querySelector('.right').disabled =
+      this.currentPage === this.maxPage;
+  }
 
   render() {
     document.querySelector('.pagination-container').innerHTML = this.html();
     this.addEventListeners();
+    this.updateButtonStates();
   }
 
   addEventListeners() {
@@ -119,9 +115,9 @@ export default class Pagination {
         } else if (index === this.pages.length + 3) {
           button.addEventListener('click', this.handleFastRight);
         } else {
-          button.addEventListener('click', () => {
-            this.handlePageClick(this.pages[index - 2]);
-          });
+          button.addEventListener('click', () =>
+            this.handlePageClick(this.pages[index - 2]),
+          );
         }
       });
   }
