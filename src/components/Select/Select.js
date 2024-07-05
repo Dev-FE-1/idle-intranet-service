@@ -1,4 +1,5 @@
 import Icon from '../Icon/Icon.js';
+import { COLORS } from '../../utils/constants.js';
 import { chevronDown } from '../../utils/icons.js';
 import './Select.css';
 
@@ -29,7 +30,7 @@ export default class Select {
     this.small = small;
     this.chevronDown = new Icon({
       svg: chevronDown,
-      options: { size: '18px' },
+      options: { size: '18px', color: COLORS.DARK_GRAY },
     });
 
     this.filteredContents = excludeFirst ? contents.slice(1) : contents;
