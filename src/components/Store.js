@@ -8,8 +8,8 @@ class Store {
   async getUser() {
     if (this.user) return this.user;
 
-    const user = await fetchUser();
-    return user;
+    this.user = await fetchUser();
+    return this.user;
   }
 }
 
