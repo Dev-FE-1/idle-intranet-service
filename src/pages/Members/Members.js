@@ -27,12 +27,12 @@ export default class MembersPage extends Main {
     this.contents = [];
     this.auth = new AuthService();
     this.pagination = new Pagination({
-        currentPage: this.currentPage,
-        maxPage: 8,
-        onPageChange: this.handlePageChange,
+      currentPage: this.currentPage,
+      maxPage: 8,
+      onPageChange: this.handlePageChange,
     });
-    
-    if (this.auth.isLoggedIn() && window.location.pathname === PATH.MEMBERS) {
+
+    if (this.auth.isLoggedIn()) {
       this.loadData(this.currentPage, this.maxProfile);
     }
   }
@@ -48,7 +48,9 @@ export default class MembersPage extends Main {
       .then((data) => {
         this.contents = data;
         this.renderTable();
-        this.render();
+        if (window.location.pathname === PATH.MEMBER) {
+          this.render();
+        }
       })
       .catch((error) => {
         console.error('Failed to load page data:', error);
