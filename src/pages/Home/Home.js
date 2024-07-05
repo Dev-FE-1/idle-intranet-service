@@ -4,11 +4,12 @@ import Main from '../../components/Main.js';
 import Title from '../../components/Title/Title.js';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
 import Button from '../../components/Button/Button.js';
-import './Home.css';
 import Icon from '../../components/Icon/Icon.js';
-import { COLORS } from '../../utils/constants.js';
+import Avatar from '../../components/Avatar/Avatar.js';
 import { chevronDown } from '../../utils/icons.js';
+import { COLORS } from '../../utils/constants.js';
 import logo from '../../../public/images/logo.svg';
+import './Home.css';
 
 const dummyUserProfile = {
   employeeNumber: 101,
@@ -93,32 +94,33 @@ export default class HomePage extends Main {
           ${this.moreButton.html()}
         </div>
 
-        <div class="announcement">
-          <h2 class="home-subtitle">경영진 공지사항</h2>
-          <div class="announcement-content">
-            <img src="/public/images/user-default.svg" alt="profile" />
-            <div class="announcement-info">
-              <p class="admin">최고 관리자</p>
-              <p class="time">약 15시간 전</p>
+        <section class="announcement-container">
+          <div class="wrapper">
+            <h2 class="home-subtitle">주요 소식</h2>
+            <div class="announcement-author">
+              <div class="author-image-container">
+                ${new Avatar({
+                  url: 'https://api.dicebear.com/9.x/lorelei/svg?seed=Max&eyes=variant09',
+                }).html()}
+              </div>
+              <div class="announcement-info">
+                <div class="announcement-author-name">안민지</div>
+                <div class="announcement-time">약 15시간 전</div>
+              </div>
+            </div>
+            <div class="announcement-contents">
+              <p>
+                오늘은 즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. 오늘은
+                즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. <br />오늘은
+                즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. 오늘은 즐거운
+                월급날입니다. <br />
+                오늘은 즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. 오늘은
+                즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. 오늘은 즐거운
+                월급날입니다.
+              </p>
             </div>
           </div>
-          <div class="announcement-text">
-            <p>
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다. <br />
-              오늘은 즐거운 월급날입니다.
-            </p>
-          </div>
-        </div>
+        </section>
       </div>
     `;
 
