@@ -7,14 +7,16 @@ export const COLORS = {
   LIGHTEST_GRAY: 'var(--color-lightest-gray)',
 };
 
+const baseUrl = import.meta.env.VITE_BASE_URL || '';
+
 export const PATH = {
-  SIGNIN: '/signin',
-  HOME: '/',
-  ANNOUNCEMENT: '/announcements/:id',
-  MEMBERS: '/members',
-  MEMBER: '/members/:id',
-  PROFILE: '/profile',
-  WORK_MANAGE: '/work-manage',
+  SIGNIN: `${baseUrl}/signin`,
+  HOME: `${baseUrl}/`,
+  ANNOUNCEMENT: `${baseUrl}/announcements/:id`,
+  MEMBER: `${baseUrl}/members/:id`,
+  MEMBERS: `${baseUrl}/members`,
+  PROFILE: `${baseUrl}/profile`,
+  WORK_MANAGE: `${baseUrl}/work-manage`,
 };
 
 export const PATH_TITLE = {
