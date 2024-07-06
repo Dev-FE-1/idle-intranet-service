@@ -109,7 +109,7 @@ app.get('/api/members/:page', authenticateToken, (req, res) => {
     ORDER BY 
       employeeNumber ASC 
     LIMIT ? 
-    OFFSET ?`; // 조직 추가
+    OFFSET ?`;
 
   // eslint-disable-next-line consistent-return
   db.all(sql, [limit, offset], (err, rows) => {
@@ -139,7 +139,8 @@ app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
     'email',
     'phoneNumber',
     'profileImage',
-  ]; // 조직 추가
+    'departmentName',
+  ];
 
   if (isAdmin === 'true') {
     selectItems.push(
@@ -148,7 +149,8 @@ app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
       'address',
       'salary',
       'education',
-      'career', // 근무 유형 추가
+      'career',
+      'employmentType',
     );
   }
 
@@ -179,7 +181,7 @@ app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/user', authenticateToken, (req, res) => {
+app.get('/api/user', (req, res) => {
   const { employeeNumber } = req.query;
 
   if (!employeeNumber) {
@@ -205,11 +207,13 @@ app.get('/api/user', authenticateToken, (req, res) => {
       career, 
       role, 
       profileImage, 
-      remainingVacationDays
+      remainingVacationDays,
+      departmentName,
+      employmentType
     FROM 
       Members 
     WHERE 
-      employeeNumber = ?`; // 조직, 근무유형 추가
+      employeeNumber = ?`;
 
   // eslint-disable-next-line consistent-return
   db.get(sql, [employeeNumber], (err, row) => {
@@ -324,7 +328,7 @@ app.get('/api/vacationRequests/:page', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/api/announcements', authenticateToken, (req, res) => {
+app.get('/api/announcements', (req, res) => {
   const sql = 'SELECT * FROM Announcements';
 
   // eslint-disable-next-line consistent-return

@@ -1,4 +1,4 @@
-import Main from '../../components/Main.js';
+import Container from '../../components/Container.js';
 import Title from '../../components/Title/Title.js';
 import Input from '../../components/Input/Input.js';
 import Table from '../../components/Table/Table.js';
@@ -10,9 +10,9 @@ import Pagination from '../../components/Pagination/Pagination.js';
 import MemberService from '../../components/API/MemberService.js';
 import AuthService from '../../components/API/AuthService.js';
 
-export default class MembersPage extends Main {
+export default class MembersPage extends Container {
   constructor() {
-    super();
+    super('#main');
     this.Title = new Title({
       title: PATH_TITLE.MEMBERS,
     });

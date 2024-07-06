@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import Main from '../../components/Main.js';
+import Container from '../../components/Container.js';
 import Title from '../../components/Title/Title.js';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
 import Button from '../../components/Button/Button.js';
@@ -37,9 +37,9 @@ const dummyUserProfile = {
   remainingVacationDays: 11,
 };
 
-export default class HomePage extends Main {
+export default class HomePage extends Container {
   constructor() {
-    super();
+    super('#main');
     this.Title = new Title({
       title: '작은 큐브가 만드는 큰 변화, Cube.IT',
       subtitle: 'VISION & MISSION',

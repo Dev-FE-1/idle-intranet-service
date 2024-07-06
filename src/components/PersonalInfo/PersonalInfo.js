@@ -5,8 +5,8 @@ import WorkInfo from './WorkInfo.js';
 import './PersonalInfo.css';
 
 export default class PersonalInfo {
-  constructor({ user }) {
-    this.ProfileInfo = new ProfileInfo({ user });
+  constructor() {
+    this.ProfileInfo = new ProfileInfo();
     this.WorkInfo = new WorkInfo();
   }
 
@@ -24,6 +24,10 @@ export default class PersonalInfo {
     const delay = nextMinuteStart.diff(now);
 
     return delay;
+  }
+
+  render() {
+    this.ProfileInfo.render();
   }
 
   html() {
