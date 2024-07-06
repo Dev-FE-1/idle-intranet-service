@@ -103,9 +103,9 @@ app.get('/api/members/:page', authenticateToken, (req, res) => {
       position, 
       email, 
       phoneNumber,
-      departmentName 
+      departmentName
     FROM 
-      Members 
+      Members
     ORDER BY 
       employeeNumber ASC 
     LIMIT ? 

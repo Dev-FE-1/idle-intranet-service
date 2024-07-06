@@ -1,4 +1,4 @@
-import AuthService from '../Auth/AuthService.js';
+import AuthService from '../API/AuthService.js';
 import Button from '../Button/Button.js';
 import './Header.css';
 

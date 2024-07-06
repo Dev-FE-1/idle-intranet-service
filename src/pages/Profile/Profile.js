@@ -1,4 +1,4 @@
-import AuthService from '../../components/Auth/AuthService.js';
+import AuthService from '../../components/API/AuthService.js';
 import Button from '../../components/Button/Button.js';
 import Container from '../../components/Container.js';
 import PersonalDetails from '../../components/PersonalInfo/PersonalDetails.js';
