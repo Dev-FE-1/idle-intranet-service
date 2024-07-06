@@ -1,7 +1,7 @@
 import Input from '../Input/Input.js';
 import Button from '../Button/Button.js';
 import './SignInForm.css';
-import AuthService from '../API/AuthService.js';
+import { login } from '../API/AuthService.js';
 
 export default class SignInForm {
   constructor() {
@@ -23,7 +23,6 @@ export default class SignInForm {
       content: '로그인',
       disabled: true,
     });
-    this.authService = new AuthService();
     this.isValidEmail = false;
     this.isValidPassword = false;
   }
@@ -44,7 +43,7 @@ export default class SignInForm {
         '비밀번호는 8자 이상, 30자 이하로 작성해 주시기 바랍니다.',
       );
     } else {
-      this.authService.login(this.email, this.password, this.showErrorMessage);
+      login(this.email, this.password, this.showErrorMessage);
     }
     document.querySelector('.button.btn-primary').removeAttribute('disabled');
   };
