@@ -1,4 +1,4 @@
-import AuthService from '../API/AuthService.js';
+import { logout } from '../API/AuthService.js';
 import Button from '../Button/Button.js';
 import './Header.css';
 
@@ -12,7 +12,6 @@ export default class Header {
       content: '로그아웃',
       size: 'small',
     });
-    this.handleLogout = new AuthService().logout;
     this.render();
   }
 
@@ -33,6 +32,6 @@ export default class Header {
     `;
     document
       .querySelector('.logout-btn-wrapper button')
-      .addEventListener('click', this.handleLogout);
+      .addEventListener('click', logout);
   }
 }

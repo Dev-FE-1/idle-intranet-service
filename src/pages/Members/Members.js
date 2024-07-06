@@ -7,8 +7,8 @@ import './Members.css';
 import Icon from '../../components/Icon/Icon.js';
 import { magnifyingGlass } from '../../utils/icons.js';
 import Pagination from '../../components/Pagination/Pagination.js';
-import MemberService from '../../components/API/MemberService.js';
-import AuthService from '../../components/API/AuthService.js';
+import { loadPage } from '../../components/API/MemberService.js';
+import { isLoggedIn } from '../../components/API/AuthService.js';
 
 export default class MembersPage extends Container {
   constructor() {
@@ -23,18 +23,19 @@ export default class MembersPage extends Container {
     this.input = new Input({ placeholder: '이름을 입력하세요' });
     this.currentPage = 1;
     this.maxProfile = 7;
-    this.memberService = new MemberService();
     this.contents = [];
-    this.auth = new AuthService();
     this.pagination = new Pagination({
       currentPage: this.currentPage,
       maxPage: 8,
       onPageChange: this.handlePageChange,
     });
 
-    if (this.auth.isLoggedIn()) {
-      this.loadData(this.currentPage, this.maxProfile);
-    }
+    // 비동기 로그인 체크
+    isLoggedIn().then((loggedIn) => {
+      if (loggedIn) {
+        this.loadData(this.currentPage, this.maxProfile);
+      }
+    });
   }
 
   handlePageChange = (newPage) => {
@@ -43,8 +44,7 @@ export default class MembersPage extends Container {
   };
 
   loadData(page, max) {
-    this.memberService
-      .loadPage(page, max)
+    loadPage(page, max)
       .then((data) => {
         this.contents = data;
         this.renderTable();

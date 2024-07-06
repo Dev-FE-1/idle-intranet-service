@@ -1,4 +1,4 @@
-import AuthService from '../../components/API/AuthService.js';
+import { logout } from '../../components/API/AuthService.js';
 import Button from '../../components/Button/Button.js';
 import Container from '../../components/Container.js';
 import PersonalDetails from '../../components/PersonalInfo/PersonalDetails.js';
@@ -22,7 +22,6 @@ export default class ProfilePage extends Container {
       variant: 'tertiary',
       content: '로그아웃',
     });
-    this.handleLogout = new AuthService().logout;
   }
 
   renderCurrentTime() {
@@ -58,7 +57,7 @@ export default class ProfilePage extends Container {
       ${this.Title.html()}
       ${this.PersonalInfo.html()}
       ${this.PersonalDetails.html()}
-      <div class='logout-btn-wrapper'>
+      <div class='logout-btn-wrapper-inprofile'>
         ${this.Button.html()}
       </div>
     `;
@@ -67,7 +66,7 @@ export default class ProfilePage extends Container {
     this.PersonalInfo.render();
     this.PersonalDetails.render();
     document
-      .querySelector('.logout-btn-wrapper button')
-      .addEventListener('click', this.handleLogout);
+      .querySelector('.logout-btn-wrapper-inprofile button')
+      .addEventListener('click', logout);
   }
 }
