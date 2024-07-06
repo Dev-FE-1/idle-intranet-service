@@ -1,14 +1,17 @@
-import Layout from './components/Layout.js';
-import Header from './components/Header/Header.js';
-import NavBar from './components/NavBar/NavBar.js';
 import Route from './routes/Route.js';
+import { storeInstance } from './components/Store.js';
 
 class App {
   constructor() {
-    this.Layout = new Layout({ container: '#app' });
-    this.Header = new Header({ container: '.header-container' });
-    this.NavBar = new NavBar({ container: '.navbar' });
     this.Route = new Route();
+    this.Store = storeInstance;
+
+    this.init();
+  }
+
+  init() {
+    this.Store.renderLayout();
+    this.Route.init();
   }
 }
 
