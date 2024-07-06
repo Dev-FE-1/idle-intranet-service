@@ -1,21 +1,19 @@
-import ApiClient from './ApiClient.js';
+const loadPage = async (page, max) => {
+  try {
+    const response = await fetch(`/api/members/${page}?max=${max}`, {
+      method: 'GET',
+    });
 
-export default class MemberService {
-  constructor() {
-    this.apiClient = new ApiClient(this.getToken);
-  }
+    if (!response.ok) {
+      throw new Error(`Failed to load data: ${response.statusText}`);
+    }
 
-  loadPage(page, max) {
-    return this.apiClient
-      .get(`/api/members/${page}?max=${max}`)
-      .then((response) => response.data.data)
-      .catch((error) => {
-        throw error;
-      });
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error('Error loading page:', error);
+    throw error;
   }
+};
 
-  // eslint-disable-next-line class-methods-use-this
-  getToken() {
-    return localStorage.getItem('token');
-  }
-}
+export { loadPage };
