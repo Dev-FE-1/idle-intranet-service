@@ -1,3 +1,5 @@
+import { PATH } from '../../utils/constants.js';
+
 const login = async (email, password, showError) => {
   try {
     const response = await fetch('/api/login', {
@@ -28,7 +30,7 @@ const login = async (email, password, showError) => {
 
     if (data.status === 'OK') {
       localStorage.setItem('token', data.token);
-      window.location.href = '/';
+      window.location.href = PATH.HOME;
     } else {
       showError(
         `로그인에 실패하였습니다: ${data.message || '알 수 없는 오류가 발생했습니다.'}`,
@@ -41,7 +43,7 @@ const login = async (email, password, showError) => {
 
 const logout = () => {
   localStorage.removeItem('token');
-  window.location.href = '/signin';
+  window.location.href = PATH.SIGNIN;
 };
 
 const isLoggedIn = async () => {
