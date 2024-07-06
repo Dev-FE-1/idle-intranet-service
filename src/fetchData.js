@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const { VITE_SERVER_URL, VITE_LOCAL_URL } = import.meta.env;
-const apiBaseUrl = VITE_SERVER_URL || VITE_LOCAL_URL;
+const { VITE_SERVER_URL } = import.meta.env;
+const apiBaseUrl = VITE_SERVER_URL;
 
 export async function fetchMembers(page = 1, max = 10) {
   const response = await axios.get(

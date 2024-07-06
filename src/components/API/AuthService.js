@@ -1,7 +1,7 @@
 import { PATH } from '../../utils/constants.js';
 
-const { VITE_SERVER_URL, VITE_LOCAL_URL } = import.meta.env;
-const apiBaseUrl = VITE_SERVER_URL || VITE_LOCAL_URL;
+const { VITE_SERVER_URL } = import.meta.env;
+const apiBaseUrl = VITE_SERVER_URL;
 
 const login = async (email, password, showError) => {
   try {

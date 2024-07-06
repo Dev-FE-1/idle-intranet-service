@@ -1,5 +1,5 @@
-const { VITE_SERVER_URL, VITE_LOCAL_URL } = import.meta.env;
-const apiBaseUrl = VITE_SERVER_URL || VITE_LOCAL_URL;
+const { VITE_SERVER_URL } = import.meta.env;
+const apiBaseUrl = VITE_SERVER_URL;
 
 const loadPage = async (page, max) => {
   try {
