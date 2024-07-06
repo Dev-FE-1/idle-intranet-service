@@ -32,7 +32,7 @@ var Ft=Object.defineProperty;var Ut=(t,e,n)=>e in t?Ft(t,e,{enumerable:!0,config
               <span class="nav-menu">${e.title}</span>
             </a>
           </li>
-        `}).join("")}}class ie{constructor(e){this.$container=document.querySelector(e)}}const Wt="/assets/404-5M1Xnl0d.png";class Gt extends ie{constructor(){super("#app")}render(){this.$container.innerHTML=`
+        `}).join("")}}class ie{constructor(e){this.$container=document.querySelector(e)}}const Wt="/idle-intranet-service/assets/404-5M1Xnl0d.png";class Gt extends ie{constructor(){super("#app")}render(){this.$container.innerHTML=`
       <div class="not-found-container">
         <div class="wrapper">
           <img class="not-found-image" src=${Wt} alt="404" />
@@ -59,7 +59,7 @@ var Ft=Object.defineProperty;var Ut=(t,e,n)=>e in t?Ft(t,e,{enumerable:!0,config
       <div class='profile-img-container img-${this.size} img-bd-${this.border}'>
         <img src=${this.url} alt="프로필 사진" class="profile-img img-${this.size}"/>
       </div>
-    `}}var $s={VITE_SERVER_URL:"http://localhost:8080",BASE_URL:"/",MODE:"production",DEV:!1,PROD:!0,SSR:!1};const{VITE_SERVER_URL:Os}=$s;async function Ts(){const t=localStorage.getItem("EmployeeNumber")||100,e=await fetch(`${Os}/api/user?employeeNumber=${t}`);let n;return e.status===200&&(n=await e.json()),n.data}class Ps{constructor(){this.user=null}async getUser(){return this.user?this.user:(this.user=await Ts(),this.user)}}const Nt=new Ps;class ks{constructor(){this.store=Nt,this.isWorking=!1}renderAvatar(){const e=document.querySelector(".profile-info .avatar-container");e.innerHTML=this.Avatar.html()}renderUserInfo(){const e=document.querySelector(".personal-profile .profile-name"),n=document.querySelector(".personal-profile .profile-position");e.innerText=this.user.name,n.innerText=this.user.position}async render(){this.user||(this.user=await this.store.getUser(),this.Avatar=new It({url:this.user.profileImage,size:"large"})),this.renderAvatar(),this.renderUserInfo()}html(){return`
+    `}}var $s={VITE_SERVER_URL:"http://localhost:8080",BASE_URL:"/idle-intranet-service/",MODE:"production",DEV:!1,PROD:!0,SSR:!1};const{VITE_SERVER_URL:Os}=$s;async function Ts(){const t=localStorage.getItem("EmployeeNumber")||100,e=await fetch(`${Os}/api/user?employeeNumber=${t}`);let n;return e.status===200&&(n=await e.json()),n.data}class Ps{constructor(){this.user=null}async getUser(){return this.user?this.user:(this.user=await Ts(),this.user)}}const Nt=new Ps;class ks{constructor(){this.store=Nt,this.isWorking=!1}renderAvatar(){const e=document.querySelector(".profile-info .avatar-container");e.innerHTML=this.Avatar.html()}renderUserInfo(){const e=document.querySelector(".personal-profile .profile-name"),n=document.querySelector(".personal-profile .profile-position");e.innerText=this.user.name,n.innerText=this.user.position}async render(){this.user||(this.user=await this.store.getUser(),this.Avatar=new It({url:this.user.profileImage,size:"large"})),this.renderAvatar(),this.renderUserInfo()}html(){return`
       <div class="profile-info">
         <div class="avatar-container"></div>
         <div class="personal-profile">
@@ -343,7 +343,7 @@ var Ft=Object.defineProperty;var Ut=(t,e,n)=>e in t?Ft(t,e,{enumerable:!0,config
         <p class="alert-message"></p>
         ${this.Button.html()}
       </form>
-    `}setEventListeners(){const e=document.getElementById("signin_email"),n=document.getElementById("signin_password"),s=document.querySelector(".button.btn-primary");e.addEventListener("input",this.handleInput),n.addEventListener("input",this.handleInput),s.addEventListener("click",this.handleForm)}}const Ys="/assets/dashboard-CkOnVST7.png";class Zs extends ie{constructor(){super("#app"),this.Form=new Js}render(){this.$container.innerHTML=`
+    `}setEventListeners(){const e=document.getElementById("signin_email"),n=document.getElementById("signin_password"),s=document.querySelector(".button.btn-primary");e.addEventListener("input",this.handleInput),n.addEventListener("input",this.handleInput),s.addEventListener("click",this.handleForm)}}const Ys="/idle-intranet-service/assets/dashboard-CkOnVST7.png";class Zs extends ie{constructor(){super("#app"),this.Form=new Js}render(){this.$container.innerHTML=`
       <div class="signin-container">
         <header>
           <div class="logo-container">
