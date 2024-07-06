@@ -1,16 +1,18 @@
-import Main from '../../components/Main.js';
+import Container from '../../components/Container.js';
 import Title from '../../components/Title/Title.js';
 import Input from '../../components/Input/Input.js';
 import Table from '../../components/Table/Table.js';
-import { COLORS, PATH_TITLE } from '../../utils/constants.js';
+import { COLORS, PATH, PATH_TITLE } from '../../utils/constants.js';
 import './Members.css';
 import Icon from '../../components/Icon/Icon.js';
 import { magnifyingGlass } from '../../utils/icons.js';
 import Pagination from '../../components/Pagination/Pagination.js';
+import { loadPage } from '../../components/API/MemberService.js';
+import { isLoggedIn } from '../../components/API/AuthService.js';
 
-export default class MembersPage extends Main {
+export default class MembersPage extends Container {
   constructor() {
-    super();
+    super('#main');
     this.Title = new Title({
       title: PATH_TITLE.MEMBERS,
     });
@@ -19,61 +21,55 @@ export default class MembersPage extends Main {
       options: { size: '18px', color: COLORS.DARK_GRAY },
     });
     this.input = new Input({ placeholder: '이름을 입력하세요' });
+    this.currentPage = 1;
+    this.maxProfile = 7;
+    this.contents = [];
+    this.pagination = new Pagination({
+      currentPage: this.currentPage,
+      maxPage: 8,
+      onPageChange: this.handlePageChange,
+    });
+
+    // 비동기 로그인 체크
+    isLoggedIn().then((loggedIn) => {
+      if (loggedIn) {
+        this.loadData(this.currentPage, this.maxProfile);
+      }
+    });
+  }
+
+  handlePageChange = (newPage) => {
+    this.currentPage = newPage;
+    this.loadData(this.currentPage, this.maxProfile);
+  };
+
+  loadData(page, max) {
+    loadPage(page, max)
+      .then((data) => {
+        this.contents = data;
+        this.renderTable();
+        if (window.location.pathname === PATH.MEMBERS) {
+          this.render();
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to load page data:', error);
+      });
+  }
+
+  renderTable() {
+    const transformedEmployees = this.contents.map((employee) => [
+      employee.name,
+      employee.position,
+      employee.departmentName,
+      employee.email,
+      employee.phoneNumber,
+    ]);
+
     this.table = new Table({
       headers: ['이름', '직무', '조직', '이메일', '연락처'],
-      contents: [
-        [
-          '김직원',
-          '프론테엔드 개발자',
-          '검색서비스개발팀',
-          'hello@gmail.com',
-          '02-123-4567',
-        ],
-        [
-          '김직원',
-          '프론테엔드 개발자',
-          '검색서비스개발팀',
-          'hello@gmail.com',
-          '02-123-4567',
-        ],
-        [
-          '김직원',
-          '프론테엔드 개발자',
-          '검색서비스개발팀',
-          'hello@gmail.com',
-          '02-123-4567',
-        ],
-        [
-          '김직원',
-          '프론테엔드 개발자',
-          '검색서비스개발팀',
-          'hello@gmail.com',
-          '02-123-4567',
-        ],
-        [
-          '김직원',
-          '프론테엔드 개발자',
-          '검색서비스개발팀',
-          'hello@gmail.com',
-          '02-123-4567',
-        ],
-        [
-          '김직원',
-          '프론테엔드 개발자',
-          '검색서비스개발팀',
-          'hello@gmail.com',
-          '02-123-4567',
-        ],
-        [
-          '김직원',
-          '프론테엔드 개발자',
-          '검색서비스개발팀',
-          'hello@gmail.com',
-          '02-123-4567',
-        ],
-      ],
+      contents: transformedEmployees,
     });
-    this.pagination = new Pagination({ currentPage: 5, maxPage: 10 });
   }
 
   render() {
@@ -93,7 +89,7 @@ export default class MembersPage extends Main {
               </button>
             </div>
           </div>
-          ${this.table.html()}
+          ${this.table ? this.table.html() : ''}
         </div>
         <div class='pagination-container'>
           ${this.pagination.html()}

@@ -8,9 +8,10 @@ import Icon from '../Icon/Icon.js';
 import './Pagination.css';
 
 export default class Pagination {
-  constructor({ currentPage, maxPage }) {
+  constructor({ currentPage, maxPage, onPageChange }) {
     this.currentPage = currentPage;
     this.maxPage = maxPage;
+    this.onPageChange = onPageChange;
     this.pages = [];
     this.chevrons_left = new Icon({
       svg: chevronsLeft,
@@ -62,40 +63,43 @@ export default class Pagination {
     pageCalc(this.currentPage, this.maxPage, this.pages);
   }
 
-  handleFastLeft = () => {
-    this.currentPage = 1;
+  updatePage(newPage) {
+    this.currentPage = newPage;
     this.calculatePages();
+    this.onPageChange(this.currentPage);
+    this.updateButtonStates();
     this.render();
-  };
+  }
 
-  handleFastRight = () => {
-    this.currentPage = this.maxPage;
-    this.calculatePages();
-    this.render();
-  };
+  handleFastLeft = () => this.updatePage(1);
 
-  handleLeft = () => {
-    this.currentPage = this.currentPage === 1 ? 1 : this.currentPage - 1;
-    this.calculatePages();
-    this.render();
-  };
+  handleFastRight = () => this.updatePage(this.maxPage);
 
-  handleRight = () => {
-    this.currentPage =
-      this.currentPage === this.maxPage ? this.maxPage : this.currentPage + 1;
-    this.calculatePages();
-    this.render();
-  };
+  handleLeft = () =>
+    this.updatePage(this.currentPage === 1 ? 1 : this.currentPage - 1);
 
-  handlePageClick = (page) => {
-    this.currentPage = page;
-    this.calculatePages();
-    this.render();
-  };
+  handleRight = () =>
+    this.updatePage(
+      this.currentPage === this.maxPage ? this.maxPage : this.currentPage + 1,
+    );
+
+  handlePageClick = (page) => this.updatePage(page);
+
+  getCurrentPage = () => this.currentPage;
+
+  updateButtonStates() {
+    document.querySelector('.fast-left').disabled = this.currentPage === 1;
+    document.querySelector('.left').disabled = this.currentPage === 1;
+    document.querySelector('.fast-right').disabled =
+      this.currentPage === this.maxPage;
+    document.querySelector('.right').disabled =
+      this.currentPage === this.maxPage;
+  }
 
   render() {
     document.querySelector('.pagination-container').innerHTML = this.html();
     this.addEventListeners();
+    this.updateButtonStates();
   }
 
   addEventListeners() {
@@ -111,9 +115,9 @@ export default class Pagination {
         } else if (index === this.pages.length + 3) {
           button.addEventListener('click', this.handleFastRight);
         } else {
-          button.addEventListener('click', () => {
-            this.handlePageClick(this.pages[index - 2]);
-          });
+          button.addEventListener('click', () =>
+            this.handlePageClick(this.pages[index - 2]),
+          );
         }
       });
   }
@@ -126,9 +130,11 @@ export default class Pagination {
         ${this.pages
           .map((page) => {
             if (page === '...') {
-              return `<button class='disabled' disabled>${page}</button>`;
+              return `<button class='omit' disabled>${page}</button>`;
             }
-            return `<button class='page ${page === this.currentPage ? 'active' : ''}'>${page}</button>`;
+            return `<button class='page ${
+              page === this.currentPage ? 'active' : ''
+            }'>${page}</button>`;
           })
           .join('')}
         <button class='right'>${this.chevron_right.html()}</button>

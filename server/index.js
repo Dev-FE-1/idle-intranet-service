@@ -22,27 +22,21 @@ const generateToken = (user) => {
   return jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
 };
 
-const authenticateToken = (req, res, next) => {
+app.post('/api/verify-token', async (req, res) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
-    res.sendStatus(401);
-    return;
+    return res.json({ valid: false });
   }
 
-  jwt.verify(token, SECRET_KEY, (err, user) => {
-    if (err) {
-      res.sendStatus(403);
-      return;
-    }
-
-    /* eslint-disable no-param-reassign */
-    req.user = user;
-    /* eslint-enable no-param-reassign */
-    next();
-  });
-};
+  try {
+    await jwt.verify(token, SECRET_KEY);
+    return res.json({ valid: true });
+  } catch (err) {
+    return res.json({ valid: false });
+  }
+});
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
@@ -79,14 +73,16 @@ app.post('/api/login', async (req, res) => {
     }
 
     // 비밀번호가 틀린 경우: STATUS 401
-    return res.status(401).json({ status: 'Error', error: '로그인 실패!' });
+    return res.status(401).json({
+      status: 'Error',
+      error:
+        '로그인에 실패하였습니다. 이메일과 비밀번호를 다시 확인해 주시기 바랍니다!',
+    });
   });
-
-  // 반환 값을 명시적으로 추가하여 콜백 함수가 종료되었음을 알립니다.
   return null;
 });
 
-app.get('/api/members/:page', authenticateToken, (req, res) => {
+app.get('/api/members/:page', (req, res) => {
   let { page } = req.params;
   const { max = 10 } = req.query;
   const limit = parseInt(max, 10);
@@ -102,13 +98,14 @@ app.get('/api/members/:page', authenticateToken, (req, res) => {
       name, 
       position, 
       email, 
-      phoneNumber 
+      phoneNumber,
+      departmentName
     FROM 
-      Members 
+      Members
     ORDER BY 
       employeeNumber ASC 
     LIMIT ? 
-    OFFSET ?`; // 조직 추가
+    OFFSET ?`;
 
   // eslint-disable-next-line consistent-return
   db.all(sql, [limit, offset], (err, rows) => {
@@ -126,7 +123,7 @@ app.get('/api/members/:page', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
+app.get('/api/member/:employeeNumber', (req, res) => {
   const { employeeNumber } = req.params;
   const { isAdmin } = req.query;
 
@@ -138,7 +135,8 @@ app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
     'email',
     'phoneNumber',
     'profileImage',
-  ]; // 조직 추가
+    'departmentName',
+  ];
 
   if (isAdmin === 'true') {
     selectItems.push(
@@ -147,7 +145,8 @@ app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
       'address',
       'salary',
       'education',
-      'career', // 근무 유형 추가
+      'career',
+      'employmentType',
     );
   }
 
@@ -178,7 +177,7 @@ app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/user', authenticateToken, (req, res) => {
+app.get('/api/user', (req, res) => {
   const { employeeNumber } = req.query;
 
   if (!employeeNumber) {
@@ -204,11 +203,13 @@ app.get('/api/user', authenticateToken, (req, res) => {
       career, 
       role, 
       profileImage, 
-      remainingVacationDays
+      remainingVacationDays,
+      departmentName,
+      employmentType
     FROM 
       Members 
     WHERE 
-      employeeNumber = ?`; // 조직, 근무유형 추가
+      employeeNumber = ?`;
 
   // eslint-disable-next-line consistent-return
   db.get(sql, [employeeNumber], (err, row) => {
@@ -234,7 +235,7 @@ app.get('/api/user', authenticateToken, (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/attendance/:page', authenticateToken, (req, res) => {
+app.get('/api/attendance/:page', (req, res) => {
   let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;
 
@@ -279,7 +280,7 @@ app.get('/api/attendance/:page', authenticateToken, (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/vacationRequests/:page', authenticateToken, (req, res) => {
+app.get('/api/vacationRequests/:page', (req, res) => {
   let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;
 
@@ -323,7 +324,7 @@ app.get('/api/vacationRequests/:page', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/api/announcements', authenticateToken, (req, res) => {
+app.get('/api/announcements', (req, res) => {
   const sql = 'SELECT * FROM Announcements';
 
   // eslint-disable-next-line consistent-return
@@ -342,7 +343,7 @@ app.get('/api/announcements', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/api/announcements/:id', authenticateToken, (req, res) => {
+app.get('/api/announcements/:id', (req, res) => {
   const { id } = req.params;
   const sql = 'SELECT * FROM Announcements WHERE announcementId = ?';
 
