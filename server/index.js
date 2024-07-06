@@ -22,27 +22,21 @@ const generateToken = (user) => {
   return jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
 };
 
-const authenticateToken = (req, res, next) => {
+app.post('/api/verify-token', async (req, res) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
-    res.sendStatus(401);
-    return;
+    return res.json({ valid: false });
   }
 
-  jwt.verify(token, SECRET_KEY, (err, user) => {
-    if (err) {
-      res.sendStatus(403);
-      return;
-    }
-
-    /* eslint-disable no-param-reassign */
-    req.user = user;
-    /* eslint-enable no-param-reassign */
-    next();
-  });
-};
+  try {
+    await jwt.verify(token, SECRET_KEY);
+    return res.json({ valid: true });
+  } catch (err) {
+    return res.json({ valid: false });
+  }
+});
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
@@ -86,7 +80,7 @@ app.post('/api/login', async (req, res) => {
   return null;
 });
 
-app.get('/api/members/:page', authenticateToken, (req, res) => {
+app.get('/api/members/:page', (req, res) => {
   let { page } = req.params;
   const { max = 10 } = req.query;
   const limit = parseInt(max, 10);
@@ -127,7 +121,7 @@ app.get('/api/members/:page', authenticateToken, (req, res) => {
   });
 });
 
-app.get('/api/member/:employeeNumber', authenticateToken, (req, res) => {
+app.get('/api/member/:employeeNumber', (req, res) => {
   const { employeeNumber } = req.params;
   const { isAdmin } = req.query;
 
@@ -239,7 +233,7 @@ app.get('/api/user', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/attendance/:page', authenticateToken, (req, res) => {
+app.get('/api/attendance/:page', (req, res) => {
   let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;
 
@@ -284,7 +278,7 @@ app.get('/api/attendance/:page', authenticateToken, (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/vacationRequests/:page', authenticateToken, (req, res) => {
+app.get('/api/vacationRequests/:page', (req, res) => {
   let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;
 
@@ -347,7 +341,7 @@ app.get('/api/announcements', (req, res) => {
   });
 });
 
-app.get('/api/announcements/:id', authenticateToken, (req, res) => {
+app.get('/api/announcements/:id', (req, res) => {
   const { id } = req.params;
   const sql = 'SELECT * FROM Announcements WHERE announcementId = ?';
 
