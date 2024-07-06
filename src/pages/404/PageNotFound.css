@@ -29,17 +29,9 @@
   font-size: 14px;
 }
 
-.not-found-container .home-link {
-  height: 50px;
-  padding: 0 40px;
+.not-found-container button {
   margin-top: 32px;
-  text-decoration: none;
-  text-align: center;
-  line-height: 50px;
-  color: #fff;
-  border-radius: 4px;
-  background-color: var(--color-primary);
-  transition: background 0.3s;
+  width: 140px;
 }
 
 /* desktop */
@@ -52,10 +44,6 @@
 
   .not-found-container .wrapper {
     padding-bottom: 50px;
-  }
-
-  .not-found-container .home-link:hover {
-    background-color: var(--color-primary-hover);
   }
 
   .not-found-image {
