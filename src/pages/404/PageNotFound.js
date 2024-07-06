@@ -2,11 +2,22 @@ import Container from '../../components/Container.js';
 import notFoundImage from '../../../public/images/404.png';
 import './PageNotFound.css';
 import Button from '../../components/Button/Button.js';
+import { PATH } from '../../utils/constants.js';
 
 export default class PageNotFound extends Container {
   constructor() {
     super('#app');
+    this.path = PATH.HOME;
     this.homeButton = new Button({ content: '홈으로 이동' });
+  }
+
+  onClickHomeButton = () => {
+    window.location.href = this.path;
+  };
+
+  setEventListener() {
+    const $button = document.querySelector('.not-found-container button');
+    $button.addEventListener('click', this.onClickHomeButton);
   }
 
   render() {
@@ -21,5 +32,7 @@ export default class PageNotFound extends Container {
         </div>
       </div>
     `;
+
+    this.setEventListener();
   }
 }
