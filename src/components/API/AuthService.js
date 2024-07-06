@@ -8,28 +8,34 @@ const login = async (email, password, showError) => {
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
-
-    if (response.ok && data.status === 'OK') {
-      localStorage.setItem('token', data.token);
-      window.location.href = '/';
-    } else {
-      showError(data.error || '로그인 실패');
-    }
-  } catch (error) {
-    if (error.response && error.response.status) {
-      if (error.response.status === 400) {
-        showError(`잘못된 요청입니다. ${error.response.data.error}`);
-      } else if (error.response.status === 401) {
+    if (!response.ok) {
+      const errorData = await response.json();
+      if (response.status === 400) {
+        showError(`잘못된 요청입니다. ${errorData.error}`);
+      } else if (response.status === 401) {
         showError(
           '로그인에 실패하였습니다. 이메일과 비밀번호를 다시 확인해 주시기 바랍니다',
         );
       } else {
-        showError(`오류: ${error.message}`);
+        showError(
+          `오류: ${errorData.message || '알 수 없는 오류가 발생했습니다.'}`,
+        );
       }
-    } else {
-      showError('알 수 없는 오류가 발생했습니다.');
+      return;
     }
+
+    const data = await response.json();
+
+    if (data.status === 'OK') {
+      localStorage.setItem('token', data.token);
+      window.location.href = '/';
+    } else {
+      showError(
+        `로그인에 실패하였습니다: ${data.message || '알 수 없는 오류가 발생했습니다.'}`,
+      );
+    }
+  } catch (error) {
+    showError('알 수 없는 오류가 발생했습니다.');
   }
 };
 
@@ -64,7 +70,6 @@ const isLoggedIn = async () => {
     return false;
   }
 };
-
 
 const getToken = () => {
   return localStorage.getItem('token');

@@ -73,10 +73,12 @@ app.post('/api/login', async (req, res) => {
     }
 
     // 비밀번호가 틀린 경우: STATUS 401
-    return res.status(401).json({ status: 'Error', error: '로그인 실패!' });
+    return res.status(401).json({
+      status: 'Error',
+      error:
+        '로그인에 실패하였습니다. 이메일과 비밀번호를 다시 확인해 주시기 바랍니다!',
+    });
   });
-
-  // 반환 값을 명시적으로 추가하여 콜백 함수가 종료되었음을 알립니다.
   return null;
 });
 
