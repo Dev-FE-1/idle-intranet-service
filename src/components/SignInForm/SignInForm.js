@@ -84,7 +84,7 @@ export default class SignInForm {
 
   html() {
     return `
-      <form id="signin_form">
+      <form id="signin_form" class="signin-form">
         ${this.EmailInput.html()}
         ${this.PasswordInput.html()}
         <p class="alert-message"></p>
