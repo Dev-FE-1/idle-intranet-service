@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import db from './database.js';
 import { verifyPassword } from './passwords.js';
+import { extractEmployeeNumber } from './middlewares/authMiddleware.js';
 
 dotenv.config();
 
@@ -177,28 +178,8 @@ app.get('/api/member/:employeeNumber', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/user', (req, res) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({
-      status: 'Error',
-      error: '토큰이 없습니다.',
-    });
-  }
-
-  let employeeNumber;
-
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    employeeNumber = decoded.id;
-  } catch (err) {
-    return res.status(403).json({
-      status: 'Error',
-      error: '사원 정보가 없습니다.',
-    });
-  }
+app.get('/api/user', extractEmployeeNumber, (req, res) => {
+  const { employeeNumber } = req;
 
   const sql = `
     SELECT 
