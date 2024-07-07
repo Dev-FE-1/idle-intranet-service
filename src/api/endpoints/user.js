@@ -14,3 +14,17 @@ export async function fetchUser() {
     throw error;
   }
 }
+
+export async function fetchWeeklyAttendances() {
+  try {
+    const response = await apiCall({
+      endpoint: API_ENDPOINTS.ATTENDANCE_WEEKLY,
+      method: 'get',
+      auth: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch user weekly attendances:', error);
+    throw error;
+  }
+}

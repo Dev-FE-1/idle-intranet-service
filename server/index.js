@@ -229,6 +229,42 @@ app.get('/api/user', extractEmployeeNumber, (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
+app.get('/api/attendance/weekly', extractEmployeeNumber, (req, res) => {
+  const { employeeNumber } = req;
+
+  const today = new Date();
+  const dayOfWeek = today.getDay();
+  const diffToMonday = (dayOfWeek + 6) % 7;
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - diffToMonday);
+  const mondayStr = monday.toISOString().split('T')[0];
+  const todayStr = today.toISOString().split('T')[0];
+
+  const sql = `
+    SELECT * 
+    FROM 
+      Attendance 
+    WHERE 
+      employeeNumber = ? AND date BETWEEN ? AND ?
+    ORDER BY date DESC`;
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [employeeNumber, mondayStr, todayStr], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
 app.get('/api/attendance/:page', (req, res) => {
   let { page } = req.params;
   const { employeeNumber, max = 10 } = req.query;

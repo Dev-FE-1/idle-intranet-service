@@ -19,6 +19,7 @@ export const API_ENDPOINTS = {
   MEMBERS: apiUrl('api/members'),
   MEMBER: apiUrl('api/member'),
   ATTENDANCE: apiUrl('api/attendance'),
+  ATTENDANCE_WEEKLY: apiUrl('api/attendance/weekly'),
   VACATION_REQUESTS: apiUrl('api/vacationRequests'),
   DEPARTMENTS: apiUrl('api/departments'),
   ANNOUNCEMENTS: apiUrl('api/announcements'),
