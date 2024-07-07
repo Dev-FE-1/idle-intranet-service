@@ -85,6 +85,19 @@
   background-color: #fff;
 }
 
+.no-reult-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-reult-container img {
+  width: 600px;
+  height: 500px;
+  margin: -20px 0 -50px;
+}
+
 /* 미디어 쿼리 */
 @media (width <= 1024px) {
   .members-container {

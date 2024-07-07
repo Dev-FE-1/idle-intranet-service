@@ -128,7 +128,13 @@ export default class MembersPage extends Container {
       headers: ['이름', '직무', '조직', '이메일', '연락처'],
       contents: transformedEmployees,
     });
-    if (window.location.pathname === PATH.MEMBERS) {
+    if (this.total === 0) {
+      document.getElementById('table-container').innerHTML = /* HTML */ `
+        <div class="no-reult-container">
+          <img src="images/no-result.png" alt="결과 없음" />
+        </div>
+      `;
+    } else if (window.location.pathname === PATH.MEMBERS) {
       document.getElementById('table-container').innerHTML = this.table.html();
     }
   };
