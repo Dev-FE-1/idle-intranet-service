@@ -35,7 +35,7 @@ export default class MembersPage extends Container {
 
     isLoggedIn().then((loggedIn) => {
       if (loggedIn) {
-        this.resetSearch();
+        this.getMember();
       }
     });
   }
@@ -67,6 +67,7 @@ export default class MembersPage extends Container {
           this.total = total;
           this.renderPagination();
           this.renderTable();
+          this.updateTotalCount();
         })
         .catch((error) => {
           console.error('Failed to search members:', error.message);
@@ -81,6 +82,7 @@ export default class MembersPage extends Container {
         this.total = total;
         this.renderPagination();
         this.renderTable();
+        this.updateTotalCount();
       })
       .catch((error) => {
         console.error('Failed to load page data:', error);
@@ -91,6 +93,13 @@ export default class MembersPage extends Container {
     this.currentPage = 1;
     document.getElementById('search-input').value = '';
     this.getMember();
+  };
+
+  updateTotalCount = () => {
+    document.querySelectorAll('.members-container em').forEach((em) => {
+      // eslint-disable-next-line no-param-reassign
+      em.innerText = this.total;
+    });
   };
 
   renderPagination = () => {
