@@ -1,8 +1,14 @@
+const { VITE_SERVER_URL } = import.meta.env;
+const apiBaseUrl = VITE_SERVER_URL;
+
 const getMembers = async (page, max) => {
   try {
-    const response = await fetch(`/api/members/${page}?max=${max}`, {
-      method: 'GET',
-    });
+    const response = await fetch(
+      `${apiBaseUrl}/api/members/${page}?max=${max}`,
+      {
+        method: 'GET',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(`Failed to load data: ${response.statusText}`);
@@ -21,7 +27,7 @@ const searchMembers = async (name, max, page) => {
     const encodedName = encodeURIComponent(name);
 
     const response = await fetch(
-      `/api/members/search/${encodedName}?max=${max}&page=${page}`,
+      `${apiBaseUrl}/api/members/search/${encodedName}?max=${max}&page=${page}`,
       {
         method: 'GET',
       },
