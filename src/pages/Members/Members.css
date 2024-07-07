@@ -55,7 +55,7 @@
   align-items: center;
 }
 
-.members-search-header .input {
+.members-input-container .input {
   width: 220px;
   height: 40px;
   border-right: 0;
@@ -63,7 +63,7 @@
   font-size: 14px;
 }
 
-.members-search-header button {
+.members-input-container button {
   display: flex;
   align-items: center;
   height: 40px;
@@ -130,7 +130,7 @@
     width: 100%;
   }
 
-  .members-search-header .input {
+  .members-input-container .input {
     width: 100%;
   }
 }

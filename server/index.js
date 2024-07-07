@@ -92,7 +92,7 @@ app.get('/api/members/:page', (req, res) => {
     page = 1;
   }
 
-  const sql = `
+  const sqlData = `
     SELECT 
       employeeNumber, 
       name, 
@@ -107,8 +107,12 @@ app.get('/api/members/:page', (req, res) => {
     LIMIT ? 
     OFFSET ?`;
 
+  const sqlCount = `
+    SELECT COUNT(*) AS total
+    FROM Members`;
+
   // eslint-disable-next-line consistent-return
-  db.all(sql, [limit, offset], (err, rows) => {
+  db.get(sqlCount, (err, countRow) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
@@ -116,9 +120,85 @@ app.get('/api/members/:page', (req, res) => {
       });
     }
 
-    res.json({
-      status: 'OK',
-      data: rows,
+    // eslint-disable-next-line consistent-return
+    db.all(sqlData, [limit, offset], (error, rows) => {
+      if (err) {
+        return res.status(500).json({
+          status: 'Error',
+          error: error.message,
+        });
+      }
+
+      res.json({
+        status: 'OK',
+        total: countRow.total,
+        data: rows,
+      });
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
+app.get('/api/members/search/:name', (req, res) => {
+  const { name } = req.params;
+  const { max = 10, page = 1 } = req.query;
+  const limit = parseInt(max, 10);
+  const offset = (parseInt(page, 10) - 1) * limit;
+
+  if (!name) {
+    return res.status(400).json({
+      status: 'Error',
+      error: 'Name query parameter is required',
+    });
+  }
+
+  const decodedName = decodeURIComponent(name);
+
+  const sqlData = `
+    SELECT 
+      employeeNumber, 
+      name, 
+      position, 
+      email, 
+      phoneNumber,
+      departmentName
+    FROM 
+      Members
+    WHERE
+      name LIKE ?
+    ORDER BY 
+      employeeNumber ASC
+    LIMIT ?
+    OFFSET ?`;
+
+  const sqlCount = `
+    SELECT COUNT(*) AS total
+    FROM Members
+    WHERE name LIKE ?`;
+
+  // eslint-disable-next-line consistent-return
+  db.get(sqlCount, [`%${decodedName}%`], (err, countRow) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    // eslint-disable-next-line no-shadow, consistent-return
+    db.all(sqlData, [`%${decodedName}%`, limit, offset], (err, rows) => {
+      if (err) {
+        return res.status(500).json({
+          status: 'Error',
+          error: err.message,
+        });
+      }
+
+      res.json({
+        status: 'OK',
+        total: countRow.total,
+        data: rows,
+      });
     });
   });
 });

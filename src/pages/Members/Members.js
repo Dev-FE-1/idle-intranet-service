@@ -7,7 +7,10 @@ import './Members.css';
 import Icon from '../../components/Icon/Icon.js';
 import { magnifyingGlass } from '../../utils/icons.js';
 import Pagination from '../../components/Pagination/Pagination.js';
-import { loadPage } from '../../components/API/MemberService.js';
+import {
+  getMembers,
+  searchMembers,
+} from '../../components/API/MemberService.js';
 import { isLoggedIn } from '../../components/API/AuthService.js';
 
 export default class MembersPage extends Container {
@@ -20,44 +23,84 @@ export default class MembersPage extends Container {
       svg: magnifyingGlass,
       options: { size: '18px', color: COLORS.DARK_GRAY },
     });
-    this.input = new Input({ placeholder: '이름을 입력하세요' });
+    this.input = new Input({
+      placeholder: '이름을 입력하세요',
+      id: 'search-input',
+      required: true,
+    });
     this.currentPage = 1;
     this.maxProfile = 7;
     this.contents = [];
-    this.pagination = new Pagination({
-      currentPage: this.currentPage,
-      maxPage: 8,
-      onPageChange: this.handlePageChange,
-    });
+    this.total = 0;
 
-    // 비동기 로그인 체크
     isLoggedIn().then((loggedIn) => {
       if (loggedIn) {
-        this.loadData(this.currentPage, this.maxProfile);
+        this.getMember();
       }
     });
   }
 
   handlePageChange = (newPage) => {
     this.currentPage = newPage;
-    this.loadData(this.currentPage, this.maxProfile);
+    const searchValue = document.getElementById('search-input').value;
+    if (searchValue) {
+      this.searchMember(searchValue);
+    } else {
+      this.getMember();
+    }
   };
 
-  loadData(page, max) {
-    loadPage(page, max)
-      .then((data) => {
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    this.currentPage = 1;
+    const searchValue = document.getElementById('search-input').value;
+    this.searchMember(searchValue);
+  };
+
+  searchMember = (name) => {
+    if (name === '') {
+      this.getMember();
+    } else {
+      searchMembers(name, this.maxProfile, this.currentPage)
+        .then(([data, total]) => {
+          this.contents = data;
+          this.total = total;
+          this.renderPagination();
+          this.renderTable();
+        })
+        .catch((error) => {
+          console.error('Failed to search members:', error.message);
+        });
+    }
+  };
+
+  getMember = () => {
+    getMembers(this.currentPage, this.maxProfile)
+      .then(([data, total]) => {
         this.contents = data;
+        this.total = total;
+        this.renderPagination();
         this.renderTable();
-        if (window.location.pathname === PATH.MEMBERS) {
-          this.render();
-        }
       })
       .catch((error) => {
         console.error('Failed to load page data:', error);
       });
-  }
+  };
 
-  renderTable() {
+  renderPagination = () => {
+    this.pagination = new Pagination({
+      currentPage: this.currentPage,
+      maxPage: Math.ceil(this.total / this.maxProfile),
+      onPageChange: this.handlePageChange,
+    });
+    if (window.location.pathname === PATH.MEMBERS) {
+      document.body.querySelector('.pagination-container').innerHTML =
+        this.pagination.html();
+      this.pagination.render();
+    }
+  };
+
+  renderTable = () => {
     const transformedEmployees = this.contents.map((employee) => [
       employee.name,
       employee.position,
@@ -70,7 +113,10 @@ export default class MembersPage extends Container {
       headers: ['이름', '직무', '조직', '이메일', '연락처'],
       contents: transformedEmployees,
     });
-  }
+    if (window.location.pathname === PATH.MEMBERS) {
+      document.getElementById('table-container').innerHTML = this.table.html();
+    }
+  };
 
   render() {
     this.$container.innerHTML = `
@@ -82,20 +128,29 @@ export default class MembersPage extends Container {
         <div class='members-content-container'>
           <div class='members-search-header'>
             <span>총 <em>50</em> 명</span>
-            <div class='members-input-container'>
+            <form id="search-form" class='members-input-container'>
               ${this.input.html()}
-              <button>
+              <button type="submit" class='submit-button'>
                 ${this.magnifyGlass.html()}
               </button>
-            </div>
+            </form>
           </div>
-          ${this.table ? this.table.html() : ''}
+          <div id='table-container'>
+            ${this.table ? this.table.html() : ''}
+          </div>
         </div>
         <div class='pagination-container'>
-          ${this.pagination.html()}
+          ${this.pagination ? this.pagination.html() : ''}
         </div>
       </div>
     `;
-    this.pagination.render();
+
+    if (this.pagination) {
+      this.pagination.render();
+    }
+
+    document
+      .querySelector('.submit-button')
+      .addEventListener('click', this.handleFormSubmit);
   }
 }
