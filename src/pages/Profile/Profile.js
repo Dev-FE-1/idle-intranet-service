@@ -18,8 +18,6 @@ export default class ProfilePage extends Container {
     });
     this.PersonalInfo = new PersonalInfo();
     this.PersonalDetails = new PersonalDetails();
-    this.timeout = null;
-    this.timer = null;
     this.Button = new Button({
       variant: 'tertiary',
       content: '로그아웃',
@@ -33,34 +31,6 @@ export default class ProfilePage extends Container {
     this.PersonalDetails.render(this.user);
   }
 
-  renderCurrentTime() {
-    this.PersonalInfo.updateTime();
-
-    if (!this.timer) {
-      const delay = this.PersonalInfo.getNextUpdateDelay();
-
-      const updateNextTime = () => {
-        this.PersonalInfo.updateTime();
-        const nextDelay = this.PersonalInfo.getNextUpdateDelay();
-        this.timer = setTimeout(updateNextTime, nextDelay);
-      };
-
-      this.timeout = setTimeout(updateNextTime, delay);
-    }
-  }
-
-  cleanUp() {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-      this.timeout = null;
-    }
-
-    if (this.timer) {
-      clearTimeout(this.timer);
-      this.timer = null;
-    }
-  }
-
   render() {
     this.$container.innerHTML = `
       ${this.Title.html()}
@@ -71,7 +41,6 @@ export default class ProfilePage extends Container {
       </div>
     `;
 
-    this.renderCurrentTime();
     this.PersonalInfo.render();
     this.renderPersonalDetails();
     document

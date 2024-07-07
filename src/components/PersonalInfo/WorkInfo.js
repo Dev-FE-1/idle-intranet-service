@@ -1,6 +1,7 @@
 import Button from '../Button/Button.js';
 import Icon from '../Icon/Icon.js';
 import ProgressRing from '../ProgressRing.js/ProgressRing.js';
+import CurrentTime from './CurrentTime.js';
 import { COLORS } from '../../utils/constants.js';
 import { clockIcon } from '../../utils/icons.js';
 import './WorkInfo.css';
@@ -55,8 +56,14 @@ export default class WorkInfo {
     const $endTime = document.querySelector('.work-hour-time.end');
 
     $buttonContainer.innerHTML = this.Button.html();
-    $startTime.innerText = startTime;
-    $endTime.innerText = endTime;
+
+    this.CurrentTime = new CurrentTime();
+    this.CurrentTime.cleanUp();
+    this.CurrentTime.render();
+    $startTime.innerText = startTime || '-';
+    $startTime.setAttribute('datetime', startTime);
+    $endTime.innerText = endTime || '-';
+    $endTime.setAttribute('datetime', endTime);
   }
 
   async render() {
