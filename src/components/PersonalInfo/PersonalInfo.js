@@ -13,7 +13,7 @@ export default class PersonalInfo {
   updateTime() {
     const currentTime = dayjs().format('HH:mm');
 
-    const $time = document.querySelector('.work-hour-time');
+    const $time = document.querySelector('.work-hour-time.current');
     $time.setAttribute('datetime', currentTime);
     $time.innerText = currentTime;
   }
@@ -28,6 +28,7 @@ export default class PersonalInfo {
 
   render() {
     this.ProfileInfo.render();
+    this.WorkInfo.render();
   }
 
   html() {
