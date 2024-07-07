@@ -1,6 +1,6 @@
 import Layout from './Layout.js';
 import Menu from './NavBar/Menu.js';
-import { fetchUser } from '../fetchData.js';
+import { fetchUser } from '../api/endpoints/user.js';
 
 class Store {
   constructor() {

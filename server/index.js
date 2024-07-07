@@ -178,12 +178,25 @@ app.get('/api/member/:employeeNumber', (req, res) => {
 
 // eslint-disable-next-line consistent-return
 app.get('/api/user', (req, res) => {
-  const { employeeNumber } = req.query;
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
 
-  if (!employeeNumber) {
-    return res.status(422).json({
+  if (!token) {
+    return res.status(401).json({
       status: 'Error',
-      error: '사원 번호가 누락되었습니다.',
+      error: '토큰이 없습니다.',
+    });
+  }
+
+  let employeeNumber;
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    employeeNumber = decoded.id;
+  } catch (err) {
+    return res.status(403).json({
+      status: 'Error',
+      error: '사원 정보가 없습니다.',
     });
   }
 
