@@ -35,7 +35,7 @@ export default class MembersPage extends Container {
 
     isLoggedIn().then((loggedIn) => {
       if (loggedIn) {
-        this.getMember();
+        this.resetSearch();
       }
     });
   }
@@ -87,6 +87,12 @@ export default class MembersPage extends Container {
       });
   };
 
+  resetSearch = () => {
+    this.currentPage = 1;
+    document.getElementById('search-input').value = '';
+    this.getMember();
+  };
+
   renderPagination = () => {
     this.pagination = new Pagination({
       currentPage: this.currentPage,
@@ -123,11 +129,11 @@ export default class MembersPage extends Container {
       <div class='members-container'>
         <div class='members-mobile-only'>
           ${this.Title.html()}
-          <span>총 <em>50</em> 명</span>
+          <span>총 <em>${this.total}</em> 명</span>
         </div>
         <div class='members-content-container'>
           <div class='members-search-header'>
-            <span>총 <em>50</em> 명</span>
+            <span>총 <em>${this.total}</em> 명</span>
             <form id="search-form" class='members-input-container'>
               ${this.input.html()}
               <button type="submit" class='submit-button'>
@@ -152,5 +158,7 @@ export default class MembersPage extends Container {
     document
       .querySelector('.submit-button')
       .addEventListener('click', this.handleFormSubmit);
+
+    this.resetSearch();
   }
 }
