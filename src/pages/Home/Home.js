@@ -116,14 +116,14 @@ export default class HomePage extends Container {
       </div>
     `;
 
-    // 공지사항 데이터 가져오기 및 UI 업데이트
+    // 공지사항 데이터 가져오기
     try {
       const response = await axios.get('/api/announcements'); // axios를 사용하여 데이터 가져오기
       const announcements = response.data.data; // 데이터 추출
 
       this.renderAnnouncements(announcements);
       // 추가적인 공지사항 불러오기
-      this.renderAdditionalAnnouncement();
+      this.renderAdditionalAnnouncements(announcements);
     } catch (error) {
       console.error('공지사항 데이터를 가져오는 중 에러 발생:', error);
     }
@@ -154,36 +154,30 @@ export default class HomePage extends Container {
     });
   }
 
-  async renderAdditionalAnnouncement() {
-    try {
-      const response = await axios.get('/api/announcements/6'); // announcementId가 6인 공지사항을 가져옵니다.
-      const announcement = response.data.data; // 데이터 추출
-      console.log(announcement);
-
-      this.renderSingleAnnouncement(announcement);
-    } catch (error) {
-      console.error('추가 공지사항 데이터를 가져오는 중 에러 발생:', error);
-    }
-  }
-
-  renderSingleAnnouncement(announcement) {
+  renderAdditionalAnnouncements(announcements) {
     const announcementContainer = this.$container.querySelector(
       '.announcement-content',
     );
 
-    if (!announcement.imageUrl) {
-      const announcementElement = document.createElement('div');
-      announcementElement.classList.add('announcement-item');
+    announcementContainer.innerHTML = '';
 
-      announcementElement.innerHTML = /* HTML */ `
-        <div class="announcement-content">
-          <p class="announcement-content">
-            ${announcement.content.replaceAll('\n', '<br />')}
-          </p>
-        </div>
-      `;
+    announcements.forEach((item) => {
+      if (!item.imageUrl) {
+        const announcementElement = document.createElement('div');
+        announcementElement.classList.add('announcement-item');
 
-      announcementContainer.appendChild(announcementElement);
-    }
+        announcementElement.innerHTML = /* HTML */ `
+          <p>${item.content.replaceAll('\n', '<br />')}</p>
+        `;
+
+        announcementContainer.appendChild(announcementElement);
+      }
+    });
   }
 }
+
+// 사용 예시
+document.addEventListener('DOMContentLoaded', () => {
+  const homePageInstance = new HomePage();
+  homePageInstance.render();
+});

@@ -107,16 +107,11 @@
   gap: 12px;
 }
 
-.announcement-item {
-}
-
 .announcement-content {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 0;
-  padding-right: 0;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  margin-left: 15px;
+  padding-bottom: 60px;
   color: var(--color-darkest-gray);
 }
 
