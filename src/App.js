@@ -1,16 +1,16 @@
 import Route from './routes/Route.js';
-import { storeInstance } from './components/Store.js';
+import Layout from './components/Layout.js';
 
 class App {
   constructor() {
+    this.Layout = new Layout();
     this.Route = new Route();
-    this.Store = storeInstance;
 
     this.init();
   }
 
   init() {
-    this.Store.renderLayout();
+    this.Layout.render();
     this.Route.init();
   }
 }

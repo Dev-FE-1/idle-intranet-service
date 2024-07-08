@@ -1,6 +1,9 @@
 .not-found-container {
+  z-index: 999;
+  position: absolute;
+  inset: 0;
   height: 100vh;
-  background-color: #fff;
+  background-color: var(--color-lightest-gray);
 }
 
 .not-found-container .wrapper {
@@ -29,9 +32,17 @@
   font-size: 14px;
 }
 
-.not-found-container button {
+.not-found-container .home-link {
+  height: 50px;
+  padding: 0 40px;
   margin-top: 32px;
-  width: 140px;
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
+  border-radius: 4px;
+  background-color: var(--color-primary);
+  transition: background 0.3s;
 }
 
 /* desktop */
@@ -39,11 +50,15 @@
   .not-found-container {
     display: flex;
     align-items: center;
-    height: 100vh;
+    background-color: #fff;
   }
 
   .not-found-container .wrapper {
     padding-bottom: 50px;
+  }
+
+  .not-found-container .home-link:hover {
+    background-color: var(--color-primary-hover);
   }
 
   .not-found-image {
