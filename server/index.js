@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import db from './database.js';
 import { verifyPassword } from './passwords.js';
+import { extractEmployeeNumber } from './middlewares/authMiddleware.js';
 
 dotenv.config();
 
@@ -92,7 +93,7 @@ app.get('/api/members/:page', (req, res) => {
     page = 1;
   }
 
-  const sql = `
+  const sqlData = `
     SELECT 
       employeeNumber, 
       name, 
@@ -107,8 +108,12 @@ app.get('/api/members/:page', (req, res) => {
     LIMIT ? 
     OFFSET ?`;
 
+  const sqlCount = `
+    SELECT COUNT(*) AS total
+    FROM Members`;
+
   // eslint-disable-next-line consistent-return
-  db.all(sql, [limit, offset], (err, rows) => {
+  db.get(sqlCount, (err, countRow) => {
     if (err) {
       return res.status(500).json({
         status: 'Error',
@@ -116,9 +121,85 @@ app.get('/api/members/:page', (req, res) => {
       });
     }
 
-    res.json({
-      status: 'OK',
-      data: rows,
+    // eslint-disable-next-line consistent-return
+    db.all(sqlData, [limit, offset], (error, rows) => {
+      if (err) {
+        return res.status(500).json({
+          status: 'Error',
+          error: error.message,
+        });
+      }
+
+      res.json({
+        status: 'OK',
+        total: countRow.total,
+        data: rows,
+      });
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
+app.get('/api/members/search/:name', (req, res) => {
+  const { name } = req.params;
+  const { max = 10, page = 1 } = req.query;
+  const limit = parseInt(max, 10);
+  const offset = (parseInt(page, 10) - 1) * limit;
+
+  if (!name) {
+    return res.status(400).json({
+      status: 'Error',
+      error: 'Name query parameter is required',
+    });
+  }
+
+  const decodedName = decodeURIComponent(name);
+
+  const sqlData = `
+    SELECT 
+      employeeNumber, 
+      name, 
+      position, 
+      email, 
+      phoneNumber,
+      departmentName
+    FROM 
+      Members
+    WHERE
+      name LIKE ?
+    ORDER BY 
+      employeeNumber ASC
+    LIMIT ?
+    OFFSET ?`;
+
+  const sqlCount = `
+    SELECT COUNT(*) AS total
+    FROM Members
+    WHERE name LIKE ?`;
+
+  // eslint-disable-next-line consistent-return
+  db.get(sqlCount, [`%${decodedName}%`], (err, countRow) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    // eslint-disable-next-line no-shadow, consistent-return
+    db.all(sqlData, [`%${decodedName}%`, limit, offset], (err, rows) => {
+      if (err) {
+        return res.status(500).json({
+          status: 'Error',
+          error: err.message,
+        });
+      }
+
+      res.json({
+        status: 'OK',
+        total: countRow.total,
+        data: rows,
+      });
     });
   });
 });
@@ -177,15 +258,8 @@ app.get('/api/member/:employeeNumber', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/user', (req, res) => {
-  const { employeeNumber } = req.query;
-
-  if (!employeeNumber) {
-    return res.status(422).json({
-      status: 'Error',
-      error: '사원 번호가 누락되었습니다.',
-    });
-  }
+app.get('/api/user', extractEmployeeNumber, (req, res) => {
+  const { employeeNumber } = req;
 
   const sql = `
     SELECT 
@@ -230,6 +304,42 @@ app.get('/api/user', (req, res) => {
     res.json({
       status: 'OK',
       data: row,
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
+app.get('/api/attendance/weekly', extractEmployeeNumber, (req, res) => {
+  const { employeeNumber } = req;
+
+  const today = new Date();
+  const dayOfWeek = today.getDay();
+  const diffToMonday = (dayOfWeek + 6) % 7;
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - diffToMonday);
+  const mondayStr = monday.toISOString().split('T')[0];
+  const todayStr = today.toISOString().split('T')[0];
+
+  const sql = `
+    SELECT * 
+    FROM 
+      Attendance 
+    WHERE 
+      employeeNumber = ? AND date BETWEEN ? AND ?
+    ORDER BY date DESC`;
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [employeeNumber, mondayStr, todayStr], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
     });
   });
 });

@@ -1,12 +1,25 @@
+import Container from '../Container.js';
 import Icon from '../Icon/Icon.js';
-import { COLORS, PATH } from '../../utils/constants.js';
+import { COLORS, PATH, PATH_TITLE } from '../../utils/constants.js';
+import {
+  clockIcon,
+  homeIcon,
+  membersIcon,
+  profileIcon,
+} from '../../utils/icons.js';
 
-export default class Menu {
-  constructor(container, menus) {
-    this.$container = document.querySelector(container);
+const menus = [
+  { path: PATH.HOME, title: PATH_TITLE.HOME, icon: homeIcon },
+  { path: PATH.MEMBERS, title: PATH_TITLE.MEMBERS, icon: membersIcon },
+  { path: PATH.PROFILE, title: PATH_TITLE.PROFILE, icon: profileIcon },
+  { path: PATH.WORK_MANAGE, title: PATH_TITLE.WORK_MANAGE, icon: clockIcon },
+];
+
+export default class Menu extends Container {
+  constructor() {
+    super('.menu-list');
     this.menus = menus;
     this._active = PATH.HOME;
-    this.render();
   }
 
   set active(activeMenu) {

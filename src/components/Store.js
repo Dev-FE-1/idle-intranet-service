@@ -1,8 +1,14 @@
-import { fetchUser } from '../fetchData.js';
+import { fetchUser, fetchWeeklyAttendances } from '../api/endpoints/user.js';
 
 class Store {
   constructor() {
+    this.Menu = null;
     this.user = null;
+    this.weeklyAttendances = null;
+  }
+
+  setMenu(menu) {
+    this.Menu = menu;
   }
 
   async getUser() {
@@ -10,6 +16,13 @@ class Store {
 
     this.user = await fetchUser();
     return this.user;
+  }
+
+  async getWeeklyAttendances() {
+    if (this.weeklyAttendances) return this.weeklyAttendances;
+
+    this.weeklyAttendances = await fetchWeeklyAttendances();
+    return this.weeklyAttendances;
   }
 }
 

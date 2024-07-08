@@ -17,21 +17,6 @@
     height: 100%;
   }
 
-  .header-profile {
-    position: relative;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--color-light-gray);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .header-profile-image {
-    position: absolute;
-    left: -2px;
-    width: 40px;
-  }
-
   .logout-btn-wrapper button {
     margin-left: 5px;
     padding: 5px;

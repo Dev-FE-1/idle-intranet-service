@@ -1,6 +1,9 @@
 .not-found-container {
+  z-index: 999;
+  position: absolute;
+  inset: 0;
   height: 100vh;
-  background-color: #fff;
+  background-color: var(--color-lightest-gray);
 }
 
 .not-found-container .wrapper {
@@ -47,7 +50,7 @@
   .not-found-container {
     display: flex;
     align-items: center;
-    height: 100vh;
+    background-color: #fff;
   }
 
   .not-found-container .wrapper {
