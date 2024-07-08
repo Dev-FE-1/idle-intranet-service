@@ -1,14 +1,14 @@
-import axios from 'axios';
-
 import Container from '../../components/Container.js';
 import Title from '../../components/Title/Title.js';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
 import Button from '../../components/Button/Button.js';
 import Icon from '../../components/Icon/Icon.js';
-import Avatar from '../../components/Avatar/Avatar.js';
 import { chevronDown } from '../../utils/icons.js';
-import { COLORS } from '../../utils/constants.js';
 import logo from '../../../public/images/logo.svg';
+import GalleryItem from '../../components/Announcements/GalleryItem.js';
+import TextItem from '../../components/Announcements/TextItem.js';
+import { COLORS } from '../../utils/constants.js';
+import { fetchAnnouncements } from '../../api/endpoints/announcement.js';
 import './Home.css';
 
 export default class HomePage extends Container {
@@ -20,7 +20,6 @@ export default class HomePage extends Container {
       description:
         'Cube.IT은 작은 아이디어로 큰 변화를 만들어갑니다. 혁신적인 큐브의 힘을 경험해 보세요.',
     });
-
     this.PersonalInfo = new PersonalInfo();
     this.buttonIcon = new Icon({
       svg: chevronDown,
@@ -32,7 +31,51 @@ export default class HomePage extends Container {
     });
   }
 
-  async render() {
+  async setAnnouncements() {
+    this.announcements = await fetchAnnouncements();
+    this.galleryAnnouncements = this.announcements.filter(
+      (announcement) => announcement.imageUrl,
+    );
+    this.textAnnouncements = this.announcements.filter(
+      (announcement) => !announcement.imageUrl,
+    );
+  }
+
+  async renderGalleryAnnouncements() {
+    const $gallery = document.querySelector('.home-container .gallery');
+
+    if (!this.announcements) {
+      await this.setAnnouncements();
+    }
+
+    $gallery.innerHTML = this.galleryAnnouncements
+      .map((announcement) => new GalleryItem(announcement).html())
+      .join('');
+  }
+
+  async renderTextAnnouncements() {
+    const $container = document.querySelector(
+      '.home-container .announcement-contents',
+    );
+
+    if (!this.announcements) {
+      await this.setAnnouncements();
+    }
+
+    const textItems = [];
+
+    $container.innerHTML = this.textAnnouncements
+      .map((announcement) => {
+        const textItem = new TextItem(announcement);
+        textItems.push(textItem);
+        return textItem.html();
+      })
+      .join('');
+
+    textItems.forEach((item) => item.render());
+  }
+
+  render() {
     this.$container.innerHTML = /* HTML */ `
       <div class="home-container">
         <header class="home-mobile-header mobile-only">
@@ -44,7 +87,9 @@ export default class HomePage extends Container {
           </div>
           <ul class="menu-list"></ul>
         </header>
+
         ${this.Title.html()}
+
         <div class="my-info desktop-only">
           <div class="wrapper">
             <h2 class="home-subtitle">내 정보</h2>
@@ -55,7 +100,7 @@ export default class HomePage extends Container {
         <section class="gallery-section">
           <div class="wrapper">
             <h2 class="home-subtitle">공지사항 갤러리</h2>
-            <div class="gallery"></div>
+            <ul class="gallery"></ul>
           </div>
         </section>
 
@@ -66,80 +111,14 @@ export default class HomePage extends Container {
         <section class="announcement-container">
           <div class="wrapper">
             <h2 class="home-subtitle">주요 소식</h2>
-            <div class="announcement-author">
-              <div class="author-image-container">
-                ${new Avatar({
-                  url: 'https://api.dicebear.com/9.x/lorelei/svg?seed=Max&eyes=variant09',
-                }).html()}
-              </div>
-              <div class="announcement-info">
-                <div class="announcement-author-name">안민지</div>
-                <div class="announcement-time">약 15시간 전</div>
-              </div>
-            </div>
-            <div class="announcement-content"></div>
+            <ul class="announcement-contents"></ul>
           </div>
         </section>
       </div>
     `;
 
     this.PersonalInfo.render();
-    // 공지사항 데이터 가져오기
-    try {
-      const response = await axios.get('/api/announcements'); // axios를 사용하여 데이터 가져오기
-      const announcements = response.data.data; // 데이터 추출
-
-      this.renderAnnouncements(announcements);
-      // 추가적인 공지사항 불러오기
-      this.renderAdditionalAnnouncements(announcements);
-    } catch (error) {
-      console.error('공지사항 데이터를 가져오는 중 에러 발생:', error);
-    }
-  }
-
-  renderAnnouncements(announcements) {
-    const galleryElement = this.$container.querySelector('.gallery');
-
-    announcements.forEach((item) => {
-      if (item.imageUrl) {
-        const announcementElement = document.createElement('div');
-        announcementElement.classList.add('gallery-item');
-
-        announcementElement.innerHTML = /* HTML */ `
-          <a href="${item.link}">
-            <div class="gallery-image-box">
-              <img src="${item.imageUrl}" alt="${item.title}" />
-            </div>
-            <div class="gallery-content-box">
-              <h2>${item.title}</h2>
-              <p class="gallery-content">${item.content}</p>
-            </div>
-          </a>
-        `;
-
-        galleryElement.appendChild(announcementElement);
-      }
-    });
-  }
-
-  renderAdditionalAnnouncements(announcements) {
-    const announcementContainer = this.$container.querySelector(
-      '.announcement-content',
-    );
-
-    announcementContainer.innerHTML = '';
-
-    announcements.forEach((item) => {
-      if (!item.imageUrl) {
-        const announcementElement = document.createElement('div');
-        announcementElement.classList.add('announcement-item');
-
-        announcementElement.innerHTML = /* HTML */ `
-          <p>${item.content.replaceAll('\n', '<br />')}</p>
-        `;
-
-        announcementContainer.appendChild(announcementElement);
-      }
-    });
+    this.renderGalleryAnnouncements();
+    this.renderTextAnnouncements();
   }
 }
