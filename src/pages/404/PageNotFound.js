@@ -5,7 +5,7 @@ import { PATH } from '../../utils/constants.js';
 
 export default class PageNotFound extends Container {
   constructor() {
-    super('#app');
+    super('#main');
   }
 
   render() {

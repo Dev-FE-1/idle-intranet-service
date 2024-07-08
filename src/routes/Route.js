@@ -13,7 +13,6 @@ import { matchRoute } from '../utils/matchRoute.js';
 
 export default class Route {
   constructor() {
-    this.notFoundPage = new PageNotFound();
     this.title = 'CubeIT ';
     this.currentPage = null;
   }
@@ -80,6 +79,7 @@ export default class Route {
     window.addEventListener('popstate', () => this.route());
     document.body.addEventListener('click', this.handleNavigatePage);
     this.Menu = storeInstance.Menu;
+    this.notFoundPage = new PageNotFound();
     this.setRoutes();
     this.route();
   }
