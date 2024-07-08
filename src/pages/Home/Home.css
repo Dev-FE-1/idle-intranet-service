@@ -102,17 +102,19 @@
 }
 
 /* announcement */
+.announcement-contents {
+  padding-bottom: 50px;
+}
+
 .announcement-author {
   display: flex;
   gap: 12px;
 }
 
 .announcement-content {
-  margin-top: 20px;
-  margin-bottom: 25px;
-  margin-left: 15px;
-  padding-bottom: 60px;
+  padding: 20px 0 10px;
   color: var(--color-darkest-gray);
+  line-height: 1.6;
 }
 
 .announcement-author .author-image-container .profile-img-container {
@@ -136,10 +138,6 @@
   .home-container .gallery {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .announcement-contents {
-    padding-bottom: 50px;
-  }
 }
 
 /* desktop */
@@ -159,10 +157,6 @@
 
   .home-container .gallery {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .home-container .gallery-image-box {
-    aspect-ratio: 1/1;
   }
 
   .home-container .gallery a:hover .gallery-image-box img {
