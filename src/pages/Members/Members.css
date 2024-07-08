@@ -90,12 +90,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 300px;
 }
 
-.no-reult-container img {
-  width: 600px;
-  height: 500px;
-  margin: -20px 0 -50px;
+.no-reult-container p{
+  margin: 5px 0;
+}
+
+.no-reult-container p strong{
+  color: red;
+  letter-spacing: 1px;
 }
 
 /* 미디어 쿼리 */

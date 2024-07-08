@@ -1,18 +1,18 @@
 import { logout } from '../API/AuthService.js';
 import Button from '../Button/Button.js';
+import Container from '../Container.js';
 import './Header.css';
 
-export default class Header {
-  constructor({ container, user }) {
-    this.$container = document.querySelector(container);
-    this.profileImage = user && user.profileImage;
-    this.userName = user && user.name;
+export default class Header extends Container {
+  constructor() {
+    super('.header-container');
+    // this.profileImage = user && user.profileImage;
+    // this.userName = user && user.name;
     this.Button = new Button({
       variant: 'tertiary',
       content: '로그아웃',
       size: 'small',
     });
-    this.render();
   }
 
   render() {

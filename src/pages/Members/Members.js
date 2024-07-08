@@ -129,9 +129,11 @@ export default class MembersPage extends Container {
       contents: transformedEmployees,
     });
     if (this.total === 0) {
+      const name = document.getElementById('search-input').value;
       document.getElementById('table-container').innerHTML = /* HTML */ `
         <div class="no-reult-container">
-          <img src="images/no-result.png" alt="결과 없음" />
+          <p><strong>'${name}'</strong> 에 대한 검색 결과가 없습니다.</p>
+          <p>다른 검색어를 입력해주세요.</p>
         </div>
       `;
     } else if (window.location.pathname === PATH.MEMBERS) {
