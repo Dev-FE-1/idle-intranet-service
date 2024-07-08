@@ -12,7 +12,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL || '';
 export const PATH = {
   SIGNIN: `${baseUrl}/signin`,
   HOME: `${baseUrl}/`,
-  ANNOUNCEMENT: `${baseUrl}/announcements/:id`,
+  ANNOUNCEMENT: `${baseUrl}/announcements`,
   MEMBER: `${baseUrl}/members/:id`,
   MEMBERS: `${baseUrl}/members`,
   PROFILE: `${baseUrl}/profile`,
