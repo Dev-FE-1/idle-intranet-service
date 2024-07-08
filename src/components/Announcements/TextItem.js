@@ -13,9 +13,15 @@ export default class TextItem {
     }
 
     const $container = document.querySelector(
-      `#announcement-${this.item.announcementId} .author-image-container`,
+      `#announcement-${this.item.announcementId}`,
     );
-    $container.innerHTML = new Avatar({ url: this.author.profileImage }).html();
+    const $avatar = $container.querySelector('.author-image-container');
+    const $name = $container.querySelector('.announcement-author-name');
+
+    $avatar.innerHTML = new Avatar({
+      url: this.author.profileImage,
+    }).html();
+    $name.innerText = this.author.name;
   }
 
   render() {
@@ -23,13 +29,15 @@ export default class TextItem {
   }
 
   html() {
+    const postedDate = this.item.postedDate.split('-').slice(1).join('/');
+
     return /* HTML */ `
       <li id="announcement-${this.item.announcementId}">
         <div class="announcement-author">
           <div class="author-image-container"></div>
           <div class="announcement-info">
-            <div class="announcement-author-name">안민지</div>
-            <div class="announcement-time">약 15시간 전</div>
+            <div class="announcement-author-name"></div>
+            <div class="announcement-time">${postedDate}</div>
           </div>
         </div>
         <div class="announcement-content">
