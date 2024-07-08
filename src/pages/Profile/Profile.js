@@ -1,4 +1,4 @@
-import { logout } from '../../components/API/AuthService.js';
+import { isLoggedIn, logout } from '../../components/API/AuthService.js';
 import Button from '../../components/Button/Button.js';
 import Container from '../../components/Container.js';
 import PersonalDetails from '../../components/PersonalInfo/PersonalDetails.js';
@@ -16,22 +16,32 @@ export default class ProfilePage extends Container {
       title: PATH_TITLE.PROFILE,
       desktopOnly: true,
     });
-    this.PersonalInfo = new PersonalInfo();
-    this.PersonalDetails = new PersonalDetails();
     this.Button = new Button({
       variant: 'tertiary',
       content: '로그아웃',
     });
   }
 
-  async renderPersonalDetails() {
+  async setUserInfo() {
+    const isValidUser = await isLoggedIn();
+    if (!isValidUser) return;
     if (!this.user) {
       this.user = await this.store.getUser();
     }
-    this.PersonalDetails.render(this.user);
+    if (!this.isWorking) {
+      this.isWorking = await this.store.getUserIsWorking();
+    }
+
+    this.PersonalDetails = new PersonalDetails();
+    this.PersonalInfo = new PersonalInfo({
+      member: this.user,
+      isWorking: this.isWorking,
+    });
   }
 
-  render() {
+  async render() {
+    await this.setUserInfo();
+
     this.$container.innerHTML = `
       ${this.Title.html()}
       ${this.PersonalInfo.html()}
@@ -41,8 +51,9 @@ export default class ProfilePage extends Container {
       </div>
     `;
 
+    this.PersonalDetails.render(this.user);
     this.PersonalInfo.render();
-    this.renderPersonalDetails();
+
     document
       .querySelector('.logout-btn-wrapper-inprofile button')
       .addEventListener('click', logout);

@@ -1,4 +1,4 @@
-import { getToken, logout } from '../API/AuthService.js';
+import { isLoggedIn, logout } from '../API/AuthService.js';
 import Avatar from '../Avatar/Avatar.js';
 import Button from '../Button/Button.js';
 import Container from '../Container.js';
@@ -17,7 +17,8 @@ export default class Header extends Container {
   }
 
   async renderAvatar() {
-    if (!getToken()) return;
+    const isValidUser = await isLoggedIn();
+    if (!isValidUser) return;
     if (!this.user) {
       this.user = await this.store.getUser();
       this.Avatar = new Avatar({
