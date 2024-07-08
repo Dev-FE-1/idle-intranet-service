@@ -1,22 +1,12 @@
 import Avatar from '../Avatar/Avatar.js';
 import './ProfileInfo.css';
 import { storeInstance } from '../Store.js';
-import { setTodayWork } from '../../utils/userWork.js';
 
 export default class ProfileInfo {
-  constructor() {
+  constructor({ member, isWorking }) {
     this.store = storeInstance;
-  }
-
-  renderLabel() {
-    const $label = document.querySelector('.work-status-label');
-    if (this.isWorking) {
-      $label.classList.add('active');
-      $label.innerText = '근무중';
-    } else {
-      $label.classList.remove('active');
-      $label.innerText = '근무전';
-    }
+    this.member = member;
+    this.isWorking = isWorking;
   }
 
   renderAvatar() {
@@ -33,31 +23,16 @@ export default class ProfileInfo {
     const $positionContainer = document.querySelector(
       '.personal-profile .profile-position',
     );
-    $nameContainer.innerText = this.user.name;
-    $positionContainer.innerText = this.user.position;
+    $nameContainer.innerText = this.member.name;
+    $positionContainer.innerText = this.member.position;
   }
 
-  async render() {
-    if (!this.user) {
-      this.user = await this.store.getUser();
-      this.Avatar = new Avatar({
-        url: this.user.profileImage,
-        size: 'large',
-      });
-    }
+  render() {
+    this.Avatar = new Avatar({
+      url: this.member.profileImage,
+      size: 'large',
+    });
 
-    if (!this.isWorking) {
-      const weeklyAttendances = await this.store.getWeeklyAttendances();
-      const today = new Date().toISOString().split('T')[0];
-      const { startTime, endTime } =
-        weeklyAttendances.filter(
-          (attendance) => attendance.date === today,
-        )[0] || setTodayWork(today);
-
-      this.isWorking = !!(startTime && !endTime);
-    }
-
-    this.renderLabel();
     this.renderAvatar();
     this.renderUserInfo();
   }
@@ -67,7 +42,7 @@ export default class ProfileInfo {
       <div class="profile-info">
         <div class="avatar-container"></div>
         <div class="personal-profile">
-          <div class="work-status-label"></div>
+          <div class="work-status-label${this.isWorking ? ' active' : ''}">${this.isWorking ? '근무중' : '근무전'}</div>
           <h2 class="profile-name"></h2>
           <span class="profile-position"></span>
         </div>

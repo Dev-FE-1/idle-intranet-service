@@ -6,7 +6,6 @@ import { sortByPeriod } from '../../utils/sortByPeriod.js';
 export default class PersonalDetails {
   constructor() {
     this.store = storeInstance;
-    this.isOwner = true; // 임시
     this.personalInfo = [];
     this.privateInfo = [];
     this.employmentInfo = [];

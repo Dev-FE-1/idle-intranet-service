@@ -3,8 +3,8 @@ import WorkInfo from './WorkInfo.js';
 import './PersonalInfo.css';
 
 export default class PersonalInfo {
-  constructor() {
-    this.ProfileInfo = new ProfileInfo();
+  constructor({ member, isWorking }) {
+    this.ProfileInfo = new ProfileInfo({ member, isWorking });
     this.WorkInfo = new WorkInfo();
   }
 
