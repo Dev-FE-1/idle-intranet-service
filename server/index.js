@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import db from './database.js';
 import { verifyPassword } from './passwords.js';
+import { extractEmployeeNumber } from './middlewares/authMiddleware.js';
 
 dotenv.config();
 
@@ -257,15 +258,8 @@ app.get('/api/member/:employeeNumber', (req, res) => {
 });
 
 // eslint-disable-next-line consistent-return
-app.get('/api/user', (req, res) => {
-  const { employeeNumber } = req.query;
-
-  if (!employeeNumber) {
-    return res.status(422).json({
-      status: 'Error',
-      error: '사원 번호가 누락되었습니다.',
-    });
-  }
+app.get('/api/user', extractEmployeeNumber, (req, res) => {
+  const { employeeNumber } = req;
 
   const sql = `
     SELECT 
@@ -310,6 +304,42 @@ app.get('/api/user', (req, res) => {
     res.json({
       status: 'OK',
       data: row,
+    });
+  });
+});
+
+// eslint-disable-next-line consistent-return
+app.get('/api/attendance/weekly', extractEmployeeNumber, (req, res) => {
+  const { employeeNumber } = req;
+
+  const today = new Date();
+  const dayOfWeek = today.getDay();
+  const diffToMonday = (dayOfWeek + 6) % 7;
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - diffToMonday);
+  const mondayStr = monday.toISOString().split('T')[0];
+  const todayStr = today.toISOString().split('T')[0];
+
+  const sql = `
+    SELECT * 
+    FROM 
+      Attendance 
+    WHERE 
+      employeeNumber = ? AND date BETWEEN ? AND ?
+    ORDER BY date DESC`;
+
+  // eslint-disable-next-line consistent-return
+  db.all(sql, [employeeNumber, mondayStr, todayStr], (err, rows) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+      data: rows,
     });
   });
 });
