@@ -175,8 +175,3 @@ export default class HomePage extends Container {
     });
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const homePageInstance = new HomePage();
-  homePageInstance.render();
-});
