@@ -93,14 +93,6 @@
   color: var(--color-dark-gray);
 }
 
-.gallery-more-button-container button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  margin-top: 12px;
-}
-
 /* announcement */
 .announcement-contents {
   padding-bottom: 50px;
@@ -166,9 +158,5 @@
 
   .home-container .gallery-item .gallery-content-box {
     padding: 16px;
-  }
-
-  .gallery-more-button-container {
-    display: none;
   }
 }

@@ -1,13 +1,9 @@
 import Container from '../../components/Container.js';
 import Title from '../../components/Title/Title.js';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
-import Button from '../../components/Button/Button.js';
-import Icon from '../../components/Icon/Icon.js';
-import { chevronDown } from '../../utils/icons.js';
 import logo from '../../../public/images/logo.svg';
 import GalleryItem from '../../components/Announcements/GalleryItem.js';
 import TextItem from '../../components/Announcements/TextItem.js';
-import { COLORS } from '../../utils/constants.js';
 import { fetchAnnouncements } from '../../api/endpoints/announcement.js';
 import './Home.css';
 
@@ -21,14 +17,6 @@ export default class HomePage extends Container {
         'Cube.IT은 작은 아이디어로 큰 변화를 만들어갑니다. 혁신적인 큐브의 힘을 경험해 보세요.',
     });
     this.PersonalInfo = new PersonalInfo();
-    this.buttonIcon = new Icon({
-      svg: chevronDown,
-      options: { color: COLORS.DARKEST_GRAY },
-    });
-    this.moreButton = new Button({
-      variant: 'tertiary',
-      content: `${this.buttonIcon.html()} 더 보기`,
-    });
   }
 
   async setAnnouncements() {
@@ -103,10 +91,6 @@ export default class HomePage extends Container {
             <ul class="gallery"></ul>
           </div>
         </section>
-
-        <div class="gallery-more-button-container wrapper">
-          ${this.moreButton.html()}
-        </div>
 
         <section class="announcement-container">
           <div class="wrapper">
