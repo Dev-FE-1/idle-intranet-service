@@ -176,7 +176,6 @@ export default class HomePage extends Container {
   }
 }
 
-// 사용 예시
 document.addEventListener('DOMContentLoaded', () => {
   const homePageInstance = new HomePage();
   homePageInstance.render();
