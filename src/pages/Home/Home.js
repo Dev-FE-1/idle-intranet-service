@@ -104,32 +104,26 @@ export default class HomePage extends Container {
                 }).html()}
               </div>
               <div class="announcement-info">
-                <div class="announcement-author-name">안민지</div>
+                <div class="announcement-author-name">
+                  ${dummyUserProfile.name}
+                </div>
                 <div class="announcement-time">약 15시간 전</div>
               </div>
             </div>
-            <div class="announcement-contents">
-              <p>
-                오늘은 즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. 오늘은
-                즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. <br />오늘은
-                즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. 오늘은 즐거운
-                월급날입니다. <br />
-                오늘은 즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. 오늘은
-                즐거운 월급날입니다. 오늘은 즐거운 월급날입니다. 오늘은 즐거운
-                월급날입니다.
-              </p>
-            </div>
+            <div class="announcement-content"></div>
           </div>
         </section>
       </div>
     `;
 
-    // 공지사항 데이터 가져오기 및 UI 업데이트
+    // 공지사항 데이터 가져오기
     try {
       const response = await axios.get('/api/announcements'); // axios를 사용하여 데이터 가져오기
       const announcements = response.data.data; // 데이터 추출
 
       this.renderAnnouncements(announcements);
+      // 추가적인 공지사항 불러오기
+      this.renderAdditionalAnnouncements(announcements);
     } catch (error) {
       console.error('공지사항 데이터를 가져오는 중 에러 발생:', error);
     }
@@ -156,6 +150,27 @@ export default class HomePage extends Container {
         `;
 
         galleryElement.appendChild(announcementElement);
+      }
+    });
+  }
+
+  renderAdditionalAnnouncements(announcements) {
+    const announcementContainer = this.$container.querySelector(
+      '.announcement-content',
+    );
+
+    announcementContainer.innerHTML = '';
+
+    announcements.forEach((item) => {
+      if (!item.imageUrl) {
+        const announcementElement = document.createElement('div');
+        announcementElement.classList.add('announcement-item');
+
+        announcementElement.innerHTML = /* HTML */ `
+          <p>${item.content.replaceAll('\n', '<br />')}</p>
+        `;
+
+        announcementContainer.appendChild(announcementElement);
       }
     });
   }
