@@ -11,32 +11,6 @@ import { COLORS } from '../../utils/constants.js';
 import logo from '../../../public/images/logo.svg';
 import './Home.css';
 
-const dummyUserProfile = {
-  employeeNumber: 101,
-  name: '안민지',
-  position: 'Software Engineer',
-  hireDate: '2015-10-11',
-  birthDate: '1987-05-08',
-  address: '경상북도 안산시 단원구 반포대거리',
-  email: 'anminji@cubeit.com',
-  phoneNumber: '010-7583-2446',
-  salary: 69000000,
-  isAdmin: true,
-  departmentNumber: 20,
-  education: '성균관대학교 소프트웨어공학 학사',
-  career: [
-    {
-      companyName: '카카오',
-      period: '2012-04-06 ~ 2014-07-02',
-      role: '백엔드 개발자',
-    },
-  ],
-  role: '백엔드 개발자',
-  profileImage:
-    'https://api.dicebear.com/9.x/lorelei/svg?seed=Max&eyes=variant09',
-  remainingVacationDays: 11,
-};
-
 export default class HomePage extends Container {
   constructor() {
     super('#main');
@@ -47,19 +21,14 @@ export default class HomePage extends Container {
         'Cube.IT은 작은 아이디어로 큰 변화를 만들어갑니다. 혁신적인 큐브의 힘을 경험해 보세요.',
     });
 
-    // WorkInfo 객체를 생성
-    this.PersonalInfo = new PersonalInfo({ user: dummyUserProfile });
-
-    // 버튼 아이콘
+    this.PersonalInfo = new PersonalInfo();
     this.buttonIcon = new Icon({
       svg: chevronDown,
       options: { color: COLORS.DARKEST_GRAY },
     });
-
-    // Button 인스턴스 생성
     this.moreButton = new Button({
       variant: 'tertiary',
-      content: `${this.buttonIcon.html()}더 보기`,
+      content: `${this.buttonIcon.html()} 더 보기`,
     });
   }
 
@@ -104,9 +73,7 @@ export default class HomePage extends Container {
                 }).html()}
               </div>
               <div class="announcement-info">
-                <div class="announcement-author-name">
-                  ${dummyUserProfile.name}
-                </div>
+                <div class="announcement-author-name">안민지</div>
                 <div class="announcement-time">약 15시간 전</div>
               </div>
             </div>
@@ -116,6 +83,7 @@ export default class HomePage extends Container {
       </div>
     `;
 
+    this.PersonalInfo.render();
     // 공지사항 데이터 가져오기
     try {
       const response = await axios.get('/api/announcements'); // axios를 사용하여 데이터 가져오기
