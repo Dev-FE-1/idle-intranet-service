@@ -24,7 +24,7 @@ export default class EditProfileButton {
   };
 
   onClickEditButton = () => {
-    this.EditProfileForm.render();
+    this.EditProfileForm.renderInitialData();
     this.Modal.open();
   };
 

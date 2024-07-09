@@ -30,30 +30,60 @@ export default class EditProfileForm {
     this.$image.src = this.newImage;
   }
 
-  setEventListeners() {
-    this.$randomImageButton = document.querySelector(
-      '.edit-profile-form .random-profile-image-button',
+  setUserImage() {
+    this.setFileInput();
+    this.$fileInput.click();
+  }
+
+  onFileInputChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.$image.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  setFileInput() {
+    this.$fileInput = document.createElement('input');
+    this.$fileInput.type = 'file';
+    this.$fileInput.accept = 'image/*';
+    this.$fileInput.addEventListener('change', (event) =>
+      this.onFileInputChange(event),
     );
+  }
+
+  setEventListeners() {
     this.$randomImageButton.addEventListener('click', () =>
       this.setRandomImage(),
     );
+    this.$selectImageButton.addEventListener('click', () => {
+      this.setUserImage();
+    });
   }
 
-  renderInputs() {
-    const $phoneNumberInput = document.querySelector(
-      'input#phone_number_input',
-    );
-    const $addressInput = document.querySelector('input#address_input');
-
-    $phoneNumberInput.value = this.member.phoneNumber;
-    $addressInput.value = this.member.address;
+  renderInitialData() {
+    this.$image.src = this.member.profileImage;
+    this.$phoneNumberInput.value = this.member.phoneNumber;
+    this.$addressInput.value = this.member.address;
   }
 
   render() {
-    this.renderInputs();
-    this.setEventListeners();
     this.$image = document.querySelector('.edit-profile-form .profile-image');
-    this.$image.src = this.member.profileImage;
+    this.$randomImageButton = document.querySelector(
+      '.edit-profile-form .random-profile-image-button',
+    );
+    this.$phoneNumberInput = document.querySelector('input#phone_number_input');
+    this.$addressInput = document.querySelector('input#address_input');
+    this.$selectImageButton = document.querySelector(
+      '.edit-image-button-container button',
+    );
+
+    this.renderInitialData();
+    this.setFileInput();
+    this.setEventListeners();
   }
 
   html() {
