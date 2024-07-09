@@ -100,7 +100,8 @@ app.get('/api/members/:page', (req, res) => {
       position, 
       email, 
       phoneNumber,
-      departmentName
+      departmentName,
+      profileImage
     FROM 
       Members
     ORDER BY 
@@ -162,7 +163,8 @@ app.get('/api/members/search/:name', (req, res) => {
       position, 
       email, 
       phoneNumber,
-      departmentName
+      departmentName,
+      profileImage
     FROM 
       Members
     WHERE
@@ -206,7 +208,7 @@ app.get('/api/members/search/:name', (req, res) => {
 
 app.get('/api/member/:employeeNumber', (req, res) => {
   const { employeeNumber } = req.params;
-  const { isAdmin } = req.query;
+  const { isAdmin, isOwner } = req.query;
 
   const selectItems = [
     'employeeNumber',
@@ -219,7 +221,7 @@ app.get('/api/member/:employeeNumber', (req, res) => {
     'departmentName',
   ];
 
-  if (isAdmin === 'true') {
+  if (isAdmin === '1' || isOwner) {
     selectItems.push(
       'hireDate',
       'birthDate',

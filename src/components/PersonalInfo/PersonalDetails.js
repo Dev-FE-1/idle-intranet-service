@@ -87,9 +87,8 @@ export default class PersonalDetails {
   async render(member) {
     this.user = await this.store.getUser();
     this.member = member;
-    this.isAdmin = !!this.member.isAdmin;
+    this.isAdmin = !!this.user.isAdmin;
     this.isOwner = this.member.employeeNumber === this.user.employeeNumber;
-
     this.setInfoArray();
     this.renderPersonalDetails();
   }

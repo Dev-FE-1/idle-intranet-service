@@ -102,6 +102,10 @@
   letter-spacing: 1px;
 }
 
+.table-container tbody tr{
+  cursor: pointer;
+}
+
 /* 미디어 쿼리 */
 @media (width <= 1024px) {
   .members-container {
