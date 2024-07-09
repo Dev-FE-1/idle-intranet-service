@@ -4,10 +4,13 @@ import Modal from '../Modal/Modal.js';
 import { COLORS } from '../../utils/constants.js';
 import { edit } from '../../utils/icons.js';
 import EditProfileForm from './EditProfileForm.js';
+import { updateUserProfile } from '../../api/endpoints/user.js';
+import { storeInstance } from '../Store.js';
 
 export default class EditProfileButton {
   constructor({ container, member }) {
     this.$container = container;
+    this.store = storeInstance;
     this.member = member;
     this.icon = new Icon({
       svg: edit,
@@ -19,9 +22,53 @@ export default class EditProfileButton {
     this.EditProfileForm = new EditProfileForm({ member: this.member });
   }
 
-  onSubmit = () => {
-    console.log('submit');
-  };
+  updateMember({ profileImage, phoneNumber, address }) {
+    this.member.profileImage = profileImage;
+    this.member.phoneNumber = phoneNumber;
+    this.member.address = address;
+  }
+
+  async updateProfilePage({ profileImage, phoneNumber, address }) {
+    const user = await this.store.getUser();
+    if (this.member.employeeNumber === user.employeeNumber) {
+      const $headerAvatar = document.querySelector(
+        '.header-container .profile-img',
+      );
+      $headerAvatar.src = profileImage;
+    }
+
+    const $profileImage = document.querySelector(
+      '.personal-info-section .profile-img',
+    );
+    $profileImage.src = profileImage;
+
+    const $subtitles = document.querySelectorAll('.personal-detail-subtitle');
+    /* eslint-disable no-param-reassign */
+    $subtitles.forEach(($subtitle) => {
+      if ($subtitle.textContent === '전화번호') {
+        $subtitle.nextElementSibling.innerText = phoneNumber;
+      } else if ($subtitle.textContent === '자택 주소') {
+        $subtitle.nextElementSibling.innerText = address;
+      }
+    });
+  }
+
+  async onSubmit() {
+    const formData = this.EditProfileForm.getFormData();
+    const response = await updateUserProfile({
+      employeeNumber: this.member.employeeNumber,
+      profileData: formData,
+    });
+
+    if (response.status !== 'OK') {
+      console.log('프로필 수정을 실패했습니다.');
+      return;
+    }
+
+    this.updateProfilePage(formData);
+    this.updateMember(formData);
+    this.Modal.close();
+  }
 
   onClickEditButton = () => {
     this.EditProfileForm.renderInitialData();
@@ -33,7 +80,7 @@ export default class EditProfileButton {
       title: '프로필 수정',
       mainContent: this.EditProfileForm.html(),
       buttonContent: '수정',
-      onSubmit: this.onSubmit,
+      onSubmit: this.onSubmit.bind(this),
     });
   }
 

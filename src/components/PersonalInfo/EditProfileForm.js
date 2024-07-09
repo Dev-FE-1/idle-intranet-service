@@ -25,6 +25,14 @@ export default class EditProfileForm {
     });
   }
 
+  getFormData() {
+    return {
+      profileImage: this.$image.src,
+      phoneNumber: this.$phoneNumberInput.value,
+      address: this.$addressInput.value,
+    };
+  }
+
   setRandomImage() {
     this.newImage = generateRandomProfile();
     this.$image.src = this.newImage;
