@@ -13,6 +13,7 @@ import {
 } from '../../components/API/MemberService.js';
 import { isLoggedIn } from '../../components/API/AuthService.js';
 import Route from '../../routes/Route.js';
+import Avatar from '../../components/Avatar/Avatar.js';
 
 export default class MembersPage extends Container {
   constructor() {
@@ -118,13 +119,16 @@ export default class MembersPage extends Container {
   };
 
   renderTable = () => {
-    const transformedEmployees = this.contents.map((employee) => [
-      employee.name,
-      employee.position,
-      employee.departmentName,
-      employee.email,
-      employee.phoneNumber,
-    ]);
+    const transformedEmployees = this.contents.map((employee) => {
+      this.Avatar = new Avatar({ url: employee.profileImage });
+      return [
+        `${this.Avatar.html()}<div>${employee.name}</div>`,
+        employee.position,
+        employee.departmentName,
+        employee.email,
+        employee.phoneNumber,
+      ];
+    });
     this.ids = this.contents.map((employee) => [employee.employeeNumber]);
 
     this.table = new Table({

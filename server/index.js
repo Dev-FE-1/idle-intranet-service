@@ -100,7 +100,8 @@ app.get('/api/members/:page', (req, res) => {
       position, 
       email, 
       phoneNumber,
-      departmentName
+      departmentName,
+      profileImage
     FROM 
       Members
     ORDER BY 
@@ -162,7 +163,8 @@ app.get('/api/members/search/:name', (req, res) => {
       position, 
       email, 
       phoneNumber,
-      departmentName
+      departmentName,
+      profileImage
     FROM 
       Members
     WHERE
