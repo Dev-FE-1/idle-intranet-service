@@ -12,6 +12,7 @@ import {
   searchMembers,
 } from '../../components/API/MemberService.js';
 import { isLoggedIn } from '../../components/API/AuthService.js';
+import Route from '../../routes/Route.js';
 
 export default class MembersPage extends Container {
   constructor() {
@@ -31,6 +32,8 @@ export default class MembersPage extends Container {
     this.maxProfile = 7;
     this.contents = [];
     this.total = 0;
+    this.ids = [];
+    this.route = new Route();
 
     isLoggedIn().then((loggedIn) => {
       if (loggedIn) {
@@ -122,6 +125,7 @@ export default class MembersPage extends Container {
       employee.email,
       employee.phoneNumber,
     ]);
+    this.ids = this.contents.map((employee) => [employee.employeeNumber]);
 
     this.table = new Table({
       headers: ['이름', '직무', '조직', '이메일', '연락처'],
@@ -136,7 +140,16 @@ export default class MembersPage extends Container {
         </div>
       `;
     } else if (window.location.pathname === PATH.MEMBERS) {
-      document.getElementById('table-container').innerHTML = this.table.html();
+      const tableContainer = document.getElementById('table-container');
+      tableContainer.innerHTML = this.table.html();
+
+      tableContainer.querySelectorAll('tr').forEach((row, index) => {
+        row.addEventListener('click', () => {
+          const employeeId = this.ids[index - 1];
+          window.history.pushState(null, null, `${PATH.MEMBERS}/${employeeId}`);
+          this.route.init();
+        });
+      });
     }
   };
 

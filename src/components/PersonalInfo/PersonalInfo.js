@@ -18,7 +18,7 @@ export default class PersonalInfo {
       <section class="personal-info-section">
         <div class="wrapper">
           ${this.ProfileInfo.html()}
-          ${this.WorkInfo.html()}
+          ${this.isWorking ? this.WorkInfo.html() : ''}
         </div>
       </section>
     `;

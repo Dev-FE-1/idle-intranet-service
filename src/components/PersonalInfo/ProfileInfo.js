@@ -42,7 +42,7 @@ export default class ProfileInfo {
       <div class="profile-info">
         <div class="avatar-container"></div>
         <div class="personal-profile">
-          <div class="work-status-label${this.isWorking ? ' active' : ''}">${this.isWorking ? '근무중' : '근무전'}</div>
+          ${this.isWorking !== null ? `<div class="work-status-label${this.isWorking ? ' active' : ''}">${this.isWorking ? '근무중' : '근무전'}</div>` : ''}
           <h2 class="profile-name"></h2>
           <span class="profile-position"></span>
         </div>

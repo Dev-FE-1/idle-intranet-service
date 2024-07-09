@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import Button from '../Button/Button.js';
 import Icon from '../Icon/Icon.js';
 import ProgressRing from '../ProgressRing.js/ProgressRing.js';
@@ -24,7 +25,7 @@ export default class WorkInfo {
 
   renderWeeklyWorkHours() {
     const $time = document.querySelector('.weekly-work-hours-time');
-    $time.innerHTML = `${this.weeklyWorkHours}시간`;
+    $time ? ($time.innerHTML = `${this.weeklyWorkHours}시간`) : '';
   }
 
   renderProgressRing() {
@@ -32,7 +33,7 @@ export default class WorkInfo {
     const percent = (this.weeklyWorkHours / 40) * 100;
     this.ProgressRing = new ProgressRing({ percent });
     this.Button = null;
-    $container.innerHTML = this.ProgressRing.html();
+    $container ? ($container.innerHTML = this.ProgressRing.html()) : '';
   }
 
   renderDailyWork() {
@@ -55,15 +56,19 @@ export default class WorkInfo {
     const $startTime = document.querySelector('.work-hour-time.start');
     const $endTime = document.querySelector('.work-hour-time.end');
 
-    $buttonContainer.innerHTML = this.Button.html();
+    $buttonContainer ? ($buttonContainer.innerHTML = this.Button.html()) : '';
 
     this.CurrentTime = new CurrentTime();
     this.CurrentTime.cleanUp();
     this.CurrentTime.render();
-    $startTime.innerText = startTime || '-';
-    $startTime.setAttribute('datetime', startTime);
-    $endTime.innerText = endTime || '-';
-    $endTime.setAttribute('datetime', endTime);
+    if ($startTime) {
+      $startTime.innerText = startTime || '-';
+      $startTime.setAttribute('datetime', startTime);
+    }
+    if ($endTime) {
+      $endTime.innerText = endTime || '-';
+      $endTime.setAttribute('datetime', endTime);
+    }
   }
 
   async render() {
