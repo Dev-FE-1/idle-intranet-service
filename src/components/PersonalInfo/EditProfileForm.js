@@ -27,7 +27,6 @@ export default class EditProfileForm {
 
   setRandomImage() {
     this.newImage = generateRandomProfile();
-    this.$image = document.querySelector('.edit-profile-form .profile-image');
     this.$image.src = this.newImage;
   }
 
@@ -53,6 +52,8 @@ export default class EditProfileForm {
   render() {
     this.renderInputs();
     this.setEventListeners();
+    this.$image = document.querySelector('.edit-profile-form .profile-image');
+    this.$image.src = this.member.profileImage;
   }
 
   html() {

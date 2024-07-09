@@ -16,7 +16,6 @@ export default class EditProfileButton {
     this.EditButton = new IconButton({
       icon: this.icon,
     });
-
     this.EditProfileForm = new EditProfileForm({ member: this.member });
   }
 
@@ -25,6 +24,7 @@ export default class EditProfileButton {
   };
 
   onClickEditButton = () => {
+    this.EditProfileForm.render();
     this.Modal.open();
   };
 
