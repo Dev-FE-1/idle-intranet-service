@@ -40,7 +40,7 @@ export default class ProfileSpecPage extends Container {
     this.PersonalDetails = new PersonalDetails();
     this.ProfileInfo = new ProfileInfo({
       member: this.member,
-      isWorking: true,
+      isWorking: this.user.employeeNumber === this.member.employeeNumber,
     });
   }
 
