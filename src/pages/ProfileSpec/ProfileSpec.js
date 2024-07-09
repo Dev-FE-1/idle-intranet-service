@@ -2,7 +2,7 @@ import { isLoggedIn } from '../../components/API/AuthService.js';
 import { getMemberById } from '../../components/API/MemberService.js';
 import Container from '../../components/Container.js';
 import PersonalDetails from '../../components/PersonalInfo/PersonalDetails.js';
-import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
+import ProfileInfo from '../../components/PersonalInfo/ProfileInfo.js';
 import { storeInstance } from '../../components/Store.js';
 import Title from '../../components/Title/Title.js';
 import { PATH_TITLE } from '../../utils/constants.js';
@@ -38,22 +38,25 @@ export default class ProfileSpecPage extends Container {
     }
 
     this.PersonalDetails = new PersonalDetails();
-    this.PersonalInfo = new PersonalInfo({
+    this.ProfileInfo = new ProfileInfo({
       member: this.member,
-      isWorking: null,
+      isWorking: true,
     });
   }
 
   async render() {
     await this.setUserInfo();
-
     this.$container.innerHTML = `
       ${this.Title.html()}
-      ${this.PersonalInfo.html()}
+      <section class="personal-info-section">
+        <div class="wrapper">
+          ${this.ProfileInfo.html()}
+        </div>
+      </section>
       ${this.PersonalDetails.html()}
     `;
 
     this.PersonalDetails.render(this.member);
-    this.PersonalInfo.render();
+    this.ProfileInfo.render();
   }
 }
