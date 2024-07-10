@@ -1,0 +1,19 @@
+.management-section-container {
+  padding: 30px 0;
+  margin-top: 12px;
+  background-color: white;
+}
+
+.management-section-title {
+  padding-bottom: 30px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (width >= 1024px) {
+  .management-section-container {
+    padding: 0;
+    margin-top: 36px;
+    background-color: white;
+  }
+}

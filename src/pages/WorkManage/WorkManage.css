@@ -1,0 +1,43 @@
+.work-manage-header-container {
+  background-color: #fff;
+}
+
+.work-manage-menu-list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-weight: 700;
+}
+
+.work-manage-menu-item {
+  height: 100%;
+  padding: 20px 0 15px;
+  color: var(--color-dark-gray);
+  cursor: pointer;
+}
+
+.work-manage-menu-item + .work-manage-menu-item {
+  margin-left: 28px;
+}
+
+.work-manage-menu-list li.active {
+  border-bottom: 2px solid var(--color-primary);
+  color: var(--color-black);
+}
+
+@media (width >= 1024px) {
+  .work-manage-menu-list {
+    position: relative;
+  }
+
+  .work-manage-menu-list::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: calc(100% - (20px * 2));
+    height: 2px;
+    background-color: var(--color-light-gray);
+  }
+}
