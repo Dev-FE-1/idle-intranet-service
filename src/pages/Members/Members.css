@@ -55,7 +55,7 @@
   align-items: center;
 }
 
-.members-search-header .input {
+.members-input-container .input {
   width: 220px;
   height: 40px;
   border-right: 0;
@@ -63,7 +63,7 @@
   font-size: 14px;
 }
 
-.members-search-header button {
+.members-input-container button {
   display: flex;
   align-items: center;
   height: 40px;
@@ -83,6 +83,43 @@
   align-items: center;
   height: 80px;
   background-color: #fff;
+}
+
+.no-result-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  background-color: #fff;
+}
+
+.no-result-container p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.no-result-container p strong {
+  color: var(--color-primary);
+  letter-spacing: 1px;
+}
+
+.members-container .table-container td {
+  padding: 0;
+}
+
+.members-container .table-container td a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+.members-container .table-container td a:has(img) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* 미디어 쿼리 */
@@ -130,7 +167,7 @@
     width: 100%;
   }
 
-  .members-search-header .input {
+  .members-input-container .input {
     width: 100%;
   }
 }

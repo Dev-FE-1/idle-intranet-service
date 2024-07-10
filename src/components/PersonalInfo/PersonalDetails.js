@@ -6,7 +6,6 @@ import { sortByPeriod } from '../../utils/sortByPeriod.js';
 export default class PersonalDetails {
   constructor() {
     this.store = storeInstance;
-    this.isOwner = true; // 임시
     this.personalInfo = [];
     this.privateInfo = [];
     this.employmentInfo = [];
@@ -15,35 +14,35 @@ export default class PersonalDetails {
 
   setInfoArray() {
     this.personalInfo = [
-      { subtitle: '조직', contents: this.user.departmentName },
-      { subtitle: '직책', contents: this.user.role },
+      { subtitle: '조직', contents: this.member.departmentName },
+      { subtitle: '직책', contents: this.member.role },
     ];
 
     this.privateInfo = [
-      { subtitle: '이메일', contents: this.user.email },
-      { subtitle: '전화번호', contents: this.user.phoneNumber },
+      { subtitle: '이메일', contents: this.member.email },
+      { subtitle: '전화번호', contents: this.member.phoneNumber },
     ];
 
     if (this.isAdmin || this.isOwner) {
       this.privateInfo.unshift({
         subtitle: '생년월일',
-        contents: this.user.birthDate,
+        contents: this.member.birthDate,
       });
 
       this.privateInfo.push({
         subtitle: '자택 주소',
-        contents: this.user.address,
+        contents: this.member.address,
       });
 
       this.employmentInfo = [
-        { subtitle: '입사일', contents: this.user.hireDate },
-        { subtitle: '근무유형', contents: this.user.employmentType },
+        { subtitle: '입사일', contents: this.member.hireDate },
+        { subtitle: '근무유형', contents: this.member.employmentType },
       ];
 
-      const careers = JSON.parse(this.user.career);
+      const careers = JSON.parse(this.member.career);
       careers.sort(sortByPeriod);
       this.educationAndCareerInfo = [
-        { subtitle: '학력', contents: this.user.education },
+        { subtitle: '학력', contents: this.member.education },
         {
           subtitle: '경력',
           contents: `<ul class="career-list">
@@ -67,10 +66,10 @@ export default class PersonalDetails {
       ];
     }
 
-    if (this.isAdmin && this.user.salary) {
+    if (this.isAdmin && this.member.salary) {
       this.employmentInfo.push({
         subtitle: '연봉',
-        contents: this.user.salary.toLocaleString('en-US'),
+        contents: this.member.salary.toLocaleString('en-US'),
       });
     }
   }
@@ -85,13 +84,12 @@ export default class PersonalDetails {
     `;
   }
 
-  async render() {
-    if (!this.user) {
-      this.user = await this.store.getUser();
-      this.isAdmin = this.user.isAdmin;
-      this.setInfoArray();
-    }
-
+  async render(member) {
+    this.user = await this.store.getUser();
+    this.member = member;
+    this.isAdmin = !!this.user.isAdmin;
+    this.isOwner = this.member.employeeNumber === this.user.employeeNumber;
+    this.setInfoArray();
     this.renderPersonalDetails();
   }
 

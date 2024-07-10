@@ -35,7 +35,9 @@ export default class Pagination {
   calculatePages() {
     this.pages = [];
     const pageCalc = (currentPage, maxPage, pages) => {
-      if (currentPage < 5) {
+      if (maxPage <= 7) {
+        pages.push(...Array.from({ length: maxPage }, (_, i) => i + 1));
+      } else if (currentPage < 5) {
         pages.push(
           ...Array.from({ length: 5 }, (_, i) => i + 1),
           '...',

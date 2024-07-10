@@ -1,33 +1,16 @@
-import dayjs from 'dayjs';
-
 import ProfileInfo from './ProfileInfo.js';
 import WorkInfo from './WorkInfo.js';
 import './PersonalInfo.css';
 
 export default class PersonalInfo {
-  constructor() {
-    this.ProfileInfo = new ProfileInfo();
+  constructor({ member, isWorking }) {
+    this.ProfileInfo = new ProfileInfo({ member, isWorking });
     this.WorkInfo = new WorkInfo();
-  }
-
-  updateTime() {
-    const currentTime = dayjs().format('HH:mm');
-
-    const $time = document.querySelector('.work-hour-time');
-    $time.setAttribute('datetime', currentTime);
-    $time.innerText = currentTime;
-  }
-
-  getNextUpdateDelay() {
-    const now = dayjs();
-    const nextMinuteStart = now.add(1, 'minute').startOf('minute');
-    const delay = nextMinuteStart.diff(now);
-
-    return delay;
   }
 
   render() {
     this.ProfileInfo.render();
+    this.WorkInfo.render();
   }
 
   html() {

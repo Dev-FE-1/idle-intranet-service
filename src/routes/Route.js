@@ -1,5 +1,6 @@
 import { isLoggedIn } from '../components/API/AuthService.js';
-import Menu from '../components/NavBar/Menu.js';
+import { storeInstance } from '../components/Store.js';
+import AnnouncementPage from '../pages/Announcement/Announcement.js';
 import {
   HomePage,
   MembersPage,
@@ -8,37 +9,25 @@ import {
   SignInPage,
   PageNotFound,
 } from '../pages/index.js';
+import ProfileSpecPage from '../pages/ProfileSpec/ProfileSpec.js';
 import { PATH_TITLE, PATH } from '../utils/constants.js';
-import {
-  clockIcon,
-  homeIcon,
-  membersIcon,
-  profileIcon,
-} from '../utils/icons.js';
 import { matchRoute } from '../utils/matchRoute.js';
-
-const menus = [
-  { path: PATH.HOME, title: PATH_TITLE.HOME, icon: homeIcon },
-  { path: PATH.MEMBERS, title: PATH_TITLE.MEMBERS, icon: membersIcon },
-  { path: PATH.PROFILE, title: PATH_TITLE.PROFILE, icon: profileIcon },
-  { path: PATH.WORK_MANAGE, title: PATH_TITLE.WORK_MANAGE, icon: clockIcon },
-];
 
 export default class Route {
   constructor() {
-    this.notFoundPage = new PageNotFound();
-    this.Menu = new Menu('.menu-list', menus);
     this.title = 'CubeIT ';
     this.currentPage = null;
-
-    this.init();
   }
 
   setRoutes() {
     this.routes = {
       [PATH.HOME]: { title: PATH_TITLE.HOME, page: new HomePage() },
+      [PATH.ANNOUNCEMENT]: {
+        title: PATH_TITLE.ANNOUNCEMENT,
+        page: new AnnouncementPage(),
+      },
+      [PATH.MEMBER]: { title: PATH_TITLE.MEMBERS, page: new ProfileSpecPage() },
       [PATH.MEMBERS]: { title: PATH_TITLE.MEMBERS, page: new MembersPage() },
-      [PATH.MEMBER]: { title: PATH_TITLE.MEMBERS, page: new ProfilePage() },
       [PATH.PROFILE]: { title: PATH_TITLE.PROFILE, page: new ProfilePage() },
       [PATH.WORK_MANAGE]: {
         title: PATH_TITLE.WORK_MANAGE,
@@ -95,6 +84,8 @@ export default class Route {
   init() {
     window.addEventListener('popstate', () => this.route());
     document.body.addEventListener('click', this.handleNavigatePage);
+    this.Menu = storeInstance.Menu;
+    this.notFoundPage = new PageNotFound();
     this.setRoutes();
     this.route();
   }

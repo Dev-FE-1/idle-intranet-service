@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 const { VITE_SERVER_URL } = import.meta.env;
+const apiBaseUrl = VITE_SERVER_URL;
 
 export async function fetchMembers(page = 1, max = 10) {
   const response = await axios.get(
-    `${VITE_SERVER_URL}/api/members/${page}?max=${max}`,
+    `${apiBaseUrl}/api/members/${page}?max=${max}`,
   );
   let members;
 
@@ -23,7 +24,7 @@ export async function fetchMember(employeeNumber) {
   }
 
   const response = await fetch(
-    `${VITE_SERVER_URL}/api/member/${employeeNumber}?isAdmin=${isAdmin}`,
+    `${apiBaseUrl}/api/member/${employeeNumber}?isAdmin=${isAdmin}`,
   );
   let member;
 
@@ -40,7 +41,7 @@ export async function fetchAttendance(employeeNumber, page = 1, max = 10) {
   }
 
   const response = await axios.get(
-    `${VITE_SERVER_URL}/api/attendance/${page}?employeeNumber=${employeeNumber}&max=${max}`,
+    `${apiBaseUrl}/api/attendance/${page}?employeeNumber=${employeeNumber}&max=${max}`,
   );
   let attendance;
 
@@ -61,7 +62,7 @@ export async function fetchVacationRequests(
   }
 
   const response = await axios.get(
-    `${VITE_SERVER_URL}/api/vacationRequests/${page}?employeeNumber=${employeeNumber}&max=${max}`,
+    `${apiBaseUrl}/api/vacationRequests/${page}?employeeNumber=${employeeNumber}&max=${max}`,
   );
   let vacationRequests;
 
@@ -73,7 +74,7 @@ export async function fetchVacationRequests(
 }
 
 export async function fetchDepartments() {
-  const response = await axios.get(`${VITE_SERVER_URL}/api/departments`);
+  const response = await axios.get(`${apiBaseUrl}/api/departments`);
   let departments;
 
   if (response.status === 200) {
@@ -84,7 +85,7 @@ export async function fetchDepartments() {
 }
 
 export async function fetchAnnouncements() {
-  const response = await axios.get(`${VITE_SERVER_URL}/api/announcements`);
+  const response = await axios.get(`${apiBaseUrl}/api/announcements`);
   let announcements;
 
   if (response.status === 200) {
@@ -98,9 +99,7 @@ export async function fetchAnnouncement(id) {
   if (!id) {
     console.error('공지 아이디가 필요합니다');
   }
-  const response = await axios.get(
-    `${VITE_SERVER_URL}/api/announcements/${id}`,
-  );
+  const response = await axios.get(`${apiBaseUrl}/api/announcements/${id}`);
   let announcement;
 
   if (response.status === 200) {
@@ -113,7 +112,7 @@ export async function fetchAnnouncement(id) {
 export async function fetchUser() {
   const employeeNumber = localStorage.getItem('EmployeeNumber') || 100; // 임시
   const response = await fetch(
-    `${VITE_SERVER_URL}/api/user?employeeNumber=${employeeNumber}`,
+    `${apiBaseUrl}/api/user?employeeNumber=${employeeNumber}`,
   );
   let user;
 

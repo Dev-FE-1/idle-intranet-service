@@ -1,4 +1,8 @@
 export const matchRoute = (path, routes) => {
+  if (!routes) {
+    return null;
+  }
+
   let matchedRoute = null;
 
   Object.keys(routes).forEach((routePath) => {
@@ -13,7 +17,6 @@ export const matchRoute = (path, routes) => {
 
     const regex = new RegExp(`^${regexPath}$`);
     const match = path.match(regex);
-
     if (match) {
       matchedRoute = route;
     }

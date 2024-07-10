@@ -7,14 +7,17 @@ export const COLORS = {
   LIGHTEST_GRAY: 'var(--color-lightest-gray)',
 };
 
+const baseUrl = import.meta.env.VITE_BASE_URL || '';
+
 export const PATH = {
-  SIGNIN: '/signin',
-  HOME: '/',
-  ANNOUNCEMENT: '/announcements/:id',
-  MEMBERS: '/members',
-  MEMBER: '/members/:id',
-  PROFILE: '/profile',
-  WORK_MANAGE: '/work-manage',
+  SIGNIN: `${baseUrl}/signin`,
+  HOME: `${baseUrl}/`,
+  ANNOUNCEMENT: `${baseUrl}/announcements/:id`,
+  ANNOUNCEMENTS: `${baseUrl}/announcements`,
+  MEMBER: `${baseUrl}/members/:id`,
+  MEMBERS: `${baseUrl}/members`,
+  PROFILE: `${baseUrl}/profile`,
+  WORK_MANAGE: `${baseUrl}/work-manage`,
 };
 
 export const PATH_TITLE = {
@@ -23,4 +26,5 @@ export const PATH_TITLE = {
   MEMBERS: '구성원',
   PROFILE: '프로필',
   WORK_MANAGE: '근무/휴가',
+  ANNOUNCEMENT: '공지사항',
 };

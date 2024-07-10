@@ -26,6 +26,7 @@
 .btn-secondary:disabled {
   background-color: var(--color-lightest-gray);
   color: var(--color-dark-gray);
+  cursor: default;
 }
 
 .btn-tertiary {
@@ -36,6 +37,7 @@
 .btn-tertiary:disabled {
   background-color: var(--color-lightest-gray);
   color: var(--color-dark-gray);
+  cursor: default;
 }
 
 .btn-ghost {
@@ -74,5 +76,9 @@
   .btn-text:hover {
     background-color: var(--color-lightest-gray);
     color: var(--color-black);
+  }
+
+  .btn-secondary:disabled:hover {
+    background-color: var(--color-lightest-gray);
   }
 }

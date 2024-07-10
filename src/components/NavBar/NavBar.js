@@ -1,10 +1,10 @@
 import logo from '../../../public/images/logo.svg';
+import Container from '../Container.js';
 import './NavBar.css';
 
-export default class NavBar {
-  constructor({ container }) {
-    this.$container = document.querySelector(container);
-    this.render();
+export default class NavBar extends Container {
+  constructor() {
+    super('.navbar');
   }
 
   render() {

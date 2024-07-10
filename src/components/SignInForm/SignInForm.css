@@ -6,14 +6,10 @@
   display: block;
 }
 
-.button.btn-primary {
+.signin-form .button.btn-primary {
   margin-bottom: 15px;
 }
 
-.button.btn-primary:hover {
-  background-color: var(--color-primary);
-}
-
-.button.btn-primary:disabled:hover {
+.signin-form .button.btn-primary:disabled:hover {
   background-color: var(--color-lightest-gray);
 }
