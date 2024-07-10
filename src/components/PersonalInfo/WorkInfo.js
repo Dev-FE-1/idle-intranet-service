@@ -11,9 +11,10 @@ import {
   calculateWeeklyWorkHours,
   setTodayWork,
 } from '../../utils/userWork.js';
+import { addAttendance, updateAttendance } from '../API/AttendanceService.js';
 
 export default class WorkInfo {
-  constructor() {
+  constructor({ personalInfo }) {
     this.store = storeInstance;
     this.weeklyAttendances = null;
     this.weeklyWorkHours = null;
@@ -21,28 +22,31 @@ export default class WorkInfo {
       svg: clockIcon,
       options: { color: COLORS.DARK_GRAY },
     });
+    this.personalInfo = personalInfo;
   }
 
   renderWeeklyWorkHours() {
     const $time = document.querySelector('.weekly-work-hours-time');
-    $time ? ($time.innerHTML = `${this.weeklyWorkHours}시간`) : '';
+    if ($time) $time.innerHTML = `${this.weeklyWorkHours}시간`;
   }
 
   renderProgressRing() {
     const $container = document.querySelector('.progress-ring-container');
     const percent = (this.weeklyWorkHours / 40) * 100;
     this.ProgressRing = new ProgressRing({ percent });
-    this.Button = null;
-    $container ? ($container.innerHTML = this.ProgressRing.html()) : '';
+    if ($container) $container.innerHTML = this.ProgressRing.html();
   }
 
-  renderDailyWork() {
+  async renderDailyWork() {
     const today = new Date().toISOString().split('T')[0];
-    const { startTime, endTime } =
-      this.weeklyAttendances.filter(
-        (attendance) => attendance.date === today,
-      )[0] || setTodayWork(today);
+    let attendance = this.weeklyAttendances.find((a) => a.date === today);
 
+    if (!attendance) {
+      attendance = setTodayWork(today);
+      this.weeklyAttendances.push(attendance);
+    }
+
+    let { startTime, endTime } = attendance;
     this.Button = new Button({
       variant: startTime && !endTime ? 'primary' : 'secondary',
       size: 'large',
@@ -56,23 +60,65 @@ export default class WorkInfo {
     const $startTime = document.querySelector('.work-hour-time.start');
     const $endTime = document.querySelector('.work-hour-time.end');
 
-    $buttonContainer ? ($buttonContainer.innerHTML = this.Button.html()) : '';
+    if ($buttonContainer) $buttonContainer.innerHTML = this.Button.html();
 
     this.CurrentTime = new CurrentTime();
     this.CurrentTime.cleanUp();
     this.CurrentTime.render();
-    if ($startTime) {
-      $startTime.innerText = startTime || '-';
+
+    if (startTime) {
+      $startTime.innerText = startTime;
       $startTime.setAttribute('datetime', startTime);
     }
-    if ($endTime) {
-      $endTime.innerText = endTime || '-';
+    if (endTime) {
+      $endTime.innerText = endTime;
       $endTime.setAttribute('datetime', endTime);
     }
+
+    $buttonContainer
+      .querySelector('button')
+      .addEventListener('click', async () => {
+        const now = document.body.querySelector(
+          '.work-hour-time.current',
+        ).innerHTML;
+
+        if (startTime && !endTime) {
+          endTime = now;
+          $endTime.innerText = endTime || '-';
+          $endTime.setAttribute('datetime', endTime);
+
+          const attendanceData = {
+            employeeNumber: this.user.employeeNumber,
+            date: today,
+            startTime,
+            endTime,
+            status: '정상 근무',
+          };
+          await updateAttendance(attendanceData);
+          attendance.endTime = endTime;
+        } else if (!startTime) {
+          startTime = now;
+          $startTime.innerText = startTime || '-';
+          $startTime.setAttribute('datetime', startTime);
+
+          const attendanceData = {
+            employeeNumber: this.user.employeeNumber,
+            date: today,
+            startTime,
+            endTime: null,
+            status: '정상 근무',
+          };
+          await addAttendance(attendanceData);
+          attendance.startTime = startTime;
+        }
+        await this.renderDailyWork();
+        this.personalInfo.updateIsWorking();
+      });
   }
 
   async render() {
     if (!this.weeklyAttendances) {
+      this.user = await this.store.getUser();
       this.weeklyAttendances = await this.store.getWeeklyAttendances();
       this.weeklyWorkHours = calculateWeeklyWorkHours(this.weeklyAttendances);
     }
@@ -82,32 +128,30 @@ export default class WorkInfo {
   }
 
   html() {
-    return /* HTML */ `
-      <div class="work-info-container">
-        <div class="work-info weekly-work-hours">
-          ${this.Icon.html()}
-          <div class="weekly-work-hours-title">이번 주 근무 시간</div>
-          <strong class="weekly-work-hours-time"></strong>
-          <div class="progress-ring-container"></div>
-        </div>
-        <div class="work-info daily-work-hours">
-          <ul class="work-hours-list">
-            <li>
-              <div class="work-hour-title">현재 시각</div>
-              <time class="work-hour-time current" datetime=""></time>
-            </li>
-            <li>
-              <div class="work-hour-title">근무 시작</div>
-              <time class="work-hour-time start" datetime="">-</time>
-            </li>
-            <li>
-              <div class="work-hour-title">근무 종료</div>
-              <time class="work-hour-time end" datetime="">-</time>
-            </li>
-          </ul>
-          <div class="work-hours-button-container" type="button"></div>
-        </div>
+    return /* HTML */ ` <div class="work-info-container">
+      <div class="work-info weekly-work-hours">
+        ${this.Icon.html()}
+        <div class="weekly-work-hours-title">이번 주 근무 시간</div>
+        <strong class="weekly-work-hours-time"></strong>
+        <div class="progress-ring-container"></div>
       </div>
-    `;
+      <div class="work-info daily-work-hours">
+        <ul class="work-hours-list">
+          <li>
+            <div class="work-hour-title">현재 시각</div>
+            <time class="work-hour-time current" datetime=""></time>
+          </li>
+          <li>
+            <div class="work-hour-title">근무 시작</div>
+            <time class="work-hour-time start" datetime="">-</time>
+          </li>
+          <li>
+            <div class="work-hour-title">근무 종료</div>
+            <time class="work-hour-time end" datetime="">-</time>
+          </li>
+        </ul>
+        <div class="work-hours-button-container" type="button"></div>
+      </div>
+    </div>`;
   }
 }
