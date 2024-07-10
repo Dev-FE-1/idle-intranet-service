@@ -1,4 +1,5 @@
 .profile-info {
+  position: relative;
   display: flex;
   margin-bottom: 20px;
 }
@@ -43,8 +44,20 @@
   font-weight: 700;
 }
 
+.profile-info .edit-profile-button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 @media (width >= 1024px) {
   .profile-info {
     flex-grow: 1;
+  }
+
+  .profile-info .edit-profile-button-container {
+    top: -62px;
+    right: auto;
+    left: 72px;
   }
 }

@@ -1,7 +1,10 @@
+import { COLORS } from '../../utils/constants.js';
+import { logoutIcon } from '../../utils/icons.js';
 import { isLoggedIn, logout } from '../API/AuthService.js';
 import Avatar from '../Avatar/Avatar.js';
 import Button from '../Button/Button.js';
 import Container from '../Container.js';
+import Icon from '../Icon/Icon.js';
 import { storeInstance } from '../Store.js';
 import './Header.css';
 
@@ -9,9 +12,16 @@ export default class Header extends Container {
   constructor() {
     super('.header-container');
     this.store = storeInstance;
+    this.icon = new Icon({
+      svg: logoutIcon,
+      options: {
+        color: COLORS.DARKEST_GRAY,
+        size: '14px',
+      },
+    });
     this.Button = new Button({
-      variant: 'tertiary',
-      content: '로그아웃',
+      variant: 'ghost',
+      content: `${this.icon.html()} 로그아웃`,
       size: 'small',
     });
   }
@@ -31,12 +41,10 @@ export default class Header extends Container {
   }
 
   render() {
-    this.$container.innerHTML = `
-      <div class="wrapper">
+    this.$container.innerHTML = /* HTML */ `
+      <div class="wrapper header-items">
         <div class="avatar-container"></div>
-        <div class ='logout-btn-wrapper'>
-          ${this.Button.html()}
-        </div>
+        <div class="logout-btn-wrapper">${this.Button.html()}</div>
       </div>
     `;
     document

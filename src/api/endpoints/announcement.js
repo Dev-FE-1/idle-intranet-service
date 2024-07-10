@@ -13,3 +13,16 @@ export async function fetchAnnouncements() {
     throw error;
   }
 }
+
+export async function fetchAnnouncement(id) {
+  try {
+    const response = await apiCall({
+      endpoint: `${API_ENDPOINTS.ANNOUNCEMENTS}/${id}`,
+      method: 'get',
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch announcement:', error);
+    throw error;
+  }
+}

@@ -125,6 +125,10 @@
   color: var(--color-dark-gray);
 }
 
+.home-container .edit-profile-button-container {
+  display: none;
+}
+
 /* tablet */
 @media (width >= 768px) {
   .home-container .gallery {

@@ -85,25 +85,46 @@
   background-color: #fff;
 }
 
-.no-reult-container {
+.no-result-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  padding-bottom: 80px;
+  background-color: #fff;
 }
 
-.no-reult-container p{
-  margin: 5px 0;
+.no-result-container .no-result-image {
+  width: 200px;
+  margin: 40px 0;
 }
 
-.no-reult-container p strong{
-  color: red;
+.no-result-container p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.no-result-container p strong {
+  color: var(--color-primary);
   letter-spacing: 1px;
 }
 
-.table-container tbody tr{
-  cursor: pointer;
+.members-container .table-container td {
+  padding: 0;
+}
+
+.members-container .table-container td a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+.members-container .table-container td a:has(img) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* 미디어 쿼리 */
