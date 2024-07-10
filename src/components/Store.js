@@ -6,7 +6,7 @@ class Store {
     this.Menu = null;
     this.user = null;
     this.weeklyAttendances = null;
-    this.isWorking = null;
+    this.isWorking = false;
   }
 
   setMenu(menu) {
@@ -21,8 +21,6 @@ class Store {
   }
 
   async getUserIsWorking() {
-    if (this.isWorking !== null) return this.isWorking;
-
     const weeklyAttendances = await this.getWeeklyAttendances();
     const today = new Date().toISOString().split('T')[0];
     const { startTime, endTime } =
