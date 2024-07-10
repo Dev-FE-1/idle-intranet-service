@@ -28,3 +28,18 @@ export async function fetchWeeklyAttendances() {
     throw error;
   }
 }
+
+export async function updateUserProfile({ employeeNumber, profileData }) {
+  try {
+    const response = await apiCall({
+      endpoint: API_ENDPOINTS.UPDATE_PROFILE,
+      method: 'put',
+      data: { employeeNumber, profileData },
+      auth: true,
+    });
+    return response;
+  } catch (error) {
+    console.error('Failed to update profile:', error);
+    throw error;
+  }
+}

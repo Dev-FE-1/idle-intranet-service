@@ -54,12 +54,6 @@
   vertical-align: top;
 }
 
-.table-container td:has(img) {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 @media (width >= 1024px) {
   .table-wrapper {
     max-width: 1200px;
