@@ -12,7 +12,6 @@ import {
   searchMembers,
 } from '../../components/API/MemberService.js';
 import { isLoggedIn } from '../../components/API/AuthService.js';
-import Route from '../../routes/Route.js';
 import Avatar from '../../components/Avatar/Avatar.js';
 
 export default class MembersPage extends Container {
@@ -34,7 +33,6 @@ export default class MembersPage extends Container {
     this.contents = [];
     this.total = 0;
     this.ids = [];
-    this.route = new Route();
 
     isLoggedIn().then((loggedIn) => {
       if (loggedIn) {
@@ -118,15 +116,23 @@ export default class MembersPage extends Container {
     }
   };
 
+  /* eslint-disable class-methods-use-this */
+  createMemberLink(item, id) {
+    return `<a href="${PATH.MEMBERS}/${id}">${item}</a>`;
+  }
+
   renderTable = () => {
     const transformedEmployees = this.contents.map((employee) => {
       this.Avatar = new Avatar({ url: employee.profileImage });
       return [
-        `${this.Avatar.html()}<div>${employee.name}</div>`,
-        employee.position,
-        employee.departmentName,
-        employee.email,
-        employee.phoneNumber,
+        this.createMemberLink(
+          `${this.Avatar.html()}<div>${employee.name}</div>`,
+          employee.employeeNumber,
+        ),
+        this.createMemberLink(employee.position, employee.employeeNumber),
+        this.createMemberLink(employee.departmentName, employee.employeeNumber),
+        this.createMemberLink(employee.email, employee.employeeNumber),
+        this.createMemberLink(employee.phoneNumber, employee.employeeNumber),
       ];
     });
     this.ids = this.contents.map((employee) => [employee.employeeNumber]);
@@ -138,7 +144,7 @@ export default class MembersPage extends Container {
     if (this.total === 0) {
       const name = document.getElementById('search-input').value;
       document.getElementById('table-container').innerHTML = /* HTML */ `
-        <div class="no-reult-container">
+        <div class="no-result-container">
           <p><strong>'${name}'</strong> 에 대한 검색 결과가 없습니다.</p>
           <p>다른 검색어를 입력해주세요.</p>
         </div>
@@ -146,14 +152,6 @@ export default class MembersPage extends Container {
     } else if (window.location.pathname === PATH.MEMBERS) {
       const tableContainer = document.getElementById('table-container');
       tableContainer.innerHTML = this.table.html();
-
-      tableContainer.querySelectorAll('tr').forEach((row, index) => {
-        row.addEventListener('click', () => {
-          const employeeId = this.ids[index - 1];
-          window.history.pushState(null, null, `${PATH.MEMBERS}/${employeeId}`);
-          this.route.init();
-        });
-      });
     }
   };
 

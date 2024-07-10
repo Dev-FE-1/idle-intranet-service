@@ -8,7 +8,7 @@ export default class GalleryItem {
   html() {
     return /* HTML */ `
       <li class="gallery-item">
-        <a href="${PATH.ANNOUNCEMENT}/${this.item.announcementId}">
+        <a href="${PATH.ANNOUNCEMENTS}/${this.item.announcementId}">
           <div class="gallery-image-box">
             <img src="./${this.item.imageUrl}" alt="${this.item.title}" />
           </div>
