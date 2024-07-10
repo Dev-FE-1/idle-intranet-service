@@ -90,8 +90,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  padding-bottom: 80px;
   background-color: #fff;
+}
+
+.no-result-container .no-result-image {
+  width: 200px;
+  margin: 40px 0;
 }
 
 .no-result-container p {

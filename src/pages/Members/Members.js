@@ -13,6 +13,7 @@ import {
 } from '../../components/API/MemberService.js';
 import { isLoggedIn } from '../../components/API/AuthService.js';
 import Avatar from '../../components/Avatar/Avatar.js';
+import noResultImage from '../../../public/images/no-result.png';
 
 export default class MembersPage extends Container {
   constructor() {
@@ -145,8 +146,13 @@ export default class MembersPage extends Container {
       const name = document.getElementById('search-input').value;
       document.getElementById('table-container').innerHTML = /* HTML */ `
         <div class="no-result-container">
-          <p><strong>'${name}'</strong> 에 대한 검색 결과가 없습니다.</p>
-          <p>다른 검색어를 입력해주세요.</p>
+          <img
+            src="${noResultImage}"
+            alt="검색 결과 없음"
+            class="no-result-image"
+          />
+          <p><strong>'${name}'</strong>에 대한 검색 결과가 없습니다.</p>
+          <p>다른 검색어를 입력해 주세요.</p>
         </div>
       `;
     } else if (window.location.pathname === PATH.MEMBERS) {
