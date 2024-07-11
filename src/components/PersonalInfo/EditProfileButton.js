@@ -2,7 +2,7 @@ import Icon from '../Icon/Icon.js';
 import IconButton from '../Button/IconButton.js';
 import Modal from '../Modal/Modal.js';
 import { COLORS } from '../../utils/constants.js';
-import { edit } from '../../utils/icons.js';
+import { edit, loader } from '../../utils/icons.js';
 import EditProfileForm from './EditProfileForm.js';
 import { updateUserProfile } from '../../api/endpoints/user.js';
 import { storeInstance } from '../Store.js';
@@ -20,6 +20,10 @@ export default class EditProfileButton {
       icon: this.icon,
     });
     this.EditProfileForm = new EditProfileForm({ member: this.member });
+    this.loader = new Icon({
+      svg: loader,
+      options: { color: '#fff' },
+    });
   }
 
   updateMember({ profileImage, phoneNumber, address }) {
@@ -84,13 +88,11 @@ export default class EditProfileButton {
       formData.address,
     );
     this.EditProfileForm.showAlertMessage(!isValidPhoneNumber, !isValidAddress);
-    console.log(
-      formData.phoneNumber,
-      formData.address,
-      isValidPhoneNumber,
-      isValidAddress,
-    );
     if (isValidPhoneNumber && isValidAddress) {
+      const $submitButton = document.querySelector(
+        '#edit-profile-modal .btn-primary',
+      );
+      $submitButton.innerHTML = this.loader.html();
       const response = await updateUserProfile({
         employeeNumber: this.member.employeeNumber,
         profileData: formData,
@@ -103,6 +105,7 @@ export default class EditProfileButton {
       this.updateProfilePage(formData);
       this.updateMember(formData);
       this.Modal.close();
+      $submitButton.innerHTML = '수정';
     }
   }
 
