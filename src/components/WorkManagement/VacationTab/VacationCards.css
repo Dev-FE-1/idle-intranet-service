@@ -1,0 +1,20 @@
+.vacation-cards-title {
+  padding-bottom: 30px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (width >= 1024px) {
+  .vacation-cards-container {
+    padding: 0;
+    margin-top: 36px;
+    background-color: white;
+  }
+
+  .vacation-cards-list {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
