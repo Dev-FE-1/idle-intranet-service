@@ -53,21 +53,57 @@ export default class EditProfileButton {
     });
   }
 
-  async onSubmit() {
-    const formData = this.EditProfileForm.getFormData();
-    const response = await updateUserProfile({
-      employeeNumber: this.member.employeeNumber,
-      profileData: formData,
-    });
+  // eslint-disable-next-line class-methods-use-this
+  verifyFormData(phoneNumber, address) {
+    const phoneRegex =
+      /^\+?(\d{1,3})?[-. ]?(\d{1,4})[-. ]?(\d{3,4})[-. ]?(\d{4})$/;
+    const cityRegex = /^[가-힣]{2,5}시$/;
+    const districtRegex = /^[가-힣]{2,5}구$/;
+    const neighborhoodRegex = /^[가-힣0-9]{1,10}(동|로|길)$/;
 
-    if (response.status !== 'OK') {
-      console.log('프로필 수정을 실패했습니다.');
-      return;
+    const isValidPhoneNumber = phoneRegex.test(phoneNumber);
+
+    const parts = address.split(' ');
+    if (parts.length < 3) {
+      return [isValidPhoneNumber, false];
     }
 
-    this.updateProfilePage(formData);
-    this.updateMember(formData);
-    this.Modal.close();
+    const hasCity = parts.some((part) => cityRegex.test(part));
+    const hasDistrict = parts.some((part) => districtRegex.test(part));
+    const hasNeighborhood = parts.some((part) => neighborhoodRegex.test(part));
+
+    const isValidAddress = hasCity && hasDistrict && hasNeighborhood;
+
+    return [isValidPhoneNumber, isValidAddress];
+  }
+
+  async onSubmit() {
+    const formData = this.EditProfileForm.getFormData();
+    const [isValidPhoneNumber, isValidAddress] = this.verifyFormData(
+      formData.phoneNumber,
+      formData.address,
+    );
+    this.EditProfileForm.showAlertMessage(!isValidPhoneNumber, !isValidAddress);
+    console.log(
+      formData.phoneNumber,
+      formData.address,
+      isValidPhoneNumber,
+      isValidAddress,
+    );
+    if (isValidPhoneNumber && isValidAddress) {
+      const response = await updateUserProfile({
+        employeeNumber: this.member.employeeNumber,
+        profileData: formData,
+      });
+
+      if (response.status !== 'OK') {
+        console.log('프로필 수정을 실패했습니다.');
+        return;
+      }
+      this.updateProfilePage(formData);
+      this.updateMember(formData);
+      this.Modal.close();
+    }
   }
 
   onClickEditButton = () => {

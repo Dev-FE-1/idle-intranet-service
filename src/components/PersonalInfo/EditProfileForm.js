@@ -25,6 +25,24 @@ export default class EditProfileForm {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  showAlertMessage(showP, showA) {
+    const alertPhonenumber = document.body.querySelector(
+      '.alert-invalid-phonenumber',
+    );
+    const alertAddress = document.body.querySelector('.alert-invalid-address');
+    if (showP) {
+      alertPhonenumber.classList.add('show');
+    } else {
+      alertPhonenumber.classList.remove('show');
+    }
+    if (showA) {
+      alertAddress.classList.add('show');
+    } else {
+      alertAddress.classList.remove('show');
+    }
+  }
+
   getFormData() {
     return {
       profileImage: this.$image.src,
@@ -110,10 +128,17 @@ export default class EditProfileForm {
       <div class="input-container">
         <label for="phone_number_input">전화번호</label>
         ${this.phoneNumberInput.html()}
+        <p class="alert-invalid-phonenumber">
+          입력하신 전화번호의 형식이 옳바르지 않습니다.
+        </p>
       </div>
       <div class="input-container">
         <label for="address_input">주소</label>
         ${this.addressInput.html()}
+        <p class="alert-invalid-address">
+          입력하신 주소의 형식이 옳바르지 않습니다. <br />
+          시, 구, 동/로/길 까지 표기해주세요.
+        </p>
       </div>
     </form>`;
   }
