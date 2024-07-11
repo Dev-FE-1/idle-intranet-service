@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -13,13 +14,13 @@
 }
 
 .vacation-card-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  margin-right: 10px;
+  font-size: 16px;
+  margin-right: 8px;
 }
 
 .vacation-card-info-box {
@@ -29,7 +30,7 @@
 }
 
 .vacation-card-days {
-  margin-right: 7px;
+  margin-right: 8px;
   color: var(--color-darkest-gray);
   font-weight: 500;
   text-align: right;
@@ -40,7 +41,7 @@
   margin-right: -3px;
 }
 
-@media (width >= 1024px) {
+@media (width >= 768px) {
   .vacation-card {
     padding: 20px;
     width: calc((100% / 3) - 9px);
@@ -58,5 +59,11 @@
 
   .vacation-card-days {
     margin-right: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  .vacation-card {
+    width: calc((100% / 4) - 9px);
   }
 }

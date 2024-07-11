@@ -11,6 +11,7 @@
   align-items: center;
   gap: 10px;
   border-radius: 4px;
+  font-size: 14px;
   background-color: transparent;
   cursor: pointer;
   outline: none;
@@ -32,7 +33,7 @@
 }
 
 .dropdown-btn.underlined.dropdown-open {
-  border-bottom: 1px solid var(--color-darkest-gray);
+  border-bottom: 1px solid var(--color-dark-gray);
 }
 
 /* rounded-border */
@@ -46,7 +47,7 @@
 }
 
 .dropdown-btn.rounded-border.dropdown-open {
-  border: 1px solid var(--color-darkest-gray);
+  border: 1px solid var(--color-dark-gray);
 }
 
 .dropdown-list {
@@ -58,8 +59,8 @@
   min-width: 160px;
   border: 1px solid var(--color-light-gray);
   border-radius: 4px;
+  font-size: 14px;
   background-color: white;
-  box-shadow: 0 4px 6px 0 rgb(0 0 0 / 9%);
 }
 
 .dropdown-item {
