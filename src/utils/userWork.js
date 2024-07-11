@@ -1,15 +1,17 @@
 function getTimeInMinutes(time) {
-  const [hours, minutes, seconds] = time.split(':').map(Number);
-  return hours * 60 + minutes + seconds / 60;
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes / 60;
 }
 
 function getWorkDuration({ startTime, endTime }) {
   const MAX = 9;
-  const startMinutes = getTimeInMinutes(startTime);
-  const endMinutes = getTimeInMinutes(endTime);
-  const durationHours = (endMinutes - startMinutes) / 60;
-
-  return durationHours === MAX ? durationHours - 1 : durationHours;
+  const startMinutes = startTime ? getTimeInMinutes(startTime) : 0;
+  const endMinutes = endTime ? getTimeInMinutes(endTime) : 0;
+  const durationHours =
+    endMinutes - startMinutes < 0
+      ? 0
+      : Math.floor((endMinutes - startMinutes) / 60);
+  return durationHours > MAX ? 8 : durationHours;
 }
 
 function calculateWeeklyWorkHours(data) {
