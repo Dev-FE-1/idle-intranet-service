@@ -3,7 +3,6 @@ import { fetchAnnouncement } from '../../api/endpoints/announcement.js';
 import './Announcement.css';
 import { fetchMember } from '../../api/endpoints/member.js';
 import Icon from '../../components/Icon/Icon.js';
-import IconButton from '../../components/Button/IconButton.js';
 import { chevronLeft } from '../../utils/icons.js';
 import { COLORS } from '../../utils/constants.js';
 
@@ -13,9 +12,11 @@ export default class AnnouncementPage extends Container {
     this.announcement = null;
     this.Icon = new Icon({
       svg: chevronLeft,
-      options: { color: COLORS.DARKEST_GRAY },
+      options: {
+        color: COLORS.DARKEST_GRAY,
+        size: '1.4rem',
+      },
     });
-    this.IconButton = new IconButton({ icon: this.Icon });
   }
 
   async setAnnouncement() {
@@ -24,36 +25,43 @@ export default class AnnouncementPage extends Container {
     this.announcement = await fetchAnnouncement(id);
   }
 
-  async getMember() {
+  async setMember() {
     this.member = await fetchMember(this.announcement.employeeNumber);
-    console.log(this.member);
   }
 
   async render() {
     await this.setAnnouncement();
-    await this.getMember();
+    await this.setMember();
 
     this.$container.innerHTML = /* HTML */ `
       <div class="announcement-page-container">
-        <div class="back-button-container">${this.IconButton.html()}</div>
-        <h1 class="announcement-title">${this.announcement.title}</h1>
-        <div class="announcement-department">
-          ${this.member.name} | ${this.announcement.postedDate}
+        <header class="announcement-mobile-header">
+          <button>${this.Icon.html()}</button>
+        </header>
+        <div class="wrapper">
+          <h1 class="announcement-title">${this.announcement.title}</h1>
+          <div class="announcement-department">
+            ${this.member.name} | ${this.announcement.postedDate}
+          </div>
         </div>
         <img
           class="announcement-image"
           src="..${this.announcement.imageUrl}"
           alt="Announcement Image"
         />
-        <p class="announcement-content">
-          ${this.announcement.content.replaceAll('\n', '<br />')}
-        </p>
+        <div class="wrapper">
+          <p class="announcement-content">
+            ${this.announcement.content.replaceAll('\n', '<br />')}
+          </p>
+        </div>
       </div>
     `;
-    document
-      .querySelector('.back-button-container button')
-      .addEventListener('click', () => {
-        window.history.back();
-      });
+
+    const backButton = document.querySelector(
+      '.announcement-mobile-header button',
+    );
+    backButton.addEventListener('click', () => {
+      window.history.back();
+    });
   }
 }
