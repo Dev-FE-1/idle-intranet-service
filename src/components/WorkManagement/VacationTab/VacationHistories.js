@@ -11,9 +11,21 @@ export default class VacationHistories {
     this.isLoading = true;
     this.VacationSelect = new Select({
       contents: vacationTypes,
-      onSelect: (selectedItem) => console.log('Selected:', selectedItem),
+      onSelect: (selectedItem) => this.onSelectType(selectedItem),
       roundedBorder: true,
     });
+  }
+
+  onSelectType(selectedItem) {
+    let filteredVacations = this.vacations.filter(
+      (vacation) => vacation.vacationType === selectedItem,
+    );
+
+    if (selectedItem === '전체 휴가') {
+      filteredVacations = this.vacations;
+    }
+
+    this.renderTable(filteredVacations, selectedItem);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -35,7 +47,7 @@ export default class VacationHistories {
     );
   }
 
-  renderTable(vacations) {
+  renderTable(vacations, selectedItem = null) {
     const tableContents = this.setTableContents(vacations);
     this.Table = new Table({
       headers: [
@@ -51,7 +63,16 @@ export default class VacationHistories {
     const $tableContainer = this.$vacationHistoriesContainer.querySelector(
       '.vacation-table-container',
     );
-    $tableContainer.innerHTML = this.Table.html();
+
+    if (!vacations.length && selectedItem) {
+      $tableContainer.innerHTML = /* HTML */ `
+        <p class="no-vacations-result">
+          <strong>'${selectedItem}'</strong> 사용 기록이 없습니다.
+        </p>
+      `;
+    } else {
+      $tableContainer.innerHTML = this.Table.html();
+    }
   }
 
   async setVacation() {

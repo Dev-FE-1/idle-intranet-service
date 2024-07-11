@@ -1,3 +1,7 @@
+.vacation-histories-container {
+  min-height: 400px;
+}
+
 .vacation-histories-header {
   padding-bottom: 22px;
   display: flex;
@@ -17,11 +21,23 @@
   background-color: rgba(0 122 255 / 10%);
 }
 
+.no-vacations-result {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.no-vacations-result strong {
+  color: var(--color-primary);
+}
+
 @media (width >= 1024px) {
   .vacation-histories-container {
     padding: 0;
     margin-top: 48px;
-    margin-bottom: 48px;
     background-color: white;
+  }
+
+  .vacation-histories-container .table-container {
+    margin-bottom: 20px;
   }
 }
