@@ -65,7 +65,7 @@ export default class WorkManagePage extends Container {
         await this.renderVacationTab();
         break;
       default:
-        await this.renderVacationTab();
+        await this.workingTab.render();
     }
   }
 
@@ -79,19 +79,21 @@ export default class WorkManagePage extends Container {
       <div class="work-manage-header-container">
         ${this.Title.html()}
         <ul class="work-manage-menu-list wrapper">
-          <li class="work-manage-menu-item" id="work-management">근무 관리</li>
-          <li class="work-manage-menu-item active" id="vacation-management">
+          <li class="work-manage-menu-item active" id="work-management">
+            근무 관리
+          </li>
+          <li class="work-manage-menu-item" id="vacation-management">
             휴가 관리
           </li>
         </ul>
       </div>
       <div id="work-manage-content" class="work-manage-content">
-        <section class="vacation-cards-container"></section>
-        <section class="vacation-histories-container"></section>
-        <section class="working-tab-container hidden"></section>
+        <section class="vacation-cards-container hidden"></section>
+        <section class="vacation-histories-container hidden"></section>
+        <section class="working-tab-container"></section>
       </div>
     `;
-    await this.renderVacationTab();
+    await this.workingTab.render();
     this.setupMenuInteraction();
   }
 }
