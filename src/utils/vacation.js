@@ -44,7 +44,7 @@ export const vacationTypes = [
   '배우자 출산 휴가',
   '여성 휴가',
   '가족 돌봄 휴가',
-  '기타휴가',
+  '기타 휴가',
 ];
 
 export const vacationDaysOptions = [
