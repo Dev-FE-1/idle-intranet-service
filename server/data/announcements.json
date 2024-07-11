@@ -6,7 +6,7 @@
     "employeeNumber": 145,
     "departmentNumber": 60,
     "postedDate": "2024-04-15",
-    "imageUrl": "/public/images/announcements_01.png"
+    "imageUrl": "/images/announcements_01.png"
   },
   {
     "announcementId": 2,
@@ -15,7 +15,7 @@
     "employeeNumber": 145,
     "departmentNumber": 60,
     "postedDate": "2024-01-30",
-    "imageUrl": "/public/images/announcements_02.png"
+    "imageUrl": "/images/announcements_02.png"
   },
   {
     "announcementId": 3,
@@ -24,7 +24,7 @@
     "employeeNumber": 139,
     "departmentNumber": 50,
     "postedDate": "2024-03-10",
-    "imageUrl": "/public/images/announcements_03.png"
+    "imageUrl": "/images/announcements_03.png"
   },
   {
     "announcementId": 4,
@@ -33,7 +33,7 @@
     "employeeNumber": 127,
     "departmentNumber": 70,
     "postedDate": "2023-12-25",
-    "imageUrl": "/public/images/announcements_04.png"
+    "imageUrl": "/images/announcements_04.png"
   },
   {
     "announcementId": 5,
@@ -42,7 +42,7 @@
     "employeeNumber": 143,
     "departmentNumber": 20,
     "postedDate": "2024-06-20",
-    "imageUrl": "/public/images/announcements_05.png"
+    "imageUrl": "/images/announcements_05.png"
   },
   {
     "announcementId": 6,
