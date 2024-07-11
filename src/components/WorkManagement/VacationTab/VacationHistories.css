@@ -1,0 +1,24 @@
+.vacation-histories-header {
+  padding-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vacation-histories-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (width >= 1024px) {
+  .vacation-histories-header {
+    max-width: 300px;
+  }
+
+  .vacation-histories-container {
+    padding: 0;
+    margin-top: 48px;
+    margin-bottom: 48px;
+    background-color: white;
+  }
+}

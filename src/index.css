@@ -42,6 +42,10 @@ button {
   padding-bottom: 70px;
 }
 
+.hidden {
+  display: none;
+}
+
 @media (width >= 1024px) {
   body {
     background-color: #fff;
