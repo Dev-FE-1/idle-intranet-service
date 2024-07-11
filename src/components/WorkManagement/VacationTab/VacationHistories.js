@@ -1,9 +1,9 @@
 import './VacationHistories.css';
-import VacationHistory from './VacationHistory.js';
 import Select from '../../Select/Select.js';
 import { vacationTypes } from '../../../utils/vacation.js';
 import { storeInstance } from '../../Store.js';
 import { fetchVacationRequests } from '../../../api/endpoints/vacationRequests.js';
+import Table from '../../Table/Table.js';
 
 export default class VacationHistories {
   constructor() {
@@ -16,28 +16,49 @@ export default class VacationHistories {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  setTableContents(vacations) {
+    return vacations.map(
+      ({
+        vacationStartDate,
+        vacationEndDate,
+        vacationType,
+        approvalStatus,
+        vacationRequestDate,
+      }) => [
+        vacationType,
+        `<span class="vacation-status">${approvalStatus}</span>`,
+        vacationStartDate,
+        vacationEndDate,
+        vacationRequestDate,
+      ],
+    );
+  }
+
+  renderTable(vacations) {
+    const tableContents = this.setTableContents(vacations);
+    this.Table = new Table({
+      headers: [
+        '휴가 종류',
+        '승인 상태',
+        '휴가 시작일',
+        '휴가 종료일',
+        '신청일',
+      ],
+      contents: tableContents,
+    });
+
+    const $tableContainer = this.$vacationHistoriesContainer.querySelector(
+      '.vacation-table-container',
+    );
+    $tableContainer.innerHTML = this.Table.html();
+  }
+
   async setVacation() {
     if (!this.user) {
       this.user = await this.store.getUser();
     }
     this.vacations = await fetchVacationRequests(this.user.employeeNumber);
-  }
-
-  async renderVacationHistories() {
-    const $vacationHistoriesList =
-      this.$vacationHistoriesContainer.querySelector(
-        '.vacation-histories-list',
-      );
-
-    if (!this.vacations) {
-      await this.setVacation();
-    }
-
-    if ($vacationHistoriesList) {
-      $vacationHistoriesList.innerHTML = this.vacations
-        .map((vacation) => new VacationHistory(vacation).html())
-        .join('');
-    }
   }
 
   async render() {
@@ -51,11 +72,11 @@ export default class VacationHistories {
           <h3 class="vacation-histories-title">사용 기록</h3>
           ${this.VacationSelect.html()}
         </div>
-        <ul class="vacation-histories-list"></ul>
       </div>
+      <div class="vacation-table-container"></div>
     `;
     await this.setVacation();
-    await this.renderVacationHistories();
+    this.renderTable(this.vacations);
     this.VacationSelect.setEventListeners();
   }
 }
