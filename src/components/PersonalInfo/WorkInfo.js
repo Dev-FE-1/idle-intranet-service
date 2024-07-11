@@ -12,6 +12,7 @@ import {
   setTodayWork,
 } from '../../utils/userWork.js';
 import { addAttendance, updateAttendance } from '../API/AttendanceService.js';
+import Modal from '../Modal/Modal.js';
 
 export default class WorkInfo {
   constructor({ personalInfo }) {
@@ -23,6 +24,7 @@ export default class WorkInfo {
       options: { color: COLORS.DARK_GRAY },
     });
     this.personalInfo = personalInfo;
+    this.modal = new Modal({ onSubmit: () => {}, id: 'work-toggle-modal' });
   }
 
   renderWeeklyWorkHours() {
@@ -35,6 +37,16 @@ export default class WorkInfo {
     const percent = (this.weeklyWorkHours / 40) * 100;
     this.ProgressRing = new ProgressRing({ percent });
     if ($container) $container.innerHTML = this.ProgressRing.html();
+  }
+
+  setModal({ title, mainContent, buttonContent, onSubmit }) {
+    const modalWrapper = document.body.querySelector('.work-modal-wrapper');
+    this.modal.title = title;
+    this.modal.mainContent = mainContent;
+    this.modal.buttonContent = buttonContent;
+    this.modal.updateButton();
+    this.modal.onSubmit = onSubmit;
+    modalWrapper.innerHTML = this.modal.html();
   }
 
   async renderDailyWork() {
@@ -83,36 +95,52 @@ export default class WorkInfo {
         ).innerHTML;
 
         if (startTime && !endTime) {
-          endTime = now;
-          $endTime.innerText = endTime || '-';
-          $endTime.setAttribute('datetime', endTime);
-
-          const attendanceData = {
-            employeeNumber: this.user.employeeNumber,
-            date: today,
-            startTime,
-            endTime,
-            status: '정상 근무',
-          };
-          await updateAttendance(attendanceData);
-          attendance.endTime = endTime;
+          this.setModal({
+            title: `현재 시각: ${now}`,
+            mainContent: '근무를 종료하시겠습니까?',
+            buttonContent: '근무 종료',
+            onSubmit: async () => {
+              endTime = now;
+              $endTime.innerText = endTime || '-';
+              $endTime.setAttribute('datetime', endTime);
+              const attendanceData = {
+                employeeNumber: this.user.employeeNumber,
+                date: today,
+                startTime,
+                endTime,
+                status: '정상 근무',
+              };
+              await updateAttendance(attendanceData);
+              attendance.endTime = endTime;
+              await this.renderDailyWork();
+              this.personalInfo.updateIsWorking();
+            },
+          });
         } else if (!startTime) {
-          startTime = now;
-          $startTime.innerText = startTime || '-';
-          $startTime.setAttribute('datetime', startTime);
-
-          const attendanceData = {
-            employeeNumber: this.user.employeeNumber,
-            date: today,
-            startTime,
-            endTime: null,
-            status: '정상 근무',
-          };
-          await addAttendance(attendanceData);
-          attendance.startTime = startTime;
+          this.setModal({
+            title: `현재 시각: ${now}`,
+            mainContent: '근무를 시작하시겠습니까?',
+            buttonContent: '근무 시작',
+            onSubmit: async () => {
+              startTime = now;
+              $startTime.innerText = startTime || '-';
+              $startTime.setAttribute('datetime', startTime);
+              const attendanceData = {
+                employeeNumber: this.user.employeeNumber,
+                date: today,
+                startTime,
+                endTime: null,
+                status: '정상 근무',
+              };
+              await addAttendance(attendanceData);
+              attendance.startTime = startTime;
+              await this.renderDailyWork();
+              this.personalInfo.updateIsWorking();
+            },
+          });
         }
-        await this.renderDailyWork();
-        this.personalInfo.updateIsWorking();
+        this.modal.render();
+        this.modal.open();
       });
   }
 
@@ -128,30 +156,33 @@ export default class WorkInfo {
   }
 
   html() {
-    return /* HTML */ ` <div class="work-info-container">
-      <div class="work-info weekly-work-hours">
-        ${this.Icon.html()}
-        <div class="weekly-work-hours-title">이번 주 근무 시간</div>
-        <strong class="weekly-work-hours-time"></strong>
-        <div class="progress-ring-container"></div>
+    return /* HTML */ `
+      <div class="work-info-container">
+        <div class="work-info weekly-work-hours">
+          ${this.Icon.html()}
+          <div class="weekly-work-hours-title">이번 주 근무 시간</div>
+          <strong class="weekly-work-hours-time"></strong>
+          <div class="progress-ring-container"></div>
+        </div>
+        <div class="work-info daily-work-hours">
+          <div class="work-modal-wrapper"></div>
+          <ul class="work-hours-list">
+            <li>
+              <div class="work-hour-title">현재 시각</div>
+              <time class="work-hour-time current" datetime=""></time>
+            </li>
+            <li>
+              <div class="work-hour-title">근무 시작</div>
+              <time class="work-hour-time start" datetime="">-</time>
+            </li>
+            <li>
+              <div class="work-hour-title">근무 종료</div>
+              <time class="work-hour-time end" datetime="">-</time>
+            </li>
+          </ul>
+          <div class="work-hours-button-container" type="button"></div>
+        </div>
       </div>
-      <div class="work-info daily-work-hours">
-        <ul class="work-hours-list">
-          <li>
-            <div class="work-hour-title">현재 시각</div>
-            <time class="work-hour-time current" datetime=""></time>
-          </li>
-          <li>
-            <div class="work-hour-title">근무 시작</div>
-            <time class="work-hour-time start" datetime="">-</time>
-          </li>
-          <li>
-            <div class="work-hour-title">근무 종료</div>
-            <time class="work-hour-time end" datetime="">-</time>
-          </li>
-        </ul>
-        <div class="work-hours-button-container" type="button"></div>
-      </div>
-    </div>`;
+    `;
   }
 }

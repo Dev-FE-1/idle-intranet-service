@@ -81,6 +81,7 @@ export default class EditProfileButton {
       mainContent: this.EditProfileForm.html(),
       buttonContent: '수정',
       onSubmit: this.onSubmit.bind(this),
+      id: 'edit-profile-modal',
     });
   }
 
