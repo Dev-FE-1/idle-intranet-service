@@ -22,7 +22,6 @@ export default class AnnouncementPage extends Container {
     const pathParts = window.location.pathname.split('/');
     const id = pathParts[pathParts.length - 1];
     this.announcement = await fetchAnnouncement(id);
-    console.log(this.announcement);
   }
 
   async getMember() {
@@ -36,7 +35,7 @@ export default class AnnouncementPage extends Container {
 
     this.$container.innerHTML = /* HTML */ `
       <div class="announcement-page-container">
-        <div class="back-button">${this.IconButton.html()}</div>
+        <div class="back-button-container">${this.IconButton.html()}</div>
 
         <h1 class="announcement-title">${this.announcement.title}</h1>
         <div class="announcement-department">
@@ -53,8 +52,10 @@ export default class AnnouncementPage extends Container {
         </p>
       </div>
     `;
-    document.querySelector('.back-button').addEventListener('click', () => {
-      window.history.back();
-    });
+    document
+      .querySelector('.back-button-container button')
+      .addEventListener('click', () => {
+        window.history.back();
+      });
   }
 }

@@ -1,5 +1,5 @@
 .announcement-page-container {
-  padding: 20px;
+  padding: 10px;
   background-color: #fff;
 }
 
@@ -16,6 +16,7 @@
 }
 
 .announcement-image {
+  margin-top: 20px;
   max-width: 100%;
   height: auto;
   margin-bottom: 10px;
@@ -24,6 +25,9 @@
 .announcement-content {
   font-size: 16px;
   margin-bottom: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
 }
 
 .announcement-date {
@@ -31,17 +35,52 @@
   color: var(--color-dark-gray);
 }
 
-.announcement-page-container .back-button button {
+.announcement-page-container .back-button-container button {
   border: none;
 }
 
 /* tablet */
-@media (width >= 768px) {
+@media (width >= 632px) {
+  .announcement-page-container .back-button-container button {
+    display: none;
+  }
+
+  .announcement-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  .announcement-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .announcement-title,
+  .announcement-department,
+  .announcement-content,
+  .announcement-date {
+    width: 100%;
+    max-width: 600px;
+  }
+  .announcement-content {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    margin: 20px auto;
+    width: 100%;
+  }
 }
 
 /* desktop */
 @media (width >= 1024px) {
-  .announcement-page-container .back-button button {
+  .announcement-page-container .back-button-container button {
     display: none;
   }
   .announcement-page-container {
@@ -71,5 +110,6 @@
     text-align: left;
     margin-top: 20px;
     margin-bottom: 20px;
+    width: 610px;
   }
 }
