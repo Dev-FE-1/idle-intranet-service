@@ -1,0 +1,30 @@
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.calendar-table th,
+.calendar-table td {
+  height: 50px;
+  text-align: center;
+}
+
+.calendar-table td {
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.calendar-table .disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.calendar-table .selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.calendar-table .range {
+  background-color: #90caf9;
+}
