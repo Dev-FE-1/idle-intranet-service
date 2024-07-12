@@ -1,0 +1,19 @@
+.working-tab-title {
+  padding: 0 20px 30px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (width >= 1024px) {
+  .working-tab-container {
+    padding: 0;
+    margin-top: 36px;
+    background-color: white;
+  }
+
+  .working-tab-title {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}

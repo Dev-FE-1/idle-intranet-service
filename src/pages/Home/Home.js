@@ -72,13 +72,9 @@ export default class HomePage extends Container {
     if (!this.user) {
       this.user = await this.store.getUser();
     }
-    if (!this.isWorking) {
-      this.isWorking = await this.store.getUserIsWorking();
-    }
 
     this.PersonalInfo = new PersonalInfo({
       member: this.user,
-      isWorking: this.isWorking,
     });
 
     const $container = document.querySelector(

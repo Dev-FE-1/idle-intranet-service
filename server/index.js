@@ -347,6 +347,53 @@ app.get('/api/attendance/weekly', extractEmployeeNumber, (req, res) => {
   });
 });
 
+app.post('/api/addAttendance', (req, res) => {
+  const { employeeNumber, date, startTime, endTime, status } = req.body;
+
+  const sql = `
+    INSERT INTO Attendance (employeeNumber, date, startTime, endTime, status)
+    VALUES (?, ?, ?, ?, ?)
+  `;
+
+  // eslint-disable-next-line consistent-return
+  db.run(sql, [employeeNumber, date, startTime, endTime, status], (err) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+    });
+  });
+});
+
+app.post('/api/updateAttendance', (req, res) => {
+  const { employeeNumber, date, endTime } = req.body;
+
+  const sql = `
+    UPDATE Attendance
+    SET endTime = ?
+    WHERE employeeNumber = ? AND date = ? AND endTime IS NULL
+  `;
+
+  // eslint-disable-next-line consistent-return
+  db.run(sql, [endTime, employeeNumber, date], (err) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+    });
+  });
+});
+
 // eslint-disable-next-line consistent-return
 app.get('/api/attendance/:page', (req, res) => {
   let { page } = req.params;

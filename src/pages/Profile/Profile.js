@@ -3,10 +3,10 @@ import Button from '../../components/Button/Button.js';
 import Container from '../../components/Container.js';
 import PersonalDetails from '../../components/PersonalInfo/PersonalDetails.js';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
-import { storeInstance } from '../../components/Store.js';
 import Title from '../../components/Title/Title.js';
 import { PATH_TITLE } from '../../utils/constants.js';
 import './Profile.css';
+import { storeInstance } from '../../components/Store.js';
 
 export default class ProfilePage extends Container {
   constructor() {
@@ -28,14 +28,9 @@ export default class ProfilePage extends Container {
     if (!this.user) {
       this.user = await this.store.getUser();
     }
-    if (!this.isWorking) {
-      this.isWorking = await this.store.getUserIsWorking();
-    }
-
     this.PersonalDetails = new PersonalDetails();
     this.PersonalInfo = new PersonalInfo({
       member: this.user,
-      isWorking: this.isWorking,
     });
   }
 
@@ -48,8 +43,7 @@ export default class ProfilePage extends Container {
       ${this.PersonalDetails.html()}
       <div class='logout-btn-wrapper-inprofile'>
         ${this.Button.html()}
-      </div>
-    `;
+      </div>`;
 
     this.PersonalDetails.render(this.user);
     this.PersonalInfo.render();

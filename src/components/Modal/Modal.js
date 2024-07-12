@@ -2,13 +2,14 @@ import Button from '../Button/Button.js';
 import './Modal.css';
 
 export default class Modal {
-  constructor({ title, mainContent, buttonContent, onSubmit }) {
+  constructor({ title, mainContent, buttonContent, onSubmit, id }) {
     this.title = title || '';
     this.mainContent = mainContent || '메인 컨텐츠';
     this.buttonContent = buttonContent || 'Click me';
     this.submitButton = new Button({ content: this.buttonContent });
     this.closeButton = new Button({ variant: 'text', content: '취소' });
     this.onSubmit = onSubmit;
+    this.id = id;
   }
 
   open() {
@@ -17,6 +18,10 @@ export default class Modal {
 
   close() {
     this.$container.classList.remove('active');
+  }
+
+  updateButton() {
+    this.submitButton = new Button({ content: this.buttonContent });
   }
 
   setEventListeners() {
@@ -32,13 +37,13 @@ export default class Modal {
   }
 
   render() {
-    this.$container = document.querySelector('.modal-container');
+    this.$container = document.querySelector(`#${this.id}`);
     this.setEventListeners();
   }
 
   html() {
     return /* HTML */ `
-      <div class="modal-container">
+      <div class="modal-container" id=${this.id}>
         <div class="modal-bg"></div>
         <div class="modal-content">
           <div class="modal-header">
