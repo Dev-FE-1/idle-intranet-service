@@ -4,7 +4,6 @@ import { vacationArray } from '../../../utils/vacation.js';
 import Modal from '../../Modal/Modal.js';
 import VacationForm from '../../VacationForm/VacationForm.js';
 
-
 export default class VacationCards {
   constructor() {
     this.modal = new Modal({
@@ -22,13 +21,14 @@ export default class VacationCards {
     this.modal.render();
   }
 
-
   handleVacationCardClick = async (vacationDataType) => {
     this.vacationForm = new VacationForm(vacationDataType);
     this.setModal({
       mainContent: this.vacationForm.html(),
       onSubmit: () => {
         console.log('휴가 신청 제출');
+        // 휴가 신청 후 동작 등록
+        this.modal.close();
       },
     });
     this.modal.open();
