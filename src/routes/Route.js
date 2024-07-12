@@ -1,5 +1,6 @@
 import { isLoggedIn } from '../components/API/AuthService.js';
 import { storeInstance } from '../components/Store.js';
+import AnnouncementPage from '../pages/Announcement/Announcement.js';
 import {
   HomePage,
   MembersPage,
@@ -8,6 +9,7 @@ import {
   SignInPage,
   PageNotFound,
 } from '../pages/index.js';
+import ProfileSpecPage from '../pages/ProfileSpec/ProfileSpec.js';
 import { PATH_TITLE, PATH } from '../utils/constants.js';
 import { matchRoute } from '../utils/matchRoute.js';
 
@@ -20,8 +22,12 @@ export default class Route {
   setRoutes() {
     this.routes = {
       [PATH.HOME]: { title: PATH_TITLE.HOME, page: new HomePage() },
+      [PATH.ANNOUNCEMENT]: {
+        title: PATH_TITLE.ANNOUNCEMENT,
+        page: new AnnouncementPage(),
+      },
+      [PATH.MEMBER]: { title: PATH_TITLE.MEMBERS, page: new ProfileSpecPage() },
       [PATH.MEMBERS]: { title: PATH_TITLE.MEMBERS, page: new MembersPage() },
-      [PATH.MEMBER]: { title: PATH_TITLE.MEMBERS, page: new ProfilePage() },
       [PATH.PROFILE]: { title: PATH_TITLE.PROFILE, page: new ProfilePage() },
       [PATH.WORK_MANAGE]: {
         title: PATH_TITLE.WORK_MANAGE,

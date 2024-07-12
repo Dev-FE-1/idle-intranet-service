@@ -6,7 +6,6 @@ import { sortByPeriod } from '../../utils/sortByPeriod.js';
 export default class PersonalDetails {
   constructor() {
     this.store = storeInstance;
-    this.isOwner = true; // 임시
     this.personalInfo = [];
     this.privateInfo = [];
     this.employmentInfo = [];
@@ -88,9 +87,8 @@ export default class PersonalDetails {
   async render(member) {
     this.user = await this.store.getUser();
     this.member = member;
-    this.isAdmin = !!this.member.isAdmin;
+    this.isAdmin = !!this.user.isAdmin;
     this.isOwner = this.member.employeeNumber === this.user.employeeNumber;
-
     this.setInfoArray();
     this.renderPersonalDetails();
   }

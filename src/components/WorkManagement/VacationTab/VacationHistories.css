@@ -1,0 +1,43 @@
+.vacation-histories-container {
+  min-height: 400px;
+}
+
+.vacation-histories-header {
+  padding-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vacation-histories-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.vacation-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--color-primary);
+  background-color: rgba(0 122 255 / 10%);
+}
+
+.no-vacations-result {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.no-vacations-result strong {
+  color: var(--color-primary);
+}
+
+@media (width >= 1024px) {
+  .vacation-histories-container {
+    padding: 0;
+    margin-top: 48px;
+    background-color: white;
+  }
+
+  .vacation-histories-container .table-container {
+    margin-bottom: 30px;
+  }
+}

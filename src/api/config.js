@@ -24,4 +24,5 @@ export const API_ENDPOINTS = {
   DEPARTMENTS: apiUrl('api/departments'),
   ANNOUNCEMENTS: apiUrl('api/announcements'),
   USER: apiUrl('api/user'),
+  UPDATE_PROFILE: apiUrl('api/updateProfile'),
 };

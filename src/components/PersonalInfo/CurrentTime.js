@@ -9,9 +9,10 @@ export default class CurrentTime {
 
   updateTime() {
     const currentTime = dayjs().format('HH:mm');
-
-    this.$time.setAttribute('datetime', currentTime);
-    this.$time.innerText = currentTime;
+    if (this.$time) {
+      this.$time.setAttribute('datetime', currentTime);
+      this.$time.innerText = currentTime;
+    }
   }
 
   getNextUpdateDelay() {

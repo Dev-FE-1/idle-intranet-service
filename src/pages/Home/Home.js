@@ -6,6 +6,8 @@ import GalleryItem from '../../components/Announcements/GalleryItem.js';
 import TextItem from '../../components/Announcements/TextItem.js';
 import { fetchAnnouncements } from '../../api/endpoints/announcement.js';
 import './Home.css';
+import { storeInstance } from '../../components/Store.js';
+import { isLoggedIn } from '../../components/API/AuthService.js';
 
 export default class HomePage extends Container {
   constructor() {
@@ -16,7 +18,7 @@ export default class HomePage extends Container {
       description:
         'Cube.IT은 작은 아이디어로 큰 변화를 만들어갑니다. 혁신적인 큐브의 힘을 경험해 보세요.',
     });
-    this.PersonalInfo = new PersonalInfo();
+    this.store = storeInstance;
   }
 
   async setAnnouncements() {
@@ -63,6 +65,25 @@ export default class HomePage extends Container {
     textItems.forEach((item) => item.render());
   }
 
+  async renderPersonalInfo() {
+    const isValidUser = await isLoggedIn();
+
+    if (!isValidUser) return;
+    if (!this.user) {
+      this.user = await this.store.getUser();
+    }
+
+    this.PersonalInfo = new PersonalInfo({
+      member: this.user,
+    });
+
+    const $container = document.querySelector(
+      '.home-container .personal-info-container',
+    );
+    $container.innerHTML = this.PersonalInfo.html();
+    this.PersonalInfo.render();
+  }
+
   render() {
     this.$container.innerHTML = /* HTML */ `
       <div class="home-container">
@@ -82,7 +103,7 @@ export default class HomePage extends Container {
           <div class="wrapper">
             <h2 class="home-subtitle">내 정보</h2>
           </div>
-          ${this.PersonalInfo.html()}
+          <div class="personal-info-container"></div>
         </div>
 
         <section class="gallery-section">
@@ -101,7 +122,8 @@ export default class HomePage extends Container {
       </div>
     `;
 
-    this.PersonalInfo.render();
+    this.renderPersonalInfo();
+    this.renderTextAnnouncements();
     this.renderGalleryAnnouncements();
     this.renderTextAnnouncements();
   }

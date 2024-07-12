@@ -46,4 +46,29 @@ const searchMembers = async (name, max, page) => {
   }
 };
 
-export { getMembers, searchMembers };
+const getMemberById = async (
+  employeeNumber,
+  isAdmin = false,
+  isOwner = false,
+) => {
+  try {
+    const response = await fetch(
+      `${apiBaseUrl}/api/member/${employeeNumber}?isAdmin=${isAdmin}&isOwner=${isOwner}`,
+      {
+        method: 'GET',
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to load data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error('Error loading member data:', error);
+    throw error;
+  }
+};
+
+export { getMembers, searchMembers, getMemberById };

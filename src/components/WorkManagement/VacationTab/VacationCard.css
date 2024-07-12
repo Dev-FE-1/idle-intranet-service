@@ -1,0 +1,69 @@
+.vacation-card {
+  min-height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.vacation-card-type-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vacation-card-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.vacation-card-info-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vacation-card-days {
+  margin-right: 8px;
+  color: var(--color-darkest-gray);
+  font-weight: 500;
+  text-align: right;
+}
+
+.next-arrow-icon {
+  display: flex;
+  margin-right: -3px;
+}
+
+@media (width >= 768px) {
+  .vacation-card {
+    padding: 20px;
+    width: calc((100% / 3) - 9px);
+    border: 1px solid var(--color-light-gray);
+    border-radius: 4px;
+  }
+
+  .vacation-card:hover {
+    background-color: var(--color-lightest-gray);
+  }
+
+  .next-arrow-icon {
+    display: none;
+  }
+
+  .vacation-card-days {
+    margin-right: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  .vacation-card {
+    width: calc((100% / 4) - 9px);
+  }
+}

@@ -1,10 +1,12 @@
 import { fetchUser, fetchWeeklyAttendances } from '../api/endpoints/user.js';
+import { setTodayWork } from '../utils/userWork.js';
 
 class Store {
   constructor() {
     this.Menu = null;
     this.user = null;
     this.weeklyAttendances = null;
+    this.isWorking = false;
   }
 
   setMenu(menu) {
@@ -16,6 +18,17 @@ class Store {
 
     this.user = await fetchUser();
     return this.user;
+  }
+
+  async getUserIsWorking() {
+    const weeklyAttendances = await this.getWeeklyAttendances();
+    const today = new Date().toISOString().split('T')[0];
+    const { startTime, endTime } =
+      weeklyAttendances.filter((attendance) => attendance.date === today)[0] ||
+      setTodayWork(today);
+
+    this.isWorking = !!(startTime && !endTime);
+    return this.isWorking;
   }
 
   async getWeeklyAttendances() {

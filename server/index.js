@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import db from './database.js';
 import { verifyPassword } from './passwords.js';
 import { extractEmployeeNumber } from './middlewares/authMiddleware.js';
+import { uploadImageToCloudinary } from './cloudinary.js';
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ const SECRET_KEY = process.env.JWT_SECRET;
 
 app.use(morgan('dev'));
 app.use(express.static('dist'));
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 app.use(cors());
 
 const generateToken = (user) => {
@@ -100,7 +101,8 @@ app.get('/api/members/:page', (req, res) => {
       position, 
       email, 
       phoneNumber,
-      departmentName
+      departmentName,
+      profileImage
     FROM 
       Members
     ORDER BY 
@@ -162,7 +164,8 @@ app.get('/api/members/search/:name', (req, res) => {
       position, 
       email, 
       phoneNumber,
-      departmentName
+      departmentName,
+      profileImage
     FROM 
       Members
     WHERE
@@ -206,7 +209,7 @@ app.get('/api/members/search/:name', (req, res) => {
 
 app.get('/api/member/:employeeNumber', (req, res) => {
   const { employeeNumber } = req.params;
-  const { isAdmin } = req.query;
+  const { isAdmin, isOwner } = req.query;
 
   const selectItems = [
     'employeeNumber',
@@ -219,7 +222,7 @@ app.get('/api/member/:employeeNumber', (req, res) => {
     'departmentName',
   ];
 
-  if (isAdmin === 'true') {
+  if (isAdmin === '1' || isOwner) {
     selectItems.push(
       'hireDate',
       'birthDate',
@@ -340,6 +343,53 @@ app.get('/api/attendance/weekly', extractEmployeeNumber, (req, res) => {
     res.json({
       status: 'OK',
       data: rows,
+    });
+  });
+});
+
+app.post('/api/addAttendance', (req, res) => {
+  const { employeeNumber, date, startTime, endTime, status } = req.body;
+
+  const sql = `
+    INSERT INTO Attendance (employeeNumber, date, startTime, endTime, status)
+    VALUES (?, ?, ?, ?, ?)
+  `;
+
+  // eslint-disable-next-line consistent-return
+  db.run(sql, [employeeNumber, date, startTime, endTime, status], (err) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
+    });
+  });
+});
+
+app.post('/api/updateAttendance', (req, res) => {
+  const { employeeNumber, date, endTime } = req.body;
+
+  const sql = `
+    UPDATE Attendance
+    SET endTime = ?
+    WHERE employeeNumber = ? AND date = ? AND endTime IS NULL
+  `;
+
+  // eslint-disable-next-line consistent-return
+  db.run(sql, [endTime, employeeNumber, date], (err) => {
+    if (err) {
+      return res.status(500).json({
+        status: 'Error',
+        error: err.message,
+      });
+    }
+
+    res.json({
+      status: 'OK',
     });
   });
 });
@@ -497,6 +547,57 @@ app.get('/api/departments', (req, res) => {
       data: rows,
     });
   });
+});
+
+app.put('/api/updateProfile', async (req, res) => {
+  const { employeeNumber, profileData } = req.body;
+  const { address, phoneNumber } = profileData;
+  let { profileImage } = profileData;
+
+  try {
+    if (profileImage && profileImage.startsWith('data:image')) {
+      profileImage = await uploadImageToCloudinary(profileImage);
+    }
+
+    const sql = `
+      UPDATE Members
+      SET profileImage = ?, address = ?, phoneNumber = ?
+      WHERE employeeNumber = ?
+    `;
+
+    // eslint-disable-next-line consistent-return
+    // eslint-disable-line prefer-arrow-callback
+    db.run(
+      sql,
+      [profileImage, address, phoneNumber, employeeNumber],
+      // eslint-disable-next-line consistent-return
+      function (err) {
+        if (err) {
+          return res.status(500).json({
+            status: 'Error',
+            error: err.message,
+          });
+        }
+
+        if (this.changes === 0) {
+          return res.status(404).json({
+            status: 'Error',
+            error: '해당 사용자를 찾을 수 없습니다.',
+          });
+        }
+
+        res.json({
+          status: 'OK',
+          message: '프로필이 성공적으로 업데이트되었습니다.',
+        });
+      },
+    );
+  } catch (error) {
+    res.status(500).json({
+      status: 'Error',
+      error: '프로필 업데이트 중 오류가 발생했습니다.',
+    });
+  }
 });
 
 app.listen(port, () => {
