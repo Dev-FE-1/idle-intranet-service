@@ -12,7 +12,7 @@ export default class Input {
 
   html() {
     return `
-      <input type='${this.type}' class='input input-${this.readOnly}' id='${this.id}' value='${this.value}' ${this.readOnly ? 'readOnly' : ''} placeholder='${this.placeholder}'>
+      <input type='${this.type}' class='input input-${this.readOnly}' id='${this.id}' value='${this.value}' ${this.readOnly === 'read-only' ? 'readOnly' : ''} placeholder='${this.placeholder}'>
     `;
   }
 }

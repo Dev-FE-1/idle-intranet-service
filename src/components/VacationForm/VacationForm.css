@@ -23,7 +23,7 @@ input {
   outline: 1px solid tomato;
 } */
 
-.input-field {
+.vacation-form .input-field {
   width: 100%;
   min-height: 50px;
   display: flex;
@@ -32,37 +32,49 @@ input {
   gap: 16px;
 }
 
-.input-field input {
+.vacation-form .input-field input {
   padding-right: 0;
   height: 20px;
+  font-size: 14px;
+  vertical-align: text-bottom;
 }
 
-.input-field.input-readonly {
+.vacation-form .input-field.input-readonly {
   padding: 0 17px;
   background-color: var(--color-lightest-gray);
 }
 
-.input-field.border {
+.vacation-form .input-field.border {
   padding: 0 17px;
   border: 1px solid var(--color-lightest-gray);
 }
 
-.input-field.input-readonly input {
+.vacation-form .input-field.input-readonly input {
   text-align: right;
 }
 
-.input-field label {
+.vacation-form .input-field label {
   white-space: nowrap;
   flex-shrink: 0;
   font-size: 14px;
   color: var(--color-darkest-gray);
 }
 
-.input-field .input-readonly {
+.vacation-form .input-field .input-readonly {
   flex-grow: 1;
 }
 
-.start-date-button {
+.vacation-form .start-date-input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.vacation-form .start-date-input svg {
+  cursor: pointer;
+}
+
+.vacation-form .start-date-button {
   text-align: right;
   margin: 0;
   margin-right: -16px;

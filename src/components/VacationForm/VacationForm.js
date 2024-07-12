@@ -1,8 +1,10 @@
+import { calendarIcon } from '../../utils/icons.js';
 import {
   calculateEndDate,
   listVacationDaysWithSuffix,
 } from '../../utils/userVacation.js';
 import { vacationArray } from '../../utils/vacation.js';
+import Icon from '../Icon/Icon.js';
 import Input from '../Input/Input.js';
 import Select from '../Select/Select.js';
 import { storeInstance } from '../Store.js';
@@ -12,6 +14,12 @@ export default class VacationForm {
   constructor(vacationDataType) {
     this.store = storeInstance;
     this.vacationDataType = vacationDataType;
+    this.CalendarIcon = new Icon({
+      svg: calendarIcon,
+      options: {
+        size: '1.2rem',
+      },
+    });
   }
 
   async updateVacationList() {
@@ -36,9 +44,9 @@ export default class VacationForm {
 
     this.StartDateInput = new Input({
       id: 'startDate',
-      type: 'date',
+      type: 'text',
       value: new Date().toISOString().split('T')[0],
-      onChange: () => this.calculateAndDisplayEndDate(),
+      readOnly: true,
     });
 
     const days = await this.updateVacationList();
@@ -79,23 +87,28 @@ export default class VacationForm {
     await this.initFormInputs();
     this.$vacationTypeInput.innerHTML = this.VacationTypeInput.html();
     this.$daySelect.innerHTML = this.DaySelect.html();
-    this.$startDateInput.innerHTML = this.StartDateInput.html();
+    this.$startDateInput.innerHTML = `${this.StartDateInput.html()} ${this.CalendarIcon.html()}`;
     this.$endDateInput.innerHTML = this.EndDateInput.html();
 
     this.DaySelect.setEventListeners();
-    // this.StartDateInput.setEventListeners();
+
+    const $startDateInput = this.$startDateInput.querySelector('input');
+    $startDateInput.addEventListener('click', () => {
+      // 추후 캘린더 추가하면 캘린더 오픈
+    });
 
     this.calculateAndDisplayEndDate();
   }
 
   html() {
+    console.log('form html');
     return /* HTML */ `
       <div class="vacation-form" id="vacationForm">
         <div class="input-field input-readonly">
           <label>휴가 종류</label>
           <div class="vacation-type-input"></div>
         </div>
-        <div class="input-field border">
+        <div class="input-field border input-readonly">
           <label>시작일</label>
           <div class="start-date-input"></div>
         </div>
