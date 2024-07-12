@@ -394,6 +394,63 @@ app.post('/api/updateAttendance', (req, res) => {
   });
 });
 
+app.post('/api/vacationRequest', (req, res) => {
+  const {
+    employeeNumber,
+    departmentNumber,
+    vacationStartDate,
+    vacationEndDate,
+    approvalStatus = '미승인',
+    vacationType,
+    vacationStartTime,
+    vacationEndTime,
+    vacationReason,
+  } = req.body;
+
+  const sql = `
+  INSERT INTO EmployeeVacations (
+    employeeNumber,
+    departmentNumber,
+    vacationStartDate,
+    vacationEndDate,
+    approvalStatus,
+    vacationType,
+    vacationStartTime,
+    vacationEndTime,
+    vacationReason
+  )
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+`;
+
+  db.run(
+    sql,
+    [
+      employeeNumber,
+      departmentNumber,
+      vacationStartDate,
+      vacationEndDate,
+      approvalStatus,
+      vacationType,
+      vacationStartTime,
+      vacationEndTime,
+      vacationReason,
+    ],
+    // eslint-disable-next-line consistent-return
+    (err) => {
+      if (err) {
+        return res.status(500).json({
+          status: 'Error',
+          error: err.message,
+        });
+      }
+
+      res.json({
+        status: 'OK',
+      });
+    },
+  );
+});
+
 // eslint-disable-next-line consistent-return
 app.get('/api/attendance/:page', (req, res) => {
   let { page } = req.params;
