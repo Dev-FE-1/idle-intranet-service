@@ -1,0 +1,119 @@
+.modal-main-content {
+  width: 100%;
+}
+
+.vacation-form {
+  /* margin: 20px auto; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* .input-field {
+  width: 100%;
+  display: flex;
+  gap: 120px;
+  background-color: var(--color-lightest-gray);
+} */
+
+/* 
+input {
+  outline: 1px solid tomato;
+} */
+
+.vacation-form .input-field {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.vacation-form .input-field input {
+  padding-right: 0;
+  height: 20px;
+  font-size: 14px;
+  vertical-align: text-bottom;
+}
+
+.vacation-form .input-field.input-readonly {
+  padding: 0 17px;
+  background-color: var(--color-lightest-gray);
+}
+
+.vacation-form .input-field.border {
+  padding: 0 17px;
+  border: 1px solid var(--color-lightest-gray);
+}
+
+.vacation-form .input-field.input-readonly input {
+  text-align: right;
+}
+
+.vacation-form .input-field label {
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 14px;
+  color: var(--color-darkest-gray);
+}
+
+.vacation-form .input-field .input-readonly {
+  flex-grow: 1;
+}
+
+.vacation-form .start-date-input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.vacation-form .start-date-input svg {
+  cursor: pointer;
+}
+
+.vacation-form .start-date-button {
+  text-align: right;
+  margin: 0;
+  margin-right: -16px;
+  width: 100%;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.vacation-reason {
+  padding: 17px;
+  width: 100%;
+  min-height: 100px;
+  appearance: none;
+  border-radius: 0;
+  background-color: transparent;
+  resize: none;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-black);
+  border: 1px solid var(--color-light-gray);
+}
+
+.vacation-reason:focus {
+  outline: none;
+}
+
+.vacation-reason:active {
+  background-color: transparent;
+}
+
+.vacation-reason::placeholder {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-dark-gray);
+}

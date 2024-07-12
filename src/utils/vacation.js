@@ -47,17 +47,6 @@ export const vacationTypes = [
   '기타 휴가',
 ];
 
-export const vacationDaysOptions = [
-  '0일',
-  '1일',
-  '2일',
-  '3일',
-  '4일',
-  '5일',
-  '6일',
-  '7일',
-  '8일',
-];
 export const availableStartTimes = [
   '00:00',
   '09:00',
