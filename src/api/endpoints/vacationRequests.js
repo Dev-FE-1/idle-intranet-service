@@ -22,33 +22,6 @@ export async function fetchVacationRequests(
   }
 }
 
-export async function updateAttendance(
-  employeeNumber,
-  date,
-  startTime,
-  endTime,
-  status,
-) {
-  try {
-    const response = await apiCall({
-      endpoint: API_ENDPOINTS.ATTENDANCE,
-      method: 'put',
-      data: {
-        employeeNumber,
-        date,
-        startTime,
-        endTime,
-        status,
-      },
-      auth: true,
-    });
-    return response;
-  } catch (error) {
-    console.error('Failed to update profile:', error);
-    throw error;
-  }
-}
-
 export async function updateVacationRequests({
   employeeNumber,
   departmentNumber,

@@ -2,6 +2,8 @@ import './VacationCards.css';
 import VacationCard from './VacationCard.js';
 import { vacationArray } from '../../../utils/vacation.js';
 import Modal from '../../Modal/Modal.js';
+import VacationForm from '../../VacationForm/VacationForm.js';
+
 
 export default class VacationCards {
   constructor() {
@@ -9,6 +11,7 @@ export default class VacationCards {
       title: '휴가 신청',
       buttonContent: '휴가 신청하기',
     });
+    this.vacationForm = new VacationForm();
   }
 
   setModal({ mainContent, onSubmit }) {
@@ -19,15 +22,17 @@ export default class VacationCards {
     this.modal.render();
   }
 
-  handleVacationCardClick = (type, days) => {
-    const mainContent = `휴가 타입: ${type}, 남은 휴가 일수: ${days}`;
+
+  handleVacationCardClick = async (vacationDataType) => {
+    this.vacationForm = new VacationForm(vacationDataType);
     this.setModal({
-      mainContent,
+      mainContent: this.vacationForm.html(),
       onSubmit: () => {
         console.log('휴가 신청 제출');
       },
     });
     this.modal.open();
+    this.vacationForm.render();
   };
 
   renderVacationCard() {
