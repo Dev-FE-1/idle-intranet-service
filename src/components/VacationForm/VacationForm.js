@@ -1,14 +1,14 @@
+import './VacationForm.css';
+import Icon from '../Icon/Icon.js';
+import Input from '../Input/Input.js';
+import Select from '../Select/Select.js';
 import { calendarIcon } from '../../utils/icons.js';
 import {
   calculateEndDate,
   listVacationDaysWithSuffix,
 } from '../../utils/userVacation.js';
 import { vacationArray } from '../../utils/vacation.js';
-import Icon from '../Icon/Icon.js';
-import Input from '../Input/Input.js';
-import Select from '../Select/Select.js';
 import { storeInstance } from '../Store.js';
-import './VacationForm.css';
 
 export default class VacationForm {
   constructor(vacationDataType) {
@@ -100,8 +100,16 @@ export default class VacationForm {
     this.calculateAndDisplayEndDate();
   }
 
+  getSelectedVacationData() {
+    return {
+      vacationType: this.vacationDataType,
+      vacationStartDate: this.StartDateInput.value,
+      vacationEndDate: this.EndDateInput.value,
+      vacationReason: document.querySelector('#vacationReason').value,
+    };
+  }
+
   html() {
-    console.log('form html');
     return /* HTML */ `
       <div class="vacation-form" id="vacationForm">
         <div class="input-field input-readonly">
