@@ -61,8 +61,8 @@ export default class EditProfileButton {
   verifyFormData(phoneNumber, address) {
     const phoneRegex =
       /^\+?(\d{1,3})?[-. ]?(\d{1,4})[-. ]?(\d{3,4})[-. ]?(\d{4})$/;
-    const cityRegex = /^[가-힣]{2,5}시$/;
-    const districtRegex = /^[가-힣]{2,5}구$/;
+    const cityRegex = /^[가-힣]{1,5}시$/;
+    const districtRegex = /^[가-힣]{1,5}구$/;
     const neighborhoodRegex = /^[가-힣0-9]{1,10}(동|로|길)$/;
 
     const isValidPhoneNumber = phoneRegex.test(phoneNumber);
