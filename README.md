@@ -107,25 +107,33 @@ npm run dev
 
 <img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=%3Chtml%3E&logoColor=white">
 
-웹 페이지의 구조를 정의하고 콘텐츠를 배치하는 데 사용되었습니다.
+웹 페이지의 구조를 정의하고 콘텐츠를 배치하는 데 사용
 
 <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=%3Ccss%3E&logoColor=white">
 
-웹 페이지의 스타일링을 담당하여 사용자에게 시각적으로 일관된 디자인을 제공했습니다.
+웹 페이지의 스타일링을 담당하여 사용자에게 시각적으로 일관된 디자인을 제공
 
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=%3CJavaScript%3E&logoColor=white">
 
-웹 페이지의 동적 기능을 구현하고, 사용자 인터랙션을 처리하는 데 사용되었습니다.
+웹 페이지의 동적 기능을 구현하고, 사용자 인터랙션을 처리하는 데 사용
 
 ### Back-end
 
 <img src="https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&logo=%3CNode.js%3E&logoColor=white">
 
-서버 측 개발을 위해 사용되었으며, 비동기 이벤트 기반 아키텍처를 통해 기본적인 서버를 구축할 수 있습니다.
+비동기 I/O 및 이벤트 주도 아키텍쳐 설계에 적합한 node.js 사용
+
+<img src="https://img.shields.io/badge/bcrypt-57BCAD?style=for-the-badge&logo=%3CNode.js%3E&logoColor=white">
+
+단방향 해싱과 솔트를 활용하여 안전하고 신뢰성 있게 비밀번호를 저장하기 위해 bcrypt 사용
 
 <img src="https://img.shields.io/badge/sqlite3-0072AA?style=for-the-badge&logo=%3Csqlite%3E&logoColor=white">
 
-간단한 백엔드 요구 사항이 있는 프로젝트에 적합한 SQLite3 데이터베이스를 사용했습니다.
+간단한 백엔드 요구 사항이 있는 프로젝트에 적합한 SQLite3를 데이터베이스로 사용
+
+<img src="https://img.shields.io/badge/JWT-031B4E?style=for-the-badge&logo=%3Csqlite%3E&logoColor=white">
+
+클라이언트와 서버 간에 보안정보를 안전하게 전달하기 위해 JWT 사용
 
 <br>
 
