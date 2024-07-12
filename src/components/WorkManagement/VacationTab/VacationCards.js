@@ -4,6 +4,7 @@ import { vacationArray } from '../../../utils/vacation.js';
 import Modal from '../../Modal/Modal.js';
 import VacationForm from '../../VacationForm/VacationForm.js';
 
+
 export default class VacationCards {
   constructor() {
     this.modal = new Modal({
@@ -20,6 +21,7 @@ export default class VacationCards {
     modalWrapper.innerHTML = this.modal.html();
     this.modal.render();
   }
+
 
   handleVacationCardClick = async (vacationDataType) => {
     this.vacationForm = new VacationForm(vacationDataType);
@@ -40,7 +42,10 @@ export default class VacationCards {
 
     if ($vacationCardsList) {
       $vacationCardsList.innerHTML = vacationArray
-        .map((vacationData) => new VacationCard(vacationData).html())
+        .map((vacationData) => {
+          const vacationCard = new VacationCard(vacationData);
+          return vacationCard.html();
+        })
         .join('');
 
       $vacationCardsList

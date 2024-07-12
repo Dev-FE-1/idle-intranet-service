@@ -20,8 +20,13 @@
   margin-left: 28px;
 }
 
+.work-manage-menu-list li {
+  z-index: 1;
+  position: relative;
+}
+
 .work-manage-menu-list li.active {
-  border-bottom: 2px solid var(--color-primary);
+  border-bottom: 4px solid var(--color-primary);
   color: var(--color-black);
 }
 
@@ -51,11 +56,15 @@
   .work-manage-menu-list::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: 0;
     left: 50%;
     transform: translate(-50%, 0%);
     width: calc(100% - (20px * 2));
     height: 2px;
     background-color: var(--color-light-gray);
+  }
+
+  .working-history-container .table-container {
+    margin-bottom: 30px;
   }
 }

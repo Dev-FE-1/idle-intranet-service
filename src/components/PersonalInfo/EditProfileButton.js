@@ -2,7 +2,7 @@ import Icon from '../Icon/Icon.js';
 import IconButton from '../Button/IconButton.js';
 import Modal from '../Modal/Modal.js';
 import { COLORS } from '../../utils/constants.js';
-import { edit } from '../../utils/icons.js';
+import { edit, loader } from '../../utils/icons.js';
 import EditProfileForm from './EditProfileForm.js';
 import { updateUserProfile } from '../../api/endpoints/user.js';
 import { storeInstance } from '../Store.js';
@@ -20,6 +20,10 @@ export default class EditProfileButton {
       icon: this.icon,
     });
     this.EditProfileForm = new EditProfileForm({ member: this.member });
+    this.loader = new Icon({
+      svg: loader,
+      options: { color: '#fff' },
+    });
   }
 
   updateMember({ profileImage, phoneNumber, address }) {
@@ -53,21 +57,56 @@ export default class EditProfileButton {
     });
   }
 
-  async onSubmit() {
-    const formData = this.EditProfileForm.getFormData();
-    const response = await updateUserProfile({
-      employeeNumber: this.member.employeeNumber,
-      profileData: formData,
-    });
+  // eslint-disable-next-line class-methods-use-this
+  verifyFormData(phoneNumber, address) {
+    const phoneRegex =
+      /^\+?(\d{1,3})?[-. ]?(\d{1,4})[-. ]?(\d{3,4})[-. ]?(\d{4})$/;
+    const cityRegex = /^[가-힣]{2,5}시$/;
+    const districtRegex = /^[가-힣]{2,5}구$/;
+    const neighborhoodRegex = /^[가-힣0-9]{1,10}(동|로|길)$/;
 
-    if (response.status !== 'OK') {
-      console.log('프로필 수정을 실패했습니다.');
-      return;
+    const isValidPhoneNumber = phoneRegex.test(phoneNumber);
+
+    const parts = address.split(' ');
+    if (parts.length < 3) {
+      return [isValidPhoneNumber, false];
     }
 
-    this.updateProfilePage(formData);
-    this.updateMember(formData);
-    this.Modal.close();
+    const hasCity = parts.some((part) => cityRegex.test(part));
+    const hasDistrict = parts.some((part) => districtRegex.test(part));
+    const hasNeighborhood = parts.some((part) => neighborhoodRegex.test(part));
+
+    const isValidAddress = hasCity && hasDistrict && hasNeighborhood;
+
+    return [isValidPhoneNumber, isValidAddress];
+  }
+
+  async onSubmit() {
+    const formData = this.EditProfileForm.getFormData();
+    const [isValidPhoneNumber, isValidAddress] = this.verifyFormData(
+      formData.phoneNumber,
+      formData.address,
+    );
+    this.EditProfileForm.showAlertMessage(!isValidPhoneNumber, !isValidAddress);
+    if (isValidPhoneNumber && isValidAddress) {
+      const $submitButton = document.querySelector(
+        '#edit-profile-modal .btn-primary',
+      );
+      $submitButton.innerHTML = this.loader.html();
+      const response = await updateUserProfile({
+        employeeNumber: this.member.employeeNumber,
+        profileData: formData,
+      });
+
+      if (response.status !== 'OK') {
+        console.log('프로필 수정을 실패했습니다.');
+        return;
+      }
+      this.updateProfilePage(formData);
+      this.updateMember(formData);
+      this.Modal.close();
+      $submitButton.innerHTML = '수정';
+    }
   }
 
   onClickEditButton = () => {
