@@ -394,21 +394,8 @@ app.post('/api/updateAttendance', (req, res) => {
   });
 });
 
-app.post('/api/vacationRequest', (req, res) => {
+app.post('/api/vacationRequests', (req, res) => {
   const {
-    employeeNumber,
-    departmentNumber,
-    vacationStartDate,
-    vacationEndDate,
-    approvalStatus = '미승인',
-    vacationType,
-    vacationStartTime,
-    vacationEndTime,
-    vacationReason,
-  } = req.body;
-
-  const sql = `
-  INSERT INTO EmployeeVacations (
     employeeNumber,
     departmentNumber,
     vacationStartDate,
@@ -417,16 +404,16 @@ app.post('/api/vacationRequest', (req, res) => {
     vacationType,
     vacationStartTime,
     vacationEndTime,
-    vacationReason
-  )
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-`;
+    vacationReason,
+    vacationRequestDate,
+    usageStatus,
+  } = req.body;
 
-  db.run(
-    sql,
-    [
+  const sql = `
+    INSERT INTO VacationRequests(
       employeeNumber,
       departmentNumber,
+      vacationRequestDate,
       vacationStartDate,
       vacationEndDate,
       approvalStatus,
@@ -434,10 +421,30 @@ app.post('/api/vacationRequest', (req, res) => {
       vacationStartTime,
       vacationEndTime,
       vacationReason,
+      usageStatus
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  db.run(
+    sql,
+    [
+      employeeNumber,
+      departmentNumber,
+      vacationRequestDate,
+      vacationStartDate,
+      vacationEndDate,
+      approvalStatus,
+      vacationType,
+      vacationStartTime,
+      vacationEndTime,
+      vacationReason,
+      usageStatus,
     ],
     // eslint-disable-next-line consistent-return
     (err) => {
       if (err) {
+        console.error('DB error:', err.message);
         return res.status(500).json({
           status: 'Error',
           error: err.message,
