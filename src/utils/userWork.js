@@ -11,7 +11,7 @@ function getWorkDuration({ startTime, endTime }) {
     endMinutes - startMinutes < 0
       ? 0
       : Math.floor((endMinutes - startMinutes) / 60);
-  return durationHours > MAX ? 8 : durationHours;
+  return durationHours >= MAX ? 8 : durationHours;
 }
 
 function calculateWeeklyWorkHours(data) {
