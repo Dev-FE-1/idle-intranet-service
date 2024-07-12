@@ -26,10 +26,6 @@ export default class VacationForm {
     return vacation ? vacation.icon : '';
   }
 
-  removeDaySuffix(dayString) {
-    return dayString.replace('일', '');
-  }
-
   async initFormInputs() {
     this.VacationTypeInput = new Input({
       id: 'vacationType',
@@ -48,7 +44,7 @@ export default class VacationForm {
     const days = await this.updateVacationList();
     this.DaySelect = new Select({
       contents: days,
-      onSelect: () => this.calculateAndDisplayEndDate(),
+      onSelect: (selectedItem) => this.calculateAndDisplayEndDate(selectedItem),
       small: true,
     });
 
@@ -60,24 +56,17 @@ export default class VacationForm {
     });
   }
 
-  calculateAndDisplayEndDate() {
-    if (this.StartDateInput && this.DaySelect.selectedItem) {
+  calculateAndDisplayEndDate(selectedItem) {
+    let selectedDay = selectedItem;
+    if (!selectedDay) {
+      selectedDay = 1;
+    }
+    if (this.StartDateInput) {
       const startDate = new Date(this.StartDateInput.value);
-      const numberOfDays = parseInt(
-        this.removeDaySuffix(this.DaySelect.selectedItem),
-        10,
-      );
+      const numberOfDays = parseInt(selectedDay, 10);
       const endDate = calculateEndDate(startDate, numberOfDays);
-
-      if (endDate instanceof Date) {
-        this.EndDateInput.value = endDate.toISOString().split('T')[0];
-        this.$endDateInput.innerHTML = this.EndDateInput.html();
-      } else {
-        console.error(
-          'calculateEndDate did not return a Date object:',
-          endDate,
-        );
-      }
+      this.EndDateInput.value = endDate;
+      this.$endDateInput.innerHTML = this.EndDateInput.html();
     }
   }
 
@@ -94,7 +83,7 @@ export default class VacationForm {
     this.$endDateInput.innerHTML = this.EndDateInput.html();
 
     this.DaySelect.setEventListeners();
-    this.StartDateInput.setEventListeners();
+    // this.StartDateInput.setEventListeners();
 
     this.calculateAndDisplayEndDate();
   }
