@@ -17,7 +17,26 @@ const SECRET_KEY = process.env.JWT_SECRET;
 app.use(morgan('dev'));
 app.use(express.static('dist'));
 app.use(express.json({ limit: '10mb' }));
-app.use(cors());
+
+const allowedOrigins = [
+  'https://dev-fe-1.github.io',
+  'http://localhost:5173',
+  'http://localhost:8080',
+];
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+  }),
+);
 
 const generateToken = (user) => {
   const payload = { id: user.employeeNumber, email: user.email };
