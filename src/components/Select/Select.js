@@ -64,9 +64,14 @@ export default class Select {
 
   updateSelection = (content) => {
     this.onSelect(content);
+    this.selectedItem = content;
     this.dropdownButton.innerHTML = `${content} ${this.chevronDown.html()}`;
     this.closeDropdown();
   };
+
+  getSelectedItem() {
+    return this.selectedItem;
+  }
 
   html() {
     const buttonClass = this.roundedBorder

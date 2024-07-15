@@ -394,6 +394,70 @@ app.post('/api/updateAttendance', (req, res) => {
   });
 });
 
+app.post('/api/vacationRequests', (req, res) => {
+  const {
+    employeeNumber,
+    departmentNumber,
+    vacationStartDate,
+    vacationEndDate,
+    approvalStatus,
+    vacationType,
+    vacationStartTime,
+    vacationEndTime,
+    vacationReason,
+    vacationRequestDate,
+    usageStatus,
+  } = req.body;
+
+  const sql = `
+    INSERT INTO VacationRequests(
+      employeeNumber,
+      departmentNumber,
+      vacationRequestDate,
+      vacationStartDate,
+      vacationEndDate,
+      approvalStatus,
+      vacationType,
+      vacationStartTime,
+      vacationEndTime,
+      vacationReason,
+      usageStatus
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  db.run(
+    sql,
+    [
+      employeeNumber,
+      departmentNumber,
+      vacationRequestDate,
+      vacationStartDate,
+      vacationEndDate,
+      approvalStatus,
+      vacationType,
+      vacationStartTime,
+      vacationEndTime,
+      vacationReason,
+      usageStatus,
+    ],
+    // eslint-disable-next-line consistent-return
+    (err) => {
+      if (err) {
+        console.error('DB error:', err.message);
+        return res.status(500).json({
+          status: 'Error',
+          error: err.message,
+        });
+      }
+
+      res.json({
+        status: 'OK',
+      });
+    },
+  );
+});
+
 // eslint-disable-next-line consistent-return
 app.get('/api/attendance/:page', (req, res) => {
   let { page } = req.params;
