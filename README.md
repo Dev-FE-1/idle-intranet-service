@@ -86,20 +86,14 @@ npm run dev
 - 이번 주 근무 시간을 표시하고, 현재 시각과 근무 시간을 기록할 수 있는 도구를 제공합니다.
 - 사용자의 현재 상태(온라인, 오프라인 등)를 확인할 수 있습니다.
 
-<br>
-<br>
-
-### 컴포넌트 관계도
-
-<img width="1054" alt="컴포넌트 관계도" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/179f0bbc-bbd5-4fbd-bae5-9901d33267d5">
-<br>
-
 ### 타임라인
 
 - 기획`(2024.06.10 ~ 2024.06.12)`: 전체적인 서비스 구상 및 컨셉 기획
 - 디자인`(2024.06.13~2024.06.16)`: 기획 단계에서 제작한 와이어 프레임을 바탕으로 피그마로 디자인 작업
 - 퍼블리싱`(2024.06.18~2024.06.24)`: 역할을 분담해 페이지별 퍼블리싱 작업 진행
 - 기능 구현`(2024.06.24~2024.07.12)`: 공통 컴포넌트 작업 및 기능 구현 진행
+
+<br>
 
 ## 🔨 기술스택
 
@@ -135,14 +129,6 @@ npm run dev
 
 클라이언트와 서버 간에 보안정보를 안전하게 전달하기 위해 JWT 사용
 
-<br>
-
-<img width="1920" alt="보안 및 인증" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/8ef3e16c-d5fa-4700-aba3-ccc9e41e4453">
-
-<br>
-
-<img width="1054" alt="데이터베이스 구조도" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/6197de79-e3d7-4921-8c74-97fb8a9a5d09">
-
 ### 브랜치전략
 
 - **main, develop** 브랜치와 **feature** 보조 브랜치를 운용했습니다.
@@ -158,7 +144,7 @@ npm run dev
 - airbnb의 코딩 컨벤션을 참고해 사용했고, 예외 규칙은 팀원들과 협의했습니다.
 - 협업 시 매번 컨벤션을 신경 쓸 필요 없이 빠르게 개발하는 데에 목적을 두었습니다.
 
-### 협업방식
+## 협업방식
 
 **🗣️ 슬랙을 사용한 활발한 의사소통**
 
@@ -168,11 +154,13 @@ npm run dev
 
 **⏰ ZEP 회의 협업 진행**
 
+<img width="156" alt="zep" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/8810e6ae-a8d8-4c65-a951-6d016b168e22">
+
 매일 오후 2시부터 4시까지 정기적인 회의를 통해 진행 상황을 점검하고, 각 팀원의 역할을 분담하고 의견을 반영하여 프로젝트의 방향을 조율했습니다.
 
 **📒 노션 회의록**
 
-[6조 회의록](https://www.notion.so/2109e70d7a434150836d1d4c88df4663?v=5f960d94448c48ae964369220f89a1c7&p=1dc76070902442f9ae28ecf580a39e8f&pm=c)
+[6조 회의록](https://github.com/Dev-FE-1/idle-intranet-service/wiki)
 
 회의록은 노션을 통해 관리하며, 모든 팀원이 쉽게 접근할 수 있도록 하였습니다.
 
@@ -184,9 +172,11 @@ npm run dev
 
 **💬 깃허브를 사용한 Issue 관리와 PR 리뷰**
 
-<img width="1054" alt="PR리뷰" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/f37d3ff1-10d0-479e-a717-814526c840a8">
-<img width="1054" alt="수치화" src="https://github.com/user-attachments/assets/327c0cd5-d81e-454d-be5b-60d6b3215048">
-
+<img width="1054" alt="PR리뷰" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/f37d3ff1-10d0-479e-a717-814526c840a8">[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FDev-FE-1%2Fidle-intranet-service&count_bg=%23399918&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/Dev-FE-1/idle-intranet-service?color=73BBA3)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-closed/Dev-FE-1/idle-intranet-service?color=88D66C)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/Dev-FE-1/idle-intranet-service?color=B4E380)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr-closed/Dev-FE-1/idle-intranet-service?color=F6FB7A)
 팀원들은 서로의 코드를 검토하고, 개선할 점을 제안하며 프로젝트의 코드 품질을 높였습니다. 이를 통해 코드 통합 과정에서 발생할 수 있는 문제를 최소화하였습니다.
 
 - 모든 브랜치에 2명 이상이 Approve를 해야 PR이 Merge될 수 있도록 설정하였습니다.
