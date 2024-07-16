@@ -160,39 +160,32 @@ npm run dev
 
 ### 협업방식
 
-<img src="https://img.shields.io/badge/Slack-E01E5A?style=for-the-badge&logo=%3C%EB%A1%9C%EA%B3%A0%EC%9D%B4%EB%A6%84%3E&logoColor=white">
-<img src="https://img.shields.io/badge/ZEP-5B69C2?style=for-the-badge&logo=%3CZEP%3E&logoColor=white">
-<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=%3CNotion%3E&logoColor=white">
-<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=%3CFigma%3E&logoColor=white">
-<img src="https://img.shields.io/badge/GitHub-171515?style=for-the-badge&logo=%3CGitHub%3E&logoColor=white">
+**🗣️ 슬랙을 사용한 활발한 의사소통**
 
-### **🗣️ 슬랙을 사용한 활발한 의사소통**
-
-![슬랙](https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/f1104bbf-b6d8-4596-a3d2-0623207f775c)
+<img width="1054" alt="슬랙" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/f1104bbf-b6d8-4596-a3d2-0623207f775c">
 
 프로젝트 진행 동안 활발한 의사소통을 유지하며 신속하고 효율적인 업무 처리가 가능했습니다.
 
-### **⏰** ZEP 회의 협업 진행
-
-<img width="156" alt="zep" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/8810e6ae-a8d8-4c65-a951-6d016b168e22">
+**⏰ ZEP 회의 협업 진행**
 
 매일 오후 2시부터 4시까지 정기적인 회의를 통해 진행 상황을 점검하고, 각 팀원의 역할을 분담하고 의견을 반영하여 프로젝트의 방향을 조율했습니다.
 
-### **📒 노션 회의록**
+**📒 노션 회의록**
 
-[6조 회의록](https://www.notion.so/76b3c867b106476aa636ffcceb8c58c7?v=1d539ccb1c5d40df911c697b9a6ed49f&p=b55881f5f8ea4a1fbca2f4e320fce9a9&pm=c)
+[6조 회의록](https://www.notion.so/2109e70d7a434150836d1d4c88df4663?v=5f960d94448c48ae964369220f89a1c7&p=1dc76070902442f9ae28ecf580a39e8f&pm=c)
 
 회의록은 노션을 통해 관리하며, 모든 팀원이 쉽게 접근할 수 있도록 하였습니다.
 
-### **✍️ 피그마를 이용한 디자인**
+**✍️ 피그마를 이용한 디자인**
 
-![피그마](https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/9fe8f6a3-5f7f-4928-b1eb-b7b5301c5ac8)
+<img width="1054" alt="피그마" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/9fe8f6a3-5f7f-4928-b1eb-b7b5301c5ac8">
 
 피그마를 사용하여 프로젝트의 디자인을 협업했습니다. 팀원들은 실시간으로 디자인을 검토하고 수정할 수 있었으며, 이는 신속한 디자인 작업과 피드백을 가능하게 하였습니다.
 
-### **💬 깃허브를 사용한 Issue 관리와 PR 리뷰**
+**💬 깃허브를 사용한 Issue 관리와 PR 리뷰**
 
-![이슈](https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/f37d3ff1-10d0-479e-a717-814526c840a8)
+<img width="1054" alt="PR리뷰" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/f37d3ff1-10d0-479e-a717-814526c840a8">
+<img width="1054" alt="수치화" src="https://github.com/user-attachments/assets/327c0cd5-d81e-454d-be5b-60d6b3215048">
 
 팀원들은 서로의 코드를 검토하고, 개선할 점을 제안하며 프로젝트의 코드 품질을 높였습니다. 이를 통해 코드 통합 과정에서 발생할 수 있는 문제를 최소화하였습니다.
 
