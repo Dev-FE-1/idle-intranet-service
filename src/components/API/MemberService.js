@@ -22,6 +22,7 @@ const getMembers = async (page, max) => {
   }
 };
 
+// 매개변수가 3개 이상이 되면, 객체로 묶어서 전달하는 방법을 고려해보기
 const searchMembers = async (name, max, page) => {
   try {
     const encodedName = encodeURIComponent(name);
@@ -34,12 +35,12 @@ const searchMembers = async (name, max, page) => {
     );
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Failed to search members: ${errorData.error}`);
+      const { error } = await response.json(); // 두 곳에서 호출하는 이유가 있나요?
+      throw new Error(`Failed to search members: ${error}`);
     }
 
-    const data = await response.json();
-    return [data.data, data.total];
+    const { data, total } = await response.json();
+    return [data, total];
   } catch (error) {
     console.error('Error searching members:', error.message);
     throw error;

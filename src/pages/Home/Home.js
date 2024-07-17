@@ -1,4 +1,4 @@
-import Container from '../../components/Container.js';
+import Container from '../../components/Container.js'; // path alias를 사용해 import 경로를 간결하게 만들어보기
 import Title from '../../components/Title/Title.js';
 import PersonalInfo from '../../components/PersonalInfo/PersonalInfo.js';
 import logo from '../../../public/images/logo.svg';

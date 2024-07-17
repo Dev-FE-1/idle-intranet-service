@@ -13,6 +13,7 @@ export default class Calendar {
   }
 
   html() {
+    // map 메서드를 활용해서 선언적으로 코드를 작성해보기
     let html = `<div class="calendar-header">
                   <button id="prevMonth">&lt;</button>
                   <span>${this.currentDate.format('YYYY년 MM월')}</span>
@@ -43,6 +44,7 @@ export default class Calendar {
       .querySelectorAll('.calendar-day:not(.disabled)')
       .forEach((day) => {
         day.addEventListener('click', () => {
+          // 함수로 분리해도 좋아보입니다.
           if (this.selectedCallback) {
             this.selectedCallback(
               this.currentDate.date(day.dataset.day).format('YYYY/MM/DD'),

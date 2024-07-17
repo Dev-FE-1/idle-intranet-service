@@ -12,6 +12,8 @@ export default class Modal {
     this.id = id;
   }
 
+  // 오픈 메서드는 언제 사용되는지?
+  // this.$container.classList.toggle('active'); 이런식으로 토글로 구현할 수도 있겠네요.
   open() {
     this.$container.classList.add('active');
   }
@@ -40,6 +42,8 @@ export default class Modal {
     this.$container = document.querySelector(`#${this.id}`);
     this.setEventListeners();
   }
+
+  // dialog 태그에대해 알아보기
 
   html() {
     return /* HTML */ `

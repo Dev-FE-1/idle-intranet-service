@@ -1,3 +1,6 @@
+// 왜 컴포넌트 하위에 존재하는 건가요?
+// fetch 사용과 axios의 차이점은 무엇인가요?
+
 const { VITE_SERVER_URL } = import.meta.env;
 const apiBaseUrl = VITE_SERVER_URL;
 

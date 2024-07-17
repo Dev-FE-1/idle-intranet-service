@@ -41,6 +41,9 @@ export default class Header extends Container {
   }
 
   render() {
+    // wrapper와 container의 차이?
+    // 보통 container는 여러 컴포넌트를 감싸는 역할을 하고, wrapper는 단일 컴포넌트를 감싸는 역할을 합니다.
+    // 몰라도 된다
     this.$container.innerHTML = /* HTML */ `
       <div class="wrapper header-items">
         <div class="avatar-container"></div>

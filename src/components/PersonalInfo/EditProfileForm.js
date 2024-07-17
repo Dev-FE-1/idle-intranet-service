@@ -27,6 +27,8 @@ export default class EditProfileForm {
 
   // eslint-disable-next-line class-methods-use-this
   showAlertMessage(showP, showA) {
+    // 매개변수 이름이 무엇을 의미하는지 알기 어려움
+    // 명확한 이름으로 변경해보세요
     const alertPhonenumber = document.body.querySelector(
       '.alert-invalid-phonenumber',
     );
@@ -41,6 +43,17 @@ export default class EditProfileForm {
     } else {
       alertAddress.classList.remove('show');
     }
+
+    const invalidPhoneNumber = document.querySelector(
+      '.alert-invalid-phonenumber',
+    );
+    const invalidAddress = document.querySelector('.alert-invalid-address');
+
+    const toggleAlert = (alert, shouldShow) =>
+      alert.classList.toggle('show', shouldShow);
+
+    toggleAlert(invalidPhoneNumber, showP);
+    toggleAlert(invalidAddress, showA);
   }
 
   getFormData() {

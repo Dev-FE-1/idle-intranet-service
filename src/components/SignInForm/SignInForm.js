@@ -58,7 +58,8 @@ export default class SignInForm {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  handleInput = () => {
+  handleInput = (e) => {
+    // 돔에 접근해서 value를 가져오지 않고, event를 통해 value를 가져올 수 있을까요?
     const emailValue = document.getElementById('signin_email').value;
     const passwordValue = document.getElementById('signin_password').value;
     const button = document.querySelector('.button.btn-primary');
@@ -98,6 +99,7 @@ export default class SignInForm {
     const passwordInput = document.getElementById('signin_password');
     const buttonElement = document.querySelector('.button.btn-primary');
     emailInput.addEventListener('input', this.handleInput);
+    // change이벤트가 아닌 input이벤트를 선택한 이유가 있나요
     passwordInput.addEventListener('input', this.handleInput);
     buttonElement.addEventListener('click', this.handleForm);
   }

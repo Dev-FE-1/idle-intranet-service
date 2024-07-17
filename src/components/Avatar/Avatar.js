@@ -1,10 +1,11 @@
 import './Avatar.css';
 
 export default class Avatar {
-  constructor({ url, size, border }) {
+  constructor({ url, size = 'default', border = 'default' }) {
+    // 기본값 매개변수 사용해보기
     this.url = url;
-    this.size = size || 'default'; // default, large
-    this.border = border || 'default'; // default, light
+    this.size = size;
+    this.border = border;
   }
 
   html() {

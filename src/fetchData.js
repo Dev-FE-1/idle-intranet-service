@@ -3,6 +3,9 @@ import axios from 'axios';
 const { VITE_SERVER_URL } = import.meta.env;
 const apiBaseUrl = VITE_SERVER_URL;
 
+// let에 데이터를 담아서 리턴하는 이유가 있나요?
+// try catch를 적용해보자
+
 export async function fetchMembers(page = 1, max = 10) {
   const response = await axios.get(
     `${apiBaseUrl}/api/members/${page}?max=${max}`,

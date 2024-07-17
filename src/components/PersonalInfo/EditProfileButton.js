@@ -59,6 +59,7 @@ export default class EditProfileButton {
 
   // eslint-disable-next-line class-methods-use-this
   verifyFormData(phoneNumber, address) {
+    // 전화번호 검증하는 로직과 주소 검증하는 로직을 분리해보기
     const phoneRegex =
       /^\+?(\d{1,3})?[-. ]?(\d{1,4})[-. ]?(\d{3,4})[-. ]?(\d{4})$/;
     const cityRegex = /^[가-힣]{1,5}시$/;
@@ -77,6 +78,13 @@ export default class EditProfileButton {
     const hasNeighborhood = parts.some((part) => neighborhoodRegex.test(part));
 
     const isValidAddress = hasCity && hasDistrict && hasNeighborhood;
+
+    /**
+     *
+    const isValidPhoneNumber = isValidPhoneNumber(phoneNumber);
+    const isValidAddress = isValidAddress(address);
+    return [isValidPhoneNumber, isValidAddress];
+    */
 
     return [isValidPhoneNumber, isValidAddress];
   }

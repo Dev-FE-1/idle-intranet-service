@@ -12,6 +12,7 @@ export default class TextItem {
       this.author = await fetchMember(this.item.employeeNumber);
     }
 
+    // $은 컨벤션인가요? 변수명에 $를 사용하는 것은 어떤 의미인가요?
     const $container = document.querySelector(
       `#announcement-${this.item.announcementId}`,
     );

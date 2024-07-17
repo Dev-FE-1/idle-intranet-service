@@ -34,6 +34,7 @@ export default class Pagination {
 
   calculatePages() {
     this.pages = [];
+    // 이렇게 조건이 길어질 경우, 주석을 추가해 코드의 흐름을 유도하는 것도 좋아보여요.
     const pageCalc = (currentPage, maxPage, pages) => {
       if (maxPage <= 7) {
         pages.push(...Array.from({ length: maxPage }, (_, i) => i + 1));
@@ -73,7 +74,7 @@ export default class Pagination {
     this.render();
   }
 
-  handleFastLeft = () => this.updatePage(1);
+  handleFastLeft = () => this.updatePage(1); // 1도 상수로 빼주면 어떨까요
 
   handleFastRight = () => this.updatePage(this.maxPage);
 
@@ -107,7 +108,10 @@ export default class Pagination {
   addEventListeners() {
     document
       .querySelectorAll('.pagination-container button')
+      // switch문으로 분리해보면 어떨까요
+      // 혹은 이벤트 핸들러 배열을 만들어서 인덱스에 맞는 핸들러를 호출하는 방법도 고려해보면 좋아보여요.
       .forEach((button, index) => {
+        // attachEventListeners
         if (index === 0) {
           button.addEventListener('click', this.handleFastLeft);
         } else if (index === 1) {

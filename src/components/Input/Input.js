@@ -2,6 +2,7 @@ import './Input.css';
 
 export default class Input {
   constructor({ placeholder, type, id, readOnly, name, value }) {
+    // 기본값 매개변수를 사용하면 안되는 것인가요
     this.placeholder = placeholder || '';
     this.type = type || 'text'; // text, password, email, date....
     this.id = id; // input id 설정 (label 연결 용도)

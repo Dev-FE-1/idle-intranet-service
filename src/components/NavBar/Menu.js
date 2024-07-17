@@ -27,6 +27,7 @@ export default class Menu extends Container {
     this.render();
   }
 
+  // 조건 정리해보기
   isActiveMenu(path) {
     if (path === PATH.HOME && this._active === PATH.HOME) {
       return true;

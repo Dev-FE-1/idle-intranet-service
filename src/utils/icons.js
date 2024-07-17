@@ -1,3 +1,6 @@
+// 해당 파일도 유틸 하위에 두기에 적합하지 않습니다.
+// 컴포넌트 디렉토리 하위로 두는 것을 어떨까요?
+
 export const clockIcon = `
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clip-path="url(#clip0_99_61115)">

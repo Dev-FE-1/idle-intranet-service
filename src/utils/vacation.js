@@ -1,3 +1,5 @@
+// constants 하위로 옮기기
+
 export const vacationArray = [
   {
     icon: '🌴',

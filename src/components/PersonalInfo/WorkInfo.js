@@ -90,6 +90,7 @@ export default class WorkInfo {
     $buttonContainer
       .querySelector('button')
       .addEventListener('click', async () => {
+        // 하나의 함수에서 너무 많은 동작이 처리되는데, 분리해도 좋아보여요.
         const now = document.body.querySelector(
           '.work-hour-time.current',
         ).innerHTML;
