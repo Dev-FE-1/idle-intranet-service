@@ -6,21 +6,27 @@ import { edit, loader } from '../../utils/icons.js';
 import EditProfileForm from './EditProfileForm.js';
 import { updateUserProfile } from '../../api/endpoints/user.js';
 import { storeInstance } from '../Store.js';
+import {
+  cityRegexp,
+  districtRegexp,
+  neighborhoodRegexp,
+  phoneRegexp,
+} from '../../utils/regexp.js';
 
 export default class EditProfileButton {
   constructor({ container, member }) {
     this.$container = container;
     this.store = storeInstance;
     this.member = member;
-    this.icon = new Icon({
+    this.Icon = new Icon({
       svg: edit,
       options: { color: COLORS.DARKEST_GRAY },
     });
     this.EditButton = new IconButton({
-      icon: this.icon,
+      icon: this.Icon,
     });
     this.EditProfileForm = new EditProfileForm({ member: this.member });
-    this.loader = new Icon({
+    this.Loader = new Icon({
       svg: loader,
       options: { color: '#fff' },
     });
@@ -58,27 +64,46 @@ export default class EditProfileButton {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  verifyFormData(phoneNumber, address) {
-    const phoneRegex =
-      /^\+?(\d{1,3})?[-. ]?(\d{1,4})[-. ]?(\d{3,4})[-. ]?(\d{4})$/;
-    const cityRegex = /^[가-힣]{1,5}시$/;
-    const districtRegex = /^[가-힣]{1,5}구$/;
-    const neighborhoodRegex = /^[가-힣0-9]{1,10}(동|로|길)$/;
+  isValidAddress(parts) {
+    const hasPart = (regexp) => parts.some((part) => regexp.test(part));
 
-    const isValidPhoneNumber = phoneRegex.test(phoneNumber);
+    const hasCity = hasPart(cityRegexp);
+    const hasDistrict = hasPart(districtRegexp);
+    const hasNeighborhood = hasPart(neighborhoodRegexp);
+
+    return hasCity && hasDistrict && hasNeighborhood;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  verifyFormData(phoneNumber, address) {
+    const isValidPhoneNumber = phoneRegexp.test(phoneNumber);
 
     const parts = address.split(' ');
     if (parts.length < 3) {
       return [isValidPhoneNumber, false];
     }
 
-    const hasCity = parts.some((part) => cityRegex.test(part));
-    const hasDistrict = parts.some((part) => districtRegex.test(part));
-    const hasNeighborhood = parts.some((part) => neighborhoodRegex.test(part));
+    return [isValidPhoneNumber, this.isValidAddress(parts)];
+  }
 
-    const isValidAddress = hasCity && hasDistrict && hasNeighborhood;
+  async submitUserProfile(formData) {
+    const $submitButton = document.querySelector(
+      '#edit-profile-modal .btn-primary',
+    );
+    $submitButton.innerHTML = this.Loader.html();
+    const response = await updateUserProfile({
+      employeeNumber: this.member.employeeNumber,
+      profileData: formData,
+    });
 
-    return [isValidPhoneNumber, isValidAddress];
+    if (response.status !== 'OK') {
+      console.log('프로필 수정을 실패했습니다.');
+      return;
+    }
+    this.updateProfilePage(formData);
+    this.updateMember(formData);
+    this.Modal.close();
+    $submitButton.innerHTML = '수정';
   }
 
   async onSubmit() {
@@ -89,23 +114,7 @@ export default class EditProfileButton {
     );
     this.EditProfileForm.showAlertMessage(!isValidPhoneNumber, !isValidAddress);
     if (isValidPhoneNumber && isValidAddress) {
-      const $submitButton = document.querySelector(
-        '#edit-profile-modal .btn-primary',
-      );
-      $submitButton.innerHTML = this.loader.html();
-      const response = await updateUserProfile({
-        employeeNumber: this.member.employeeNumber,
-        profileData: formData,
-      });
-
-      if (response.status !== 'OK') {
-        console.log('프로필 수정을 실패했습니다.');
-        return;
-      }
-      this.updateProfilePage(formData);
-      this.updateMember(formData);
-      this.Modal.close();
-      $submitButton.innerHTML = '수정';
+      await this.submitUserProfile(formData);
     }
   }
 
