@@ -137,7 +137,7 @@ npm run dev
   - **Feat**: 기능 단위로 독립적인 개발 환경을 위하여 사용하고 merge 후 각 브랜치를 삭제
     - feature 브랜치 이름 규칙: `feature/기능명-issue번호`
 
-**eslint, prettie, stylelintr**
+**eslint, prettier, stylelint**
 
 - 정해진 규칙에 따라 자동적으로 코드 스타일을 정리해 코드의 일관성을 유지하고자 했습니다.
 - 코드 품질 관리는 eslint에, 코드 포맷팅은 prettier에, CSS 스타일 관리는 stylelint에 일임해 사용했습니다.
@@ -172,11 +172,13 @@ npm run dev
 
 **💬 깃허브를 사용한 Issue 관리와 PR 리뷰**
 
-<img width="1054" alt="PR리뷰" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/f37d3ff1-10d0-479e-a717-814526c840a8">[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FDev-FE-1%2Fidle-intranet-service&count_bg=%23399918&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+<img width="1054" alt="PR리뷰" src="https://github.com/Dev-FE-1/idle-intranet-service/assets/170427166/f37d3ff1-10d0-479e-a717-814526c840a8">
+
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/Dev-FE-1/idle-intranet-service?color=73BBA3)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-closed/Dev-FE-1/idle-intranet-service?color=88D66C)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/Dev-FE-1/idle-intranet-service?color=B4E380)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr-closed/Dev-FE-1/idle-intranet-service?color=F6FB7A)
+
 팀원들은 서로의 코드를 검토하고, 개선할 점을 제안하며 프로젝트의 코드 품질을 높였습니다. 이를 통해 코드 통합 과정에서 발생할 수 있는 문제를 최소화하였습니다.
 
 - 모든 브랜치에 2명 이상이 Approve를 해야 PR이 Merge될 수 있도록 설정하였습니다.
