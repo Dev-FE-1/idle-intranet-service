@@ -15,7 +15,7 @@ import { addAttendance, updateAttendance } from '../API/AttendanceService.js';
 import Modal from '../Modal/Modal.js';
 
 export default class WorkInfo {
-  constructor({ personalInfo }) {
+  constructor({ PersonalInfo }) {
     this.store = storeInstance;
     this.weeklyAttendances = null;
     this.weeklyWorkHours = null;
@@ -23,8 +23,8 @@ export default class WorkInfo {
       svg: clockIcon,
       options: { color: COLORS.DARK_GRAY },
     });
-    this.personalInfo = personalInfo;
-    this.modal = new Modal({ onSubmit: () => {}, id: 'work-toggle-modal' });
+    this.PersonalInfo = PersonalInfo;
+    this.Modal = new Modal({ onSubmit: () => {}, id: 'work-toggle-modal' });
   }
 
   renderWeeklyWorkHours() {
@@ -41,24 +41,104 @@ export default class WorkInfo {
 
   setModal({ title, mainContent, buttonContent, onSubmit }) {
     const modalWrapper = document.body.querySelector('.work-modal-wrapper');
-    this.modal.title = title;
-    this.modal.mainContent = mainContent;
-    this.modal.buttonContent = buttonContent;
-    this.modal.updateButton();
-    this.modal.onSubmit = onSubmit;
-    modalWrapper.innerHTML = this.modal.html();
+    this.Modal.title = title;
+    this.Modal.mainContent = mainContent;
+    this.Modal.buttonContent = buttonContent;
+    this.Modal.updateButton();
+    this.Modal.onSubmit = onSubmit;
+    modalWrapper.innerHTML = this.Modal.html();
   }
 
-  async renderDailyWork() {
-    const today = new Date().toISOString().split('T')[0];
-    let attendance = this.weeklyAttendances.find((a) => a.date === today);
+  getAttendance(today) {
+    const attendance = this.weeklyAttendances.find((a) => a.date === today);
 
     if (!attendance) {
-      attendance = setTodayWork(today);
-      this.weeklyAttendances.push(attendance);
+      const newAttendance = setTodayWork(today);
+      this.weeklyAttendances.push(newAttendance);
+      return newAttendance;
     }
 
-    let { startTime, endTime } = attendance;
+    return attendance;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  setTime(element, time) {
+    element.innerHTML = time;
+    element.setAttribute('datetime', time);
+  }
+
+  async submitWorkEnd({ startTime, now, today }) {
+    const $endTime = document.querySelector('.work-hour-time.end');
+    const endTime = now;
+    const attendance = this.getAttendance(today);
+    this.setTime($endTime, endTime);
+
+    const attendanceData = {
+      employeeNumber: this.user.employeeNumber,
+      date: today,
+      startTime,
+      endTime,
+      status: '정상 근무',
+    };
+
+    await updateAttendance(attendanceData);
+    attendance.endTime = endTime;
+    await this.renderDailyWork();
+    this.PersonalInfo.updateIsWorking();
+  }
+
+  async submitWorkStart({ now, today }) {
+    const $startTime = document.querySelector('.work-hour-time.start');
+    const startTime = now;
+    const attendance = this.getAttendance(today);
+    this.setTime($startTime, startTime);
+
+    const attendanceData = {
+      employeeNumber: this.user.employeeNumber,
+      date: today,
+      startTime,
+      endTime: null,
+      status: '정상 근무',
+    };
+
+    await addAttendance(attendanceData);
+    attendance.startTime = startTime;
+    await this.renderDailyWork();
+    this.PersonalInfo.updateIsWorking();
+  }
+
+  async handleClickButton({ startTime, endTime }) {
+    const $workHourTime = document.body.querySelector(
+      '.work-hour-time.current',
+    );
+    const now = $workHourTime.innerHTML;
+    const today = new Date().toISOString().split('T')[0];
+
+    if (startTime && !endTime) {
+      this.setModal({
+        title: `현재 시각: ${now}`,
+        mainContent: '근무를 종료하시겠습니까?',
+        buttonContent: '근무 종료',
+        onSubmit: () => this.submitWorkEnd({ startTime, now, today }),
+      });
+    } else if (!startTime) {
+      this.setModal({
+        title: `현재 시각: ${now}`,
+        mainContent: '근무를 시작하시겠습니까?',
+        buttonContent: '근무 시작',
+        onSubmit: () => this.submitWorkStart({ now, today }),
+      });
+    }
+
+    this.Modal.render();
+    this.Modal.open();
+  }
+
+  renderButton(startTime, endTime) {
+    const $buttonContainer = document.querySelector(
+      '.work-hours-button-container',
+    );
+
     this.Button = new Button({
       variant: startTime && !endTime ? 'primary' : 'secondary',
       size: 'large',
@@ -66,82 +146,31 @@ export default class WorkInfo {
       disabled: !!endTime,
     });
 
-    const $buttonContainer = document.querySelector(
-      '.work-hours-button-container',
-    );
-    const $startTime = document.querySelector('.work-hour-time.start');
-    const $endTime = document.querySelector('.work-hour-time.end');
-
     if ($buttonContainer) $buttonContainer.innerHTML = this.Button.html();
 
+    const $button = $buttonContainer.querySelector('button');
+    $button.addEventListener('click', () =>
+      this.handleClickButton({ startTime, endTime }),
+    );
+  }
+
+  renderCurrentTime() {
     this.CurrentTime = new CurrentTime();
     this.CurrentTime.cleanUp();
     this.CurrentTime.render();
+  }
 
-    if (startTime) {
-      $startTime.innerText = startTime;
-      $startTime.setAttribute('datetime', startTime);
-    }
-    if (endTime) {
-      $endTime.innerText = endTime;
-      $endTime.setAttribute('datetime', endTime);
-    }
+  async renderDailyWork() {
+    const $startTime = document.querySelector('.work-hour-time.start');
+    const $endTime = document.querySelector('.work-hour-time.end');
+    const today = new Date().toISOString().split('T')[0];
+    const attendance = this.getAttendance(today);
+    const { startTime, endTime } = attendance;
 
-    $buttonContainer
-      .querySelector('button')
-      .addEventListener('click', async () => {
-        const now = document.body.querySelector(
-          '.work-hour-time.current',
-        ).innerHTML;
+    this.renderButton(startTime, endTime);
 
-        if (startTime && !endTime) {
-          this.setModal({
-            title: `현재 시각: ${now}`,
-            mainContent: '근무를 종료하시겠습니까?',
-            buttonContent: '근무 종료',
-            onSubmit: async () => {
-              endTime = now;
-              $endTime.innerText = endTime || '-';
-              $endTime.setAttribute('datetime', endTime);
-              const attendanceData = {
-                employeeNumber: this.user.employeeNumber,
-                date: today,
-                startTime,
-                endTime,
-                status: '정상 근무',
-              };
-              await updateAttendance(attendanceData);
-              attendance.endTime = endTime;
-              await this.renderDailyWork();
-              this.personalInfo.updateIsWorking();
-            },
-          });
-        } else if (!startTime) {
-          this.setModal({
-            title: `현재 시각: ${now}`,
-            mainContent: '근무를 시작하시겠습니까?',
-            buttonContent: '근무 시작',
-            onSubmit: async () => {
-              startTime = now;
-              $startTime.innerText = startTime || '-';
-              $startTime.setAttribute('datetime', startTime);
-              const attendanceData = {
-                employeeNumber: this.user.employeeNumber,
-                date: today,
-                startTime,
-                endTime: null,
-                status: '정상 근무',
-              };
-              await addAttendance(attendanceData);
-              attendance.startTime = startTime;
-              await this.renderDailyWork();
-              this.personalInfo.updateIsWorking();
-            },
-          });
-        }
-        this.modal.render();
-        this.modal.open();
-      });
+    if (startTime) this.setTime($startTime, startTime);
+    if (endTime) this.setTime($endTime, endTime);
   }
 
   async render() {
@@ -152,6 +181,7 @@ export default class WorkInfo {
     }
     this.renderWeeklyWorkHours();
     this.renderProgressRing();
+    this.renderCurrentTime();
     this.renderDailyWork();
   }
 
