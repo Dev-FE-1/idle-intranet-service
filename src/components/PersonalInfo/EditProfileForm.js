@@ -26,21 +26,21 @@ export default class EditProfileForm {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  showAlertMessage(showP, showA) {
-    const alertPhonenumber = document.body.querySelector(
-      '.alert-invalid-phonenumber',
+  showAlertMessage(isPhoneNumberAlertVisible, isAddressAlertVisible) {
+    const setAlertVisibility = (element, show) => {
+      if (show) {
+        element.classList.add('show');
+      } else {
+        element.classList.remove('show');
+      }
+    };
+    const $alertPhoneNumber = document.body.querySelector(
+      '.alert-invalid-phone-number',
     );
-    const alertAddress = document.body.querySelector('.alert-invalid-address');
-    if (showP) {
-      alertPhonenumber.classList.add('show');
-    } else {
-      alertPhonenumber.classList.remove('show');
-    }
-    if (showA) {
-      alertAddress.classList.add('show');
-    } else {
-      alertAddress.classList.remove('show');
-    }
+    const $alertAddress = document.body.querySelector('.alert-invalid-address');
+
+    setAlertVisibility($alertPhoneNumber, isPhoneNumberAlertVisible);
+    setAlertVisibility($alertAddress, isAddressAlertVisible);
   }
 
   getFormData() {
@@ -129,7 +129,7 @@ export default class EditProfileForm {
       <div class="input-container">
         <label for="phone_number_input">전화번호</label>
         ${this.phoneNumberInput.html()}
-        <p class="alert-invalid-phonenumber">
+        <p class="alert-invalid-phone-number">
           입력하신 전화번호의 형식이 올바르지 않습니다.
         </p>
       </div>
