@@ -112,6 +112,11 @@
   gap: 10px;
 }
 
+.vacation-form .from-text {
+  font-size: 14px;
+  color: var(--color-darkest-gray);
+}
+
 .vacation-reason {
   padding: 17px 0;
   width: 100%;

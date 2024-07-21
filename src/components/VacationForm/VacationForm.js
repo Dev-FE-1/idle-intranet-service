@@ -273,7 +273,7 @@ export default class VacationForm {
           <label>사용 시간</label>
           <div class="time-container" id="useTime">
             <div class="time-select" id="timeSelect"></div>
-            <span>부터</span>
+            <span class="from-text">부터</span>
             <div class="hour-select" id="hourSelect"></div>
           </div>
         </div>
