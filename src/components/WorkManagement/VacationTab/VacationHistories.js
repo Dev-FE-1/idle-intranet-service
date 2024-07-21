@@ -9,6 +9,7 @@ export default class VacationHistories {
   constructor() {
     this.store = storeInstance;
     this.isLoading = true;
+    this.vacations = [];
     this.VacationSelect = new Select({
       contents: vacationTypes,
       onSelect: (selectedItem) => this.onSelectType(selectedItem),
@@ -39,7 +40,7 @@ export default class VacationHistories {
         vacationRequestDate,
       }) => [
         vacationType,
-        `<span class="vacation-status">${approvalStatus}</span>`,
+        `<span class="vacation-status ${approvalStatus === '미승인' ? 'unapproved' : ''}">${approvalStatus}</span>`,
         vacationStartDate,
         vacationEndDate,
         vacationRequestDate,
@@ -48,6 +49,9 @@ export default class VacationHistories {
   }
 
   renderTable(vacations, selectedItem = null) {
+    this.$vacationHistoriesContainer = document.querySelector(
+      '#main .vacation-histories-container',
+    );
     const tableContents = this.setTableContents(vacations);
     this.Table = new Table({
       headers: [
@@ -75,11 +79,19 @@ export default class VacationHistories {
     }
   }
 
-  async setVacation() {
+  async setVacation(newVacationData) {
     if (!this.user) {
       this.user = await this.store.getUser();
     }
+
     this.vacations = await fetchVacationRequests(this.user.employeeNumber);
+
+    if (newVacationData) {
+      this.updateVacations = [...this.vacations, newVacationData];
+      this.renderTable(this.updateVacations);
+    }
+
+    this.renderTable(this.vacations);
   }
 
   async render() {
