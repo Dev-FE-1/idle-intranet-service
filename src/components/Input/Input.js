@@ -12,7 +12,7 @@ export default class Input {
     this.placeholder = placeholder;
     this.type = type; // text, password, email, date....
     this.id = id; // input id 설정 (label 연결 용도)
-    this.readOnly = readOnly; // true, false
+    this.readOnly = readOnly; // 'default', 'read-only'
     this.name = name || this.id;
     this.value = value; // input value 설정
   }

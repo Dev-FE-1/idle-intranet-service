@@ -3,25 +3,12 @@
 }
 
 .vacation-form {
-  /* margin: 20px auto; */
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
-
-/* .input-field {
-  width: 100%;
-  display: flex;
-  gap: 120px;
-  background-color: var(--color-lightest-gray);
-} */
-
-/* 
-input {
-  outline: 1px solid tomato;
-} */
 
 .vacation-form .input-field {
   width: 100%;
@@ -30,6 +17,7 @@ input {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  border-radius: 4px;
 }
 
 .vacation-form .input-field input {
@@ -37,6 +25,7 @@ input {
   height: 20px;
   font-size: 14px;
   vertical-align: text-bottom;
+  cursor: default;
 }
 
 .vacation-form .input-field.input-readonly {
@@ -49,7 +38,15 @@ input {
   border: 1px solid var(--color-lightest-gray);
 }
 
+.vacation-form .start-date-input input {
+  cursor: pointer;
+}
+
 .vacation-form .input-field.input-readonly input {
+  text-align: right;
+}
+
+.vacation-form .input-field.border input {
   text-align: right;
 }
 
@@ -66,12 +63,33 @@ input {
 
 .vacation-form .start-date-input {
   display: flex;
-  gap: 8px;
   align-items: center;
+  gap: 8px;
 }
 
 .vacation-form .start-date-input svg {
   cursor: pointer;
+}
+
+.vacation-form .end-date-input {
+  display: flex;
+  align-items: center;
+}
+
+.vacation-form .input-field:nth-child(2) {
+  position: relative;
+}
+
+.vacation-form .calendar-container {
+  display: none;
+}
+
+.vacation-form .calendar-container.active {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  z-index: 10000;
+  display: block;
 }
 
 .vacation-form .start-date-button {
@@ -88,8 +106,19 @@ input {
   outline: inherit;
 }
 
+.vacation-form .time-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vacation-form .from-text {
+  font-size: 14px;
+  color: var(--color-darkest-gray);
+}
+
 .vacation-reason {
-  padding: 17px;
+  padding: 17px 0;
   width: 100%;
   min-height: 100px;
   appearance: none;
@@ -100,7 +129,7 @@ input {
   font-weight: 400;
   font-size: 16px;
   color: var(--color-black);
-  border: 1px solid var(--color-light-gray);
+  border: 0;
 }
 
 .vacation-reason:focus {
@@ -116,4 +145,8 @@ input {
   font-weight: 400;
   font-size: 16px;
   color: var(--color-dark-gray);
+}
+
+.vacation-form .input-field.input-error {
+  box-shadow: 0 0 0 1px var(--color-alert);
 }
