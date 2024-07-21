@@ -1,12 +1,18 @@
 import './Button.css';
 
 export default class Button {
-  constructor({ type, variant, size, content, disabled }) {
-    this.type = type || 'button'; // HTML button type: 'submit', 'reset', 'button'
-    this.variant = variant || 'primary'; // Button style type: 'primary', 'secondary',
-    this.size = size || 'default'; // small
-    this.content = content || '';
-    this.disabled = disabled || '';
+  constructor({
+    type = 'button',
+    variant = 'primary',
+    size = 'default',
+    content = '',
+    disabled = '',
+  }) {
+    this.type = type; // HTML button type: 'submit', 'reset', 'button'
+    this.variant = variant; // Button style type: 'primary', 'secondary',
+    this.size = size; // small
+    this.content = content;
+    this.disabled = disabled;
   }
 
   html() {

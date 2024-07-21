@@ -67,11 +67,13 @@
   font-size: 14px;
 }
 
-.alert-invalid-phonenumber, .alert-invalid-address{
+.alert-invalid-phone-number,
+.alert-invalid-address {
   display: none;
 }
 
-.alert-invalid-phonenumber.show, .alert-invalid-address.show{
+.alert-invalid-phone-number.show,
+.alert-invalid-address.show {
   display: block;
   font-size: 0.75rem;
   color: var(--color-alert);

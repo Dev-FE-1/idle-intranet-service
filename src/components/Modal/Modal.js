@@ -2,10 +2,16 @@ import Button from '../Button/Button.js';
 import './Modal.css';
 
 export default class Modal {
-  constructor({ title, mainContent, buttonContent, onSubmit, id }) {
-    this.title = title || '';
-    this.mainContent = mainContent || '메인 컨텐츠';
-    this.buttonContent = buttonContent || 'Click me';
+  constructor({
+    title = '',
+    mainContent = '',
+    buttonContent = '확인',
+    onSubmit,
+    id,
+  }) {
+    this.title = title;
+    this.mainContent = mainContent;
+    this.buttonContent = buttonContent;
     this.submitButton = new Button({ content: this.buttonContent });
     this.closeButton = new Button({ variant: 'text', content: '취소' });
     this.onSubmit = onSubmit;

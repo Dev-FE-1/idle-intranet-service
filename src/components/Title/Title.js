@@ -1,12 +1,18 @@
 import './Title.css';
 
 export default class Title {
-  constructor({ title, subtitle, description, contents, desktopOnly }) {
+  constructor({
+    title,
+    subtitle = '',
+    description = '',
+    contents = '',
+    desktopOnly = '',
+  }) {
     this.title = title;
-    this.subtitle = subtitle || '';
-    this.description = description || '';
-    this.contents = contents || '';
-    this.desktopOnly = desktopOnly || '';
+    this.subtitle = subtitle;
+    this.description = description;
+    this.contents = contents;
+    this.desktopOnly = desktopOnly;
   }
 
   html() {
