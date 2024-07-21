@@ -5,6 +5,7 @@ import Modal from '../../Modal/Modal.js';
 import VacationForm from '../../VacationForm/VacationForm.js';
 import { updateVacationRequests } from '../../../api/endpoints/vacationRequests.js';
 import { storeInstance } from '../../Store.js';
+import VacationHistories from './VacationHistories.js';
 
 export default class VacationCards {
   constructor() {
@@ -13,6 +14,7 @@ export default class VacationCards {
       buttonContent: '휴가 신청하기',
     });
     this.vacationForm = new VacationForm();
+    this.vacationHistories = new VacationHistories();
     this.store = storeInstance;
   }
 
@@ -24,26 +26,39 @@ export default class VacationCards {
     this.modal.render();
   }
 
+  handleVacationSubmit = async (vacationData) => {
+    const response = await updateVacationRequests(vacationData);
+    if (response.status === 'OK') {
+      console.log('휴가 신청이 완료되었습니다.');
+
+      this.vacationHistories.setVacation(vacationData);
+      this.modal.close();
+    } else {
+      console.log('휴가 신청에 실패했습니다.');
+    }
+  };
+
   handleVacationCardClick = async (vacationDataType) => {
     this.vacationForm = new VacationForm(vacationDataType);
     this.setModal({
       mainContent: this.vacationForm.html(),
       onSubmit: async () => {
-        const vacationData = this.vacationForm.getSelectedVacationData();
+        if (this.vacationForm.validateForm()) {
+          const vacationData = this.vacationForm.getSelectedVacationData();
+          const userInfo = await this.getUserInfo();
+          const requestData = {
+            ...vacationData,
+            employeeNumber: userInfo.employeeNumber,
+            departmentNumber: userInfo.departmentNumber,
+          };
 
-        const requestData = {
-          ...vacationData,
-          employeeNumber: await this.getEmployeeNumber(), // 여기서 employeeNumber를 가져옵니다.
-        };
-        console.log('신청한 휴가 데이터:', { ...requestData });
-
-        const response = await updateVacationRequests(requestData);
-        if (response.status === 'OK') {
-          console.log('휴가 신청이 완료되었습니다.');
+          console.log('requestData', requestData);
+          this.handleVacationSubmit(requestData);
         } else {
-          console.log('휴가 신청에 실패했습니다.');
+          console.error(
+            'Form validation failed. Please check the required fields and data formats.',
+          );
         }
-        this.modal.close();
       },
     });
     this.modal.open();
@@ -89,8 +104,11 @@ export default class VacationCards {
     this.renderVacationCard();
   }
 
-  async getEmployeeNumber() {
+  async getUserInfo() {
     const user = await this.store.getUser();
-    return user.employeeNumber;
+    return {
+      employeeNumber: user.employeeNumber,
+      departmentNumber: user.departmentNumber,
+    };
   }
 }

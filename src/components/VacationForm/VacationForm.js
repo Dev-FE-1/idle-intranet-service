@@ -4,11 +4,24 @@ import Input from '../Input/Input.js';
 import Select from '../Select/Select.js';
 import { calendarIcon } from '../../utils/icons.js';
 import {
+  adjustStartDate,
   calculateEndDate,
+  calculateEndTime,
+  formatDateToISO,
   listVacationDaysWithSuffix,
 } from '../../utils/userVacation.js';
-import { vacationArray } from '../../utils/vacation.js';
+import {
+  availableStartTimes,
+  hourIncrements,
+  vacationArray,
+} from '../../utils/vacation.js';
 import { storeInstance } from '../Store.js';
+import Calendar from '../Calendar/Calendar.js';
+import {
+  initializeValidationListeners,
+  updateErrorState,
+  validateInput,
+} from '../../utils/formValidationUtils.js';
 
 export default class VacationForm {
   constructor(vacationDataType) {
@@ -20,6 +33,9 @@ export default class VacationForm {
         size: '1.2rem',
       },
     });
+    this.selectedDate = adjustStartDate(new Date());
+    this.vacationStartTime = '09:00';
+    this.vacationEndTime = '18:00';
   }
 
   async updateVacationList() {
@@ -29,6 +45,7 @@ export default class VacationForm {
     return listVacationDaysWithSuffix(this.user.remainingVacationDays);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   getIcon(vacationType) {
     const vacation = vacationArray.find((v) => v.type === vacationType);
     return vacation ? vacation.icon : '';
@@ -39,20 +56,24 @@ export default class VacationForm {
       id: 'vacationType',
       type: 'text',
       value: `${this.getIcon(this.vacationDataType)} ${this.vacationDataType}`,
-      readOnly: true,
+      readOnly: 'read-only',
     });
 
+    const startDateISO = formatDateToISO(this.selectedDate);
     this.StartDateInput = new Input({
       id: 'startDate',
       type: 'text',
-      value: new Date().toISOString().split('T')[0],
-      readOnly: true,
+      value: startDateISO,
+      readOnly: 'read-only',
     });
 
     const days = await this.updateVacationList();
     this.DaySelect = new Select({
       contents: days,
-      onSelect: (selectedItem) => this.calculateAndDisplayEndDate(selectedItem),
+      onSelect: (selectedItem) => {
+        this.selectedDays = selectedItem;
+        this.calculateAndDisplayEndDate(selectedItem);
+      },
       small: true,
     });
 
@@ -60,8 +81,42 @@ export default class VacationForm {
       id: 'endDate',
       type: 'text',
       value: '',
-      readOnly: true,
+      readOnly: 'read-only',
     });
+
+    this.TimeSelect = new Select({
+      contents: availableStartTimes,
+      onSelect: (selectedItem) => {
+        this.vacationStartTime = selectedItem;
+        this.vacationEndTime = calculateEndTime(
+          selectedItem,
+          this.selectedHours,
+        );
+        updateErrorState(selectedItem, this.HourSelect.selectedItem);
+      },
+      excludeFirst: true,
+      small: true,
+    });
+
+    this.HourSelect = new Select({
+      contents: hourIncrements,
+      onSelect: (selectedItem) => {
+        const hours = parseInt(selectedItem.match(/\d+/)[0], 10);
+        this.selectedHours = hours;
+        this.vacationEndTime = calculateEndTime(this.vacationStartTime, hours);
+        updateErrorState(this.TimeSelect.selectedItem, selectedItem);
+      },
+      excludeFirst: true,
+      small: true,
+    });
+
+    if (this.vacationDataType === '반차') {
+      document.querySelector('.day-select').parentElement.style.display =
+        'none';
+      document.querySelector('.end-date-input').parentElement.style.display =
+        'none';
+      document.querySelector('.time-field').style.display = 'flex';
+    }
   }
 
   calculateAndDisplayEndDate(selectedItem) {
@@ -78,26 +133,105 @@ export default class VacationForm {
     }
   }
 
+  validateForm() {
+    const formElement = document.getElementById('vacationForm');
+    const inputs = formElement.querySelectorAll(
+      '.input-field input, .input-field textarea',
+    );
+
+    let isValid = true;
+
+    inputs.forEach((input) => {
+      if (!validateInput(input)) {
+        isValid = false;
+      }
+    });
+
+    if (this.vacationDataType === '반차') {
+      const timeField = document.querySelector('.time-field');
+      const timeSelectValid =
+        this.TimeSelect.selectedItem &&
+        this.TimeSelect.selectedItem !== '00:00';
+      const hourSelectValid =
+        this.HourSelect.selectedItem &&
+        this.HourSelect.selectedItem !== '0시간';
+
+      if (!timeSelectValid || !hourSelectValid) {
+        timeField.classList.add('input-error');
+        isValid = false;
+      } else {
+        timeField.classList.remove('input-error');
+      }
+    }
+
+    return isValid;
+  }
+
   async render() {
     this.$vacationTypeInput = document.querySelector('.vacation-type-input');
     this.$daySelect = document.querySelector('.day-select');
+    this.$timeSelect = document.querySelector('.time-select');
+    this.$hourSelect = document.querySelector('.hour-select');
     this.$startDateInput = document.querySelector('.start-date-input');
     this.$endDateInput = document.querySelector('.end-date-input');
+    this.$vacationForm = document.querySelector('.vacation-form');
+    this.$calendarContainer = this.$vacationForm.querySelector(
+      '.calendar-container',
+    );
+    this.$startDateInputField = this.$startDateInput.querySelector('input');
 
     await this.initFormInputs();
+
+    this.Calendar = new Calendar(this.selectedDate);
+    const initializeCalendar = () => {
+      this.$calendarContainer.innerHTML = this.Calendar.html();
+      this.Calendar.renderGenerateCalendar();
+      this.Calendar.addEventListeners();
+    };
+
+    const toggleCalendar = (event) => {
+      if (
+        event.target.closest('.start-date-input') ||
+        event.target.closest('.calendar-icon')
+      ) {
+        this.$calendarContainer.classList.add('active');
+        initializeCalendar();
+      } else if (!this.$calendarContainer.contains(event.target)) {
+        this.$calendarContainer.classList.remove('active');
+      }
+    };
+
+    document.addEventListener('dateSelected', (event) => {
+      this.selectedDate = adjustStartDate(new Date(event.detail.selectedDate));
+      const startDateISO = formatDateToISO(this.selectedDate);
+      this.StartDateInput.value = startDateISO;
+      this.$startDateInput.querySelector('input').value = startDateISO;
+      this.calculateAndDisplayEndDate(this.selectedDays);
+      this.Calendar.closeCalendar();
+    });
+
+    this.$startDateInput.addEventListener('click', toggleCalendar);
+    document.addEventListener('click', toggleCalendar);
+
+    if (!this.selectedDays) {
+      this.selectedDays = 1;
+      this.DaySelect.onSelect(this.selectedDays);
+    }
+
+    this.calculateAndDisplayEndDate(this.selectedDays);
+
     this.$vacationTypeInput.innerHTML = this.VacationTypeInput.html();
     this.$daySelect.innerHTML = this.DaySelect.html();
+    this.$timeSelect.innerHTML = this.TimeSelect.html();
+    this.$hourSelect.innerHTML = this.HourSelect.html();
     this.$startDateInput.innerHTML = `${this.StartDateInput.html()} ${this.CalendarIcon.html()}`;
     this.$endDateInput.innerHTML = this.EndDateInput.html();
 
     this.DaySelect.setEventListeners();
+    this.TimeSelect.setEventListeners();
+    this.HourSelect.setEventListeners();
 
-    const $startDateInput = this.$startDateInput.querySelector('input');
-    $startDateInput.addEventListener('click', () => {
-      // 추후 캘린더 추가하면 캘린더 오픈
-    });
-
-    this.calculateAndDisplayEndDate();
+    initializeValidationListeners();
   }
 
   getSelectedVacationData() {
@@ -105,10 +239,16 @@ export default class VacationForm {
       vacationType: this.vacationDataType,
       vacationStartDate: this.StartDateInput.value,
       vacationEndDate: this.EndDateInput.value,
+      vacationRequestDate: formatDateToISO(new Date()),
+      vacationStartTime: this.vacationStartTime,
+      vacationEndTime: this.vacationEndTime,
       vacationReason: document.querySelector('#vacationReason').value,
+      approvalStatus: '미승인',
+      usageStatus: '미사용',
     };
   }
 
+  // eslint-disable-next-line class-methods-use-this
   html() {
     return /* HTML */ `
       <div class="vacation-form" id="vacationForm">
@@ -116,9 +256,10 @@ export default class VacationForm {
           <label>휴가 종류</label>
           <div class="vacation-type-input"></div>
         </div>
-        <div class="input-field border input-readonly">
+        <div class="input-field border">
           <label>시작일</label>
           <div class="start-date-input"></div>
+          <div class="calendar-container"></div>
         </div>
         <div class="input-field border">
           <label>사용기간</label>
@@ -128,7 +269,15 @@ export default class VacationForm {
           <label>종료일</label>
           <div class="end-date-input"></div>
         </div>
-        <div class="input-field">
+        <div class="input-field border time-field" style="display: none;">
+          <label>사용 시간</label>
+          <div class="time-container" id="useTime">
+            <div class="time-select" id="timeSelect"></div>
+            <span>부터</span>
+            <div class="hour-select" id="hourSelect"></div>
+          </div>
+        </div>
+        <div class="input-field border">
           <textarea
             class="vacation-reason"
             name="vacationReason"
