@@ -7,7 +7,7 @@ export const vacationArray = [
   {
     icon: '💼',
     type: '반차',
-    days: '3시간',
+    days: '4시간',
   },
   {
     icon: '🤰🏻',

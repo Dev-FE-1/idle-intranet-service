@@ -10,7 +10,7 @@ export default class PersonalInfo {
     this.store = storeInstance;
     this.updateIsWorking();
     this.ProfileInfo = new ProfileInfo({ member, isWorking: this.isWorking });
-    this.WorkInfo = new WorkInfo({ personalInfo: this });
+    this.WorkInfo = new WorkInfo({ PersonalInfo: this });
   }
 
   async updateIsWorking() {

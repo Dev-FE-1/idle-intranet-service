@@ -81,9 +81,9 @@
 
 /* small */
 .dropdown-menu.small .dropdown-btn {
-  min-width: 100px;
+  min-width: 86px;
 }
 
 .dropdown-menu.small .dropdown-list {
-  min-width: 100px;
+  min-width: 86px;
 }

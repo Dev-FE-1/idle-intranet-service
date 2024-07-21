@@ -1,7 +1,7 @@
 import './ProgressRing.css';
 
 export default class ProgressRing {
-  constructor({ percent }) {
+  constructor({ percent = 0 }) {
     this.dashoffset = 100 - percent;
   }
 

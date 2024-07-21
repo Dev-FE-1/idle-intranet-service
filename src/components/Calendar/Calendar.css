@@ -1,30 +1,81 @@
-.calendar-table {
+.calendar-content {
+  padding: 10px 18px;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  background-color: white;
+}
+
+.calendar-content .calendar-header {
   width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.calendar-table th,
-.calendar-table td {
-  height: 50px;
-  text-align: center;
+.calendar-content .month-year-display {
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.calendar-table td {
+.calendar-content .control-buttons {
+  display: flex;
+  gap: 3px;
+}
+
+.calendar-content .calendar-table {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.calendar-content .calendar-table thead tr {
+  display: flex;
+}
+
+.calendar-content .calendar-table thead .calendar-th {
+  margin: 1px;
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-dark-gray);
+}
+
+.calendar-content .calendar-table tbody tr {
+  display: flex;
+}
+
+.calendar-content .calendar-table tbody td {
+  margin: 1px;
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
   cursor: pointer;
-  border: 1px solid #ccc;
 }
 
-.calendar-table .disabled {
-  color: #ccc;
-  cursor: not-allowed;
+.selected-date {
+  background-color: rgba(0 122 255 / 20%);
+  border-radius: 50%;
+  color: var(--color-primary);
 }
 
-.calendar-table .selected {
-  background-color: #007bff;
-  color: white;
+.disabled-date {
+  color: var(--color-light-gray);
+  cursor: default;
 }
 
-.calendar-table .range {
-  background-color: #90caf9;
+@media (width >= 1024px) {
+  .calendar-content
+    .calendar-table
+    tbody
+    td:not(.disabled-date, .empty-date):hover {
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    color: var(--color-primary);
+  }
 }

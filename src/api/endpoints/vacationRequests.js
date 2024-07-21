@@ -24,16 +24,16 @@ export async function fetchVacationRequests(
 
 export async function updateVacationRequests({
   employeeNumber,
-  departmentNumber = 10,
+  departmentNumber,
   vacationStartDate,
   vacationEndDate,
-  approvalStatus = '미승인',
+  approvalStatus,
   vacationType,
-  vacationStartTime = '18:15',
-  vacationEndTime = '18:15',
+  vacationStartTime,
+  vacationEndTime,
   vacationReason,
-  vacationRequestDate = '2024-07-12',
-  usageStatus = '미사용',
+  vacationRequestDate,
+  usageStatus,
 }) {
   try {
     const response = await apiCall({
@@ -50,7 +50,7 @@ export async function updateVacationRequests({
         vacationEndTime,
         vacationReason,
         vacationRequestDate,
-        usageStatus
+        usageStatus,
       },
       auth: false,
     });

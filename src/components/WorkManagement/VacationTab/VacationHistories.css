@@ -30,6 +30,11 @@
   color: var(--color-primary);
 }
 
+.vacation-status.unapproved {
+  color: var(--color-darkest-gray);
+  background-color: var(--color-light-gray);
+}
+
 @media (width >= 1024px) {
   .vacation-histories-container {
     padding: 0;

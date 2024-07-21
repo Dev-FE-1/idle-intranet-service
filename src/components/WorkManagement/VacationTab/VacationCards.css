@@ -19,4 +19,8 @@
     margin-top: 36px;
     background-color: white;
   }
+
+  .vacation-modal-wrapper .modal-content {
+    width: 375px;
+  }
 }
